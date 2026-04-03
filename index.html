@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مختبر الطبخ الكلاسيكي | Classic Cooking Lab</title>
+    <title>مختبر الطبخ الكلاسيكي | موسوعة البسطيلة المغربية</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -11,232 +11,178 @@
             --bg-dark: #121212;
             --card-dark: #1e1e1e;
             --gold: #d4a373;
-            --text-gray: #b0b0b0;
             --white: #ffffff;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { 
-            font-family: 'Cairo', sans-serif; 
-            background: var(--bg-dark); 
-            color: var(--white); 
-            transition: 0.3s;
-        }
+        body { font-family: 'Cairo', sans-serif; background: var(--bg-dark); color: var(--white); }
 
-        /* هيدر كلاسيكي */
-        header {
-            padding: 20px 8%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #333;
-            background: var(--bg-dark);
-            position: sticky; top: 0; z-index: 1000;
-        }
-        .logo { font-size: 1.5rem; font-weight: 900; color: var(--gold); letter-spacing: 1px; }
-        .logo span { color: var(--white); font-weight: 300; }
+        header { padding: 20px 8%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; position: sticky; top: 0; z-index: 1000; background: var(--bg-dark); }
+        .logo { font-size: 1.5rem; font-weight: 900; color: var(--gold); }
 
-        /* منطقة البحث */
-        .hero { padding: 60px 5%; text-align: center; }
-        .search-container {
-            max-width: 600px; margin: 0 auto; display: flex;
-            background: var(--card-dark); border: 1px solid #444;
-            border-radius: 8px; overflow: hidden;
-        }
-        .search-container input {
-            flex: 1; border: none; background: transparent; padding: 15px;
-            color: white; font-family: 'Cairo'; outline: none;
-        }
-        .search-container button {
-            background: var(--gold); border: none; padding: 0 25px;
-            color: var(--bg-dark); font-weight: bold; cursor: pointer;
-        }
+        .hero { padding: 40px 5%; text-align: center; background: linear-gradient(to bottom, #1a1a1a, var(--bg-dark)); }
+        .search-container { max-width: 600px; margin: 20px auto; display: flex; background: var(--card-dark); border: 1px solid #444; border-radius: 8px; overflow: hidden; }
+        .search-container input { flex: 1; border: none; background: transparent; padding: 15px; color: white; outline: none; font-family: 'Cairo'; }
+        .search-container button { background: var(--gold); border: none; padding: 0 25px; cursor: pointer; font-weight: bold; }
 
-        /* شبكة الوصفات */
-        .section-title { padding: 40px 8% 20px; color: var(--gold); font-size: 1.2rem; }
-        .recipe-grid { 
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
-            gap: 30px; padding: 0 8% 50px; 
-        }
+        .section-title { padding: 20px 8%; color: var(--gold); font-size: 1.5rem; display: flex; align-items: center; gap: 10px; }
+        .section-title::after { content: ""; flex: 1; height: 1px; background: #333; }
 
-        .recipe-card {
-            background: var(--card-dark); border-radius: 12px; overflow: hidden;
-            border: 1px solid #333; transition: 0.4s;
-        }
-        .recipe-card:hover { transform: translateY(-10px); border-color: var(--gold); }
-        .recipe-card img { width: 100%; height: 200px; object-fit: cover; opacity: 0.8; }
-        .recipe-info { padding: 20px; }
-        .recipe-info h3 { margin-bottom: 10px; font-size: 1.1rem; }
+        .recipe-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; padding: 0 8% 50px; }
         
-        .video-btn {
-            display: block; width: 100%; padding: 10px; margin-top: 15px;
-            background: transparent; border: 1px solid var(--gold);
-            color: var(--gold); text-align: center; text-decoration: none;
-            border-radius: 5px; font-size: 0.9rem; transition: 0.3s;
-        }
+        .recipe-card { background: var(--card-dark); border-radius: 12px; overflow: hidden; border: 1px solid #333; transition: 0.4s; position: relative; }
+        .recipe-card:hover { transform: translateY(-10px); border-color: var(--gold); }
+        .recipe-card img { width: 100%; height: 220px; object-fit: cover; }
+        
+        .badge-special { position: absolute; top: 15px; left: 15px; background: var(--gold); color: black; padding: 5px 12px; border-radius: 4px; font-weight: bold; font-size: 0.8rem; z-index: 10; }
+
+        .recipe-info { padding: 20px; }
+        .video-btn { display: block; width: 100%; padding: 10px; margin-top: 10px; background: transparent; border: 1px solid var(--gold); color: var(--gold); text-align: center; text-decoration: none; border-radius: 5px; font-size: 0.9rem; transition: 0.3s; cursor: pointer; }
         .video-btn:hover { background: var(--gold); color: black; }
 
-        /* --- واجهة المختبر (Overlay) --- */
-        #cookingLab {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--bg-dark); z-index: 2000; display: none;
-            grid-template-columns: 1fr 1fr; padding: 40px; gap: 40px; overflow-y: auto;
-        }
-
-        .visual-side { 
-            background: #181818; border-radius: 20px; border: 1px solid #333;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            position: relative;
-        }
-        
-        /* قِدر الطهي الكلاسيكي SVG */
-        .pot-svg { width: 250px; fill: #444; transition: 0.5s; }
-        .steam { position: absolute; top: 100px; font-size: 2rem; animation: steamMove 2s infinite; opacity: 0; }
-        @keyframes steamMove { 0% { transform: translateY(0); opacity: 0; } 50% { opacity: 0.5; } 100% { transform: translateY(-100px); opacity: 0; } }
-
+        /* المختبر */
+        #cookingLab { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-dark); z-index: 2000; display: none; grid-template-columns: 1fr 1fr; padding: 40px; gap: 40px; overflow-y: auto; }
+        .visual-side { background: #181818; border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; border: 1px solid #333; }
+        .pot-svg { width: 220px; fill: #444; }
         .ingredient-drop { position: absolute; top: 0; font-size: 3rem; display: none; }
-        .animate-drop { display: block !important; animation: dropIng 0.6s forwards; }
-        @keyframes dropIng { 0% { top: 0; opacity: 1; } 100% { top: 250px; opacity: 0; } }
+        .animate-drop { display: block !important; animation: drop 0.6s forwards; }
+        @keyframes drop { 0% { top: 0; opacity: 1; } 100% { top: 250px; opacity: 0; } }
 
-        .data-side { text-align: right; }
-        .ing-list { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0; }
-        .ing-tag { 
-            background: #252525; border: 1px solid #444; padding: 8px 15px; 
-            border-radius: 4px; cursor: pointer; font-size: 0.85rem; color: var(--gold);
-        }
+        .ing-tag { background: #252525; border: 1px solid #444; padding: 8px 15px; border-radius: 4px; cursor: pointer; color: var(--gold); font-size: 0.85rem; }
         .ing-tag.added { background: var(--gold); color: black; }
-
         .method-box { background: #1a1a1a; padding: 20px; border: 1px solid var(--gold); border-radius: 8px; display: none; margin-top: 20px; }
         .close-lab { position: absolute; top: 20px; right: 20px; font-size: 2rem; cursor: pointer; color: var(--gold); }
 
-        @media (max-width: 900px) { #cookingLab { grid-template-columns: 1fr; padding: 10px; } }
+        @media (max-width: 900px) { #cookingLab { grid-template-columns: 1fr; padding: 15px; } }
     </style>
 </head>
 <body>
 
     <header>
         <div class="logo">CLASSIC<span>CHEF</span></div>
-        <div style="color: var(--gold); font-size: 0.9rem;"><i class="fas fa-moon"></i> الوضع الداكن مفعّل</div>
+        <div style="color: var(--gold);"><i class="fas fa-crown"></i> ركن الأصالة المغربية</div>
     </header>
 
     <section class="hero">
-        <h1 style="margin-bottom: 20px; font-weight: 900; letter-spacing: 2px;">ابحث عن النكهة الأصلية</h1>
+        <h1>مختبر الطبخ الكلاسيكي</h1>
         <div class="search-container">
-            <input type="text" id="searchInput" placeholder="ابحث عن أكلة عالمية...">
+            <input type="text" id="searchInput" placeholder="ابحث عن أكلة أخرى...">
             <button onclick="searchManual()">بحث</button>
         </div>
     </section>
 
-    <h2 class="section-title">✨ مقترحات الشيف اليومية</h2>
-    <div class="recipe-grid" id="mainGrid">
+    <h2 class="section-title"><i class="fas fa-star"></i> تخصصات البسطيلة المغربية</h2>
+    <div class="recipe-grid" id="bastillaGrid">
         </div>
+
+    <h2 class="section-title"><i class="fas fa-globe"></i> مقترحات عالمية عشوائية</h2>
+    <div class="recipe-grid" id="mainGrid"></div>
 
     <div id="cookingLab">
         <span class="close-lab" onclick="closeLab()">&times;</span>
         <div class="visual-side">
-            <div class="steam" id="steam1">💨</div>
-            <div class="ingredient-drop" id="ingAnim">🧅</div>
-            <svg class="pot-svg" viewBox="0 0 512 512">
-                <path d="M448 128H64v64h384zM96 192h320l-32 256H128z"/>
-            </svg>
+            <div class="ingredient-drop" id="ingAnim">🥘</div>
+            <svg class="pot-svg" viewBox="0 0 512 512"><path d="M448 128H64v64h384zM96 192h320l-32 256H128z"/></svg>
             <h3 id="labStatus" style="margin-top: 20px; color: var(--gold);">بانتظار المكونات...</h3>
         </div>
-        <div class="data-side">
-            <h1 id="labTitle" style="color: var(--gold); margin-bottom: 10px;"></h1>
-            <p style="opacity: 0.7;">اضغط على المكونات الحقيقية لإضافتها إلى القِدر:</p>
-            <div class="ing-list" id="ingList"></div>
+        <div class="data-side" style="text-align: right;">
+            <h1 id="labTitle" style="color: var(--gold);"></h1>
+            <div class="ing-list" id="ingList" style="display:flex; flex-wrap:wrap; gap:10px; margin:20px 0;"></div>
             <div class="method-box" id="methodBox">
-                <h4 style="margin-bottom: 10px;">📋 طريقة التحضير:</h4>
-                <p id="methodText" style="font-size: 0.9rem; line-height: 1.8; opacity: 0.9;"></p>
-                <div id="videoContainer" style="margin-top: 20px;"></div>
+                <h4>📋 خطوات التحضير والتقديم:</h4>
+                <p id="methodText" style="margin-top:10px; line-height:1.8;"></p>
+                <div id="videoContainer" style="margin-top:20px;"></div>
             </div>
         </div>
     </div>
 
     <script>
-        // 1. جلب مقترحات تلقائية عند فتح الموقع
-        window.onload = () => {
-            for(let i=0; i<6; i++) {
-                fetchRandomRecipe();
+        // بيانات البسطيلة (بجميع أنواعها)
+        const bastillaRecipes = [
+            {
+                strMeal: "بسطيلة الدجاج واللوز التقليدية",
+                strMealThumb: "https://images.unsplash.com/photo-1541518763669-27fef04b14ea?auto=format&fit=crop&w=800&q=80",
+                strInstructions: "1. يُطهى الدجاج مع البصل والزعفران والبهارات. 2. يُفتت الدجاج ويُحضر خليط البيض والمرق. 3. يُحمص اللوز ويُهشم مع السكر والقرفة. 4. تُفرش ورقة البسطيلة وتُحشى بالطبقات الثلاث. 5. تُدهن بالزبدة وتُخبز حتى تصبح ذهبية. التقديم: تُزين بالسكر الصقيل والقرفة واللوز.",
+                ingredients: ["1 دجاجة كاملة", "1 كجم بصل مفروم", "200 جرام لوز محمص", "ورقة بسطيلة", "بيض", "زعفران حر", "قرفة وسكر"],
+                strYoutube: "https://www.youtube.com/embed/S_8qM888M6A" // مثال لفيديو
+            },
+            {
+                strMeal: "بسطيلة السمك وفواكه البحر",
+                strMealThumb: "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=800&q=80",
+                strInstructions: "1. يُشحر السمك الأبيض والقمرون والكلمار مع الشرمولة المغربية. 2. تُضاف الشعرية الصينية المسلوقة والفطر. 3. تُتبل بالهريسة والحامض المصير. 4. تُلف في ورقة البسطيلة بشكل دائري. 5. تُخبز وتُزين بالقمرون ودوائر الحامض.",
+                ingredients: ["سمك أبيض", "قمرون (جمبري)", "كلمار", "شعرية صينية", "فطر أسود", "هريسة وحامض مصير", "صويا صوص"],
+                strYoutube: "https://www.youtube.com/embed/m6lX6l9Z95M"
+            },
+            {
+                strMeal: "بسطيلة الحليب (جوهرة) - تحلية",
+                strMealThumb: "https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=800&q=80",
+                strInstructions: "1. تُقلى أوراق البسطيلة حتى تصبح مقرمشة. 2. يُحضر كريم باتيسيري بنكهة ماء الزهر. 3. تُوضع طبقة من الورقة ثم الكريم ثم اللوز المهرمش. 4. تُكرر الطبقات. التقديم: تُقدم باردة فور تحضيرها للحفاظ على القرمشة.",
+                ingredients: ["ورقة بسطيلة مقلية", "حليب وبيض", "نشا (مايزينا)", "ماء زهر", "لوز مجروش", "عسل"],
+                strYoutube: "https://www.youtube.com/embed/5F_P6mKkIoc"
             }
+        ];
+
+        window.onload = () => {
+            // عرض البسطيلة أولاً
+            const bastillaGrid = document.getElementById('bastillaGrid');
+            bastillaRecipes.forEach(recipe => displayRecipe(recipe, bastillaGrid, true));
+            
+            // عرض مقترحات عشوائية ثانياً
+            for(let i=0; i<4; i++) fetchRandomRecipe();
         };
 
         async function fetchRandomRecipe() {
             const res = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
             const data = await res.json();
-            displayRecipe(data.meals[0]);
+            displayRecipe(data.meals[0], document.getElementById('mainGrid'), false);
         }
 
-        async function searchManual() {
-            const query = document.getElementById('searchInput').value;
-            if(!query) return;
-            const res = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`);
-            const data = await res.json();
-            document.getElementById('mainGrid').innerHTML = "";
-            if(data.meals) data.meals.forEach(displayRecipe);
-        }
-
-        function displayRecipe(meal) {
-            const grid = document.getElementById('mainGrid');
+        function displayRecipe(meal, targetGrid, isSpecial) {
             const card = document.createElement('div');
             card.className = 'recipe-card animate__animated animate__fadeIn';
-            card.innerHTML = `
-                <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
+            if(isSpecial) card.innerHTML += `<div class="badge-special">وصفة ملكية</div>`;
+            
+            card.innerHTML += `
+                <img src="${meal.strMealThumb}">
                 <div class="recipe-info">
                     <h3>${meal.strMeal}</h3>
-                    <p style="font-size: 0.8rem; color: var(--gold);">${meal.strArea} | ${meal.strCategory}</p>
-                    <button class="video-btn" onclick='openLab(${JSON.stringify(meal).replace(/'/g, "&apos;")})'>فتح في المختبر التفاعلي</button>
-                    ${meal.strYoutube ? `<a href="${meal.strYoutube}" target="_blank" class="video-btn" style="border-color: #ff0000; color: #ff0000; margin-top: 5px;">مشاهدة الفيديو على YouTube</a>` : ''}
+                    <p style="font-size:0.8rem; color:var(--gold);">المطبخ المغربي الأصيل</p>
+                    <button class="video-btn" onclick='openLab(${JSON.stringify(meal).replace(/'/g, "&apos;")})'>دخول المختبر</button>
                 </div>
             `;
-            grid.appendChild(card);
+            targetGrid.appendChild(card);
         }
 
-        // --- نظام المختبر ---
-        let count = 0, total = 0;
         function openLab(meal) {
-            const lab = document.getElementById('cookingLab');
-            lab.style.display = 'grid';
+            document.getElementById('cookingLab').style.display = 'grid';
             document.getElementById('labTitle').innerText = meal.strMeal;
             document.getElementById('methodText').innerText = meal.strInstructions;
             document.getElementById('methodBox').style.display = 'none';
-            document.getElementById('ingList').innerHTML = "";
-            
-            // تحويل رابط يوتيوب ليعمل داخل الموقع (Embed)
-            if(meal.strYoutube) {
-                const videoId = meal.strYoutube.split('v=')[1];
-                document.getElementById('videoContainer').innerHTML = `<iframe width="100%" height="200" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>`;
+            const list = document.getElementById('ingList');
+            list.innerHTML = "";
+
+            // التعامل مع المقادير (سواء كانت مصفوفة جاهزة أو من API)
+            let ings = meal.ingredients || [];
+            if(ings.length === 0) {
+                for(let i=1; i<=20; i++) if(meal[`strIngredient${i}`]) ings.push(meal[`strMeasure${i}`] + " " + meal[`strIngredient${i}`]);
             }
 
-            let ings = [];
-            for(let i=1; i<=20; i++) {
-                if(meal[`strIngredient${i}`]) ings.push(meal[`strMeasure${i}`] + " " + meal[`strIngredient${i}`]);
-            }
-            total = ings.length;
-            count = 0;
-
-            ings.forEach(item => {
+            ings.forEach(ing => {
                 const span = document.createElement('span');
                 span.className = 'ing-tag';
-                span.innerText = item;
+                span.innerText = ing;
                 span.onclick = function() {
-                    if(!this.classList.contains('added')) {
-                        this.classList.add('added');
-                        const anim = document.getElementById('ingAnim');
-                        anim.classList.remove('animate-drop');
-                        void anim.offsetWidth;
-                        anim.classList.add('animate-drop');
-                        count++;
-                        if(count === total) {
-                            document.getElementById('methodBox').style.display = 'block';
-                            document.getElementById('steam1').style.opacity = '1';
-                            document.getElementById('labStatus').innerText = "اكتمل الطبخ! 🔥";
-                        } else {
-                            document.getElementById('labStatus').innerText = `تم إضافة ${count} من ${total}`;
-                        }
+                    this.classList.add('added');
+                    document.getElementById('ingAnim').classList.remove('animate-drop');
+                    void document.getElementById('ingAnim').offsetWidth;
+                    document.getElementById('ingAnim').classList.add('animate-drop');
+                    if(document.querySelectorAll('.ing-tag.added').length === ings.length) {
+                        document.getElementById('methodBox').style.display = 'block';
+                        document.getElementById('labStatus').innerText = "تم الطبخ بنجاح! 🔥";
+                        if(meal.strYoutube) document.getElementById('videoContainer').innerHTML = `<iframe width="100%" height="250" src="${meal.strYoutube}" frameborder="0" allowfullscreen></iframe>`;
                     }
                 };
-                document.getElementById('ingList').appendChild(span);
+                list.appendChild(span);
             });
         }
 
