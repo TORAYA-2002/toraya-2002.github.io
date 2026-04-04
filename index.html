@@ -3,512 +3,279 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cooking with TORAYA | أشهى الوصفات العصرية</title>
+    <title>TORAYA GLOBAL CUISINE 2026 | المنصة العالمية</title>
     
-    <meta name="description" content="موقع Cooking with TORAYA يقدم وصفات طبخ مغربية وعالمية سهلة التحضير مع فيديوهات توضيحية بجودة عالية.">
-    <meta name="keywords" content="طبخ، وصفات مغربية، حلويات، عشاء سريع، TORAYA 2002">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
-
     <style>
-        /* المتغيرات الأساسية (سهلة التعديل) */
         :root {
-            --primary-color: #e67e22; /* برتقالي فاتح */
-            --bg-color: #f4f7f6;
-            --text-color: #333;
-            --card-bg: #ffffff;
-            --nav-bg: #ffffff;
-            --shadow: 0 4px 12px rgba(0,0,0,0.08);
-            --transition: all 0.3s ease;
+            --accent: #ff4757;
+            --dark-bg: #0f172a;
+            --glass: rgba(255, 255, 255, 0.1);
+            --text: #ffffff;
         }
 
-        /* تنسيقات الوضع الليلي */
-        [data-theme="dark"] {
-            --bg-color: #121212;
-            --text-color: #e0e0e0;
-            --card-bg: #1e1e1e;
-            --nav-bg: #1e1e1e;
-            --shadow: 0 4px 12px rgba(0,0,0,0.5);
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        body { background-color: var(--dark-bg); color: var(--text); overflow-x: hidden; }
 
-        body {
-            font-family: 'Tajawal', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            transition: var(--transition);
-        }
-
-        /* الهيدر والملاحة */
+        /* الهيدر والبحث الذكي */
         header {
-            background-color: var(--nav-bg);
-            padding: 15px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: var(--shadow);
+            padding: 20px;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
             position: sticky;
             top: 0;
             z-index: 1000;
+            border-bottom: 1px solid var(--glass);
         }
 
-        .logo {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-
-        .theme-btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-            font-family: 'Tajawal', sans-serif;
-            transition: var(--transition);
-        }
-
-        .theme-btn:hover {
-            opacity: 0.9;
-            transform: scale(1.05);
-        }
-
-        /* قسم الترحيب */
-        .hero {
-            text-align: center;
-            padding: 60px 20px;
-            background: linear-gradient(135deg, var(--primary-color), #d35400);
-            color: white;
-            margin-bottom: 40px;
-        }
-
-        .hero h1 { font-size: 2.5rem; margin-bottom: 10px; }
-
-        /* حاوية الوصفات */
-        .container {
-            max-width: 900px;
+        .search-box {
+            display: flex;
+            background: var(--glass);
+            border-radius: 50px;
+            padding: 10px 20px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 0 20px;
+            border: 2px solid transparent;
+            transition: 0.3s;
         }
 
-        .recipe-card {
-            background: var(--card-bg);
+        .search-box:focus-within { border-color: var(--accent); box-shadow: 0 0 20px rgba(255, 71, 87, 0.3); }
+
+        input { background: none; border: none; color: white; flex: 1; outline: none; font-size: 1.1rem; }
+
+        /* قسم Reels (تيك توك الذكي) */
+        .reels-wrapper {
+            padding: 20px;
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+        }
+
+        .reel {
+            min-width: 160px;
+            height: 280px;
             border-radius: 20px;
-            overflow: hidden;
-            margin-bottom: 40px;
-            box-shadow: var(--shadow);
-        }
-
-        /* مشغل الفيديو */
-        .video-container {
+            background-size: cover;
+            background-position: center;
             position: relative;
-            width: 100%;
-            background: #000;
-            aspect-ratio: 16 / 9;
+            scroll-snap-align: start;
+            cursor: pointer;
+            border: 2px solid var(--glass);
+            transition: 0.4s;
         }
 
-        .video-container video {
-            width: 100%;
-            height: 100%;
-            display: block;
+        .reel:hover { transform: scale(1.05); border-color: var(--accent); }
+
+        .reel::after {
+            content: "▶ LIVE";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--accent);
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 5px;
         }
 
-        /* محتوى الوصفة */
-        .recipe-body {
+        /* حاوية الأكلات العالمية */
+        .main-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
             padding: 30px;
         }
 
-        .recipe-title {
-            color: var(--primary-color);
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-        }
-
-        .recipe-info {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 20px;
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        .ingredients-box {
-            background: rgba(230, 126, 34, 0.1);
-            padding: 20px;
-            border-radius: 12px;
-            border-right: 5px solid var(--primary-color);
-            margin-bottom: 25px;
-        }
-
-        .ingredients-box h3 { margin-bottom: 10px; color: var(--primary-color); }
-        .ingredients-box ul { list-style: inside circle; }
-
-        .steps h3 { margin-bottom: 15px; }
-        .steps p { margin-bottom: 10px; }
-
-        /* التذييل */
-        footer {
-            text-align: center;
-            padding: 40px;
-            background: var(--card-bg);
-            margin-top: 60px;
-            border-top: 1px solid rgba(0,0,0,0.1);
-        }
-
-        /* متجاوب مع الموبايل */
-        @media (max-width: 600px) {
-            .hero h1 { font-size: 1.8rem; }
-            .recipe-title { font-size: 1.4rem; }
-            header { padding: 10px 5%; }
-        }
-    </style>
-</head>
-<body data-theme="light">
-
-    <header>
-        <a href="#" class="logo">TORAYA - 2002</a>
-        <button class="theme-btn" id="themeSwitcher">الوضع الليلي 🌙</button>
-    </header>
-
-    <section class="hero">
-        <h1>Cooking with TORAYA</h1>
-        <p>مطبخك الرقمي لوصفات سريعة، اقتصادية، ومصورة</p>
-    </section>
-
-    <main class="container">
-        <article class="recipe-card" itemscope itemtype="https://schema.org/Recipe">
-            
-            <div class="video-container">
-                <video controls poster="images/poster1.jpg">
-                    <source src="vids/recipe1.mp4" type="video/mp4">
-                    متصفحك لا يدعم تشغيل الفيديو.
-                </video>
-            </div>
-
-            <div class="recipe-body">
-                <div class="recipe-info">
-                    <span>🕒 15 دقيقة</span>
-                    <span>🔥 سهلة التحضير</span>
-                    <span>📍 وصفة مغربية</span>
-                </div>
-
-                <h2 class="recipe-title" itemprop="name">طاجين السمك بالخضر على طريقة طرايا</h2>
-                <p itemprop="description">طريقة تحضير طاجين مغربي أصيل غني بالنكهات ومرتب بطريقة عصرية تناسب مائدتكم.</p>
-
-                <div class="ingredients-box">
-                    <h3>المقادير:</h3>
-                    <ul itemprop="recipeIngredient">
-                        <li>500 جرام سمك طري</li>
-                        <li>خضروات مشكلة (جزر، بطاطس، فلفل)</li>
-                        <li>شرمولة مغربية (قزبر، ثوم، توابل)</li>
-                        <li>زيت زيتون وليمون حامض</li>
-                    </ul>
-                </div>
-
-                <div class="steps">
-                    <h3>طريقة التحضير:</h3>
-                    <div itemprop="recipeInstructions">
-                        <p>1. نخلط السمك مع الشرمولة ونتركه يتشرب النكهة.</p>
-                        <p>2. نرتب الخضروات في الطاجين ونضع فوقها السمك.</p>
-                        <p>3. نضيف القليل من الماء ونتركه ينضج على نار هادئة.</p>
-                    </div>
-                </div>
-            </div>
-        </article>
-    </main>
-
-    <footer>
-        <p>جميع الحقوق محفوظة لـ <strong>Cooking with TORAYA</strong> &copy; 2026</p>
-        <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.6;">صنع بكل حب في المغرب 🇲🇦</p>
-    </footer>
-
-    <script>
-        const themeSwitcher = document.getElementById('themeSwitcher');
-        const body = document.body;
-
-        // التحقق من تفضيلات المستخدم السابقة
-        const currentTheme = localStorage.getItem('theme') || 'light';
-        body.setAttribute('data-theme', currentTheme);
-        updateButtonText(currentTheme);
-
-        themeSwitcher.addEventListener('click', () => {
-            const isDark = body.getAttribute('data-theme') === 'dark';
-            const newTheme = isDark ? 'light' : 'dark';
-            
-            body.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateButtonText(newTheme);
-        });
-
-        function updateButtonText(theme) {
-            themeSwitcher.textContent = theme === 'dark' ? 'الوضع النهاري ☀️' : 'الوضع الليلي 🌙';
-        }
-    </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cooking with TORAYA | أشهى الوصفات العصرية</title>
-    
-    <meta name="description" content="موقع Cooking with TORAYA يقدم وصفات طبخ مغربية وعالمية سهلة التحضير مع فيديوهات توضيحية بجودة عالية.">
-    <meta name="keywords" content="طبخ، وصفات مغربية، حلويات، عشاء سريع، TORAYA 2002">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
-
-    <style>
-        /* المتغيرات الأساسية (سهلة التعديل) */
-        :root {
-            --primary-color: #e67e22; /* برتقالي فاتح */
-            --bg-color: #f4f7f6;
-            --text-color: #333;
-            --card-bg: #ffffff;
-            --nav-bg: #ffffff;
-            --shadow: 0 4px 12px rgba(0,0,0,0.08);
-            --transition: all 0.3s ease;
-        }
-
-        /* تنسيقات الوضع الليلي */
-        [data-theme="dark"] {
-            --bg-color: #121212;
-            --text-color: #e0e0e0;
-            --card-bg: #1e1e1e;
-            --nav-bg: #1e1e1e;
-            --shadow: 0 4px 12px rgba(0,0,0,0.5);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Tajawal', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            transition: var(--transition);
-        }
-
-        /* الهيدر والملاحة */
-        header {
-            background-color: var(--nav-bg);
-            padding: 15px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .logo {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-
-        .theme-btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-            font-family: 'Tajawal', sans-serif;
-            transition: var(--transition);
-        }
-
-        .theme-btn:hover {
-            opacity: 0.9;
-            transform: scale(1.05);
-        }
-
-        /* قسم الترحيب */
-        .hero {
-            text-align: center;
-            padding: 60px 20px;
-            background: linear-gradient(135deg, var(--primary-color), #d35400);
-            color: white;
-            margin-bottom: 40px;
-        }
-
-        .hero h1 { font-size: 2.5rem; margin-bottom: 10px; }
-
-        /* حاوية الوصفات */
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
         .recipe-card {
-            background: var(--card-bg);
-            border-radius: 20px;
+            background: var(--glass);
+            border-radius: 30px;
             overflow: hidden;
-            margin-bottom: 40px;
-            box-shadow: var(--shadow);
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--glass);
+            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* مشغل الفيديو */
-        .video-container {
+        .recipe-card:hover { transform: translateY(-10px); }
+
+        .media-area {
             position: relative;
             width: 100%;
+            height: 250px;
             background: #000;
-            aspect-ratio: 16 / 9;
         }
 
-        .video-container video {
+        .recipe-video {
             width: 100%;
             height: 100%;
-            display: block;
+            object-fit: cover;
+            display: none;
         }
 
-        /* محتوى الوصفة */
-        .recipe-body {
-            padding: 30px;
+        .recipe-thumb {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
-        .recipe-title {
-            color: var(--primary-color);
-            font-size: 1.8rem;
-            margin-bottom: 15px;
+        .recipe-content { padding: 25px; }
+
+        .tag-group { display: flex; gap: 10px; margin-bottom: 15px; }
+        .tag { background: var(--accent); font-size: 12px; padding: 4px 12px; border-radius: 50px; }
+
+        .recipe-title { font-size: 1.5rem; font-weight: 900; margin-bottom: 10px; color: var(--accent); }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            font-size: 13px;
+            background: rgba(0,0,0,0.2);
+            padding: 15px;
+            border-radius: 15px;
         }
 
-        .recipe-info {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 20px;
-            font-size: 0.9rem;
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            cursor: pointer;
             opacity: 0.8;
+            transition: 0.3s;
         }
 
-        .ingredients-box {
-            background: rgba(230, 126, 34, 0.1);
-            padding: 20px;
-            border-radius: 12px;
-            border-right: 5px solid var(--primary-color);
-            margin-bottom: 25px;
-        }
+        .play-overlay:hover { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
 
-        .ingredients-box h3 { margin-bottom: 10px; color: var(--primary-color); }
-        .ingredients-box ul { list-style: inside circle; }
-
-        .steps h3 { margin-bottom: 15px; }
-        .steps p { margin-bottom: 10px; }
-
-        /* التذييل */
-        footer {
-            text-align: center;
-            padding: 40px;
-            background: var(--card-bg);
-            margin-top: 60px;
-            border-top: 1px solid rgba(0,0,0,0.1);
-        }
-
-        /* متجاوب مع الموبايل */
-        @media (max-width: 600px) {
-            .hero h1 { font-size: 1.8rem; }
-            .recipe-title { font-size: 1.4rem; }
-            header { padding: 10px 5%; }
-        }
     </style>
 </head>
-<body data-theme="light">
+<body>
 
     <header>
-        <a href="#" class="logo">TORAYA - 2002</a>
-        <button class="theme-btn" id="themeSwitcher">الوضع الليلي 🌙</button>
+        <div style="text-align: center; margin-bottom: 15px;">
+            <h1 style="font-weight: 900; letter-spacing: 2px;">TORAYA <span style="color: var(--accent);">2002</span></h1>
+        </div>
+        <div class="search-box">
+            <input type="text" id="globalSearch" placeholder="ابحث عن أكلة (مغربية، إيطالية، يابانية...) أو لغة...">
+        </div>
     </header>
 
-    <section class="hero">
-        <h1>Cooking with TORAYA</h1>
-        <p>مطبخك الرقمي لوصفات سريعة، اقتصادية، ومصورة</p>
-    </section>
+    <div class="reels-wrapper" id="reelsDiv">
+        </div>
 
-    <main class="container">
-        <article class="recipe-card" itemscope itemtype="https://schema.org/Recipe">
-            
-            <div class="video-container">
-                <video controls poster="images/poster1.jpg">
-                    <source src="vids/recipe1.mp4" type="video/mp4">
-                    متصفحك لا يدعم تشغيل الفيديو.
-                </video>
-            </div>
-
-            <div class="recipe-body">
-                <div class="recipe-info">
-                    <span>🕒 15 دقيقة</span>
-                    <span>🔥 سهلة التحضير</span>
-                    <span>📍 وصفة مغربية</span>
-                </div>
-
-                <h2 class="recipe-title" itemprop="name">طاجين السمك بالخضر على طريقة طرايا</h2>
-                <p itemprop="description">طريقة تحضير طاجين مغربي أصيل غني بالنكهات ومرتب بطريقة عصرية تناسب مائدتكم.</p>
-
-                <div class="ingredients-box">
-                    <h3>المقادير:</h3>
-                    <ul itemprop="recipeIngredient">
-                        <li>500 جرام سمك طري</li>
-                        <li>خضروات مشكلة (جزر، بطاطس، فلفل)</li>
-                        <li>شرمولة مغربية (قزبر، ثوم، توابل)</li>
-                        <li>زيت زيتون وليمون حامض</li>
-                    </ul>
-                </div>
-
-                <div class="steps">
-                    <h3>طريقة التحضير:</h3>
-                    <div itemprop="recipeInstructions">
-                        <p>1. نخلط السمك مع الشرمولة ونتركه يتشرب النكهة.</p>
-                        <p>2. نرتب الخضروات في الطاجين ونضع فوقها السمك.</p>
-                        <p>3. نضيف القليل من الماء ونتركه ينضج على نار هادئة.</p>
-                    </div>
-                </div>
-            </div>
-        </article>
-    </main>
-
-    <footer>
-        <p>جميع الحقوق محفوظة لـ <strong>Cooking with TORAYA</strong> &copy; 2026</p>
-        <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.6;">صنع بكل حب في المغرب 🇲🇦</p>
-    </footer>
+    <div class="main-container" id="recipesGrid">
+        </div>
 
     <script>
-        const themeSwitcher = document.getElementById('themeSwitcher');
-        const body = document.body;
+        // قاعدة البيانات الكبرى (يمكنك إضافة مئات الأكلات هنا بنفس التنسيق)
+        const globalKitchen = [
+            {
+                id: 1,
+                name: "طاجين البرقوق المغربي",
+                country: "المغرب 🇲🇦",
+                time: "90 دقيقة",
+                difficulty: "متوسط",
+                ingredients: "لحم غنم، برقوق مجفف، لوز مقلي، عسل، قرفة",
+                method: "طهي اللحم مع البصل والتوابل، ثم إضافة البرقوق المعسل في النهاية.",
+                img: "https://source.unsplash.com/800x600/?tagine",
+                vid: "vids/morocco.mp4",
+                category: "تقليدي"
+            },
+            {
+                id: 2,
+                name: "سوشي السلمون الملكي",
+                country: "اليابان 🇯🇵",
+                time: "40 دقيقة",
+                difficulty: "محترف",
+                ingredients: "أرز ياباني، سلمون طازج، نوري، أفوكادو",
+                method: "تحضير الأرز بخل السوشي، لفه مع المكونات بدقة وتقطيعه.",
+                img: "https://source.unsplash.com/800x600/?sushi",
+                vid: "vids/japan.mp4",
+                category: "عصري"
+            },
+            {
+                id: 3,
+                name: "بيتزا نابوليتانا الأصيلة",
+                country: "إيطاليا 🇮🇹",
+                time: "15 دقيقة",
+                difficulty: "سهل",
+                ingredients: "دقيق 00، طماطم سان مارزانو، موزاريلا بوفالا",
+                method: "عجن يدوي، تخمير 24 ساعة، طهي في فرن حطبي بحرارة عالية.",
+                img: "https://source.unsplash.com/800x600/?pizza",
+                vid: "vids/italy.mp4",
+                category: "شعبي"
+            }
+        ];
 
-        // التحقق من تفضيلات المستخدم السابقة
-        const currentTheme = localStorage.getItem('theme') || 'light';
-        body.setAttribute('data-theme', currentTheme);
-        updateButtonText(currentTheme);
+        const grid = document.getElementById('recipesGrid');
+        const reels = document.getElementById('reelsDiv');
 
-        themeSwitcher.addEventListener('click', () => {
-            const isDark = body.getAttribute('data-theme') === 'dark';
-            const newTheme = isDark ? 'light' : 'dark';
-            
-            body.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateButtonText(newTheme);
+        function renderApp(data) {
+            // رندرة الأكلات
+            grid.innerHTML = data.map(dish => `
+                <div class="recipe-card">
+                    <div class="media-area" onclick="startRecipe(${dish.id})">
+                        <img src="${dish.img}" class="recipe-thumb" id="thumb-${dish.id}">
+                        <video class="recipe-video" id="video-${dish.id}" controls>
+                            <source src="${dish.vid}" type="video/mp4">
+                        </video>
+                        <div class="play-overlay" id="play-${dish.id}">🔘</div>
+                    </div>
+                    <div class="recipe-content">
+                        <div class="tag-group">
+                            <span class="tag">${dish.country}</span>
+                            <span class="tag" style="background:#2ecc71">${dish.category}</span>
+                        </div>
+                        <h2 class="recipe-title">${dish.name}</h2>
+                        <div class="details-grid">
+                            <div>🕒 الوقت: ${dish.time}</div>
+                            <div>🔥 الصعوبة: ${dish.difficulty}</div>
+                            <div style="grid-column: 1 / span 2;">📝 المكونات: ${dish.ingredients}</div>
+                        </div>
+                        <div style="margin-top:15px; font-size:14px; opacity:0.8">
+                            <strong>التحضير:</strong> ${dish.method}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // رندرة الـ Reels
+            reels.innerHTML = data.map(dish => `
+                <div class="reel" style="background-image: linear-gradient(transparent, black), url('${dish.img}')">
+                    <span style="position:absolute; bottom:10px; left:10px; font-size:12px; font-weight:bold;">${dish.name}</span>
+                </div>
+            `).join('');
+        }
+
+        // دالة تشغيل الفيديو فوراً (بلمسة ذكية)
+        function startRecipe(id) {
+            const video = document.getElementById(`video-${id}`);
+            const thumb = document.getElementById(`thumb-${id}`);
+            const playBtn = document.getElementById(`play-${id}`);
+
+            thumb.style.display = 'none';
+            playBtn.style.display = 'none';
+            video.style.display = 'block';
+            video.play();
+        }
+
+        // البحث الذكي (Filter)
+        document.getElementById('globalSearch').addEventListener('input', (e) => {
+            const val = e.target.value.toLowerCase();
+            const filtered = globalKitchen.filter(d => 
+                d.name.toLowerCase().includes(val) || 
+                d.country.toLowerCase().includes(val) ||
+                d.ingredients.toLowerCase().includes(val)
+            );
+            renderApp(filtered);
         });
 
-        function updateButtonText(theme) {
-            themeSwitcher.textContent = theme === 'dark' ? 'الوضع النهاري ☀️' : 'الوضع الليلي 🌙';
-        }
+        // التشغيل الأول
+        renderApp(globalKitchen);
+
     </script>
 </body>
 </html>
