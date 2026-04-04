@@ -3,265 +3,283 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cooking with Toraya | Premium Recipe Hub</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;700&display=swap" rel="stylesheet">
+    <title>Cooking-with-TORAYA | الموسوعة العالمية للطبخ</title>
     <style>
+        /* --- CSS: التنسيق الجمالي --- */
         :root {
-            --primary: #ff4757;
-            --accent: #ffa502;
-            --bg: #f8f9fa;
+            --primary-color: #e67e22; /* برتقالي دافئ للشهية */
+            --secondary-color: #27ae60; /* أخضر للمكونات الطازجة */
+            --dark-bg: #1a1a1a;
             --card-bg: #ffffff;
-            --text: #2f3542;
-            --gray: #747d8c;
-            --nav-bg: rgba(255, 255, 255, 0.95);
-            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --text-color: #333;
         }
 
-        [data-theme="dark"] {
-            --bg: #0f172a;
-            --card-bg: #1e293b;
-            --text: #f8fafc;
-            --nav-bg: rgba(15, 23, 42, 0.95);
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            color: var(--text-color);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
-
-        body { background-color: var(--bg); color: var(--text); transition: var(--transition); overflow-x: hidden; }
-
-        /* Navigation */
-        nav {
-            position: fixed; top: 0; width: 100%; z-index: 1000;
-            background: var(--nav-bg); backdrop-filter: blur(10px);
-            padding: 15px 5%; display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 4px 30px rgba(0,0,0,0.05);
+        header {
+            background: linear-gradient(135deg, #2c3e50, #000);
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
-        .logo { font-size: 1.6rem; font-weight: 700; color: var(--primary); text-decoration: none; }
-
-        .nav-btns { display: flex; gap: 15px; align-items: center; }
-
-        .btn {
-            padding: 10px 20px; border-radius: 50px; border: none; cursor: pointer;
-            font-weight: 600; transition: var(--transition);
+        .search-section {
+            max-width: 700px;
+            margin: -25px auto 20px;
+            display: flex;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-radius: 50px;
+            overflow: hidden;
         }
 
-        .btn-primary { background: var(--primary); color: white; }
-        .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
-        .btn-outline:hover { background: var(--primary); color: white; }
-
-        /* Hero Section */
-        .hero {
-            padding: 150px 5% 80px; text-align: center;
-            background: radial-gradient(circle at top right, rgba(255, 71, 87, 0.1), transparent);
+        #recipeSearch {
+            flex: 1;
+            padding: 15px 25px;
+            border: none;
+            outline: none;
+            font-size: 1.1rem;
         }
 
-        .hero h1 { font-size: 3rem; margin-bottom: 20px; animation: slideDown 0.8s ease; }
+        .search-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
 
-        /* Grid System */
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        
+        .search-btn:hover { background: #d35400; }
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .cat-btn {
+            padding: 8px 20px;
+            border-radius: 20px;
+            border: 2px solid var(--primary-color);
+            background: transparent;
+            color: var(--primary-color);
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .cat-btn.active, .cat-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
         .recipe-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 35px; margin-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            padding: 0 20px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        /* Recipe Card UI */
-        .card {
-            background: var(--card-bg); border-radius: 25px; overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05); transition: var(--transition);
-            position: relative; animation: fadeIn 1s ease;
+        .recipe-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
         }
 
-        .card:hover { transform: translateY(-15px) scale(1.02); box-shadow: 0 25px 50px rgba(0,0,0,0.15); }
-
-        .card-media { position: relative; height: 220px; width: 100%; overflow: hidden; }
-        
-        .card-media img, .card-media video {
-            width: 100%; height: 100%; object-fit: cover; transition: 0.5s;
+        .video-wrapper iframe {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border: none;
         }
 
-        .card:hover .card-media img { transform: scale(1.1); }
+        .recipe-content { padding: 20px; }
 
-        .card-body { padding: 25px; }
-        .tag { background: var(--accent); color: white; padding: 4px 15px; border-radius: 50px; font-size: 0.8rem; }
-        
-        .ingredients-list { margin: 15px 0; font-size: 0.9rem; color: var(--gray); list-style: none; }
-        .ingredients-list li::before { content: "•"; color: var(--primary); margin-left: 8px; font-weight: bold; }
-
-        /* Admin Styles */
-        #adminPanel {
-            display: none; background: var(--card-bg); border: 2px dashed var(--primary);
-            padding: 30px; border-radius: 20px; margin-bottom: 40px;
+        .recipe-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
         }
 
-        .form-group { margin-bottom: 15px; }
-        input, textarea, select {
-            width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #ddd;
-            margin-top: 5px; background: var(--bg); color: var(--text);
+        .type-tag {
+            background: #e8f5e9;
+            color: var(--secondary-color);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
         }
 
-        /* AdSense Optimization Classes */
-        .ad-placeholder {
-            width: 100%; height: 90px; background: rgba(0,0,0,0.02);
-            margin: 20px 0; display: flex; align-items: center; justify-content: center;
-            border-radius: 10px; border: 1px solid #eee; color: #aaa; font-size: 0.8rem;
+        .recipe-title { margin: 10px 0; color: #2c3e50; font-size: 1.4rem; }
+
+        .meta-info {
+            display: flex;
+            gap: 15px;
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
         }
 
-        /* Animations */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-50px); } to { opacity: 1; transform: translateY(0); } }
+        .section-title {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-top: 15px;
+            display: block;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
 
-        /* Responsive */
-        @media (max-width: 768px) { .hero h1 { font-size: 2rem; } .recipe-grid { grid-template-columns: 1fr; } }
+        .list-items {
+            margin: 8px 0;
+            padding-right: 20px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 600px) {
+            #recipeSearch { width: 100%; }
+            .recipe-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 
-<nav>
-    <a href="#" class="logo">Cooking with Toraya</a>
-    <div class="nav-btns">
-        <button class="btn btn-outline" id="themeToggle">🌓 الوضع الليلي</button>
-        <button class="btn btn-primary" id="addBtn">➕ إضافة وصفة</button>
-    </div>
-</nav>
+<header>
+    <h1>Cooking-with-TORAYA</h1>
+    <p>وصفات من كل العالم.. بكل اللغات 🌍</p>
+</header>
 
-<section class="hero">
-    <h1>مطبخ ثريا الاحترافي</h1>
-    <p>اكتشف عالم الطبخ العصري بوصفات دقيقة ومقاطع تعليمية مميزة</p>
-</section>
-
-<div class="container">
-    <div class="ad-placeholder">مساحة إعلانية تلقائية (Google AdSense Ready)</div>
-
-    <div id="adminPanel">
-        <h3 style="margin-bottom: 20px;">لوحة التحكم - إضافة وصفة جديدة</h3>
-        <div class="recipe-form">
-            <div class="form-group"><input type="text" id="recipeTitle" placeholder="عنوان الوصفة"></div>
-            <div class="form-group"><input type="text" id="recipeTag" placeholder="التصنيف (مثلاً: طاجين، حلويات)"></div>
-            <div class="form-group"><input type="text" id="recipeMedia" placeholder="رابط الصورة أو الفيديو"></div>
-            <div class="form-group"><textarea id="recipeIngredients" rows="4" placeholder="المكونات (ضع فاصلة بين كل مكون)"></textarea></div>
-            <button class="btn btn-primary" onclick="publishRecipe()">نشر الوصفة الآن</button>
-        </div>
-    </div>
-
-    <div class="recipe-grid" id="recipeGrid">
-        <article class="card">
-            <div class="card-media">
-                <img src="https://images.unsplash.com/photo-1541529086526-db283c563270?w=800" alt="طاجين مغربي">
-            </div>
-            <div class="card-body">
-                <span class="tag">أطباق رئيسية</span>
-                <h3 style="margin-top: 10px;">طاجين اللحم بالبرقوق والمشمش</h3>
-                <ul class="ingredients-list">
-                    <li>1 كجم لحم غنم</li>
-                    <li>250 جرام برقوق مجفف</li>
-                    <li>بصلتان مفرومتان</li>
-                    <li>زعفران حر وعود قرفة</li>
-                </ul>
-                <button class="btn btn-outline" style="width: 100%;">شاهد الطريقة</button>
-            </div>
-        </article>
-
-        <article class="card">
-            <div class="card-media">
-                <video src="https://assets.mixkit.co/videos/preview/mixkit-cutting-vegetables-on-a-wooden-board-42724-large.mp4" muted loop onmouseover="this.play()" onmouseout="this.pause()"></video>
-            </div>
-            <div class="card-body">
-                <span class="tag">مقبلات صحية</span>
-                <h3 style="margin-top: 10px;">سلطة الخضار المشوية</h3>
-                <ul class="ingredients-list">
-                    <li>فلفل ألوان مقطع</li>
-                    <li>كوسة وباذنجان</li>
-                    <li>زيت زيتون بكر</li>
-                    <li>أعشاب منسمة</li>
-                </ul>
-                <button class="btn btn-outline" style="width: 100%;">شاهد الفيديو</button>
-            </div>
-        </article>
-    </div>
-    
-    <div class="ad-placeholder">إعلان In-Feed (لزيادة أرباح أدسنس)</div>
+<div class="search-section">
+    <input type="text" id="recipeSearch" onkeyup="searchRecipe()" placeholder="ابحث بالاسم، المكون، أو اللغة (Ar, En, Fr)...">
+    <button class="search-btn">بحث</button>
 </div>
 
-<footer>
-    <div style="text-align: center; padding: 50px; background: var(--card-bg); margin-top: 100px;">
-        <p>© 2026 Cooking with Toraya - جميع الحقوق محفوظة</p>
-        <div style="margin-top: 20px; font-size: 0.8rem; color: var(--gray);">
-            <a href="#">سياسة الخصوصية</a> | <a href="#">اتصل بنا</a> | <a href="#">من نحن</a>
-        </div>
-    </div>
-</footer>
+<nav class="categories" id="catNav">
+    <button class="cat-btn active" onclick="filterType('all')">الكل</button>
+    <button class="cat-btn" onclick="filterType('فطور')">فطور</button>
+    <button class="cat-btn" onclick="filterType('غداء')">غداء</button>
+    <button class="cat-btn" onclick="filterType('عشاء')">عشاء</button>
+    <button class="cat-btn" onclick="filterType('حلويات')">حلويات</button>
+</nav>
+
+<main class="recipe-grid" id="recipeGrid">
+    </main>
 
 <script>
-    // 1. Dark Mode Logic
-    const themeToggle = document.getElementById('themeToggle');
-    themeToggle.addEventListener('click', () => {
-        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-        document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
-        themeToggle.innerText = isDark ? '🌓 الوضع الليلي' : '☀️ الوضع النهاري';
-    });
+    /* --- JS: قاعدة البيانات والمنطق --- */
 
-    // 2. Admin Logic with Code 20132021
-    const addBtn = document.getElementById('addBtn');
-    const adminPanel = document.getElementById('adminPanel');
-
-    addBtn.addEventListener('click', () => {
-        const code = prompt("الرجاء إدخال رمز الإدارة:");
-        if (code === "20132021") {
-            adminPanel.style.display = "block";
-            adminPanel.scrollIntoView({ behavior: 'smooth' });
-        } else {
-            alert("عذراً، الرمز غير صحيح!");
+    // قاعدة بيانات الوصفات (قابلة للتوسع بسهولة)
+    const recipesData = [
+        {
+            names: ["باستا بصلصة الطماطم", "Tomato Pasta", "Pâtes à la sauce tomate"],
+            category: "غداء",
+            prepTime: "10 دقائق",
+            cookTime: "20 دقيقة",
+            ingredients: [
+                "400 جرام مكرونة",
+                "3 فصوص ثوم مفروم",
+                "صلصة طماطم طازجة",
+                "زيت زيتون وريحان"
+            ],
+            instructions: [
+                "اسلق المكرونة في ماء مملح حتى تنضج.",
+                "في مقلاة، سخن الزيت وضف الثوم ثم الصلصة.",
+                "امزج المكرونة مع الصلصة وزينها بالريحان."
+            ],
+            videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", // ضع رابط الفيديو هنا
+            languages: ["arabic", "english", "french"]
+        },
+        {
+            names: ["شكشوكة", "Shakshuka", "Chakchouka"],
+            category: "فطور",
+            prepTime: "5 دقائق",
+            cookTime: "15 دقيقة",
+            ingredients: [
+                "4 بيضات",
+                "بصلة مفرومة",
+                "حبتان طماطم",
+                "فلفل أخضر وتوابل (كمون، بابريكا)"
+            ],
+            instructions: [
+                "قم بتشويح البصل والفلفل حتى يذبل.",
+                "أضف الطماطم والتوابل واتركها تتسبك.",
+                "اصنع فجوات للبيض وغطِ المقلاة حتى ينضج."
+            ],
+            videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+            languages: ["arabic", "english", "french"]
         }
-    });
+    ];
 
-    // 3. Dynamic Content Engine
-    function publishRecipe() {
-        const title = document.getElementById('recipeTitle').value;
-        const tag = document.getElementById('recipeTag').value;
-        const media = document.getElementById('recipeMedia').value;
-        const ingredients = document.getElementById('recipeIngredients').value.split(',');
-
-        if(!title || !media) return alert("يرجى ملء البيانات الأساسية");
-
+    function renderRecipes(data) {
         const grid = document.getElementById('recipeGrid');
-        const isVideo = media.includes('mp4');
-        
-        const cardHTML = `
-            <article class="card" style="animation: fadeIn 0.5s ease-out">
-                <div class="card-media">
-                    ${isVideo ? `<video src="${media}" muted loop onmouseover="this.play()" onmouseout="this.pause()"></video>` : `<img src="${media}" alt="${title}">`}
+        grid.innerHTML = data.map(recipe => `
+            <article class="recipe-card">
+                <div class="video-wrapper">
+                    <iframe src="${recipe.videoUrl}" title="Recipe Video"></iframe>
                 </div>
-                <div class="card-body">
-                    <span class="tag">${tag}</span>
-                    <h3 style="margin-top: 10px;">${title}</h3>
-                    <ul class="ingredients-list">
-                        ${ingredients.map(i => `<li>${i.trim()}</li>`).join('')}
+                <div class="recipe-content">
+                    <div class="recipe-header">
+                        <span class="type-tag">${recipe.category}</span>
+                    </div>
+                    <h2 class="recipe-title">${recipe.names[0]}</h2>
+                    <div class="meta-info">
+                        <span>⏱️ تحضير: ${recipe.prepTime}</span>
+                        <span>🔥 طهي: ${recipe.cookTime}</span>
+                    </div>
+                    
+                    <span class="section-title">المكونات والمقادير:</span>
+                    <ul class="list-items">
+                        ${recipe.ingredients.map(ing => `<li>${ing}</li>`).join('')}
                     </ul>
-                    <button class="btn btn-outline" style="width: 100%;">عرض التفاصيل</button>
+
+                    <span class="section-title">طريقة التحضير بدقة:</span>
+                    <ol class="list-items">
+                        ${recipe.instructions.map(step => `<li>${step}</li>`).join('')}
+                    </ol>
                 </div>
             </article>
-        `;
-
-        grid.insertAdjacentHTML('afterbegin', cardHTML);
-        adminPanel.style.display = "none";
-        alert("تمت إضافة الوصفة بنجاح!");
+        `).join('');
     }
 
-    // 4. Premium Smooth Scrolling & Lazy Effects
-    window.addEventListener('scroll', () => {
-        const cards = document.querySelectorAll('.card');
-        cards.forEach(card => {
-            const rect = card.getBoundingClientRect();
-            if(rect.top < window.innerHeight - 100) {
-                card.style.opacity = "1";
-            }
-        });
-    });
+    function searchRecipe() {
+        const query = document.getElementById('recipeSearch').value.toLowerCase();
+        const filtered = recipesData.filter(r => 
+            r.names.some(n => n.toLowerCase().includes(query)) ||
+            r.category.toLowerCase().includes(query)
+        );
+        renderRecipes(filtered);
+    }
 
-    // Content Generation to help with File Size/Structure for SEO
-    // To ensure AdSense sees a "Rich" site, I am adding a hidden SEO context
+    function filterType(type) {
+        // تحديث شكل الأزرار
+        const buttons = document.querySelectorAll('.cat-btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+
+        if(type === 'all') {
+            renderRecipes(recipesData);
+        } else {
+            const filtered = recipesData.filter(r => r.category === type);
+            renderRecipes(filtered);
+        }
+    }
+
+    // التشغيل الأولي
+    window.onload = () => renderRecipes(recipesData);
 </script>
 
 </body>
