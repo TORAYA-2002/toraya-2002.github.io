@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TORAYA GLOBAL CUISINE 2026 | المنصة العالمية</title>
+    <title>TORAYA GLOBAL CUISINE 2002</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     
@@ -16,10 +16,9 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
-
         body { background-color: var(--dark-bg); color: var(--text); overflow-x: hidden; }
 
-        /* الهيدر والبحث الذكي */
+        /* الهيدر والبحث */
         header {
             padding: 20px;
             background: rgba(15, 23, 42, 0.95);
@@ -34,24 +33,22 @@
             display: flex;
             background: var(--glass);
             border-radius: 50px;
-            padding: 10px 20px;
+            padding: 12px 25px;
             max-width: 800px;
-            margin: 0 auto;
-            border: 2px solid transparent;
+            margin: 15px auto 0;
+            border: 2px solid var(--glass);
             transition: 0.3s;
         }
 
-        .search-box:focus-within { border-color: var(--accent); box-shadow: 0 0 20px rgba(255, 71, 87, 0.3); }
+        .search-box:focus-within { border-color: var(--accent); }
+        input { background: none; border: none; color: white; flex: 1; outline: none; font-size: 1.1rem; text-align: right; }
 
-        input { background: none; border: none; color: white; flex: 1; outline: none; font-size: 1.1rem; }
-
-        /* قسم Reels (تيك توك الذكي) */
+        /* قسم Reels (TikTok Style) */
         .reels-wrapper {
             padding: 20px;
             display: flex;
             gap: 15px;
             overflow-x: auto;
-            scroll-snap-type: x mandatory;
             scrollbar-width: none;
         }
 
@@ -59,33 +56,22 @@
             min-width: 160px;
             height: 280px;
             border-radius: 20px;
-            background-size: cover;
-            background-position: center;
+            background: #000;
             position: relative;
-            scroll-snap-align: start;
             cursor: pointer;
             border: 2px solid var(--glass);
-            transition: 0.4s;
+            overflow: hidden;
         }
 
-        .reel:hover { transform: scale(1.05); border-color: var(--accent); }
+        .reel video { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; }
+        .reel:hover video { opacity: 1; }
+        .reel span { position: absolute; bottom: 10px; right: 10px; font-size: 12px; font-weight: bold; z-index: 2; }
 
-        .reel::after {
-            content: "▶ LIVE";
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: var(--accent);
-            font-size: 10px;
-            padding: 2px 8px;
-            border-radius: 5px;
-        }
-
-        /* حاوية الأكلات العالمية */
+        /* حاوية الأكلات */
         .main-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
             padding: 30px;
         }
 
@@ -95,187 +81,138 @@
             overflow: hidden;
             backdrop-filter: blur(5px);
             border: 1px solid var(--glass);
-            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-
-        .recipe-card:hover { transform: translateY(-10px); }
 
         .media-area {
             position: relative;
             width: 100%;
-            height: 250px;
+            height: 220px;
             background: #000;
-        }
-
-        .recipe-video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: none;
-        }
-
-        .recipe-thumb {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .recipe-content { padding: 25px; }
-
-        .tag-group { display: flex; gap: 10px; margin-bottom: 15px; }
-        .tag { background: var(--accent); font-size: 12px; padding: 4px 12px; border-radius: 50px; }
-
-        .recipe-title { font-size: 1.5rem; font-weight: 900; margin-bottom: 10px; color: var(--accent); }
-
-        .details-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            font-size: 13px;
-            background: rgba(0,0,0,0.2);
-            padding: 15px;
-            border-radius: 15px;
-        }
-
-        .play-overlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 3rem;
             cursor: pointer;
-            opacity: 0.8;
-            transition: 0.3s;
         }
 
-        .play-overlay:hover { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+        .recipe-video { width: 100%; height: 100%; object-fit: cover; display: none; }
+        .recipe-thumb { width: 100%; height: 100%; object-fit: cover; }
 
+        .recipe-content { padding: 20px; }
+        .recipe-title { font-size: 1.4rem; font-weight: 900; color: var(--accent); margin-bottom: 10px; }
+        
+        .tag { background: var(--accent); font-size: 11px; padding: 3px 10px; border-radius: 50px; margin-left: 5px; }
+
+        .details { font-size: 13px; background: rgba(0,0,0,0.3); padding: 12px; border-radius: 15px; margin-top: 10px; }
+
+        .play-btn {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            font-size: 3rem; color: var(--accent); opacity: 0.9;
+        }
+
+        footer { text-align: center; padding: 40px; opacity: 0.5; font-size: 14px; }
     </style>
 </head>
 <body>
 
     <header>
-        <div style="text-align: center; margin-bottom: 15px;">
-            <h1 style="font-weight: 900; letter-spacing: 2px;">TORAYA <span style="color: var(--accent);">2002</span></h1>
-        </div>
+        <h1 style="text-align: center; font-weight: 900;">TORAYA <span style="color: var(--accent);">2002</span></h1>
         <div class="search-box">
-            <input type="text" id="globalSearch" placeholder="ابحث عن أكلة (مغربية، إيطالية، يابانية...) أو لغة...">
+            <input type="text" id="recipeSearch" placeholder="ابحث عن أكلة أو دولة (مغربي، إيطالي...)...">
         </div>
     </header>
 
-    <div class="reels-wrapper" id="reelsDiv">
-        </div>
+    <div class="reels-wrapper" id="reelsDiv"></div>
 
-    <div class="main-container" id="recipesGrid">
-        </div>
+    <main class="main-container" id="recipesGrid"></main>
+
+    <footer>جميع الحقوق محفوظة لـ Cooking with TORAYA © 2026</footer>
 
     <script>
-        // قاعدة البيانات الكبرى (يمكنك إضافة مئات الأكلات هنا بنفس التنسيق)
-        const globalKitchen = [
+        // قاعدة بيانات الأكلات مع فيديوهات حقيقية تعمل
+        const recipes = [
             {
                 id: 1,
-                name: "طاجين البرقوق المغربي",
+                name: "الكسكس المغربي العالمي",
                 country: "المغرب 🇲🇦",
-                time: "90 دقيقة",
-                difficulty: "متوسط",
-                ingredients: "لحم غنم، برقوق مجفف، لوز مقلي، عسل، قرفة",
-                method: "طهي اللحم مع البصل والتوابل، ثم إضافة البرقوق المعسل في النهاية.",
-                img: "https://source.unsplash.com/800x600/?tagine",
-                vid: "vids/morocco.mp4",
-                category: "تقليدي"
+                ingredients: "سميد، سبع خضار، لحم، سمن مغربي",
+                method: "تفوير الكسكس 3 مرات مع مرق اللحم والخضار المنسم.",
+                vid: "https://player.vimeo.com/external/371433846.sd.mp4?s=231da6ab57f91a5c6974866ca5925048&profile_id=139",
+                img: "https://images.pexels.com/photos/7194915/pexels-photo-7194915.jpeg"
             },
             {
                 id: 2,
-                name: "سوشي السلمون الملكي",
-                country: "اليابان 🇯🇵",
-                time: "40 دقيقة",
-                difficulty: "محترف",
-                ingredients: "أرز ياباني، سلمون طازج، نوري، أفوكادو",
-                method: "تحضير الأرز بخل السوشي، لفه مع المكونات بدقة وتقطيعه.",
-                img: "https://source.unsplash.com/800x600/?sushi",
-                vid: "vids/japan.mp4",
-                category: "عصري"
+                name: "بيتزا نابولي الإيطالية",
+                country: "إيطاليا 🇮🇹",
+                ingredients: "طماطم، ريحان، موزاريلا، زيت زيتون",
+                method: "عجينة مخمرة طويلاً مع طهي سريع في فرن حطبي.",
+                vid: "https://player.vimeo.com/external/481132593.sd.mp4?s=500742512f464010b986a4225380539f208c5c7f&profile_id=139",
+                img: "https://images.pexels.com/photos/1566837/pexels-photo-1566837.jpeg"
             },
             {
                 id: 3,
-                name: "بيتزا نابوليتانا الأصيلة",
-                country: "إيطاليا 🇮🇹",
-                time: "15 دقيقة",
-                difficulty: "سهل",
-                ingredients: "دقيق 00، طماطم سان مارزانو، موزاريلا بوفالا",
-                method: "عجن يدوي، تخمير 24 ساعة، طهي في فرن حطبي بحرارة عالية.",
-                img: "https://source.unsplash.com/800x600/?pizza",
-                vid: "vids/italy.mp4",
-                category: "شعبي"
+                name: "سوشي طوكيو الفاخر",
+                country: "اليابان 🇯🇵",
+                ingredients: "أرز خل، سمك سلمون، نوري، واسابي",
+                method: "لف الأرز بدقة مع السمك الطازج وتقديمه بارداً.",
+                vid: "https://player.vimeo.com/external/449339275.sd.mp4?s=d00469b2d869273c5d6423c2a014909a80e1a179&profile_id=139",
+                img: "https://images.pexels.com/photos/357756/pexels-photo-357756.jpeg"
             }
         ];
 
         const grid = document.getElementById('recipesGrid');
         const reels = document.getElementById('reelsDiv');
 
-        function renderApp(data) {
-            // رندرة الأكلات
-            grid.innerHTML = data.map(dish => `
+        function render(filter = "") {
+            const filtered = recipes.filter(r => r.name.includes(filter) || r.country.includes(filter));
+            
+            grid.innerHTML = filtered.map(r => `
                 <div class="recipe-card">
-                    <div class="media-area" onclick="startRecipe(${dish.id})">
-                        <img src="${dish.img}" class="recipe-thumb" id="thumb-${dish.id}">
-                        <video class="recipe-video" id="video-${dish.id}" controls>
-                            <source src="${dish.vid}" type="video/mp4">
+                    <div class="media-area" onclick="playRecipe(${r.id})">
+                        <img src="${r.img}" class="recipe-thumb" id="thumb-${r.id}">
+                        <video class="recipe-video" id="video-${r.id}" loop muted playsinline>
+                            <source src="${r.vid}" type="video/mp4">
                         </video>
-                        <div class="play-overlay" id="play-${dish.id}">🔘</div>
+                        <div class="play-btn" id="btn-${r.id}">▶</div>
                     </div>
                     <div class="recipe-content">
-                        <div class="tag-group">
-                            <span class="tag">${dish.country}</span>
-                            <span class="tag" style="background:#2ecc71">${dish.category}</span>
-                        </div>
-                        <h2 class="recipe-title">${dish.name}</h2>
-                        <div class="details-grid">
-                            <div>🕒 الوقت: ${dish.time}</div>
-                            <div>🔥 الصعوبة: ${dish.difficulty}</div>
-                            <div style="grid-column: 1 / span 2;">📝 المكونات: ${dish.ingredients}</div>
-                        </div>
-                        <div style="margin-top:15px; font-size:14px; opacity:0.8">
-                            <strong>التحضير:</strong> ${dish.method}
+                        <span class="tag">${r.country}</span>
+                        <h2 class="recipe-title">${r.name}</h2>
+                        <div class="details">
+                            <strong>المكونات:</strong> ${r.ingredients}<br><br>
+                            <strong>التحضير:</strong> ${r.method}
                         </div>
                     </div>
                 </div>
             `).join('');
 
-            // رندرة الـ Reels
-            reels.innerHTML = data.map(dish => `
-                <div class="reel" style="background-image: linear-gradient(transparent, black), url('${dish.img}')">
-                    <span style="position:absolute; bottom:10px; left:10px; font-size:12px; font-weight:bold;">${dish.name}</span>
+            reels.innerHTML = recipes.map(r => `
+                <div class="reel" onclick="playRecipe(${r.id})">
+                    <video loop muted playsinline poster="${r.img}">
+                        <source src="${r.vid}" type="video/mp4">
+                    </video>
+                    <span>${r.name}</span>
                 </div>
             `).join('');
         }
 
-        // دالة تشغيل الفيديو فوراً (بلمسة ذكية)
-        function startRecipe(id) {
-            const video = document.getElementById(`video-${id}`);
-            const thumb = document.getElementById(`thumb-${id}`);
-            const playBtn = document.getElementById(`play-${id}`);
-
-            thumb.style.display = 'none';
-            playBtn.style.display = 'none';
-            video.style.display = 'block';
-            video.play();
+        function playRecipe(id) {
+            const v = document.getElementById(`video-${id}`);
+            const t = document.getElementById(`thumb-${id}`);
+            const b = document.getElementById(`btn-${id}`);
+            
+            // إخفاء الصورة والزر وتشغيل الفيديو بمجرد الضغط
+            if(t) t.style.display = 'none';
+            if(b) b.style.display = 'none';
+            if(v) {
+                v.style.display = 'block';
+                v.muted = false;
+                v.play();
+            }
         }
 
-        // البحث الذكي (Filter)
-        document.getElementById('globalSearch').addEventListener('input', (e) => {
-            const val = e.target.value.toLowerCase();
-            const filtered = globalKitchen.filter(d => 
-                d.name.toLowerCase().includes(val) || 
-                d.country.toLowerCase().includes(val) ||
-                d.ingredients.toLowerCase().includes(val)
-            );
-            renderApp(filtered);
+        // البحث الحقيقي
+        document.getElementById('recipeSearch').addEventListener('input', (e) => {
+            render(e.target.value);
         });
 
-        // التشغيل الأول
-        renderApp(globalKitchen);
-
+        render();
     </script>
 </body>
 </html>
