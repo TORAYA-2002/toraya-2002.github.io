@@ -3,216 +3,245 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TORAYA GLOBAL CUISINE 2002</title>
+    <title>TORAYA Global Kitchen | منصة الطبخ العالمية</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        :root 
-            --accent: #ff4757;
-            --dark-bg: #0f172a;
-            --glass: rgba(255, 255, 255, 0.1);
-            --text: #ffffff;
+        :root {
+            --primary: #c62828; /* أحمر رسمي */
+            --bg: #ffffff;
+            --text: #1a1a1a;
+            --border: #e0e0e0;
+            --secondary-text: #757575;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
-        body { background-color: var(--dark-bg); color: var(--text); overflow-x: hidden; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Tajawal', sans-serif; }
+        body { background-color: var(--bg); color: var(--text); }
 
-        /* الهيدر والبحث */
+        /* الهيدر الرسمي (مثل الصحف العالمية) */
         header {
-            padding: 20px;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(10px);
+            border-bottom: 3px double var(--border);
+            padding: 20px 5%;
+            text-align: center;
+            background: #fff;
             position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid var(--glass);
         }
 
-        .search-box {
-            display: flex;
-            background: var(--glass);
-            border-radius: 50px;
-            padding: 12px 25px;
+        .logo { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 2.5rem; 
+            letter-spacing: -1px; 
+            color: var(--text);
+            text-transform: uppercase;
+        }
+
+        /* زر البحث الذكي المتطور */
+        .smart-search-wrapper {
             max-width: 800px;
-            margin: 15px auto 0;
-            border: 2px solid var(--glass);
+            margin: 20px auto 0;
+            position: relative;
+        }
+
+        #smartSearch {
+            width: 100%;
+            padding: 15px 25px;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            font-size: 1rem;
+            background: #f9f9f9;
+            outline: none;
             transition: 0.3s;
         }
 
-        .search-box:focus-within { border-color: var(--accent); }
-        input { background: none; border: none; color: white; flex: 1; outline: none; font-size: 1.1rem; text-align: right; }
+        #smartSearch:focus { border-color: var(--primary); background: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
 
-        /* قسم Reels (TikTok Style) */
-        .reels-wrapper {
-            padding: 20px;
+        /* قسم REELS (TikTok Style) */
+        .reels-header { padding: 30px 5% 10px; font-weight: 900; font-size: 1.2rem; border-bottom: 1px solid var(--border); margin-bottom: 15px; }
+        
+        .reels-container {
             display: flex;
             gap: 15px;
             overflow-x: auto;
+            padding: 10px 5% 20px;
             scrollbar-width: none;
         }
 
-        .reel {
-            min-width: 160px;
-            height: 280px;
-            border-radius: 20px;
+        .reel-card {
+            min-width: 150px;
+            height: 260px;
             background: #000;
+            border-radius: 8px;
+            overflow: hidden;
             position: relative;
             cursor: pointer;
-            border: 2px solid var(--glass);
-            overflow: hidden;
+            border: 1px solid var(--border);
         }
 
-        .reel video { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; }
-        .reel:hover video { opacity: 1; }
-        .reel span { position: absolute; bottom: 10px; right: 10px; font-size: 12px; font-weight: bold; z-index: 2; }
+        .reel-card video { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
+        .reel-card:hover video { opacity: 1; }
+        .reel-card span { position: absolute; bottom: 10px; right: 10px; color: white; font-size: 11px; font-weight: bold; text-shadow: 1px 1px 3px #000; }
 
-        /* حاوية الأكلات */
-        .main-container {
+        /* شبكة الأكلات العالمية (الهيكل الرسمي المعتمد) */
+        .main-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 25px;
-            padding: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 40px;
+            padding: 40px 5%;
         }
 
-        .recipe-card {
-            background: var(--glass);
-            border-radius: 30px;
-            overflow: hidden;
-            backdrop-filter: blur(5px);
-            border: 1px solid var(--glass);
-        }
+        .recipe-item { border-bottom: 1px solid var(--border); padding-bottom: 20px; transition: 0.3s; }
+        .recipe-item:hover { opacity: 0.8; }
 
-        .media-area {
-            position: relative;
+        .media-box {
             width: 100%;
-            height: 220px;
-            background: #000;
+            aspect-ratio: 4 / 3;
+            background: #f0f0f0;
+            margin-bottom: 15px;
+            position: relative;
             cursor: pointer;
+            overflow: hidden;
         }
 
-        .recipe-video { width: 100%; height: 100%; object-fit: cover; display: none; }
-        .recipe-thumb { width: 100%; height: 100%; object-fit: cover; }
+        .media-box img, .media-box video { width: 100%; height: 100%; object-fit: cover; }
+        .media-box video { display: none; }
 
-        .recipe-content { padding: 20px; }
-        .recipe-title { font-size: 1.4rem; font-weight: 900; color: var(--accent); margin-bottom: 10px; }
-        
-        .tag { background: var(--accent); font-size: 11px; padding: 3px 10px; border-radius: 50px; margin-left: 5px; }
-
-        .details { font-size: 13px; background: rgba(0,0,0,0.3); padding: 12px; border-radius: 15px; margin-top: 10px; }
-
-        .play-btn {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            font-size: 3rem; color: var(--accent); opacity: 0.9;
+        .play-icon {
+            position: absolute; top: 10px; left: 10px;
+            background: rgba(255,255,255,0.9);
+            padding: 5px 10px; border-radius: 4px; font-size: 12px; font-weight: bold;
         }
 
-        footer { text-align: center; padding: 40px; opacity: 0.5; font-size: 14px; }
+        .recipe-country { color: var(--primary); font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 8px; }
+        .recipe-name { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 10px; line-height: 1.2; }
+        .recipe-meta { font-size: 13px; color: var(--secondary-text); margin-bottom: 10px; }
+
+        footer { border-top: 1px solid var(--border); padding: 40px; text-align: center; font-size: 12px; color: var(--secondary-text); }
+
+        /* Responsive */
+        @media (max-width: 768px) { .logo { font-size: 1.8rem; } }
     </style>
 </head>
 <body>
 
     <header>
-        <h1 style="text-align: center; font-weight: 900;">TORAYA <span style="color: var(--accent);">2002</span></h1>
-        <div class="search-box">
-            <input type="text" id="recipeSearch" placeholder="ابحث عن أكلة أو دولة (مغربي، إيطالي...)...">
+        <div class="logo">The Toraya Cooking</div>
+        <div class="smart-search-wrapper">
+            <input type="text" id="smartSearch" placeholder="بحث ذكي: أكلة، مكون، دولة، أو لغة (Search by dish, ingredients, or country)...">
         </div>
     </header>
 
-    <div class="reels-wrapper" id="reelsDiv"></div>
+    <div class="reels-header">Trending Reels ⚡</div>
+    <div class="reels-container" id="reelsArea"></div>
 
-    <main class="main-container" id="recipesGrid"></main>
+    <main class="main-grid" id="mainRecipesArea"></main>
 
-    <footer>جميع الحقوق محفوظة لـ Cooking with TORAYA © 2026</footer>
+    <footer>
+        <p>© 2026 TORAYA GLOBAL MEDIA GROUP. All World Cuisines Included.</p>
+    </footer>
 
     <script>
-        // قاعدة بيانات الأكلات مع فيديوهات حقيقية تعمل
-        const recipes = [
+        // قاعدة بيانات ضخمة (أمثلة لجميع دول العالم ولغات مختلفة)
+        const globalDatabase = [
             {
                 id: 1,
-                name: "الكسكس المغربي العالمي",
+                name: "طاجين الغنم بالبرقوق",
+                name_en: "Moroccan Lamb Tagine",
                 country: "المغرب 🇲🇦",
-                ingredients: "سميد، سبع خضار، لحم، سمن مغربي",
-                method: "تفوير الكسكس 3 مرات مع مرق اللحم والخضار المنسم.",
+                time: "90 min",
+                tags: ["Morocco", "Maghreb", "Tradition", "برقوق"],
                 vid: "https://player.vimeo.com/external/371433846.sd.mp4?s=231da6ab57f91a5c6974866ca5925048&profile_id=139",
                 img: "https://images.pexels.com/photos/7194915/pexels-photo-7194915.jpeg"
             },
             {
                 id: 2,
-                name: "بيتزا نابولي الإيطالية",
-                country: "إيطاليا 🇮🇹",
-                ingredients: "طماطم، ريحان، موزاريلا، زيت زيتون",
-                method: "عجينة مخمرة طويلاً مع طهي سريع في فرن حطبي.",
-                vid: "https://player.vimeo.com/external/481132593.sd.mp4?s=500742512f464010b986a4225380539f208c5c7f&profile_id=139",
-                img: "https://images.pexels.com/photos/1566837/pexels-photo-1566837.jpeg"
+                name: "Sushi Moriwase",
+                name_en: "Premium Sushi Set",
+                country: "اليابان 🇯🇵",
+                time: "30 min",
+                tags: ["Japan", "Asia", "Fish", "سوشي"],
+                vid: "https://player.vimeo.com/external/449339275.sd.mp4?s=d00469b2d869273c5d6423c2a014909a80e1a179&profile_id=139",
+                img: "https://images.pexels.com/photos/357756/pexels-photo-357756.jpeg"
             },
             {
                 id: 3,
-                name: "سوشي طوكيو الفاخر",
-                country: "اليابان 🇯🇵",
-                ingredients: "أرز خل، سمك سلمون، نوري، واسابي",
-                method: "لف الأرز بدقة مع السمك الطازج وتقديمه بارداً.",
-                vid: "https://player.vimeo.com/external/449339275.sd.mp4?s=d00469b2d869273c5d6423c2a014909a80e1a179&profile_id=139",
-                img: "https://images.pexels.com/photos/357756/pexels-photo-357756.jpeg"
+                name: "Pasta Margherita",
+                name_en: "Classic Italian Pasta",
+                country: "إيطاليا 🇮🇹",
+                time: "20 min",
+                tags: ["Italy", "Europe", "Vegetarian", "باستا"],
+                vid: "https://player.vimeo.com/external/481132593.sd.mp4?s=500742512f464010b986a4225380539f208c5c7f&profile_id=139",
+                img: "https://images.pexels.com/photos/1566837/pexels-photo-1566837.jpeg"
             }
         ];
 
-        const grid = document.getElementById('recipesGrid');
-        const reels = document.getElementById('reelsDiv');
+        const recipesArea = document.getElementById('mainRecipesArea');
+        const reelsArea = document.getElementById('reelsArea');
 
-        function render(filter = "") {
-            const filtered = recipes.filter(r => r.name.includes(filter) || r.country.includes(filter));
-            
-            grid.innerHTML = filtered.map(r => `
-                <div class="recipe-card">
-                    <div class="media-area" onclick="playRecipe(${r.id})">
-                        <img src="${r.img}" class="recipe-thumb" id="thumb-${r.id}">
-                        <video class="recipe-video" id="video-${r.id}" loop muted playsinline>
-                            <source src="${r.vid}" type="video/mp4">
+        function render(data) {
+            // رندرة الأكلات (الهيكل الرسمي)
+            recipesArea.innerHTML = data.map(recipe => `
+                <article class="recipe-item">
+                    <div class="media-box" onclick="toggleMedia(${recipe.id})">
+                        <img src="${recipe.img}" id="img-${recipe.id}">
+                        <video id="vid-${recipe.id}" loop muted playsinline>
+                            <source src="${recipe.vid}" type="video/mp4">
                         </video>
-                        <div class="play-btn" id="btn-${r.id}">▶</div>
+                        <div class="play-icon">VIDEO ▶</div>
                     </div>
-                    <div class="recipe-content">
-                        <span class="tag">${r.country}</span>
-                        <h2 class="recipe-title">${r.name}</h2>
-                        <div class="details">
-                            <strong>المكونات:</strong> ${r.ingredients}<br><br>
-                            <strong>التحضير:</strong> ${r.method}
-                        </div>
-                    </div>
-                </div>
+                    <div class="recipe-country">${recipe.country}</div>
+                    <h2 class="recipe-name">${recipe.name}</h2>
+                    <div class="recipe-meta">تحضير: ${recipe.time} • وصفة أصلية</div>
+                </article>
             `).join('');
 
-            reels.innerHTML = recipes.map(r => `
-                <div class="reel" onclick="playRecipe(${r.id})">
-                    <video loop muted playsinline poster="${r.img}">
-                        <source src="${r.vid}" type="video/mp4">
+            // رندرة الـ Reels (بدون تكرار الكود)
+            reelsArea.innerHTML = data.map(recipe => `
+                <div class="reel-card" onclick="toggleReel(this)">
+                    <video loop muted playsinline poster="${recipe.img}">
+                        <source src="${recipe.vid}" type="video/mp4">
                     </video>
-                    <span>${r.name}</span>
+                    <span>${recipe.name_en}</span>
                 </div>
             `).join('');
         }
 
-        function playRecipe(id) {
-            const v = document.getElementById(`video-${id}`);
-            const t = document.getElementById(`thumb-${id}`);
-            const b = document.getElementById(`btn-${id}`);
-            
-            // إخفاء الصورة والزر وتشغيل الفيديو بمجرد الضغط
-            if(t) t.style.display = 'none';
-            if(b) b.style.display = 'none';
-            if(v) {
-                v.style.display = 'block';
-                v.muted = false;
-                v.play();
+        // تشغيل ميديا الأكلات
+        function toggleMedia(id) {
+            const img = document.getElementById(`img-${id}`);
+            const vid = document.getElementById(`vid-${id}`);
+            if (vid.paused) {
+                img.style.display = 'none';
+                vid.style.display = 'block';
+                vid.play();
+                vid.muted = false;
+            } else {
+                vid.pause();
             }
         }
 
-        // البحث الحقيقي
-        document.getElementById('recipeSearch').addEventListener('input', (e) => {
-            render(e.target.value);
+        // تشغيل Reels
+        function toggleReel(el) {
+            const v = el.querySelector('video');
+            v.paused ? v.play() : v.pause();
+        }
+
+        // محرك البحث الذكي (متعدد اللغات والوسوم)
+        document.getElementById('smartSearch').addEventListener('input', (e) => {
+            const val = e.target.value.toLowerCase();
+            const filtered = globalDatabase.filter(r => 
+                r.name.toLowerCase().includes(val) || 
+                r.name_en.toLowerCase().includes(val) || 
+                r.country.toLowerCase().includes(val) ||
+                r.tags.some(t => t.toLowerCase().includes(val))
+            );
+            render(filtered);
         });
 
-        render();
+        // التشغيل الأولي
+        render(globalDatabase);
     </script>
 </body>
 </html>
