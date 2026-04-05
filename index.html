@@ -12,33 +12,54 @@
     font-family:"Tahoma","Arial",sans-serif;
 }
 body{
-    background:#f5f5f7;
+    background:radial-gradient(circle at top,#fffdf5 0,#f8f4ea 40%,#f3efe6 70%,#eee9df 100%);
     color:#222;
+    min-height:100vh;
 }
 header{
-    background:linear-gradient(120deg,#ffffff,#fdf7e6);
-    border-bottom:1px solid rgba(212,175,55,0.4);
+    background:linear-gradient(120deg,rgba(255,255,255,0.95),rgba(255,248,228,0.98));
+    border-bottom:1px solid rgba(212,175,55,0.35);
     padding:14px 32px;
     position:sticky;
     top:0;
-    z-index:20;
-    backdrop-filter:blur(10px);
+    z-index:40;
+    backdrop-filter:blur(18px);
+    box-shadow:0 18px 40px rgba(0,0,0,0.06);
 }
 .header-inner{
     display:flex;
     align-items:center;
     justify-content:space-between;
-    max-width:1200px;
+    max-width:1240px;
     margin:0 auto;
 }
 .logo{
     font-size:26px;
-    font-weight:700;
+    font-weight:800;
     letter-spacing:1px;
-    color:#444;
+    color:#3a3a3a;
+    display:flex;
+    align-items:center;
+    gap:8px;
 }
 .logo span{
-    color:#d4af37;
+    background:linear-gradient(135deg,#f5d26b,#d4af37,#f7e29b);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+.logo-mark{
+    width:26px;
+    height:26px;
+    border-radius:10px;
+    background:radial-gradient(circle at 30% 20%,#fff7d1 0,#f0c75c 40%,#b88a1b 100%);
+    box-shadow:0 0 0 1px rgba(255,255,255,0.7),0 10px 20px rgba(0,0,0,0.18);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    font-size:14px;
+    font-weight:700;
 }
 nav{
     display:flex;
@@ -47,56 +68,102 @@ nav{
 nav a{
     text-decoration:none;
     color:#444;
-    padding:7px 16px;
+    padding:7px 18px;
     border-radius:999px;
     border:1px solid transparent;
     font-size:14px;
-    background:rgba(255,255,255,0.7);
-    backdrop-filter:blur(6px);
-    transition:all .2s ease;
+    background:linear-gradient(135deg,rgba(255,255,255,0.9),rgba(250,244,228,0.9));
+    backdrop-filter:blur(10px);
+    box-shadow:0 10px 22px rgba(0,0,0,0.06);
+    transition:all .18s ease;
+    position:relative;
+    overflow:hidden;
+}
+nav a::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:radial-gradient(circle at 0 0,rgba(255,255,255,0.9),transparent 55%);
+    opacity:0;
+    transition:opacity .25s ease;
+}
+nav a:hover::before{
+    opacity:1;
 }
 nav a:hover{
-    border-color:#d4af37;
-    background:#fffaf0;
+    border-color:rgba(212,175,55,0.9);
+    background:linear-gradient(135deg,#fffaf0,#fff5da);
     color:#222;
+    transform:translateY(-1px);
+    box-shadow:0 14px 30px rgba(0,0,0,0.12);
 }
 .hero{
-    max-width:1200px;
-    margin:22px auto 10px auto;
+    max-width:1240px;
+    margin:26px auto 16px auto;
     padding:24px 20px;
     display:grid;
-    grid-template-columns:1.4fr 1fr;
-    gap:26px;
+    grid-template-columns:1.45fr 1.05fr;
+    gap:28px;
 }
 .hero-main{
-    background:#ffffff;
-    border-radius:22px;
-    padding:22px 22px 20px 22px;
-    box-shadow:0 18px 40px rgba(0,0,0,0.06);
-    border:1px solid rgba(212,175,55,0.25);
+    background:radial-gradient(circle at top left,#fffaf0 0,#ffffff 40%,#fdf7e6 100%);
+    border-radius:26px;
+    padding:24px 24px 22px 24px;
+    box-shadow:0 26px 70px rgba(0,0,0,0.12);
+    border:1px solid rgba(255,255,255,0.9);
+    position:relative;
+    overflow:hidden;
+}
+.hero-main::before{
+    content:"";
+    position:absolute;
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    background:radial-gradient(circle,#ffe9a8 0,rgba(255,255,255,0) 70%);
+    top:-80px;
+    left:-60px;
+    opacity:.7;
+}
+.hero-main::after{
+    content:"";
+    position:absolute;
+    width:260px;
+    height:260px;
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(255,255,255,0.9) 0,rgba(255,255,255,0) 70%);
+    bottom:-120px;
+    right:-80px;
+    opacity:.7;
+}
+.hero-content{
+    position:relative;
+    z-index:2;
 }
 .hero-badge{
     display:inline-flex;
     align-items:center;
-    gap:6px;
+    gap:7px;
     font-size:11px;
-    padding:4px 12px;
+    padding:5px 13px;
     border-radius:999px;
-    border:1px solid rgba(212,175,55,0.7);
+    border:1px solid rgba(212,175,55,0.9);
     background:linear-gradient(120deg,#fffaf0,#fff);
     color:#7a5b12;
-    margin-bottom:10px;
+    margin-bottom:12px;
+    box-shadow:0 10px 24px rgba(0,0,0,0.08);
 }
 .hero-badge-dot{
-    width:7px;
-    height:7px;
+    width:8px;
+    height:8px;
     border-radius:50%;
-    background:#d4af37;
+    background:radial-gradient(circle,#f7e29b 0,#d4af37 60%,#b88a1b 100%);
+    box-shadow:0 0 0 3px rgba(244,214,130,0.6);
 }
 .hero-main h1{
-    font-size:28px;
-    margin-bottom:8px;
-    color:#333;
+    font-size:30px;
+    margin-bottom:10px;
+    color:#2f2f2f;
 }
 .hero-main p{
     font-size:14px;
@@ -104,95 +171,145 @@ nav a:hover{
     color:#555;
     margin-bottom:6px;
 }
-.hero-tags{
+.hero-highlight{
     margin-top:8px;
+    padding:10px 12px;
+    border-radius:16px;
+    background:linear-gradient(135deg,rgba(255,248,225,0.9),rgba(255,255,255,0.95));
+    border:1px dashed rgba(212,175,55,0.7);
+    font-size:12px;
+    color:#6b4f16;
+}
+.hero-tags{
+    margin-top:10px;
     display:flex;
     flex-wrap:wrap;
-    gap:6px;
+    gap:7px;
 }
 .hero-tag{
     font-size:11px;
-    padding:3px 10px;
+    padding:4px 11px;
     border-radius:999px;
-    background:#f5f0df;
+    background:linear-gradient(135deg,#f7f2df,#fff);
     color:#7a5b12;
+    border:1px solid rgba(212,175,55,0.5);
+    box-shadow:0 8px 18px rgba(0,0,0,0.05);
 }
 .hero-actions{
-    margin-top:14px;
+    margin-top:16px;
     display:flex;
     flex-wrap:wrap;
     gap:10px;
 }
 .btn-primary{
-    background:linear-gradient(135deg,#d4af37,#f3d47a);
+    background:linear-gradient(135deg,#f5d26b,#d4af37,#f7e29b);
     color:#222;
     border:none;
     border-radius:999px;
-    padding:9px 20px;
+    padding:10px 22px;
     font-size:14px;
     cursor:pointer;
-    box-shadow:0 10px 25px rgba(212,175,55,0.35);
-    transition:transform .15s ease,box-shadow .15s ease,filter .15s ease;
+    box-shadow:0 16px 36px rgba(212,175,55,0.55);
+    transition:transform .16s ease,box-shadow .16s ease,filter .16s ease;
+    position:relative;
+    overflow:hidden;
+}
+.btn-primary::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-40%;
+    width:40%;
+    height:100%;
+    background:linear-gradient(120deg,rgba(255,255,255,0.7),rgba(255,255,255,0));
+    transform:skewX(-20deg);
+    opacity:0;
+    transition:all .35s ease;
+}
+.btn-primary:hover::before{
+    left:120%;
+    opacity:1;
 }
 .btn-primary:hover{
-    transform:translateY(-1px);
-    box-shadow:0 14px 30px rgba(212,175,55,0.45);
-    filter:brightness(1.03);
+    transform:translateY(-2px) scale(1.01);
+    box-shadow:0 20px 44px rgba(212,175,55,0.7);
+    filter:brightness(1.04);
 }
 .btn-ghost{
-    background:#ffffff;
+    background:radial-gradient(circle at top,#ffffff 0,#f7f2e4 100%);
     color:#444;
     border-radius:999px;
-    padding:9px 18px;
+    padding:10px 20px;
     font-size:14px;
     cursor:pointer;
-    border:1px solid rgba(212,175,55,0.6);
-    transition:all .15s ease;
+    border:1px solid rgba(212,175,55,0.7);
+    transition:all .16s ease;
+    box-shadow:0 12px 26px rgba(0,0,0,0.08);
 }
 .btn-ghost:hover{
-    background:#fffaf0;
+    background:linear-gradient(135deg,#fffaf0,#fff5da);
     color:#222;
+    transform:translateY(-2px);
+    box-shadow:0 18px 36px rgba(0,0,0,0.12);
 }
 .hero-side{
     display:flex;
     flex-direction:column;
-    gap:14px;
+    gap:16px;
 }
 .hero-card{
-    background:#ffffff;
-    border-radius:20px;
+    background:radial-gradient(circle at top left,#fffaf0 0,#ffffff 40%,#f7f2e4 100%);
+    border-radius:22px;
     padding:18px 18px 16px 18px;
-    box-shadow:0 16px 35px rgba(0,0,0,0.05);
-    border:1px solid rgba(0,0,0,0.04);
+    box-shadow:0 24px 60px rgba(0,0,0,0.12);
+    border:1px solid rgba(255,255,255,0.9);
+    position:relative;
+    overflow:hidden;
+}
+.hero-card::before{
+    content:"";
+    position:absolute;
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(245,210,107,0.7) 0,rgba(255,255,255,0) 70%);
+    top:-60px;
+    right:-40px;
+    opacity:.5;
+}
+.hero-card-inner{
+    position:relative;
+    z-index:2;
 }
 .hero-card-title{
-    font-size:16px;
+    font-size:17px;
     margin-bottom:6px;
     color:#333;
 }
 .hero-card-body{
     font-size:13px;
-    line-height:1.8;
+    line-height:1.9;
     color:#555;
 }
 .hero-mini{
-    background:linear-gradient(135deg,#fffaf0,#f7f3e6);
+    background:linear-gradient(135deg,rgba(255,255,255,0.96),rgba(248,242,226,0.98));
     border-radius:18px;
     padding:12px 14px;
     font-size:12px;
     color:#6b4f16;
     border:1px dashed rgba(212,175,55,0.7);
+    box-shadow:0 18px 40px rgba(0,0,0,0.08);
 }
 .section{
-    max-width:1200px;
-    margin:10px auto 24px auto;
+    max-width:1240px;
+    margin:12px auto 26px auto;
     padding:0 20px;
 }
 .section-header{
     display:flex;
     align-items:flex-end;
     justify-content:space-between;
-    margin-bottom:14px;
+    margin-bottom:16px;
 }
 .section-title{
     font-size:22px;
@@ -204,18 +321,36 @@ nav a:hover{
 }
 .section-pill{
     font-size:11px;
-    padding:4px 10px;
+    padding:5px 12px;
     border-radius:999px;
-    background:#ffffff;
-    border:1px solid rgba(212,175,55,0.5);
+    background:radial-gradient(circle at top,#fffaf0 0,#ffffff 100%);
+    border:1px solid rgba(212,175,55,0.7);
     color:#7a5b12;
+    box-shadow:0 12px 26px rgba(0,0,0,0.08);
 }
 .admin-panel{
-    background:#ffffff;
-    border-radius:20px;
+    background:radial-gradient(circle at top left,#fffaf0 0,#ffffff 40%,#f7f2e4 100%);
+    border-radius:22px;
     padding:18px 18px 16px 18px;
-    box-shadow:0 16px 35px rgba(0,0,0,0.05);
-    border:1px solid rgba(0,0,0,0.04);
+    box-shadow:0 24px 60px rgba(0,0,0,0.12);
+    border:1px solid rgba(255,255,255,0.9);
+    position:relative;
+    overflow:hidden;
+}
+.admin-panel::before{
+    content:"";
+    position:absolute;
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(245,210,107,0.7) 0,rgba(255,255,255,0) 70%);
+    bottom:-80px;
+    left:-60px;
+    opacity:.5;
+}
+.admin-inner{
+    position:relative;
+    z-index:2;
 }
 .admin-header{
     display:flex;
@@ -229,24 +364,33 @@ nav a:hover{
 }
 .admin-status{
     font-size:11px;
-    padding:4px 10px;
+    padding:5px 12px;
     border-radius:999px;
-    border:1px solid rgba(212,175,55,0.7);
-    background:#fffaf0;
+    border:1px solid rgba(212,175,55,0.9);
+    background:linear-gradient(135deg,#fffaf0,#fff);
     color:#7a5b12;
+    box-shadow:0 10px 24px rgba(0,0,0,0.08);
 }
 .admin-login-row{
     display:flex;
     flex-wrap:wrap;
     gap:8px;
-    margin-bottom:10px;
+    margin-bottom:12px;
 }
 .admin-login-row input{
-    padding:7px 12px;
+    padding:8px 13px;
     border-radius:999px;
-    border:1px solid #ccc;
-    min-width:190px;
+    border:1px solid rgba(200,200,200,0.9);
+    min-width:210px;
     font-size:13px;
+    background:radial-gradient(circle at top,#ffffff 0,#f7f2e4 100%);
+    box-shadow:0 10px 22px rgba(0,0,0,0.06) inset;
+    outline:none;
+    transition:border-color .16s ease,box-shadow .16s ease;
+}
+.admin-login-row input:focus{
+    border-color:rgba(212,175,55,0.9);
+    box-shadow:0 0 0 1px rgba(212,175,55,0.4),0 10px 22px rgba(0,0,0,0.06) inset;
 }
 .admin-login-row button{
     font-size:13px;
@@ -258,7 +402,7 @@ nav a:hover{
 .admin-grid{
     display:grid;
     grid-template-columns:1.1fr 1fr;
-    gap:12px;
+    gap:14px;
 }
 .admin-field{
     margin-bottom:8px;
@@ -266,74 +410,106 @@ nav a:hover{
 .admin-field label{
     display:block;
     font-size:12px;
-    margin-bottom:3px;
+    margin-bottom:4px;
     color:#555;
 }
 .admin-field input,
 .admin-field textarea,
 .admin-field select{
     width:100%;
-    padding:7px 9px;
-    border-radius:10px;
-    border:1px solid #d0d0d0;
+    padding:8px 10px;
+    border-radius:12px;
+    border:1px solid rgba(205,205,205,0.95);
     font-size:13px;
-    background:#fafafa;
+    background:radial-gradient(circle at top,#ffffff 0,#f7f2e4 100%);
+    box-shadow:0 10px 22px rgba(0,0,0,0.05) inset;
+    outline:none;
+    transition:border-color .16s ease,box-shadow .16s ease,transform .12s ease;
+}
+.admin-field input:focus,
+.admin-field textarea:focus,
+.admin-field select:focus{
+    border-color:rgba(212,175,55,0.9);
+    box-shadow:0 0 0 1px rgba(212,175,55,0.4),0 10px 22px rgba(0,0,0,0.05) inset;
+    transform:translateY(-1px);
 }
 .admin-field textarea{
-    min-height:70px;
+    min-height:80px;
     resize:vertical;
 }
 .admin-actions{
     display:flex;
     flex-wrap:wrap;
     gap:8px;
-    margin-top:6px;
+    margin-top:8px;
 }
 .admin-note{
     font-size:11px;
     color:#888;
-    margin-top:6px;
+    margin-top:8px;
 }
 .recipes-grid{
     display:grid;
     grid-template-columns:repeat(4,minmax(0,1fr));
-    gap:18px;
+    gap:20px;
 }
 .recipe-card{
-    background:#ffffff;
-    border-radius:20px;
+    background:radial-gradient(circle at top left,#fffaf0 0,#ffffff 40%,#f7f2e4 100%);
+    border-radius:22px;
     overflow:hidden;
     display:flex;
     flex-direction:column;
-    box-shadow:0 18px 40px rgba(0,0,0,0.05);
-    border:1px solid rgba(0,0,0,0.03);
-    transition:transform .15s ease,box-shadow .15s ease;
+    box-shadow:0 26px 70px rgba(0,0,0,0.16);
+    border:1px solid rgba(255,255,255,0.9);
+    transition:transform .18s ease,box-shadow .18s ease,filter .18s ease;
+    position:relative;
+}
+.recipe-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:radial-gradient(circle at top,rgba(255,255,255,0.35),transparent 60%);
+    opacity:0;
+    transition:opacity .2s ease;
+    pointer-events:none;
+}
+.recipe-card:hover::before{
+    opacity:1;
 }
 .recipe-card:hover{
-    transform:translateY(-3px);
-    box-shadow:0 22px 50px rgba(0,0,0,0.08);
+    transform:translateY(-6px) scale(1.01);
+    box-shadow:0 32px 80px rgba(0,0,0,0.22);
+    filter:brightness(1.02);
 }
 .recipe-card-header{
     position:relative;
+    overflow:hidden;
 }
 .recipe-card-header img{
     width:100%;
-    height:170px;
+    height:190px;
     object-fit:cover;
+    transform:scale(1.02);
+    transition:transform .25s ease,filter .25s ease;
+}
+.recipe-card:hover .recipe-card-header img{
+    transform:scale(1.06);
+    filter:brightness(1.05);
 }
 .recipe-badge{
     position:absolute;
     top:10px;
     left:10px;
-    background:rgba(255,250,240,0.95);
+    background:radial-gradient(circle at top,#fffaf0 0,#ffffff 100%);
     border-radius:999px;
-    padding:3px 10px;
+    padding:4px 11px;
     font-size:11px;
-    border:1px solid rgba(212,175,55,0.8);
+    border:1px solid rgba(212,175,55,0.9);
     color:#7a5b12;
+    box-shadow:0 12px 26px rgba(0,0,0,0.18);
 }
 .recipe-body{
-    padding:12px 13px 13px 13px;
+    padding:13px 14px 14px 14px;
     display:flex;
     flex-direction:column;
     gap:4px;
@@ -353,66 +529,87 @@ nav a:hover{
 .recipe-subheading{
     font-size:13px;
     color:#333;
-    margin-top:4px;
+    margin-top:5px;
 }
 .recipe-ingredients,
 .recipe-steps{
     font-size:12px;
     color:#555;
     padding-right:18px;
-    margin-top:2px;
+    margin-top:3px;
 }
 .recipe-ingredients li,
 .recipe-steps li{
-    margin-bottom:2px;
+    margin-bottom:3px;
 }
 .recipe-footer{
     font-size:11px;
     color:#777;
     display:flex;
     justify-content:space-between;
-    margin-top:5px;
+    margin-top:7px;
 }
 .recipe-admin-tools{
     display:none;
-    margin-top:6px;
+    margin-top:7px;
     font-size:11px;
 }
 .recipe-admin-tools button{
     font-size:11px;
-    padding:4px 8px;
+    padding:4px 9px;
     border-radius:999px;
-    border:1px solid rgba(212,175,55,0.7);
-    background:#ffffff;
+    border:1px solid rgba(212,175,55,0.9);
+    background:radial-gradient(circle at top,#ffffff 0,#fff5da 100%);
     cursor:pointer;
-    transition:all .15s ease;
+    transition:all .16s ease;
+    box-shadow:0 10px 22px rgba(0,0,0,0.08);
 }
 .recipe-admin-tools button:hover{
-    background:#fffaf0;
+    background:linear-gradient(135deg,#fffaf0,#f7e29b);
+    transform:translateY(-1px);
+    box-shadow:0 14px 30px rgba(0,0,0,0.14);
 }
 .videos-grid{
     display:grid;
     grid-template-columns:repeat(3,minmax(0,1fr));
-    gap:18px;
+    gap:20px;
 }
 .video-card{
-    background:#ffffff;
-    border-radius:18px;
-    padding:10px 10px 12px 10px;
-    box-shadow:0 16px 35px rgba(0,0,0,0.05);
-    border:1px solid rgba(0,0,0,0.03);
+    background:radial-gradient(circle at top left,#fffaf0 0,#ffffff 40%,#f7f2e4 100%);
+    border-radius:20px;
+    padding:12px 12px 14px 12px;
+    box-shadow:0 24px 60px rgba(0,0,0,0.14);
+    border:1px solid rgba(255,255,255,0.9);
+    position:relative;
+    overflow:hidden;
+}
+.video-card::before{
+    content:"";
+    position:absolute;
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(245,210,107,0.7) 0,rgba(255,255,255,0) 70%);
+    top:-60px;
+    left:-40px;
+    opacity:.4;
+}
+.video-card-inner{
+    position:relative;
+    z-index:2;
 }
 .video-card h3{
     font-size:14px;
-    margin-bottom:6px;
+    margin-bottom:7px;
     color:#333;
 }
 .video-frame{
     position:relative;
     width:100%;
     padding-bottom:56.25%;
-    border-radius:12px;
+    border-radius:14px;
     overflow:hidden;
+    box-shadow:0 18px 40px rgba(0,0,0,0.18);
 }
 .video-frame iframe{
     position:absolute;
@@ -423,20 +620,27 @@ nav a:hover{
     border:0;
 }
 .footer{
-    background:#ffffff;
-    border-top:1px solid rgba(0,0,0,0.06);
-    padding:16px 24px 18px 24px;
+    background:linear-gradient(135deg,#f7f2e4,#fffaf0,#ffffff);
+    border-top:1px solid rgba(212,175,55,0.35);
+    padding:18px 24px 20px 24px;
     font-size:12px;
     color:#777;
-    margin-top:26px;
+    margin-top:30px;
+    box-shadow:0 -18px 40px rgba(0,0,0,0.08);
 }
 .footer-inner{
-    max-width:1200px;
+    max-width:1240px;
     margin:0 auto;
     display:flex;
     flex-wrap:wrap;
     justify-content:space-between;
-    gap:6px;
+    gap:8px;
+}
+.footer-inner span{
+    background:linear-gradient(135deg,#f5d26b,#d4af37,#f7e29b);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
 }
 @media(max-width:1100px){
     .hero{
@@ -456,9 +660,14 @@ nav a:hover{
     header{
         padding:10px 16px;
     }
+    .header-inner{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:8px;
+    }
     .hero{
         padding:18px 16px;
-        margin-top:16px;
+        margin-top:18px;
     }
     .section{
         padding:0 16px;
@@ -476,7 +685,10 @@ nav a:hover{
 
 <header>
     <div class="header-inner">
-        <div class="logo">ساحة المذاق <span>YUM YARD</span></div>
+        <div class="logo">
+            <div class="logo-mark">Y</div>
+            <div>ساحة المذاق <span>YUM YARD</span></div>
+        </div>
         <nav>
             <a href="#recipes">الوصفات</a>
             <a href="#videos">فيديوهات الطبخ</a>
@@ -487,38 +699,46 @@ nav a:hover{
 
 <section class="hero" id="about">
     <div class="hero-main">
-        <div class="hero-badge">
-            <span class="hero-badge-dot"></span>
-            <span>منصة وصفات عربية بطابع ذهبي كلاسيكي</span>
-        </div>
-        <h1>ساحة المذاق – وصفات بسيطة بطابع ذهبي</h1>
-        <p>هذه الصفحة تجمع عشرين وصفة عربية وعالمية مكتوبة بالعربية، مع صور حقيقية من الإنترنت، وتصميم فاتح وبسيط يركز على الوضوح والراحة أثناء القراءة.</p>
-        <p>يوجد وضع إدارة خاص بصاحب الموقع فقط، يسمح له بتعديل الوصفات مباشرة من الواجهة دون أن يتمكن أي زائر آخر من ذلك.</p>
-        <div class="hero-tags">
-            <div class="hero-tag">أطباق رئيسية</div>
-            <div class="hero-tag">مقبلات وسلطات</div>
-            <div class="hero-tag">حلويات ومشروبات</div>
-            <div class="hero-tag">واجهة عربية كاملة</div>
-        </div>
-        <div class="hero-actions">
-            <button class="btn-primary" onclick="scrollToRecipes()">استكشف الوصفات</button>
-            <button class="btn-ghost" onclick="scrollToAdmin()">دخول وضع الإدارة</button>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="hero-badge-dot"></span>
+                <span>منصة وصفات عربية بطابع ذهبي كلاسيكي فاخر</span>
+            </div>
+            <h1>ساحة المذاق – وصفات بسيطة بطابع ذهبي</h1>
+            <p>هذه الصفحة تجمع عشرين وصفة عربية وعالمية مكتوبة بالعربية، مع صور حقيقية من الإنترنت، وتصميم فاتح وبسيط بلمسات ذهبية فاخرة يركز على الوضوح والراحة أثناء القراءة.</p>
+            <p>يوجد وضع إدارة خاص بصاحب الموقع فقط، يسمح له بتعديل الوصفات مباشرة من الواجهة دون أن يتمكن أي زائر آخر من ذلك، مع إمكانية تطوير ربط حقيقي بقاعدة بيانات لاحقاً.</p>
+            <div class="hero-highlight">
+                تم تصميم هذه الواجهة لتكون نموذجاً لصفحة وصفات احترافية يمكن تطويرها إلى مشروع كامل، مع الحفاظ على بساطة التصفح وسهولة الوصول لكل وصفة وصورة وفيديو تعليمي.
+            </div>
+            <div class="hero-tags">
+                <div class="hero-tag">أطباق رئيسية</div>
+                <div class="hero-tag">مقبلات وسلطات</div>
+                <div class="hero-tag">حلويات ومشروبات</div>
+                <div class="hero-tag">واجهة عربية كاملة</div>
+                <div class="hero-tag">تصميم ذهبي فاخر</div>
+            </div>
+            <div class="hero-actions">
+                <button class="btn-primary" onclick="scrollToRecipes()">استكشف الوصفات</button>
+                <button class="btn-ghost" onclick="scrollToAdmin()">دخول وضع الإدارة</button>
+            </div>
         </div>
     </div>
     <div class="hero-side">
         <div class="hero-card">
-            <div class="hero-card-title">معلومات عن وضع الإدارة</div>
-            <div class="hero-card-body">
-                يمكن لصاحب الموقع فقط:
-                <br>• تعديل عناوين الوصفات
-                <br>• تغيير الصور والوصف المختصر
-                <br>• تحديث المكوّنات وخطوات التحضير
-                <br>• ضبط روابط الفيديوهات التعليمية
-                <br>لا يظهر أي رمز سري في الواجهة، ويتم التحقق من الصلاحيات داخلياً.
+            <div class="hero-card-inner">
+                <div class="hero-card-title">معلومات عن وضع الإدارة</div>
+                <div class="hero-card-body">
+                    يمكن لصاحب الموقع فقط:
+                    <br>• تعديل عناوين الوصفات
+                    <br>• تغيير الصور والوصف المختصر
+                    <br>• تحديث المكوّنات وخطوات التحضير
+                    <br>• ضبط روابط الفيديوهات التعليمية المرتبطة بالوصفات
+                    <br>لا يظهر أي رمز سري في واجهة المستخدم، ويتم التحقق من الصلاحيات داخلياً في الكود.
+                </div>
             </div>
         </div>
         <div class="hero-mini">
-            يمكن استخدام هذه الصفحة كنموذج لموقع وصفات احترافي، مع إمكانية تطوير نظام حفظ دائم للبيانات لاحقاً عبر قواعد بيانات أو واجهات برمجية.
+            يمكن استخدام هذه الصفحة كنقطة بداية لموقع وصفات متكامل، مع إمكانية ربطها بخدمات تخزين سحابية أو قواعد بيانات لإدارة الوصفات بشكل ديناميكي وحفظ التعديلات بشكل دائم.
         </div>
     </div>
 </section>
@@ -533,76 +753,78 @@ nav a:hover{
     </div>
 
     <div class="admin-panel">
-        <div class="admin-header">
-            <h2>لوحة التحكم</h2>
-            <div class="admin-status" id="adminStatus">الحالة: مستخدم عادي</div>
-        </div>
+        <div class="admin-inner">
+            <div class="admin-header">
+                <h2>لوحة التحكم</h2>
+                <div class="admin-status" id="adminStatus">الحالة: مستخدم عادي</div>
+            </div>
 
-        <div class="admin-login-row">
-            <input type="password" id="adminCodeInput" placeholder="أدخل رمز الدخول الخاص بالمالك">
-            <button class="btn-primary" onclick="activateAdmin()">تفعيل وضع الإدارة</button>
-            <button class="btn-ghost" onclick="deactivateAdmin()">إيقاف وضع الإدارة</button>
-        </div>
+            <div class="admin-login-row">
+                <input type="password" id="adminCodeInput" placeholder="أدخل رمز الدخول الخاص بالمالك">
+                <button class="btn-primary" onclick="activateAdmin()">تفعيل وضع الإدارة</button>
+                <button class="btn-ghost" onclick="deactivateAdmin()">إيقاف وضع الإدارة</button>
+            </div>
 
-        <div class="admin-form" id="adminForm">
-            <div class="admin-grid">
-                <div>
-                    <div class="admin-field">
-                        <label for="recipeSelect">اختيار وصفة للتعديل</label>
-                        <select id="recipeSelect">
-                            <option value="">اختر وصفة...</option>
-                            <option value="recipe1">وصفة 1</option>
-                            <option value="recipe2">وصفة 2</option>
-                            <option value="recipe3">وصفة 3</option>
-                            <option value="recipe4">وصفة 4</option>
-                            <option value="recipe5">وصفة 5</option>
-                            <option value="recipe6">وصفة 6</option>
-                            <option value="recipe7">وصفة 7</option>
-                            <option value="recipe8">وصفة 8</option>
-                            <option value="recipe9">وصفة 9</option>
-                            <option value="recipe10">وصفة 10</option>
-                            <option value="recipe11">وصفة 11</option>
-                            <option value="recipe12">وصفة 12</option>
-                            <option value="recipe13">وصفة 13</option>
-                            <option value="recipe14">وصفة 14</option>
-                            <option value="recipe15">وصفة 15</option>
-                            <option value="recipe16">وصفة 16</option>
-                            <option value="recipe17">وصفة 17</option>
-                            <option value="recipe18">وصفة 18</option>
-                            <option value="recipe19">وصفة 19</option>
-                            <option value="recipe20">وصفة 20</option>
-                        </select>
+            <div class="admin-form" id="adminForm">
+                <div class="admin-grid">
+                    <div>
+                        <div class="admin-field">
+                            <label for="recipeSelect">اختيار وصفة للتعديل</label>
+                            <select id="recipeSelect">
+                                <option value="">اختر وصفة...</option>
+                                <option value="recipe1">وصفة 1</option>
+                                <option value="recipe2">وصفة 2</option>
+                                <option value="recipe3">وصفة 3</option>
+                                <option value="recipe4">وصفة 4</option>
+                                <option value="recipe5">وصفة 5</option>
+                                <option value="recipe6">وصفة 6</option>
+                                <option value="recipe7">وصفة 7</option>
+                                <option value="recipe8">وصفة 8</option>
+                                <option value="recipe9">وصفة 9</option>
+                                <option value="recipe10">وصفة 10</option>
+                                <option value="recipe11">وصفة 11</option>
+                                <option value="recipe12">وصفة 12</option>
+                                <option value="recipe13">وصفة 13</option>
+                                <option value="recipe14">وصفة 14</option>
+                                <option value="recipe15">وصفة 15</option>
+                                <option value="recipe16">وصفة 16</option>
+                                <option value="recipe17">وصفة 17</option>
+                                <option value="recipe18">وصفة 18</option>
+                                <option value="recipe19">وصفة 19</option>
+                                <option value="recipe20">وصفة 20</option>
+                            </select>
+                        </div>
+                        <div class="admin-field">
+                            <label for="recipeTitleInput">عنوان الوصفة</label>
+                            <input type="text" id="recipeTitleInput" placeholder="اكتب عنوان الوصفة">
+                        </div>
+                        <div class="admin-field">
+                            <label for="recipeImageInput">رابط صورة الوصفة</label>
+                            <input type="text" id="recipeImageInput" placeholder="ضع رابط صورة متعلقة بالوصفة">
+                        </div>
+                        <div class="admin-field">
+                            <label for="recipeDescriptionInput">وصف قصير</label>
+                            <textarea id="recipeDescriptionInput" placeholder="اكتب وصفاً مختصراً للوصفة"></textarea>
+                        </div>
                     </div>
-                    <div class="admin-field">
-                        <label for="recipeTitleInput">عنوان الوصفة</label>
-                        <input type="text" id="recipeTitleInput" placeholder="اكتب عنوان الوصفة">
-                    </div>
-                    <div class="admin-field">
-                        <label for="recipeImageInput">رابط صورة الوصفة</label>
-                        <input type="text" id="recipeImageInput" placeholder="ضع رابط صورة متعلقة بالوصفة">
-                    </div>
-                    <div class="admin-field">
-                        <label for="recipeDescriptionInput">وصف قصير</label>
-                        <textarea id="recipeDescriptionInput" placeholder="اكتب وصفاً مختصراً للوصفة"></textarea>
+                    <div>
+                        <div class="admin-field">
+                            <label for="recipeIngredientsInput">المكوّنات (كل سطر مكوّن)</label>
+                            <textarea id="recipeIngredientsInput" placeholder="اكتب المكوّنات، كل مكوّن في سطر"></textarea>
+                        </div>
+                        <div class="admin-field">
+                            <label for="recipeStepsInput">خطوات التحضير (كل سطر خطوة)</label>
+                            <textarea id="recipeStepsInput" placeholder="اكتب خطوات التحضير، كل خطوة في سطر"></textarea>
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <div class="admin-field">
-                        <label for="recipeIngredientsInput">المكوّنات (كل سطر مكوّن)</label>
-                        <textarea id="recipeIngredientsInput" placeholder="اكتب المكوّنات، كل مكوّن في سطر"></textarea>
-                    </div>
-                    <div class="admin-field">
-                        <label for="recipeStepsInput">خطوات التحضير (كل سطر خطوة)</label>
-                        <textarea id="recipeStepsInput" placeholder="اكتب خطوات التحضير، كل خطوة في سطر"></textarea>
-                    </div>
+                <div class="admin-actions">
+                    <button class="btn-primary" onclick="updateSelectedRecipe()">تحديث الوصفة</button>
+                    <button class="btn-ghost" onclick="clearAdminForm()">مسح الحقول</button>
                 </div>
-            </div>
-            <div class="admin-actions">
-                <button class="btn-primary" onclick="updateSelectedRecipe()">تحديث الوصفة</button>
-                <button class="btn-ghost" onclick="clearAdminForm()">مسح الحقول</button>
-            </div>
-            <div class="admin-note">
-                التعديلات تطبق على هذه الصفحة في المتصفح فقط. للحفظ الدائم يجب تعديل ملف HTML الأصلي أو ربط الصفحة بنظام تخزين خارجي.
+                <div class="admin-note">
+                    التعديلات تطبق على هذه الصفحة في المتصفح فقط. للحفظ الدائم يجب تعديل ملف HTML الأصلي أو ربط الصفحة بنظام تخزين خارجي مثل قواعد بيانات أو خدمات سحابية.
+                </div>
             </div>
         </div>
     </div>
@@ -1333,21 +1555,27 @@ nav a:hover{
     </div>
     <div class="videos-grid">
         <div class="video-card">
-            <h3>طريقة عمل أرز بالدجاج</h3>
-            <div class="video-frame">
-                <iframe src="https://www.youtube.com/embed/4aZr5hZXP_s" allowfullscreen></iframe>
+            <div class="video-card-inner">
+                <h3>طريقة عمل أرز بالدجاج</h3>
+                <div class="video-frame">
+                    <iframe src="https://www.youtube.com/embed/4aZr5hZXP_s" allowfullscreen></iframe>
+                </div>
             </div>
         </div>
         <div class="video-card">
-            <h3>مكرونة بصلصة الطماطم</h3>
-            <div class="video-frame">
-                <iframe src="https://www.youtube.com/embed/1-SJGQ2HLp8" allowfullscreen></iframe>
+            <div class="video-card-inner">
+                <h3>مكرونة بصلصة الطماطم</h3>
+                <div class="video-frame">
+                    <iframe src="https://www.youtube.com/embed/1-SJGQ2HLp8" allowfullscreen></iframe>
+                </div>
             </div>
         </div>
         <div class="video-card">
-            <h3>شوربة خضار منزلية</h3>
-            <div class="video-frame">
-                <iframe src="https://www.youtube.com/embed/8pU2GqCwqjQ" allowfullscreen></iframe>
+            <div class="video-card-inner">
+                <h3>شوربة خضار منزلية</h3>
+                <div class="video-frame">
+                    <iframe src="https://www.youtube.com/embed/8pU2GqCwqjQ" allowfullscreen></iframe>
+                </div>
             </div>
         </div>
     </div>
@@ -1355,15 +1583,30 @@ nav a:hover{
 
 <footer class="footer">
     <div class="footer-inner">
-        <div>ساحة المذاق YUM YARD – صفحة وصفات بسيطة بتصميم كلاسيكي فاتح ولمسات ذهبية.</div>
-        <div>صلاحيات التعديل محفوظة لصاحب الموقع فقط عبر رمز داخلي لا يظهر للمستخدمين.</div>
+        <div>ساحة المذاق <span>YUM YARD</span> – صفحة وصفات بسيطة بتصميم كلاسيكي فاتح ولمسات ذهبية فاخرة.</div>
+        <div>صلاحيات التعديل محفوظة لصاحب الموقع فقط عبر رمز داخلي لا يظهر للمستخدمين في الواجهة.</div>
     </div>
 </footer>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-analytics.js";
+const firebaseConfig = {
+    apiKey: "AIzaSyC5vWkaVRMC5ZIT_KGeTqXMqg7U662n9bQ",
+    authDomain: "coocking-380d8.firebaseapp.com",
+    projectId: "coocking-380d8",
+    storageBucket: "coocking-380d8.firebasestorage.app",
+    messagingSenderId: "32948618858",
+    appId: "1:32948618858:web:43fd8bf52b3c9aee772c13",
+    measurementId: "G-MTD0PZSB0P"
+};
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+</script>
 
 <script>
 let isAdmin=false;
 const ADMIN_CODE="20132021";
-
 function activateAdmin(){
     const input=document.getElementById("adminCodeInput");
     const status=document.getElementById("adminStatus");
@@ -1378,7 +1621,6 @@ function activateAdmin(){
         alert("الرمز غير صحيح. هذا الوضع مخصص لصاحب الموقع فقط.");
     }
 }
-
 function deactivateAdmin(){
     isAdmin=false;
     const status=document.getElementById("adminStatus");
@@ -1388,24 +1630,20 @@ function deactivateAdmin(){
     form.style.display="none";
     showAdminTools(false);
 }
-
 function showAdminTools(show){
     const tools=document.querySelectorAll(".recipe-admin-tools");
     tools.forEach(function(t){
         t.style.display=show?"block":"none";
     });
 }
-
 function scrollToRecipes(){
     const section=document.getElementById("recipes");
     section.scrollIntoView({behavior:"smooth"});
 }
-
 function scrollToAdmin(){
     const section=document.getElementById("admin");
     section.scrollIntoView({behavior:"smooth"});
 }
-
 function clearAdminForm(){
     document.getElementById("recipeSelect").value="";
     document.getElementById("recipeTitleInput").value="";
@@ -1414,7 +1652,6 @@ function clearAdminForm(){
     document.getElementById("recipeIngredientsInput").value="";
     document.getElementById("recipeStepsInput").value="";
 }
-
 function loadRecipeIntoForm(recipeId){
     if(!isAdmin){
         alert("لا يمكن تعديل الوصفات إلا في وضع الإدارة.");
@@ -1442,7 +1679,6 @@ function loadRecipeIntoForm(recipeId){
     document.getElementById("recipeIngredientsInput").value=ingredients.join("\n");
     document.getElementById("recipeStepsInput").value=steps.join("\n");
 }
-
 function updateSelectedRecipe(){
     if(!isAdmin){
         alert("هذا الإجراء متاح فقط في وضع الإدارة.");
@@ -1463,7 +1699,6 @@ function updateSelectedRecipe(){
     const newDesc=document.getElementById("recipeDescriptionInput").value.trim();
     const newIngredientsText=document.getElementById("recipeIngredientsInput").value.trim();
     const newStepsText=document.getElementById("recipeStepsInput").value.trim();
-
     if(newTitle){
         card.querySelector(".recipe-title").textContent=newTitle;
     }
@@ -1493,9 +1728,8 @@ function updateSelectedRecipe(){
             stepsOl.appendChild(li);
         });
     }
-    alert("تم تحديث الوصفة في هذه الجلسة. للحفظ الدائم عدّل ملف HTML الأصلي.");
+    alert("تم تحديث الوصفة في هذه الجلسة. للحفظ الدائم عدّل ملف HTML الأصلي أو اربطه بنظام تخزين.");
 }
-
 document.addEventListener("DOMContentLoaded",function(){
     showAdminTools(false);
 });
