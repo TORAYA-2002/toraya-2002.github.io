@@ -2,414 +2,364 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>ساحة اللذة YUM YARD</title>
+<title>ساحة المذاق YUM YARD</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: "Tahoma", "Arial", sans-serif;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:"Tahoma","Arial",sans-serif;
 }
-body {
-    background: radial-gradient(circle at top, #fff8e1 0%, #1b1b1b 55%, #000000 100%);
-    color: #f9f3e6;
+body{
+    background:#f3f3f3;
+    color:#222;
 }
-header {
-    background: linear-gradient(135deg, #3b2b00, #000000);
-    padding: 20px 40px;
-    border-bottom: 2px solid #d4af37;
-    box-shadow: 0 0 25px rgba(212,175,55,0.6);
-    position: sticky;
-    top: 0;
-    z-index: 100;
+header{
+    background:#ffffff;
+    border-bottom:2px solid #d4af37;
+    padding:15px 30px;
+    position:sticky;
+    top:0;
+    z-index:10;
 }
-.header-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.header-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
-.logo {
-    font-size: 32px;
-    font-weight: bold;
-    letter-spacing: 3px;
-    color: #ffeb99;
-    text-shadow: 0 0 10px #d4af37, 0 0 20px #ffeb3b;
+.logo{
+    font-size:26px;
+    font-weight:bold;
+    color:#444;
 }
-.logo span {
-    color: #ffffff;
+.logo span{
+    color:#d4af37;
 }
-nav {
-    display: flex;
-    gap: 20px;
+nav{
+    display:flex;
+    gap:15px;
 }
-nav a {
-    color: #f9f3e6;
-    text-decoration: none;
-    font-size: 16px;
-    padding: 8px 16px;
-    border-radius: 20px;
-    border: 1px solid transparent;
-    transition: all 0.3s ease;
+nav a{
+    text-decoration:none;
+    color:#444;
+    padding:6px 14px;
+    border-radius:20px;
+    border:1px solid transparent;
+    font-size:14px;
 }
-nav a:hover {
-    border-color: #d4af37;
-    background: rgba(212,175,55,0.15);
-    box-shadow: 0 0 10px rgba(212,175,55,0.7);
+nav a:hover{
+    border-color:#d4af37;
+    background:#fff7dd;
 }
-.hero {
-    padding: 60px 40px 40px 40px;
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 40px;
-    align-items: center;
+.hero{
+    background:#ffffff;
+    padding:30px;
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:30px;
+    border-bottom:1px solid #e0e0e0;
 }
-.hero-text h1 {
-    font-size: 40px;
-    margin-bottom: 20px;
-    color: #ffeb99;
-    text-shadow: 0 0 15px rgba(212,175,55,0.9);
+.hero-text h1{
+    font-size:30px;
+    margin-bottom:10px;
+    color:#333;
 }
-.hero-text p {
-    font-size: 18px;
-    line-height: 1.8;
-    color: #f5e9c9;
-    margin-bottom: 20px;
+.hero-text p{
+    font-size:15px;
+    line-height:1.8;
+    margin-bottom:10px;
 }
-.hero-badge {
-    display: inline-block;
-    padding: 6px 14px;
-    border-radius: 20px;
-    border: 1px solid #d4af37;
-    color: #ffeb99;
-    font-size: 13px;
-    margin-bottom: 10px;
+.hero-badge{
+    display:inline-block;
+    font-size:12px;
+    padding:4px 10px;
+    border-radius:20px;
+    border:1px solid #d4af37;
+    color:#555;
+    margin-bottom:8px;
+    background:#fffdf4;
 }
-.hero-actions {
-    display: flex;
-    gap: 15px;
-    margin-top: 10px;
+.hero-actions{
+    margin-top:10px;
+    display:flex;
+    gap:10px;
 }
-.btn-primary {
-    background: linear-gradient(135deg, #d4af37, #ffeb3b);
-    color: #1b1b1b;
-    border-radius: 25px;
-    padding: 10px 24px;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    box-shadow: 0 0 15px rgba(212,175,55,0.8);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+.btn-primary{
+    background:#d4af37;
+    color:#222;
+    border:none;
+    border-radius:20px;
+    padding:8px 18px;
+    font-size:14px;
+    cursor:pointer;
 }
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 25px rgba(255,235,59,0.9);
+.btn-primary:hover{
+    background:#c39a2f;
 }
-.btn-ghost {
-    background: transparent;
-    color: #ffeb99;
-    border-radius: 25px;
-    padding: 10px 24px;
-    border: 1px solid #d4af37;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background 0.2s ease, box-shadow 0.2s ease;
+.btn-ghost{
+    background:#ffffff;
+    color:#444;
+    border:1px solid #d4af37;
+    border-radius:20px;
+    padding:8px 18px;
+    font-size:14px;
+    cursor:pointer;
 }
-.btn-ghost:hover {
-    background: rgba(212,175,55,0.15);
-    box-shadow: 0 0 15px rgba(212,175,55,0.7);
+.btn-ghost:hover{
+    background:#fff7dd;
 }
-.hero-visual {
-    position: relative;
-    display: flex;
-    justify-content: center;
+.hero-card{
+    background:#fafafa;
+    border-radius:16px;
+    border:1px solid #e0e0e0;
+    padding:18px;
 }
-.hero-card {
-    width: 100%;
-    max-width: 360px;
-    background: radial-gradient(circle at top, #3b2b00 0%, #000000 70%);
-    border-radius: 30px;
-    padding: 20px;
-    border: 1px solid rgba(212,175,55,0.6);
-    box-shadow: 0 0 30px rgba(0,0,0,0.9);
+.hero-card-title{
+    font-size:16px;
+    margin-bottom:8px;
+    color:#333;
 }
-.hero-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
+.hero-card-body{
+    font-size:13px;
+    line-height:1.7;
+    color:#555;
 }
-.hero-card-title {
-    font-size: 18px;
-    color: #ffeb99;
+.section{
+    padding:30px;
 }
-.hero-card-chip {
-    font-size: 12px;
-    padding: 4px 10px;
-    border-radius: 20px;
-    border: 1px solid #d4af37;
-    color: #f9f3e6;
+.section-title{
+    font-size:22px;
+    margin-bottom:6px;
+    color:#333;
 }
-.hero-card-body {
-    font-size: 14px;
-    color: #f5e9c9;
-    line-height: 1.6;
+.section-subtitle{
+    font-size:14px;
+    color:#666;
+    margin-bottom:18px;
 }
-.hero-card-footer {
-    margin-top: 15px;
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    color: #ffeb99;
+.admin-panel{
+    background:#ffffff;
+    border-radius:14px;
+    border:1px solid #e0e0e0;
+    padding:18px;
 }
-.hero-glow {
-    position: absolute;
-    width: 260px;
-    height: 260px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(212,175,55,0.35) 0%, transparent 70%);
-    top: -40px;
-    right: -40px;
-    z-index: -1;
+.admin-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
 }
-.section {
-    padding: 40px;
+.admin-header h2{
+    font-size:18px;
+    color:#333;
 }
-.section-title {
-    font-size: 26px;
-    margin-bottom: 10px;
-    color: #ffeb99;
-    text-shadow: 0 0 10px rgba(212,175,55,0.8);
+.admin-status{
+    font-size:12px;
+    padding:4px 10px;
+    border-radius:20px;
+    border:1px solid #d4af37;
+    background:#fffdf4;
+    color:#555;
 }
-.section-subtitle {
-    font-size: 15px;
-    color: #f5e9c9;
-    margin-bottom: 25px;
+.admin-login-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:12px;
 }
-.admin-panel {
-    background: radial-gradient(circle at top, #3b2b00 0%, #000000 70%);
-    border-radius: 20px;
-    padding: 20px;
-    border: 1px solid rgba(212,175,55,0.7);
-    box-shadow: 0 0 25px rgba(0,0,0,0.8);
-    margin-bottom: 30px;
+.admin-login-row input{
+    padding:7px 10px;
+    border-radius:18px;
+    border:1px solid #ccc;
+    min-width:180px;
 }
-.admin-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
+.admin-form{
+    display:none;
+    margin-top:10px;
 }
-.admin-header h2 {
-    font-size: 20px;
-    color: #ffeb99;
+.admin-grid{
+    display:grid;
+    grid-template-columns:1.1fr 1fr;
+    gap:12px;
 }
-.admin-status {
-    font-size: 13px;
-    padding: 4px 10px;
-    border-radius: 20px;
-    border: 1px solid #d4af37;
-    color: #f5e9c9;
+.admin-field{
+    margin-bottom:8px;
 }
-.admin-login-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-.admin-login-row input {
-    padding: 8px 12px;
-    border-radius: 20px;
-    border: 1px solid #d4af37;
-    background: #1b1b1b;
-    color: #f9f3e6;
-    min-width: 180px;
-}
-.admin-login-row button {
-    padding: 8px 18px;
-}
-.admin-form {
-    display: none;
-    margin-top: 10px;
-}
-.admin-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 15px;
-}
-.admin-field {
-    margin-bottom: 10px;
-}
-.admin-field label {
-    display: block;
-    font-size: 13px;
-    margin-bottom: 4px;
-    color: #ffeb99;
+.admin-field label{
+    display:block;
+    font-size:12px;
+    margin-bottom:3px;
+    color:#444;
 }
 .admin-field input,
 .admin-field textarea,
-.admin-field select {
-    width: 100%;
-    padding: 8px 10px;
-    border-radius: 10px;
-    border: 1px solid #d4af37;
-    background: #111111;
-    color: #f9f3e6;
-    font-size: 13px;
+.admin-field select{
+    width:100%;
+    padding:7px 9px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    font-size:13px;
 }
-.admin-field textarea {
-    min-height: 70px;
-    resize: vertical;
+.admin-field textarea{
+    min-height:60px;
+    resize:vertical;
 }
-.admin-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 10px;
+.admin-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:8px;
 }
-.admin-note {
-    font-size: 12px;
-    color: #f5e9c9;
-    margin-top: 8px;
+.admin-note{
+    font-size:11px;
+    color:#777;
+    margin-top:6px;
 }
-.recipes-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 20px;
+.recipes-grid{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:18px;
 }
-.recipe-card {
-    background: radial-gradient(circle at top, #3b2b00 0%, #000000 70%);
-    border-radius: 18px;
-    overflow: hidden;
-    border: 1px solid rgba(212,175,55,0.7);
-    box-shadow: 0 0 20px rgba(0,0,0,0.9);
-    display: flex;
-    flex-direction: column;
-    position: relative;
+.recipe-card{
+    background:#ffffff;
+    border-radius:14px;
+    border:1px solid #e0e0e0;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
 }
-.recipe-card-header {
-    position: relative;
+.recipe-card-header img{
+    width:100%;
+    height:160px;
+    object-fit:cover;
 }
-.recipe-card-header img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
+.recipe-badge{
+    position:absolute;
+    top:8px;
+    left:8px;
+    background:#fff7dd;
+    border-radius:16px;
+    padding:3px 9px;
+    font-size:11px;
+    border:1px solid #d4af37;
 }
-.recipe-badge {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background: rgba(0,0,0,0.7);
-    color: #ffeb99;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 11px;
-    border: 1px solid rgba(212,175,55,0.8);
+.recipe-card-header{
+    position:relative;
 }
-.recipe-body {
-    padding: 14px 14px 16px 14px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+.recipe-body{
+    padding:12px 12px 14px 12px;
+    display:flex;
+    flex-direction:column;
+    gap:4px;
 }
-.recipe-title {
-    font-size: 18px;
-    margin-bottom: 6px;
-    color: #ffeb99;
+.recipe-title{
+    font-size:16px;
+    color:#333;
 }
-.recipe-meta {
-    font-size: 12px;
-    color: #f5e9c9;
-    margin-bottom: 8px;
+.recipe-meta{
+    font-size:12px;
+    color:#777;
 }
-.recipe-description {
-    font-size: 13px;
-    color: #f5e9c9;
-    margin-bottom: 10px;
+.recipe-description{
+    font-size:13px;
+    color:#555;
 }
-.recipe-subheading {
-    font-size: 13px;
-    color: #ffeb99;
-    margin-bottom: 4px;
+.recipe-subheading{
+    font-size:13px;
+    color:#333;
+    margin-top:4px;
 }
 .recipe-ingredients,
-.recipe-steps {
-    font-size: 12px;
-    color: #f5e9c9;
-    margin-bottom: 8px;
-    padding-right: 18px;
+.recipe-steps{
+    font-size:12px;
+    color:#555;
+    padding-right:18px;
 }
 .recipe-ingredients li,
-.recipe-steps li {
-    margin-bottom: 3px;
+.recipe-steps li{
+    margin-bottom:2px;
 }
-.recipe-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 6px;
-    font-size: 11px;
-    color: #ffeb99;
+.recipe-footer{
+    font-size:11px;
+    color:#666;
+    display:flex;
+    justify-content:space-between;
+    margin-top:4px;
 }
-.recipe-admin-tools {
-    display: none;
-    margin-top: 6px;
-    font-size: 11px;
-    color: #ffeb99;
+.recipe-admin-tools{
+    display:none;
+    margin-top:6px;
+    font-size:11px;
 }
-.recipe-admin-tools button {
-    font-size: 11px;
-    padding: 4px 8px;
-    border-radius: 12px;
-    border: 1px solid #d4af37;
-    background: transparent;
-    color: #ffeb99;
-    cursor: pointer;
-    margin-left: 4px;
+.recipe-admin-tools button{
+    font-size:11px;
+    padding:4px 8px;
+    border-radius:12px;
+    border:1px solid #d4af37;
+    background:#ffffff;
+    cursor:pointer;
 }
-.recipe-admin-tools button:hover {
-    background: rgba(212,175,55,0.2);
+.recipe-admin-tools button:hover{
+    background:#fff7dd;
 }
-.footer {
-    padding: 25px 40px 35px 40px;
-    border-top: 1px solid rgba(212,175,55,0.5);
-    background: #050505;
-    margin-top: 40px;
+.videos-grid{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:18px;
 }
-.footer-inner {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 15px;
-    font-size: 13px;
-    color: #f5e9c9;
+.video-card{
+    background:#ffffff;
+    border-radius:14px;
+    border:1px solid #e0e0e0;
+    padding:10px;
 }
-.footer-inner span {
-    color: #ffeb99;
+.video-card h3{
+    font-size:14px;
+    margin-bottom:6px;
+    color:#333;
 }
-@media (max-width: 1100px) {
-    .hero {
-        grid-template-columns: 1fr;
+.video-card video{
+    width:100%;
+    border-radius:10px;
+}
+.footer{
+    background:#ffffff;
+    border-top:1px solid #e0e0e0;
+    padding:18px 30px;
+    font-size:12px;
+    color:#666;
+    margin-top:20px;
+}
+@media(max-width:1100px){
+    .hero{
+        grid-template-columns:1fr;
     }
-    .recipes-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+    .recipes-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+    .videos-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
     }
 }
-@media (max-width: 700px) {
-    header {
-        padding: 15px 20px;
+@media(max-width:700px){
+    header{
+        padding:12px 16px;
     }
-    .hero {
-        padding: 30px 20px 20px 20px;
+    .hero{
+        padding:20px 16px;
     }
-    .section {
-        padding: 25px 20px;
+    .section{
+        padding:20px 16px;
     }
-    .recipes-grid {
-        grid-template-columns: 1fr;
+    .recipes-grid{
+        grid-template-columns:1fr;
     }
-    .admin-grid {
-        grid-template-columns: 1fr;
+    .videos-grid{
+        grid-template-columns:1fr;
+    }
+    .admin-grid{
+        grid-template-columns:1fr;
     }
 }
 </style>
@@ -418,53 +368,41 @@ nav a:hover {
 
 <header>
     <div class="header-inner">
-        <div class="logo">ساحة اللذة <span>YUM YARD</span></div>
+        <div class="logo">ساحة المذاق <span>YUM YARD</span></div>
         <nav>
-            <a href="#recipes">الوصفات الذهبية</a>
+            <a href="#recipes">الوصفات</a>
+            <a href="#videos">فيديوهات الطبخ</a>
             <a href="#admin">وضع الإدارة</a>
-            <a href="#about">عن المنصة</a>
         </nav>
     </div>
 </header>
 
 <section class="hero" id="about">
     <div class="hero-text">
-        <div class="hero-badge">منصة عربية للوصفات الفاخرة</div>
-        <h1>ساحة اللذة الذهبية لعشّاق الطبخ</h1>
-        <p>في ساحة اللذة، كل وصفة هي تجربة فاخرة تجمع بين المذاق الأصيل والتقديم الراقي. تم إعداد هذه الصفحة لتكون مرجعاً ذهبياً لعشرين وصفة مميزة، كل واحدة بمكوّنات فريدة لا تتكرر في أي وصفة أخرى.</p>
-        <p>يستطيع مالك الموقع فقط الدخول إلى وضع الإدارة باستخدام رمز خاص، لإنشاء وصفات جديدة أو تعديل الوصفات الحالية أو رفع صور جديدة، مع الحفاظ على تجربة آمنة واحترافية للزوار.</p>
+        <div class="hero-badge">منصة وصفات عربية كلاسيكية</div>
+        <h1>ساحة المذاق – وصفات بسيطة بطابع ذهبي</h1>
+        <p>هذه الصفحة تجمع عشرين وصفة عربية وعالمية مكتوبة بالعربية، مع صور حقيقية من الإنترنت، وتصميم بسيط وخلفية فاتحة مريحة للعين.</p>
+        <p>يوجد وضع إدارة خاص بصاحب الموقع فقط، يمكن من خلاله تعديل الوصفات مباشرة في الصفحة باستخدام رمز سري ثابت.</p>
         <div class="hero-actions">
-            <button class="btn-primary" onclick="scrollToRecipes()">استكشف الوصفات الآن</button>
+            <button class="btn-primary" onclick="scrollToRecipes()">استكشف الوصفات</button>
             <button class="btn-ghost" onclick="scrollToAdmin()">دخول وضع الإدارة</button>
         </div>
     </div>
-    <div class="hero-visual">
-        <div class="hero-card">
-            <div class="hero-card-header">
-                <div class="hero-card-title">لوحة تحكم الطاهي الذهبي</div>
-                <div class="hero-card-chip">وضع خاص بالمالك</div>
-            </div>
-            <div class="hero-card-body">
-                في وضع الإدارة يمكنك:
-                <br>
-                • إنشاء وصفات جديدة بمكوّنات وصور خاصة
-                <br>
-                • تعديل وصفاتك الحالية وتحديث خطوات التحضير
-                <br>
-                • التحكم في عرض الوصفات للزوار
-            </div>
-            <div class="hero-card-footer">
-                <span>رمز الدخول السري محفوظ</span>
-                <span>أمان وتجربة مميزة</span>
-            </div>
+    <div class="hero-card">
+        <div class="hero-card-title">معلومات عن وضع الإدارة</div>
+        <div class="hero-card-body">
+            يمكن لصاحب الموقع فقط:
+            <br>• تعديل عناوين الوصفات
+            <br>• تغيير الصور والشرح
+            <br>• تحديث المكوّنات وخطوات التحضير
+            <br>رمز الدخول إلى وضع الإدارة هو: 20132021
         </div>
-        <div class="hero-glow"></div>
     </div>
 </section>
 
 <section class="section" id="admin">
-    <h2 class="section-title">وضع الإدارة الخاص بالمالك</h2>
-    <p class="section-subtitle">هذا الوضع متاح فقط لصاحب الموقع. لا يمكن لأي زائر آخر إنشاء أو تعديل أو رفع وصفات، حتى لو اطّلع على الصفحة. يتم تفعيل وضع الإدارة باستخدام رمز سري ثابت.</p>
+    <h2 class="section-title">وضع الإدارة لصاحب الموقع</h2>
+    <p class="section-subtitle">هذا الوضع مخصص للمالك فقط. لا يمكن لأي زائر آخر إنشاء أو تعديل الوصفات، حتى لو رأى هذه الواجهة.</p>
 
     <div class="admin-panel">
         <div class="admin-header">
@@ -474,8 +412,8 @@ nav a:hover {
 
         <div class="admin-login-row">
             <input type="password" id="adminCodeInput" placeholder="أدخل رمز وضع الإدارة">
-            <button class="btn-primary" onclick="activateAdmin()">تفعيل وضع الإدارة</button>
-            <button class="btn-ghost" onclick="deactivateAdmin()">إيقاف وضع الإدارة</button>
+            <button class="btn-primary" onclick="activateAdmin()">تفعيل</button>
+            <button class="btn-ghost" onclick="deactivateAdmin()">إيقاف</button>
         </div>
 
         <div class="admin-form" id="adminForm">
@@ -507,87 +445,76 @@ nav a:hover {
                             <option value="recipe20">وصفة 20</option>
                         </select>
                     </div>
-
                     <div class="admin-field">
                         <label for="recipeTitleInput">عنوان الوصفة</label>
                         <input type="text" id="recipeTitleInput" placeholder="اكتب عنوان الوصفة">
                     </div>
-
                     <div class="admin-field">
                         <label for="recipeImageInput">رابط صورة الوصفة</label>
                         <input type="text" id="recipeImageInput" placeholder="ضع رابط صورة متعلقة بالوصفة">
                     </div>
-
                     <div class="admin-field">
-                        <label for="recipeDescriptionInput">وصف قصير للوصفة</label>
-                        <textarea id="recipeDescriptionInput" placeholder="اكتب وصفاً جذاباً للوصفة"></textarea>
+                        <label for="recipeDescriptionInput">وصف قصير</label>
+                        <textarea id="recipeDescriptionInput" placeholder="اكتب وصفاً مختصراً للوصفة"></textarea>
                     </div>
                 </div>
-
                 <div>
                     <div class="admin-field">
-                        <label for="recipeIngredientsInput">المكوّنات (كل مكوّن في سطر منفصل)</label>
+                        <label for="recipeIngredientsInput">المكوّنات (كل سطر مكوّن)</label>
                         <textarea id="recipeIngredientsInput" placeholder="اكتب المكوّنات، كل مكوّن في سطر"></textarea>
                     </div>
-
                     <div class="admin-field">
-                        <label for="recipeStepsInput">خطوات التحضير (كل خطوة في سطر منفصل)</label>
+                        <label for="recipeStepsInput">خطوات التحضير (كل سطر خطوة)</label>
                         <textarea id="recipeStepsInput" placeholder="اكتب خطوات التحضير، كل خطوة في سطر"></textarea>
                     </div>
                 </div>
             </div>
-
             <div class="admin-actions">
-                <button class="btn-primary" onclick="updateSelectedRecipe()">تحديث الوصفة المختارة</button>
+                <button class="btn-primary" onclick="updateSelectedRecipe()">تحديث الوصفة</button>
                 <button class="btn-ghost" onclick="clearAdminForm()">مسح الحقول</button>
             </div>
-
             <div class="admin-note">
-                ملاحظة: يتم تطبيق التعديلات مباشرة على الصفحة الحالية في المتصفح فقط. للحفظ الدائم، يجب على مالك الموقع نقل التعديلات إلى الكود الأصلي.
+                التعديلات تطبق على هذه الصفحة في المتصفح فقط. للحفظ الدائم يجب تعديل ملف HTML الأصلي.
             </div>
         </div>
     </div>
 </section>
 
 <section class="section" id="recipes">
-    <h2 class="section-title">20 وصفة ذهبية فاخرة</h2>
-    <p class="section-subtitle">كل وصفة في هذه الساحة تمتلك مكوّنات فريدة لا تتكرر في أي وصفة أخرى، مع شرح واضح وصور مرتبطة بطبيعة الطبق.</p>
+    <h2 class="section-title">الوصفات الكلاسيكية في ساحة المذاق</h2>
+    <p class="section-subtitle">عشرون وصفة مع صور حقيقية وروابط يمكن تعديلها من قبل صاحب الموقع فقط.</p>
 
     <div class="recipes-grid">
 
         <article class="recipe-card" id="recipe1">
             <div class="recipe-card-header">
-                <img src="images/golden_saffron_chicken_rice.jpg" alt="أرز بالدجاج والزعفران الذهبي">
+                <img src="https://source.unsplash.com/600x400/?chicken,rice" alt="أرز بالدجاج">
                 <div class="recipe-badge">وصفة 1</div>
             </div>
             <div class="recipe-body">
-                <h3 class="recipe-title">أرز بالدجاج والزعفران الذهبي</h3>
-                <div class="recipe-meta">طبق رئيسي فاخر مستوحى من النكهات الشرقية</div>
-                <p class="recipe-description">أرز عطري مطهو بمرق الدجاج مع الزعفران الذهبي وقطع الدجاج الطرية، يقدم كوجبة رئيسية متكاملة في المناسبات الخاصة.</p>
+                <h3 class="recipe-title">أرز بالدجاج على الطريقة المنزلية</h3>
+                <div class="recipe-meta">طبق رئيسي بسيط ومشبع</div>
+                <p class="recipe-description">أرز أبيض مطهو مع مرق الدجاج وقطع الدجاج المتبلة، مناسب لغداء عائلي كلاسيكي.</p>
                 <div class="recipe-subheading">المكوّنات:</div>
                 <ul class="recipe-ingredients">
-                    <li>أرز بسمتي طويل الحبة</li>
-                    <li>مرق دجاج منزلي مركز</li>
-                    <li>زعفران إيراني منقوع في ماء دافئ</li>
-                    <li>صدور دجاج مقطعة مكعبات</li>
-                    <li>بصل أبيض مفروم ناعماً</li>
-                    <li>زيت سمن بلدي ذهبي</li>
-                    <li>حبات هيل خضراء كاملة</li>
-                    <li>عود قرفة سميك</li>
+                    <li>أرز مصري مغسول جيداً</li>
+                    <li>مرق دجاج منزلي خفيف</li>
+                    <li>قطع دجاج مسلوقة ومحمرة</li>
+                    <li>بصل أصفر مفروم ناعماً</li>
+                    <li>فلفل أسود مطحون خشن</li>
+                    <li>زيت نباتي بنكهة خفيفة</li>
                 </ul>
                 <div class="recipe-subheading">خطوات التحضير:</div>
                 <ol class="recipe-steps">
-                    <li>يغسل الأرز البسمتي جيداً وينقع في ماء فاتر لمدة ثلاثين دقيقة ثم يصفى.</li>
-                    <li>في قدر عميق، يسخن السمن البلدي ويضاف البصل الأبيض المفروم ويقلب حتى يذبل ويصبح شفافاً.</li>
-                    <li>تضاف مكعبات صدور الدجاج وتقلب حتى تتحمر من جميع الجوانب وتكتسب لوناً ذهبياً خفيفاً.</li>
-                    <li>يضاف مرق الدجاج المركز مع حبات الهيل وعود القرفة ويترك حتى يغلي برفق.</li>
-                    <li>يضاف الأرز المنقوع ويقلب مرة واحدة ثم يسكب منقوع الزعفران على السطح دون تحريك كثير.</li>
-                    <li>يغطى القدر بإحكام ويترك على نار هادئة حتى ينضج الأرز ويمتص السوائل بالكامل.</li>
-                    <li>يترك الأرز ليرتاح خمس دقائق ثم يقلب برفق ويقدم في طبق واسع مع قطع الدجاج على الوجه.</li>
+                    <li>يُقلى البصل في الزيت حتى يذبل ويأخذ لوناً ذهبياً فاتحاً.</li>
+                    <li>تضاف قطع الدجاج وتُقلب حتى تتحمر من الخارج.</li>
+                    <li>يُضاف الأرز المغسول ويُقلب مع البصل والدجاج لدقائق.</li>
+                    <li>يُسكب مرق الدجاج الساخن حتى يغطي الأرز بمقدار مناسب.</li>
+                    <li>يُتبل بالفلفل الأسود ويُترك على نار هادئة حتى ينضج الأرز تماماً.</li>
                 </ol>
                 <div class="recipe-footer">
-                    <span>زمن التحضير: 60 دقيقة</span>
-                    <span>يكفي لـ 4 أشخاص</span>
+                    <span>الوقت: 45 دقيقة</span>
+                    <span>4 حصص</span>
                 </div>
                 <div class="recipe-admin-tools">
                     <button onclick="loadRecipeIntoForm('recipe1')">تعديل</button>
@@ -597,36 +524,32 @@ nav a:hover {
 
         <article class="recipe-card" id="recipe2">
             <div class="recipe-card-header">
-                <img src="images/roasted_beetroot_salad.jpg" alt="سلطة الشمندر المحمص بالجبن الكريمي">
+                <img src="https://source.unsplash.com/600x400/?salad,vegetable" alt="سلطة خضار">
                 <div class="recipe-badge">وصفة 2</div>
             </div>
             <div class="recipe-body">
-                <h3 class="recipe-title">سلطة الشمندر المحمص بالجبن الكريمي</h3>
-                <div class="recipe-meta">مقبلات باردة بألوان زاهية وطعم متوازن</div>
-                <p class="recipe-description">شرائح شمندر محمصة في الفرن مع صلصة خفيفة وتقديمها مع جبن كريمي ناعم وجوز مقرمش لطبق افتتاحي أنيق.</p>
+                <h3 class="recipe-title">سلطة الخضار الكلاسيكية بزيت الزيتون</h3>
+                <div class="recipe-meta">مقبلات خفيفة ومنعشة</div>
+                <p class="recipe-description">سلطة بسيطة من الخضار الطازجة مع تتبيلة زيت الزيتون والليمون، مناسبة مع أغلب الأطباق.</p>
                 <div class="recipe-subheading">المكوّنات:</div>
                 <ul class="recipe-ingredients">
-                    <li>حبات شمندر طازجة متوسطة الحجم</li>
-                    <li>جبن كريمي كامل الدسم</li>
-                    <li>جوز محمص مجروش خشناً</li>
-                    <li>خل بلسمي معتّق</li>
-                    <li>عسل نحل طبيعي سائل</li>
-                    <li>أوراق جرجير طازجة</li>
+                    <li>خيار طازج مقطع مكعبات صغيرة</li>
+                    <li>طماطم حمراء مقطعة مكعبات</li>
+                    <li>فلفل أخضر حلو مقطع شرائح</li>
+                    <li>بصل أحمر مقطع شرائح رفيعة</li>
                     <li>زيت زيتون بكر ممتاز</li>
-                    <li>فلفل أسود مطحون طازجاً</li>
+                    <li>عصير ليمون طازج مركز</li>
                 </ul>
                 <div class="recipe-subheading">خطوات التحضير:</div>
                 <ol class="recipe-steps">
-                    <li>تغسل حبات الشمندر جيداً وتلف بورق ألومنيوم ثم تحمص في الفرن حتى تصبح طرية من الداخل.</li>
-                    <li>يترك الشمندر ليبرد قليلاً ثم يقشر ويقطع إلى شرائح سميكة أو مكعبات متساوية.</li>
-                    <li>في وعاء صغير، يخلط خل البلسمي مع عسل النحل وزيت الزيتون والفلفل الأسود حتى تتجانس الصلصة.</li>
-                    <li>ترتب أوراق الجرجير في طبق التقديم وتوزع فوقها شرائح الشمندر المحمص.</li>
-                    <li>تضاف قطع من الجبن الكريمي على شكل كرات صغيرة بين الشمندر والجرجير.</li>
-                    <li>يرش الجوز المحمص المجروش على الوجه ثم تسكب الصلصة بالتساوي قبل التقديم مباشرة.</li>
+                    <li>تُخلط قطع الخيار والطماطم والفلفل والبصل في وعاء عميق.</li>
+                    <li>يُضاف زيت الزيتون وعصير الليمون فوق الخضار.</li>
+                    <li>تُقلب المكونات برفق حتى تتوزع التتبيلة جيداً.</li>
+                    <li>تُقدم السلطة مباشرة أو بعد تبريدها قليلاً في الثلاجة.</li>
                 </ol>
                 <div class="recipe-footer">
-                    <span>زمن التحضير: 45 دقيقة</span>
-                    <span>يكفي لـ 3 أشخاص</span>
+                    <span>الوقت: 15 دقيقة</span>
+                    <span>3 حصص</span>
                 </div>
                 <div class="recipe-admin-tools">
                     <button onclick="loadRecipeIntoForm('recipe2')">تعديل</button>
@@ -636,36 +559,32 @@ nav a:hover {
 
         <article class="recipe-card" id="recipe3">
             <div class="recipe-card-header">
-                <img src="images/herb_crusted_lamb_rack.jpg" alt="ريش غنم بقشرة الأعشاب العطرية">
+                <img src="https://source.unsplash.com/600x400/?soup,vegetable" alt="شوربة خضار">
                 <div class="recipe-badge">وصفة 3</div>
             </div>
             <div class="recipe-body">
-                <h3 class="recipe-title">ريش غنم بقشرة الأعشاب العطرية</h3>
-                <div class="recipe-meta">طبق لحوم فاخر لعشاء مميز</div>
-                <p class="recipe-description">ريش غنم طرية مغطاة بطبقة من الأعشاب الطازجة المفتتة مع فتات الخبز، مشوية حتى الكمال وتقدم مع صلصة خفيفة.</p>
+                <h3 class="recipe-title">شوربة الخضار الدافئة</h3>
+                <div class="recipe-meta">حساء بسيط ومغذي</div>
+                <p class="recipe-description">شوربة خضار خفيفة تحتوي على قطع متنوعة من الخضار المطهوة في مرق لطيف.</p>
                 <div class="recipe-subheading">المكوّنات:</div>
                 <ul class="recipe-ingredients">
-                    <li>ريش غنم كاملة مع العظم</li>
-                    <li>فتات خبز طازج ناعم</li>
-                    <li>أوراق روزماري مفرومة ناعماً</li>
-                    <li>أوراق زعتر طازجة مفرومة</li>
-                    <li>خردل ديجون ناعم</li>
-                    <li>ثوم مهروس طازج</li>
-                    <li>زيت بذور العنب للطبخ</li>
-                    <li>فلفل أبيض مطحون</li>
+                    <li>جزر طازج مقطع شرائح رفيعة</li>
+                    <li>كرفس مقطع مكعبات صغيرة</li>
+                    <li>بطاطس بيضاء مقطعة مكعبات</li>
+                    <li>مرق خضار منزلي خفيف</li>
+                    <li>ورق غار كامل</li>
+                    <li>فلفل أبيض مطحون ناعم</li>
                 </ul>
                 <div class="recipe-subheading">خطوات التحضير:</div>
                 <ol class="recipe-steps">
-                    <li>تتبل ريش الغنم بالفلفل الأبيض وتترك في درجة حرارة الغرفة لمدة عشرين دقيقة.</li>
-                    <li>في مقلاة ساخنة، يسخن زيت بذور العنب ثم تحمر ريش الغنم من جميع الجوانب حتى تكتسب لوناً بنياً جميلاً.</li>
-                    <li>يخلط فتات الخبز مع الروزماري والزعتر والثوم المهروس حتى تتكون طبقة أعشاب متجانسة.</li>
-                    <li>يدهن سطح ريش الغنم بخردل ديجون ثم تغطى بخليط الأعشاب والخبز مع الضغط الخفيف لتثبيته.</li>
-                    <li>تنقل الريش إلى صينية فرن وتخبز في فرن ساخن حتى تصل إلى درجة النضج المرغوبة.</li>
-                    <li>تترك لترتاح لبضع دقائق ثم تقطع بين العظام وتقدم في طبق دافئ.</li>
+                    <li>يوضع الجزر والكرفس والبطاطس في قدر مع مرق الخضار.</li>
+                    <li>يُضاف ورق الغار ويُترك الخليط حتى يغلي.</li>
+                    <li>تُخفف النار ويُترك حتى تنضج الخضار تماماً.</li>
+                    <li>يُتبل بالفلفل الأبيض ويُقدم الحساء ساخناً.</li>
                 </ol>
                 <div class="recipe-footer">
-                    <span>زمن التحضير: 55 دقيقة</span>
-                    <span>يكفي لـ 2 شخصين</span>
+                    <span>الوقت: 35 دقيقة</span>
+                    <span>4 حصص</span>
                 </div>
                 <div class="recipe-admin-tools">
                     <button onclick="loadRecipeIntoForm('recipe3')">تعديل</button>
@@ -675,37 +594,32 @@ nav a:hover {
 
         <article class="recipe-card" id="recipe4">
             <div class="recipe-card-header">
-                <img src="images/creamy_mushroom_soup.jpg" alt="شوربة الفطر الكريمية بالكمأة">
+                <img src="https://source.unsplash.com/600x400/?pasta,tomato" alt="مكرونة بالصلصة">
                 <div class="recipe-badge">وصفة 4</div>
             </div>
             <div class="recipe-body">
-                <h3 class="recipe-title">شوربة الفطر الكريمية بالكمأة</h3>
-                <div class="recipe-meta">حساء دافئ بنكهة فاخرة</div>
-                <p class="recipe-description">شوربة فطر ناعمة وغنية بالقوام، مع لمسة من زيت الكمأة لتعزيز النكهة، تقدم في أكواب أنيقة كبداية لوجبة راقية.</p>
+                <h3 class="recipe-title">مكرونة بصلصة الطماطم البسيطة</h3>
+                <div class="recipe-meta">طبق سريع التحضير</div>
+                <p class="recipe-description">مكرونة مسلوقة مع صلصة طماطم منزلية خفيفة، مناسبة لعشاء سريع.</p>
                 <div class="recipe-subheading">المكوّنات:</div>
                 <ul class="recipe-ingredients">
-                    <li>فطر طازج بني مقطع شرائح</li>
-                    <li>كريمة طبخ سائلة كاملة الدسم</li>
-                    <li>مرق خضار خفيف</li>
-                    <li>كراث مفروم ناعماً</li>
-                    <li>زبدة غير مملحة</li>
-                    <li>طحين قمح ناعم</li>
-                    <li>جوزة الطيب مبشورة طازجة</li>
-                    <li>زيت كمأة أبيض عطري</li>
+                    <li>مكرونة سباغيتي جافة</li>
+                    <li>طماطم مبشورة ناعماً</li>
+                    <li>ثوم مفروم خشناً</li>
+                    <li>أوريغانو مجفف مطحون</li>
+                    <li>زيت دوار الشمس للطهي</li>
+                    <li>فلفل أحمر حلو مطحون</li>
                 </ul>
                 <div class="recipe-subheading">خطوات التحضير:</div>
                 <ol class="recipe-steps">
-                    <li>يذوب الزبدة في قدر على نار متوسطة ويضاف الكراث المفروم ويقلب حتى يلين دون أن يتحمر.</li>
-                    <li>تضاف شرائح الفطر وتقلب حتى تطلق عصارتها وتكتسب لوناً ذهبياً خفيفاً.</li>
-                    <li>يرش الطحين فوق الفطر ويقلب جيداً لتكوين قاعدة كثيفة للشوربة.</li>
-                    <li>يضاف مرق الخضار تدريجياً مع التحريك المستمر حتى يذوب الطحين تماماً.</li>
-                    <li>تضاف كريمة الطبخ وجوزة الطيب المبشورة ويترك الخليط ليغلي برفق حتى يتكاثف.</li>
-                    <li>تخلط الشوربة بالخلاط حتى تصبح ناعمة ثم تعاد إلى القدر وتعدل السماكة حسب الرغبة.</li>
-                    <li>قبل التقديم مباشرة، يضاف القليل من زيت الكمأة ويقلب برفق ثم تصب الشوربة في أوعية التقديم.</li>
+                    <li>تُسلق المكرونة في ماء مغلي حتى تنضج.</li>
+                    <li>يُقلى الثوم في الزيت ثم تُضاف الطماطم المبشورة.</li>
+                    <li>يُضاف الأوريغانو والفلفل الأحمر ويُترك الخليط حتى يتكاثف.</li>
+                    <li>تُصفى المكرونة وتُخلط مع الصلصة وتُقدم مباشرة.</li>
                 </ol>
                 <div class="recipe-footer">
-                    <span>زمن التحضير: 40 دقيقة</span>
-                    <span>يكفي لـ 4 أشخاص</span>
+                    <span>الوقت: 30 دقيقة</span>
+                    <span>3 حصص</span>
                 </div>
                 <div class="recipe-admin-tools">
                     <button onclick="loadRecipeIntoForm('recipe4')">تعديل</button>
@@ -715,36 +629,32 @@ nav a:hover {
 
         <article class="recipe-card" id="recipe5">
             <div class="recipe-card-header">
-                <img src="images/citrus_shrimp_skewers.jpg" alt="أسياخ الروبيان بالحمضيات المشوية">
+                <img src="https://source.unsplash.com/600x400/?grill,meat" alt="لحم مشوي">
                 <div class="recipe-badge">وصفة 5</div>
             </div>
             <div class="recipe-body">
-                <h3 class="recipe-title">أسياخ الروبيان بالحمضيات المشوية</h3>
-                <div class="recipe-meta">مقبلات بحرية خفيفة ومنعشة</div>
-                <p class="recipe-description">روبيان متبل بعصائر الحمضيات والأعشاب، مشوي على الفحم ويقدم مع شرائح ليمون مشوية لإضافة نكهة مدخنة.</p>
+                <h3 class="recipe-title">شرائح لحم مشوية على الفحم</h3>
+                <div class="recipe-meta">طبق لحوم كلاسيكي</div>
+                <p class="recipe-description">شرائح لحم متبلة ومشوية على الفحم بنكهة بسيطة وواضحة.</p>
                 <div class="recipe-subheading">المكوّنات:</div>
                 <ul class="recipe-ingredients">
-                    <li>روبيان كبير مقشر مع الإبقاء على الذيل</li>
-                    <li>عصير ليمون طازج</li>
-                    <li>عصير برتقال حلو</li>
-                    <li>قشر ليمون مبشور ناعماً</li>
-                    <li>أوراق كزبرة خضراء مفرومة</li>
-                    <li>فلفل حار أحمر مفروم ناعماً</li>
+                    <li>شرائح لحم بقري رفيعة</li>
+                    <li>خل تفاح طبيعي</li>
+                    <li>فلفل أسود مطحون ناعم</li>
+                    <li>ثوم بودرة خفيفة</li>
                     <li>زيت ذرة خفيف</li>
-                    <li>شرائح ليمون رفيعة للشوي</li>
+                    <li>زعتر جاف مطحون</li>
                 </ul>
                 <div class="recipe-subheading">خطوات التحضير:</div>
                 <ol class="recipe-steps">
-                    <li>يخلط عصير الليمون مع عصير البرتقال وقشر الليمون وزيت الذرة في وعاء عميق.</li>
-                    <li>تضاف الكزبرة المفرومة والفلفل الحار إلى التتبيلة وتقلب جيداً.</li>
-                    <li>يوضع الروبيان في الوعاء ويقلب حتى يغطيه الخليط ثم يترك في الثلاجة لمدة نصف ساعة.</li>
-                    <li>يصف الروبيان على أسياخ خشبية منقوعة في الماء مسبقاً، مع وضع شرائح الليمون بين الحبات.</li>
-                    <li>تشوى الأسياخ على شواية ساخنة حتى ينضج الروبيان ويأخذ لوناً وردياً ذهبياً.</li>
-                    <li>تقدم الأسياخ فوراً مع شرائح ليمون مشوية إضافية على الجانب.</li>
+                    <li>تُخلط مكونات التتبيلة في وعاء.</li>
+                    <li>تُغمر شرائح اللحم في التتبيلة وتُترك لمدة ساعة.</li>
+                    <li>تُشوى الشرائح على الفحم حتى تنضج حسب الرغبة.</li>
+                    <li>تُقدم ساخنة مع خبز أو سلطة.</li>
                 </ol>
                 <div class="recipe-footer">
-                    <span>زمن التحضير: 35 دقيقة</span>
-                    <span>يكفي لـ 3 أشخاص</span>
+                    <span>الوقت: 60 دقيقة</span>
+                    <span>2 حصة</span>
                 </div>
                 <div class="recipe-admin-tools">
                     <button onclick="loadRecipeIntoForm('recipe5')">تعديل</button>
@@ -754,36 +664,32 @@ nav a:hover {
 
         <article class="recipe-card" id="recipe6">
             <div class="recipe-card-header">
-                <img src="images/pistachio_rose_cake.jpg" alt="كيكة الفستق بماء الورد">
+                <img src="https://source.unsplash.com/600x400/?cake,vanilla" alt="كيك فانيليا">
                 <div class="recipe-badge">وصفة 6</div>
             </div>
             <div class="recipe-body">
-                <h3 class="recipe-title">كيكة الفستق بماء الورد</h3>
-                <div class="recipe-meta">حلوى فاخرة بطابع شرقي</div>
-                <p class="recipe-description">كيكة ناعمة بطعم الفستق وماء الورد، مزينة بطبقة من الكريمة المخفوقة وحبات الفستق الكاملة لختام وجبة مميزة.</p>
+                <h3 class="recipe-title">كيك الفانيليا البسيط</h3>
+                <div class="recipe-meta">حلوى منزلية كلاسيكية</div>
+                <p class="recipe-description">كيك فانيليا ناعم يمكن تقديمه مع الشاي أو القهوة.</p>
                 <div class="recipe-subheading">المكوّنات:</div>
                 <ul class="recipe-ingredients">
-                    <li>دقيق لوز مطحون ناعماً</li>
-                    <li>فستق حلبي مطحون خشناً</li>
-                    <li>سكر ناعم الحبيبات</li>
-                    <li>بيض طازج بدرجة حرارة الغرفة</li>
+                    <li>دقيق أبيض خاص بالكيك</li>
+                    <li>سكر أبيض ناعم الحبيبات</li>
+                    <li>بيض طازج متوسط الحجم</li>
+                    <li>حليب سائل كامل الدسم</li>
                     <li>زيت نباتي خفيف النكهة</li>
-                    <li>ماء ورد مركز</li>
-                    <li>بيكنج باودر خاص بالحلويات</li>
-                    <li>كريمة خفق سائلة للتزيين</li>
+                    <li>فانيليا سائلة بسيطة</li>
                 </ul>
                 <div class="recipe-subheading">خطوات التحضير:</div>
                 <ol class="recipe-steps">
-                    <li>يسخن الفرن مسبقاً وتدهن صينية الكيك وتبطن بورق الخبز.</li>
-                    <li>يخفق البيض مع السكر حتى يصبح الخليط فاتح اللون وهش القوام.</li>
-                    <li>يضاف الزيت وماء الورد ويستمر الخفق حتى يتجانس المزيج.</li>
-                    <li>يخلط دقيق اللوز مع الفستق المطحون والبيكنج باودر ثم يضاف تدريجياً إلى خليط البيض مع التقليب برفق.</li>
-                    <li>يصب الخليط في الصينية ويخبز حتى ينضج الكيك ويخرج عود الخشب نظيفاً من الوسط.</li>
-                    <li>يترك الكيك ليبرد تماماً ثم يغطى بطبقة من كريمة الخفق المخفوقة ويزين بحبات الفستق.</li>
+                    <li>يُخفق البيض مع السكر حتى يصبح الخليط فاتحاً.</li>
+                    <li>يُضاف الحليب والزيت والفانيليا ويُخلط جيداً.</li>
+                    <li>يُضاف الدقيق تدريجياً حتى يتكون خليط متجانس.</li>
+                    <li>يُصب في قالب ويُخبز حتى ينضج الكيك.</li>
                 </ol>
                 <div class="recipe-footer">
-                    <span>زمن التحضير: 70 دقيقة</span>
-                    <span>يكفي لـ 8 أشخاص</span>
+                    <span>الوقت: 50 دقيقة</span>
+                    <span>8 حصص</span>
                 </div>
                 <div class="recipe-admin-tools">
                     <button onclick="loadRecipeIntoForm('recipe6')">تعديل</button>
@@ -793,36 +699,32 @@ nav a:hover {
 
         <article class="recipe-card" id="recipe7">
             <div class="recipe-card-header">
-                <img src="images/smoked_salmon_canapes.jpg" alt="لقيمات السلمون المدخن بالأفوكادو">
+                <img src="https://source.unsplash.com/600x400/?fish,lemon" alt="سمك بالليمون">
                 <div class="recipe-badge">وصفة 7</div>
             </div>
             <div class="recipe-body">
-                <h3 class="recipe-title">لقيمات السلمون المدخن بالأفوكادو</h3>
-                <div class="recipe-meta">مقبلات صغيرة للحفلات</div>
-                <p class="recipe-description">شرائح خبز صغيرة مغطاة بكريمة الأفوكادو وقطع السلمون المدخن، تقدم كلقمة فاخرة في المناسبات.</p>
+                <h3 class="recipe-title">سمك مشوي بالليمون</h3>
+                <div class="recipe-meta">طبق بحري بسيط</div>
+                <p class="recipe-description">سمك كامل متبل بالليمون والأعشاب ومشوي في الفرن.</p>
                 <div class="recipe-subheading">المكوّنات:</div>
                 <ul class="recipe-ingredients">
-                    <li>شرائح خبز باغيت رفيعة محمصة</li>
-                    <li>سلمون مدخن مقطع شرائح صغيرة</li>
-                    <li>لب أفوكادو ناضج مهروس</li>
-                    <li>عصير ليمون أخضر طازج</li>
-                    <li>شبت طازج مفروم ناعماً</li>
-                    <li>فلفل وردي مجروش</li>
-                    <li>جبن ماسكاربوني ناعم</li>
-                    <li>شرائح خيار رفيعة للتزيين</li>
+                    <li>سمكة كاملة منظفة</li>
+                    <li>شرائح ليمون رفيعة</li>
+                    <li>كزبرة خضراء مفرومة</li>
+                    <li>كمون مطحون بسيط</li>
+                    <li>زيت زيتون خفيف</li>
+                    <li>ثوم مهروس خفيف النكهة</li>
                 </ul>
                 <div class="recipe-subheading">خطوات التحضير:</div>
                 <ol class="recipe-steps">
-                    <li>يخلط لب الأفوكادو المهروس مع عصير الليمون الأخضر والشبت حتى يتكون مزيج كريمي.</li>
-                    <li>يضاف جبن الماسكاربوني إلى خليط الأفوكادو ويقلب حتى يصبح ناعماً ومتجانساً.</li>
-                    <li>تدهن شرائح الباغيت المحمصة بطبقة من خليط الأفوكادو والجبن.</li>
-                    <li>توضع قطعة من السلمون المدخن فوق كل شريحة خبز.</li>
-                    <li>تزين كل لقمة بشرائح الخيار الرفيعة ويرش الفلفل الوردي المجروش على الوجه.</li>
-                    <li>ترتب اللقيمات في طبق تقديم أنيق وتقدم مباشرة.</li>
+                    <li>تُتبل السمكة بالثوم والكمون والكزبرة.</li>
+                    <li>توضع شرائح الليمون داخل السمكة وفوقها.</li>
+                    <li>تُرش بزيت الزيتون وتُخبز حتى تنضج.</li>
+                    <li>تُقدم مع أرز أو سلطة.</li>
                 </ol>
                 <div class="recipe-footer">
-                    <span>زمن التحضير: 25 دقيقة</span>
-                    <span>يكفي لـ 6 أشخاص</span>
+                    <span>الوقت: 40 دقيقة</span>
+                    <span>3 حصص</span>
                 </div>
                 <div class="recipe-admin-tools">
                     <button onclick="loadRecipeIntoForm('recipe7')">تعديل</button>
@@ -832,35 +734,32 @@ nav a:hover {
 
         <article class="recipe-card" id="recipe8">
             <div class="recipe-card-header">
-                <img src="images/spiced_carrot_puree.jpg" alt="بيوريه الجزر بالتوابل الدافئة">
+                <img src="https://source.unsplash.com/600x400/?sandwich,cheese" alt="ساندويتش جبن">
                 <div class="recipe-badge">وصفة 8</div>
             </div>
             <div class="recipe-body">
-                <h3 class="recipe-title">بيوريه الجزر بالتوابل الدافئة</h3>
-                <div class="recipe-meta">طبق جانبي ناعم القوام</div>
-                <p class="recipe-description">جزر مطهو حتى الطراوة ثم يهرس مع التوابل الدافئة والزبدة ليقدم كبديل فاخر للبطاطس المهروسة.</p>
+                <h3 class="recipe-title">ساندويتش جبن مشوي</h3>
+                <div class="recipe-meta">وجبة خفيفة سريعة</div>
+                <p class="recipe-description">خبز محمص مع شرائح جبن ذائبة، مناسب للفطور أو العشاء الخفيف.</p>
                 <div class="recipe-subheading">المكوّنات:</div>
                 <ul class="recipe-ingredients">
-                    <li>جزر برتقالي مقطع شرائح سميكة</li>
-                    <li>مرق دجاج خفيف</li>
-                    <li>زبدة بنية مذابة</li>
-                    <li>قرفة مطحونة ناعماً</li>
-                    <li>كمون مطحون خفيف</li>
-                    <li>فلفل حلو مدخن</li>
-                    <li>كريمة حامضة للتقديم</li>
-                    <li>بذور كراوية محمصة</li>
+                    <li>شرائح خبز توست أبيض</li>
+                    <li>جبن شرائح بسيط</li>
+                    <li>زبدة طرية للدهن</li>
+                    <li>فلفل أسود خفيف</li>
+                    <li>خردل أصفر ناعم</li>
+                    <li>شرائح طماطم رفيعة</li>
                 </ul>
                 <div class="recipe-subheading">خطوات التحضير:</div>
                 <ol class="recipe-steps">
-                    <li>يوضع الجزر المقطع في قدر ويغطى بمرق الدجاج ثم يطهى حتى يصبح طرياً جداً.</li>
-                    <li>يصفى الجزر من المرق مع الاحتفاظ بالقليل منه جانباً.</li>
-                    <li>يهرس الجزر في الخلاط مع الزبدة البنية والقرفة والكمون والفلفل الحلو حتى يصبح ناعماً.</li>
-                    <li>يضاف قليل من مرق السلق إذا لزم الأمر لضبط القوام.</li>
-                    <li>يسكب البيوريه في طبق تقديم ويزين بملعقة من الكريمة الحامضة وبذور الكراوية المحمصة.</li>
+                    <li>تُدهن شرائح الخبز بالزبدة من الخارج.</li>
+                    <li>توضع شرائح الجبن والطماطم داخل الساندويتش.</li>
+                    <li>يُضاف القليل من الخردل والفلفل.</li>
+                    <li>يُشوى الساندويتش في مقلاة حتى يذوب الجبن.</li>
                 </ol>
                 <div class="recipe-footer">
-                    <span>زمن التحضير: 35 دقيقة</span>
-                    <span>يكفي لـ 4 أشخاص</span>
+                    <span>الوقت: 15 دقيقة</span>
+                    <span>2 حصة</span>
                 </div>
                 <div class="recipe-admin-tools">
                     <button onclick="loadRecipeIntoForm('recipe8')">تعديل</button>
@@ -870,36 +769,32 @@ nav a:hover {
 
         <article class="recipe-card" id="recipe9">
             <div class="recipe-card-header">
-                <img src="images/pear_bluecheese_tart.jpg" alt="تارت الكمثرى بالجبن الأزرق">
+                <img src="https://source.unsplash.com/600x400/?omelette,eggs" alt="عجة بيض">
                 <div class="recipe-badge">وصفة 9</div>
             </div>
             <div class="recipe-body">
-                <h3 class="recipe-title">تارت الكمثرى بالجبن الأزرق</h3>
-                <div class="recipe-meta">مزيج حلو ومالح راقٍ</div>
-                <p class="recipe-description">عجينة تارت مقرمشة مغطاة بشرائح الكمثرى الناضجة وقطع الجبن الأزرق مع رشة من العسل لإبراز النكهات.</p>
+                <h3 class="recipe-title">عجة البيض بالخضار</h3>
+                <div class="recipe-meta">فطور بسيط ومغذي</div>
+                <p class="recipe-description">بيض مخفوق مع خضار مقطعة، يُطهى في مقلاة حتى يتماسك.</p>
                 <div class="recipe-subheading">المكوّنات:</div>
                 <ul class="recipe-ingredients">
-                    <li>عجينة تارت جاهزة غير محلاة</li>
-                    <li>كمثرى ناضجة مقطعة شرائح رفيعة</li>
-                    <li>جبن أزرق مفتت</li>
-                    <li>جوز بيكان محمص</li>
-                    <li>عسل زهور برية</li>
-                    <li>زعتر بري طازج</li>
-                    <li>صفار بيض لدهن العجينة</li>
-                    <li>طحين ذرة لرش القاعدة</li>
+                    <li>بيض طازج مخفوق</li>
+                    <li>فلفل أحمر حلو مكعبات</li>
+                    <li>بصل أخضر مقطع شرائح</li>
+                    <li>جبن مبشور بسيط</li>
+                    <li>زيت نباتي خفيف للقلي</li>
+                    <li>فلفل أبيض خفيف النكهة</li>
                 </ul>
                 <div class="recipe-subheading">خطوات التحضير:</div>
                 <ol class="recipe-steps">
-                    <li>تفرد عجينة التارت في قالب مناسب وتثقب بالشوكة ثم ترش بطبقة خفيفة من طحين الذرة.</li>
-                    <li>ترتب شرائح الكمثرى على قاعدة العجينة بشكل متداخل.</li>
-                    <li>ينثر الجبن الأزرق المفتت فوق الكمثرى بالتساوي.</li>
-                    <li>يضاف جوز البيكان المحمص والزعتر البري على الوجه.</li>
-                    <li>يدهن حواف العجينة بصفار البيض وتخبز في فرن ساخن حتى تتحمر القاعدة وتنضج الكمثرى.</li>
-                    <li>بعد خروج التارت من الفرن، يسكب عسل زهور البرية على السطح قبل التقديم.</li>
+                    <li>يُقلى الفلفل والبصل في الزيت قليلاً.</li>
+                    <li>يُضاف البيض المخفوق فوق الخضار.</li>
+                    <li>يُرش الجبن المبشور والفلفل الأبيض.</li>
+                    <li>يُطهى حتى تتماسك العجة وتُقدم ساخنة.</li>
                 </ol>
                 <div class="recipe-footer">
-                    <span>زمن التحضير: 50 دقيقة</span>
-                    <span>يكفي لـ 6 أشخاص</span>
+                    <span>الوقت: 20 دقيقة</span>
+                    <span>2 حصة</span>
                 </div>
                 <div class="recipe-admin-tools">
                     <button onclick="loadRecipeIntoForm('recipe9')">تعديل</button>
@@ -909,36 +804,32 @@ nav a:hover {
 
         <article class="recipe-card" id="recipe10">
             <div class="recipe-card-header">
-                <img src="images/moroccan_spiced_quinoa.jpg" alt="كينوا بالتوابل المغربية والخضار">
+                <img src="https://source.unsplash.com/600x400/?lentil,soup" alt="عدس">
                 <div class="recipe-badge">وصفة 10</div>
             </div>
             <div class="recipe-body">
-                <h3 class="recipe-title">كينوا بالتوابل المغربية والخضار</h3>
-                <div class="recipe-meta">طبق صحي غني بالألياف</div>
-                <p class="recipe-description">حبوب الكينوا المطهوة مع خليط من الخضار الموسمية والتوابل المغربية، تقدم كطبق رئيسي نباتي أو طبق جانبي فاخر.</p>
+                <h3 class="recipe-title">شوربة العدس الصفراء</h3>
+                <div class="recipe-meta">حساء دافئ وبسيط</div>
+                <p class="recipe-description">عدس أصفر مطهو مع بصل وجزر، يُهرس جزئياً للحصول على قوام ناعم.</p>
                 <div class="recipe-subheading">المكوّنات:</div>
                 <ul class="recipe-ingredients">
-                    <li>حبوب كينوا بيضاء مغسولة</li>
-                    <li>مرق خضار معطر</li>
-                    <li>كوسة خضراء مقطعة مكعبات صغيرة</li>
-                    <li>فلفل أصفر حلو مقطع شرائح</li>
-                    <li>حمص مسلوق جاهز</li>
-                    <li>بهارات رأس الحانوت المغربية</li>
-                    <li>زيت أركان غذائي</li>
-                    <li>بصل أحمر مقطع شرائح رفيعة</li>
+                    <li>عدس أصفر مغسول</li>
+                    <li>بصل أبيض مقطع مكعبات</li>
+                    <li>جزر مبشور ناعم</li>
+                    <li>ماء ساخن للطهي</li>
+                    <li>كمون مطحون بسيط</li>
+                    <li>زيت نباتي خفيف للطبخ</li>
                 </ul>
                 <div class="recipe-subheading">خطوات التحضير:</div>
                 <ol class="recipe-steps">
-                    <li>تطهى الكينوا في مرق الخضار المعطر حتى تنضج وتصبح حباتها منفوشة.</li>
-                    <li>في مقلاة واسعة، يسخن زيت الأركان ويضاف البصل الأحمر ويقلب حتى يلين.</li>
-                    <li>تضاف الكوسة والفلفل الأصفر وتقلب حتى تنضج الخضار مع بقاء بعض القرمشة.</li>
-                    <li>يضاف الحمص المسلوق وبهارات رأس الحانوت ويقلب الخليط جيداً.</li>
-                    <li>تضاف الكينوا المطهوة إلى المقلاة وتقلب برفق حتى تتوزع الخضار بالتساوي.</li>
-                    <li>يقدم الطبق دافئاً في وعاء عميق مع رشة إضافية من زيت الأركان على الوجه.</li>
+                    <li>يُقلى البصل والجزر في الزيت قليلاً.</li>
+                    <li>يُضاف العدس والماء ويُترك حتى ينضج العدس.</li>
+                    <li>يُهرس جزء من الشوربة للحصول على قوام متماسك.</li>
+                    <li>يُضاف الكمون ويُقدم الحساء ساخناً.</li>
                 </ol>
                 <div class="recipe-footer">
-                    <span>زمن التحضير: 40 دقيقة</span>
-                    <span>يكفي لـ 4 أشخاص</span>
+                    <span>الوقت: 35 دقيقة</span>
+                    <span>4 حصص</span>
                 </div>
                 <div class="recipe-admin-tools">
                     <button onclick="loadRecipeIntoForm('recipe10')">تعديل</button>
@@ -948,36 +839,32 @@ nav a:hover {
 
         <article class="recipe-card" id="recipe11">
             <div class="recipe-card-header">
-                <img src="images/vanilla_panna_cotta_berries.jpg" alt="باناكوتا الفانيليا مع التوت">
+                <img src="https://source.unsplash.com/600x400/?rice,milk" alt="أرز بالحليب">
                 <div class="recipe-badge">وصفة 11</div>
             </div>
             <div class="recipe-body">
-                <h3 class="recipe-title">باناكوتا الفانيليا مع التوت</h3>
-                <div class="recipe-meta">حلوى باردة ناعمة القوام</div>
-                <p class="recipe-description">كريمة مطهوة بنكهة الفانيليا الطبيعية، مبردة حتى التماسك وتقدم مع صلصة التوت الأحمر الطازج.</p>
+                <h3 class="recipe-title">أرز بالحليب المنزلي</h3>
+                <div class="recipe-meta">حلوى عربية بسيطة</div>
+                <p class="recipe-description">أرز مطهو في الحليب مع السكر، يُقدم دافئاً أو بارداً.</p>
                 <div class="recipe-subheading">المكوّنات:</div>
                 <ul class="recipe-ingredients">
-                    <li>كريمة سائلة كاملة الدسم</li>
-                    <li>حليب كامل الدسم</li>
-                    <li>سكر بودرة ناعم</li>
-                    <li>عيدان فانيليا طبيعية مشقوقة</li>
-                    <li>جيلاتين بودرة مذاب في ماء بارد</li>
-                    <li>توت أحمر طازج مشكل</li>
-                    <li>سكر بني لتحضير صلصة التوت</li>
-                    <li>عصير ليمون أصفر طازج</li>
+                    <li>أرز قصير الحبة مغسول</li>
+                    <li>حليب سائل كامل الدسم</li>
+                    <li>سكر أبيض بسيط</li>
+                    <li>ماء زهر خفيف</li>
+                    <li>قرفة مطحونة للتزيين</li>
+                    <li>فستق مجروش للتقديم</li>
                 </ul>
                 <div class="recipe-subheading">خطوات التحضير:</div>
                 <ol class="recipe-steps">
-                    <li>تسخن الكريمة مع الحليب والسكر في قدر على نار هادئة دون أن تغلي.</li>
-                    <li>تضاف حبوب الفانيليا المستخرجة من العيدان مع العيدان نفسها إلى الخليط وتترك لتطلق نكهتها.</li>
-                    <li>يذاب الجيلاتين في القليل من الماء البارد ثم يضاف إلى خليط الكريمة الساخن مع التحريك حتى يذوب تماماً.</li>
-                    <li>يصفى الخليط لإزالة العيدان ثم يسكب في قوالب فردية ويبرد في الثلاجة حتى يتماسك.</li>
-                    <li>لتحضير صلصة التوت، يطهى التوت مع السكر البني وعصير الليمون حتى يتكاثف قليلاً ثم يبرد.</li>
-                    <li>تقلب الباناكوتا في أطباق التقديم وتزين بصلصة التوت على الوجه.</li>
+                    <li>يُطهى الأرز في كمية من الماء حتى يلين.</li>
+                    <li>يُضاف الحليب والسكر ويُترك حتى يتكاثف.</li>
+                    <li>يُضاف ماء الزهر في النهاية ويُقلب.</li>
+                    <li>يُقدم في أطباق ويُزين بالقرفة والفستق.</li>
                 </ol>
                 <div class="recipe-footer">
-                    <span>زمن التحضير: 20 دقيقة + تبريد</span>
-                    <span>يكفي لـ 6 أشخاص</span>
+                    <span>الوقت: 40 دقيقة</span>
+                    <span>5 حصص</span>
                 </div>
                 <div class="recipe-admin-tools">
                     <button onclick="loadRecipeIntoForm('recipe11')">تعديل</button>
@@ -987,36 +874,32 @@ nav a:hover {
 
         <article class="recipe-card" id="recipe12">
             <div class="recipe-card-header">
-                <img src="images/spinach_feta_pastries.jpg" alt="فطائر السبانخ بالجبن الأبيض">
+                <img src="https://source.unsplash.com/600x400/?salad,fruit" alt="سلطة فواكه">
                 <div class="recipe-badge">وصفة 12</div>
             </div>
             <div class="recipe-body">
-                <h3 class="recipe-title">فطائر السبانخ بالجبن الأبيض</h3>
-                <div class="recipe-meta">مخبوزات خفيفة للضيافة</div>
-                <p class="recipe-description">عجينة رقيقة محشوة بخليط السبانخ الطازج والجبن الأبيض، مخبوزة حتى تصبح ذهبية ومقرمشة.</p>
+                <h3 class="recipe-title">سلطة الفواكه بالعسل</h3>
+                <div class="recipe-meta">حلوى خفيفة ومنعشة</div>
+                <p class="recipe-description">قطع فواكه متنوعة مع عسل وعصير برتقال بسيط.</p>
                 <div class="recipe-subheading">المكوّنات:</div>
                 <ul class="recipe-ingredients">
-                    <li>عجينة فيلو رقيقة</li>
-                    <li>سبانخ طازجة مفرومة خشناً</li>
-                    <li>جبن فيتا أبيض مفتت</li>
-                    <li>بصل أخضر مقطع شرائح رفيعة</li>
-                    <li>بيض مخفوق للحشو</li>
-                    <li>زيت زيتون خفيف لدهن العجينة</li>
-                    <li>سمسم أبيض للتزيين</li>
-                    <li>فلفل أحمر مجفف مطحون</li>
+                    <li>تفاح أحمر مقطع مكعبات</li>
+                    <li>موز شرائح رفيعة</li>
+                    <li>عنب أخضر بدون بذور</li>
+                    <li>عسل نحل طبيعي خفيف</li>
+                    <li>عصير برتقال طازج</li>
+                    <li>جوز مجروش بسيط</li>
                 </ul>
                 <div class="recipe-subheading">خطوات التحضير:</div>
                 <ol class="recipe-steps">
-                    <li>يخلط السبانخ المفروم مع الجبن الفيتا والبصل الأخضر والفلفل الأحمر المجفف.</li>
-                    <li>يضاف البيض المخفوق إلى الخليط ويقلب حتى يتجانس الحشو.</li>
-                    <li>تفرد طبقات من عجينة الفيلو وتدهن بزيت الزيتون ثم تقطع إلى مستطيلات.</li>
-                    <li>يوضع مقدار من الحشو في طرف كل مستطيل ثم يلف على شكل مثلثات.</li>
-                    <li>ترص الفطائر في صينية خبز وتدهن بالزيت ويرش فوقها السمسم الأبيض.</li>
-                    <li>تخبز في فرن ساخن حتى تصبح ذهبية ومقرمشة.</li>
+                    <li>تُخلط قطع الفواكه في وعاء.</li>
+                    <li>يُضاف العسل وعصير البرتقال ويُقلب برفق.</li>
+                    <li>يُرش الجوز المجروش على الوجه.</li>
+                    <li>تُقدم السلطة مباشرة أو بعد تبريدها.</li>
                 </ol>
                 <div class="recipe-footer">
-                    <span>زمن التحضير: 45 دقيقة</span>
-                    <span>يكفي لـ 5 أشخاص</span>
+                    <span>الوقت: 15 دقيقة</span>
+                    <span>4 حصص</span>
                 </div>
                 <div class="recipe-admin-tools">
                     <button onclick="loadRecipeIntoForm('recipe12')">تعديل</button>
@@ -1026,36 +909,32 @@ nav a:hover {
 
         <article class="recipe-card" id="recipe13">
             <div class="recipe-card-header">
-                <img src="images/roasted_pumpkin_risotto.jpg" alt="ريزوتو القرع المشوي">
+                <img src="https://source.unsplash.com/600x400/?potato,roast" alt="بطاطس مشوية">
                 <div class="recipe-badge">وصفة 13</div>
             </div>
             <div class="recipe-body">
-                <h3 class="recipe-title">ريزوتو القرع المشوي</h3>
-                <div class="recipe-meta">طبق أرز كريمي بنكهة الخريف</div>
-                <p class="recipe-description">أرز إيطالي مطهو ببطء مع مرق ساخن وقطع القرع المشوي، يقدم بقوام كريمي غني.</p>
+                <h3 class="recipe-title">بطاطس مشوية بالأعشاب</h3>
+                <div class="recipe-meta">طبق جانبي بسيط</div>
+                <p class="recipe-description">بطاطس مقطعة ومتبلة بالأعشاب ومشوية في الفرن.</p>
                 <div class="recipe-subheading">المكوّنات:</div>
                 <ul class="recipe-ingredients">
-                    <li>أرز أربوريو خاص بالريزوتو</li>
-                    <li>قرع عسل مقطع مكعبات ومشوي</li>
-                    <li>مرق دجاج ساخن</li>
-                    <li>بصل مفروم ناعماً</li>
-                    <li>زيت زيتون بكر</li>
-                    <li>جبن بارميزان مبشور طازج</li>
-                    <li>نبيذ أبيض للطهي</li>
-                    <li>فلفل أسود خشن</li>
+                    <li>بطاطس صفراء مقطعة مكعبات</li>
+                    <li>إكليل جبل مجفف</li>
+                    <li>بابريكا بسيطة</li>
+                    <li>زيت زيتون خفيف</li>
+                    <li>ثوم مفروم ناعم</li>
+                    <li>فلفل أسود متوسط الطحن</li>
                 </ul>
                 <div class="recipe-subheading">خطوات التحضير:</div>
                 <ol class="recipe-steps">
-                    <li>يسخن زيت الزيتون في قدر ويضاف البصل المفروم ويقلب حتى يلين.</li>
-                    <li>يضاف أرز الأربوريو ويقلب حتى تتغلف الحبات بالزيت وتصبح شفافة قليلاً.</li>
-                    <li>يضاف النبيذ الأبيض ويترك حتى يتبخر مع التحريك المستمر.</li>
-                    <li>يضاف مرق الدجاج الساخن تدريجياً مع التحريك حتى يمتص الأرز السائل شيئاً فشيئاً.</li>
-                    <li>تضاف مكعبات القرع المشوي في منتصف عملية الطهي وتستمر إضافة المرق حتى ينضج الأرز.</li>
-                    <li>يطفأ النار ويضاف جبن البارميزان المبشور والفلفل الأسود ويقلب حتى يصبح القوام كريمي.</li>
+                    <li>تُخلط البطاطس مع الزيت والثوم والأعشاب.</li>
+                    <li>تُرتب في صينية وتُرش بالبابريكا والفلفل.</li>
+                    <li>تُخبز حتى تتحمر وتنضج من الداخل.</li>
+                    <li>تُقدم ساخنة بجانب اللحم أو الدجاج.</li>
                 </ol>
                 <div class="recipe-footer">
-                    <span>زمن التحضير: 50 دقيقة</span>
-                    <span>يكفي لـ 4 أشخاص</span>
+                    <span>الوقت: 40 دقيقة</span>
+                    <span>4 حصص</span>
                 </div>
                 <div class="recipe-admin-tools">
                     <button onclick="loadRecipeIntoForm('recipe13')">تعديل</button>
@@ -1065,35 +944,32 @@ nav a:hover {
 
         <article class="recipe-card" id="recipe14">
             <div class="recipe-card-header">
-                <img src="images/grilled_eggplant_yogurt.jpg" alt="باذنجان مشوي بصلصة الزبادي">
+                <img src="https://source.unsplash.com/600x400/?hummus,dip" alt="حمص">
                 <div class="recipe-badge">وصفة 14</div>
             </div>
             <div class="recipe-body">
-                <h3 class="recipe-title">باذنجان مشوي بصلصة الزبادي</h3>
-                <div class="recipe-meta">طبق جانبي شرقي خفيف</div>
-                <p class="recipe-description">شرائح باذنجان مشوية حتى تصبح طرية ومدخنة، تقدم مع صلصة الزبادي بالثوم والأعشاب.</p>
+                <h3 class="recipe-title">حمص بالطحينة البسيط</h3>
+                <div class="recipe-meta">مقبلات عربية كلاسيكية</div>
+                <p class="recipe-description">حمص مطحون مع طحينة وعصير ليمون وزيت زيتون.</p>
                 <div class="recipe-subheading">المكوّنات:</div>
                 <ul class="recipe-ingredients">
-                    <li>باذنجان رومي مقطع شرائح طولية</li>
-                    <li>زبادي يوناني كثيف</li>
-                    <li>ثوم مفروم ناعماً</li>
-                    <li>نعناع طازج مفروم</li>
-                    <li>عصير ليمون مركز</li>
-                    <li>زيت سمسم محمص</li>
-                    <li>حبوب رمان طازجة</li>
-                    <li>فلفل أسود ناعم</li>
+                    <li>حمص مسلوق جاهز</li>
+                    <li>طحينة سمسم ناعمة</li>
+                    <li>عصير ليمون طازج</li>
+                    <li>ماء بارد للتخفيف</li>
+                    <li>زيت زيتون للتقديم</li>
+                    <li>كمون مطحون خفيف</li>
                 </ul>
                 <div class="recipe-subheading">خطوات التحضير:</div>
                 <ol class="recipe-steps">
-                    <li>تدهن شرائح الباذنجان بزيت السمسم المحمص وتشوى على شواية ساخنة حتى تطرى وتتحمر.</li>
-                    <li>يخلط الزبادي اليوناني مع الثوم المفروم والنعناع وعصير الليمون والفلفل الأسود.</li>
-                    <li>ترتب شرائح الباذنجان المشوي في طبق التقديم.</li>
-                    <li>تسكب صلصة الزبادي فوق الباذنجان بشكل متساوٍ.</li>
-                    <li>تزين حبات الرمان سطح الطبق وتقدم مباشرة.</li>
+                    <li>يُطحن الحمص مع الطحينة وعصير الليمون.</li>
+                    <li>يُضاف الماء تدريجياً حتى يصبح القوام ناعماً.</li>
+                    <li>يُتبل بالكمون ويُسكب في طبق.</li>
+                    <li>يُزين بزيت الزيتون ويُقدم مع الخبز.</li>
                 </ol>
                 <div class="recipe-footer">
-                    <span>زمن التحضير: 30 دقيقة</span>
-                    <span>يكفي لـ 3 أشخاص</span>
+                    <span>الوقت: 20 دقيقة</span>
+                    <span>3 حصص</span>
                 </div>
                 <div class="recipe-admin-tools">
                     <button onclick="loadRecipeIntoForm('recipe14')">تعديل</button>
@@ -1103,37 +979,32 @@ nav a:hover {
 
         <article class="recipe-card" id="recipe15">
             <div class="recipe-card-header">
-                <img src="images/chocolate_hazelnut_mousse.jpg" alt="موس الشوكولاتة بالبندق المحمص">
+                <img src="https://source.unsplash.com/600x400/?tea,mint" alt="شاي بالنعناع">
                 <div class="recipe-badge">وصفة 15</div>
             </div>
             <div class="recipe-body">
-                <h3 class="recipe-title">موس الشوكولاتة بالبندق المحمص</h3>
-                <div class="recipe-meta">حلوى فردية غنية</div>
-                <p class="recipe-description">موس شوكولاتة داكنة بقوام هوائي، مع قطع من البندق المحمص لمذاق مقرمش متوازن.</p>
+                <h3 class="recipe-title">شاي بالنعناع الطازج</h3>
+                <div class="recipe-meta">مشروب ساخن بسيط</div>
+                <p class="recipe-description">شاي أسود مخمر مع أوراق نعناع طازجة.</p>
                 <div class="recipe-subheading">المكوّنات:</div>
                 <ul class="recipe-ingredients">
-                    <li>شوكولاتة داكنة عالية الكاكاو</li>
-                    <li>كريمة خفق باردة</li>
-                    <li>صفار بيض طازج</li>
-                    <li>سكر ناعم للحلويات</li>
-                    <li>بندق محمص مجروش</li>
-                    <li>فانيليا سائلة نقية</li>
-                    <li>رشة كاكاو خام للتزيين</li>
-                    <li>رقائق شوكولاتة صغيرة</li>
+                    <li>شاي أسود أوراق</li>
+                    <li>ماء مغلي ساخن</li>
+                    <li>أوراق نعناع خضراء</li>
+                    <li>سكر حسب الرغبة</li>
+                    <li>شرائح ليمون رفيعة</li>
+                    <li>كوب زجاجي حراري</li>
                 </ul>
                 <div class="recipe-subheading">خطوات التحضير:</div>
                 <ol class="recipe-steps">
-                    <li>تذاب الشوكولاتة الداكنة في حمام مائي حتى تصبح ناعمة.</li>
-                    <li>يخفق صفار البيض مع السكر حتى يصبح فاتح اللون.</li>
-                    <li>تضاف الشوكولاتة المذابة والفانيليا إلى خليط الصفار وتقلب جيداً.</li>
-                    <li>تخفق كريمة الخفق حتى تتماسك ثم تطوى برفق في خليط الشوكولاتة.</li>
-                    <li>يضاف البندق المحمص المجروش ويقلب بخفة.</li>
-                    <li>يوزع الموس في كؤوس فردية ويبرد في الثلاجة حتى يتماسك.</li>
-                    <li>قبل التقديم، يزين برقائق الشوكولاتة ورشة من الكاكاو الخام.</li>
+                    <li>يُنقع الشاي في الماء المغلي لبضع دقائق.</li>
+                    <li>تُضاف أوراق النعناع إلى الكوب.</li>
+                    <li>يُصفى الشاي فوق النعناع.</li>
+                    <li>يُضاف السكر والليمون ويُقدم ساخناً.</li>
                 </ol>
                 <div class="recipe-footer">
-                    <span>زمن التحضير: 25 دقيقة + تبريد</span>
-                    <span>يكفي لـ 5 أشخاص</span>
+                    <span>الوقت: 10 دقائق</span>
+                    <span>2 حصة</span>
                 </div>
                 <div class="recipe-admin-tools">
                     <button onclick="loadRecipeIntoForm('recipe15')">تعديل</button>
@@ -1143,35 +1014,32 @@ nav a:hover {
 
         <article class="recipe-card" id="recipe16">
             <div class="recipe-card-header">
-                <img src="images/green_herb_couscous.jpg" alt="كسكس بالأعشاب الخضراء والليمون">
+                <img src="https://source.unsplash.com/600x400/?yogurt,cucumber" alt="لبنة وخيار">
                 <div class="recipe-badge">وصفة 16</div>
             </div>
             <div class="recipe-body">
-                <h3 class="recipe-title">كسكس بالأعشاب الخضراء والليمون</h3>
-                <div class="recipe-meta">طبق جانبي عطري وخفيف</div>
-                <p class="recipe-description">حبيبات الكسكس المطهوة على البخار مع خليط من الأعشاب الخضراء وعصير الليمون، تقدم بجانب الأطباق الرئيسية.</p>
+                <h3 class="recipe-title">لبنة بالخيار المجروش</h3>
+                <div class="recipe-meta">مقبلات باردة بسيطة</div>
+                <p class="recipe-description">لبنة كثيفة مع خيار مبشور وتتبيلة خفيفة.</p>
                 <div class="recipe-subheading">المكوّنات:</div>
                 <ul class="recipe-ingredients">
-                    <li>كسكس متوسط الحبة</li>
-                    <li>ماء مغلي مملح قليلاً</li>
-                    <li>بقدونس طازج مفروم</li>
-                    <li>كزبرة طازجة مفرومة</li>
-                    <li>شبت طازج مفروم</li>
-                    <li>قشر ليمون مبشور خشناً</li>
-                    <li>زيت زيتون بكر فاكهي</li>
-                    <li>فلفل ليموني مطحون</li>
+                    <li>لبنة سميكة القوام</li>
+                    <li>خيار مبشور ناعم</li>
+                    <li>نعناع مجفف بسيط</li>
+                    <li>زيت زيتون خفيف للتزيين</li>
+                    <li>فلفل أسود خفيف</li>
+                    <li>خبز عربي للتقديم</li>
                 </ul>
                 <div class="recipe-subheading">خطوات التحضير:</div>
                 <ol class="recipe-steps">
-                    <li>يوضع الكسكس في وعاء عميق ويسكب فوقه الماء المغلي ويغطى حتى يمتص السائل.</li>
-                    <li>يفرك الكسكس بالشوكة لتفكيك الحبات.</li>
-                    <li>يضاف البقدونس والكزبرة والشبت وقشر الليمون إلى الكسكس.</li>
-                    <li>يرش زيت الزيتون والفلفل الليموني ويقلب برفق حتى تتوزع الأعشاب.</li>
-                    <li>يقدم الكسكس دافئاً في طبق واسع.</li>
+                    <li>يُخلط الخيار المبشور مع اللبنة.</li>
+                    <li>يُضاف النعناع والفلفل ويُقلب جيداً.</li>
+                    <li>يُسكب في طبق ويُزين بزيت الزيتون.</li>
+                    <li>يُقدم مع الخبز العربي.</li>
                 </ol>
                 <div class="recipe-footer">
-                    <span>زمن التحضير: 20 دقيقة</span>
-                    <span>يكفي لـ 4 أشخاص</span>
+                    <span>الوقت: 10 دقائق</span>
+                    <span>3 حصص</span>
                 </div>
                 <div class="recipe-admin-tools">
                     <button onclick="loadRecipeIntoForm('recipe16')">تعديل</button>
@@ -1181,36 +1049,32 @@ nav a:hover {
 
         <article class="recipe-card" id="recipe17">
             <div class="recipe-card-header">
-                <img src="images/poached_pear_saffron_syrup.jpg" alt="كمثرى مسلوقة بشراب الزعفران">
+                <img src="https://source.unsplash.com/600x400/?coffee,milk" alt="قهوة بالحليب">
                 <div class="recipe-badge">وصفة 17</div>
             </div>
             <div class="recipe-body">
-                <h3 class="recipe-title">كمثرى مسلوقة بشراب الزعفران</h3>
-                <div class="recipe-meta">حلوى فاكهة دافئة</div>
-                <p class="recipe-description">حبات كمثرى مقشرة ومطهية في شراب معطر بالزعفران والحمضيات، تقدم مع القليل من الشراب المركز.</p>
+                <h3 class="recipe-title">قهوة بالحليب المنزلية</h3>
+                <div class="recipe-meta">مشروب صباحي بسيط</div>
+                <p class="recipe-description">قهوة سريعة التحضير مع حليب ساخن وسكر.</p>
                 <div class="recipe-subheading">المكوّنات:</div>
                 <ul class="recipe-ingredients">
-                    <li>كمثرى صلبة مقشرة مع الإبقاء على العنق</li>
-                    <li>ماء مضاف إليه سكر أبيض</li>
-                    <li>خيوط زعفران منقوعة</li>
-                    <li>قشر برتقال مقطع شرائح رفيعة</li>
-                    <li>عود فانيليا كامل</li>
-                    <li>عصير جريب فروت طازج</li>
-                    <li>حبات قرنفل كاملة</li>
-                    <li>لوز شرائح للتزيين</li>
+                    <li>قهوة سريعة التحضير</li>
+                    <li>حليب سائل ساخن</li>
+                    <li>ماء مغلي بسيط</li>
+                    <li>سكر أبيض أو بني</li>
+                    <li>كوب خزفي متوسط</li>
+                    <li>ملعقة صغيرة للتقليب</li>
                 </ul>
                 <div class="recipe-subheading">خطوات التحضير:</div>
                 <ol class="recipe-steps">
-                    <li>يوضع الماء مع السكر في قدر ويضاف قشر البرتقال وعود الفانيليا وخيوط الزعفران وحبات القرنفل.</li>
-                    <li>يترك الشراب ليغلي برفق حتى تندمج النكهات.</li>
-                    <li>تضاف حبات الكمثرى وتقلب برفق ثم يغطى القدر وتطهى حتى تصبح طرية.</li>
-                    <li>يضاف عصير الجريب فروت في نهاية الطهي ويترك لبضع دقائق إضافية.</li>
-                    <li>ترفع الكمثرى من الشراب وتوضع في أطباق التقديم.</li>
-                    <li>يترك الشراب ليغلي حتى يتكاثف قليلاً ثم يسكب فوق الكمثرى ويزين باللوز الشرائح.</li>
+                    <li>توضع القهوة في الكوب.</li>
+                    <li>يُضاف القليل من الماء المغلي ويُقلب.</li>
+                    <li>يُضاف الحليب الساخن والسكر.</li>
+                    <li>يُقلب جيداً ويُقدم فوراً.</li>
                 </ol>
                 <div class="recipe-footer">
-                    <span>زمن التحضير: 45 دقيقة</span>
-                    <span>يكفي لـ 4 أشخاص</span>
+                    <span>الوقت: 5 دقائق</span>
+                    <span>1 حصة</span>
                 </div>
                 <div class="recipe-admin-tools">
                     <button onclick="loadRecipeIntoForm('recipe17')">تعديل</button>
@@ -1220,36 +1084,32 @@ nav a:hover {
 
         <article class="recipe-card" id="recipe18">
             <div class="recipe-card-header">
-                <img src="images/chili_lime_chicken_wings.jpg" alt="أجنحة الدجاج بالليمون الحار">
+                <img src="https://source.unsplash.com/600x400/?pizza,cheese" alt="بيتزا">
                 <div class="recipe-badge">وصفة 18</div>
             </div>
             <div class="recipe-body">
-                <h3 class="recipe-title">أجنحة الدجاج بالليمون الحار</h3>
-                <div class="recipe-meta">طبق مشاركات حار ولاذع</div>
-                <p class="recipe-description">أجنحة دجاج متبلة بمزيج من الليمون الحامض والفلفل الحار، مخبوزة حتى تصبح مقرمشة من الخارج.</p>
+                <h3 class="recipe-title">بيتزا الجبن المنزلية</h3>
+                <div class="recipe-meta">طبق محبب للجميع</div>
+                <p class="recipe-description">عجينة بسيطة مع صلصة طماطم وجبن مبشور.</p>
                 <div class="recipe-subheading">المكوّنات:</div>
                 <ul class="recipe-ingredients">
-                    <li>أجنحة دجاج كاملة مقطعة</li>
-                    <li>عصير ليمون حامض طازج</li>
-                    <li>قشر ليمون مبشور ناعماً</li>
-                    <li>صلصة فلفل حار سائلة</li>
-                    <li>ثوم بودرة ناعم</li>
-                    <li>بابريكا حارة</li>
-                    <li>زيت دوار الشمس</li>
-                    <li>بصل بودرة للتتبيل</li>
+                    <li>عجينة بيتزا جاهزة</li>
+                    <li>صلصة طماطم بسيطة</li>
+                    <li>جبن موزاريلا مبشور</li>
+                    <li>زيت زيتون خفيف</li>
+                    <li>زيتون أسود شرائح</li>
+                    <li>زعتر جاف بسيط</li>
                 </ul>
                 <div class="recipe-subheading">خطوات التحضير:</div>
                 <ol class="recipe-steps">
-                    <li>يخلط عصير الليمون مع قشر الليمون وصلصة الفلفل الحار وزيت دوار الشمس.</li>
-                    <li>تضاف الثوم البودرة والبابريكا الحارة والبصل البودرة إلى التتبيلة وتقلب جيداً.</li>
-                    <li>توضع أجنحة الدجاج في الوعاء وتقلب حتى تغطى بالكامل بالتتبيلة.</li>
-                    <li>تترك الأجنحة في الثلاجة لمدة ساعة على الأقل.</li>
-                    <li>ترص الأجنحة في صينية مبطنة بورق خبز وتخبز في فرن ساخن حتى تنضج وتتحمر.</li>
-                    <li>تقدم ساخنة مع شرائح ليمون إضافية.</li>
+                    <li>تُفرد العجينة في صينية.</li>
+                    <li>تُدهن بصلصة الطماطم.</li>
+                    <li>يُضاف الجبن والزيتون والزعتر.</li>
+                    <li>تُخبز حتى يذوب الجبن وتتحمر الحواف.</li>
                 </ol>
                 <div class="recipe-footer">
-                    <span>زمن التحضير: 60 دقيقة</span>
-                    <span>يكفي لـ 4 أشخاص</span>
+                    <span>الوقت: 30 دقيقة</span>
+                    <span>4 حصص</span>
                 </div>
                 <div class="recipe-admin-tools">
                     <button onclick="loadRecipeIntoForm('recipe18')">تعديل</button>
@@ -1259,35 +1119,32 @@ nav a:hover {
 
         <article class="recipe-card" id="recipe19">
             <div class="recipe-card-header">
-                <img src="images/mint_pea_puree.jpg" alt="بيوريه البازلاء بالنعناع">
+                <img src="https://source.unsplash.com/600x400/?pancake,breakfast" alt="بان كيك">
                 <div class="recipe-badge">وصفة 19</div>
             </div>
             <div class="recipe-body">
-                <h3 class="recipe-title">بيوريه البازلاء بالنعناع</h3>
-                <div class="recipe-meta">مرافق خفيف للأطباق الرئيسية</div>
-                <p class="recipe-description">بازلاء خضراء مطهوة ومهروسة مع النعناع الطازج والزبدة، تقدم كطبقة ناعمة تحت قطع اللحم أو السمك.</p>
+                <h3 class="recipe-title">بان كيك بسيط بالعسل</h3>
+                <div class="recipe-meta">فطور حلو خفيف</div>
+                <p class="recipe-description">أقراص بان كيك ناعمة تُقدم مع عسل أو مربى.</p>
                 <div class="recipe-subheading">المكوّنات:</div>
                 <ul class="recipe-ingredients">
-                    <li>بازلاء خضراء مجمدة أو طازجة</li>
-                    <li>ماء مغلي لسلق البازلاء</li>
-                    <li>نعناع طازج أوراق كاملة</li>
-                    <li>زبدة طرية</li>
-                    <li>كريمة خفيفة للطبخ</li>
-                    <li>فلفل أبيض ناعم</li>
-                    <li>ملح بحري خشن مطحون</li>
-                    <li>شرائح ليمون للتقديم</li>
+                    <li>دقيق أبيض متعدد الاستعمالات</li>
+                    <li>حليب سائل بارد</li>
+                    <li>بيض مخفوق بسيط</li>
+                    <li>بيكنج باودر بسيط</li>
+                    <li>زبدة مذابة خفيفة</li>
+                    <li>عسل نحل للتقديم</li>
                 </ul>
                 <div class="recipe-subheading">خطوات التحضير:</div>
                 <ol class="recipe-steps">
-                    <li>تسلق البازلاء في الماء المغلي حتى تنضج وتصبح طرية.</li>
-                    <li>تصفى البازلاء وتوضع في الخلاط مع الزبدة والنعناع.</li>
-                    <li>يضاف القليل من الكريمة والفلفل الأبيض والملح البحري.</li>
-                    <li>تخلط المكونات حتى يصبح القوام ناعماً.</li>
-                    <li>يسخن البيوريه قليلاً قبل التقديم ويزين بشرائح الليمون على الجانب.</li>
+                    <li>تُخلط المكونات الجافة معاً.</li>
+                    <li>يُضاف الحليب والبيض والزبدة ويُقلب حتى يتكون خليط ناعم.</li>
+                    <li>تُسكب كميات صغيرة في مقلاة ساخنة.</li>
+                    <li>تُقلب الأقراص حتى تتحمر من الجانبين وتُقدم مع العسل.</li>
                 </ol>
                 <div class="recipe-footer">
-                    <span>زمن التحضير: 25 دقيقة</span>
-                    <span>يكفي لـ 3 أشخاص</span>
+                    <span>الوقت: 25 دقيقة</span>
+                    <span>3 حصص</span>
                 </div>
                 <div class="recipe-admin-tools">
                     <button onclick="loadRecipeIntoForm('recipe19')">تعديل</button>
@@ -1297,35 +1154,32 @@ nav a:hover {
 
         <article class="recipe-card" id="recipe20">
             <div class="recipe-card-header">
-                <img src="images/iced_cardamom_coffee.jpg" alt="قهوة مثلجة بالهال والفانيليا">
+                <img src="https://source.unsplash.com/600x400/?juice,orange" alt="عصير برتقال">
                 <div class="recipe-badge">وصفة 20</div>
             </div>
             <div class="recipe-body">
-                <h3 class="recipe-title">قهوة مثلجة بالهال والفانيليا</h3>
-                <div class="recipe-meta">مشروب بارد منعش بنكهة عربية</div>
-                <p class="recipe-description">قهوة مركزة مبردة مع الحليب البارد ونكهة الهال والفانيليا، تقدم مع مكعبات الثلج في أكواب طويلة.</p>
+                <h3 class="recipe-title">عصير برتقال طازج</h3>
+                <div class="recipe-meta">مشروب بارد بسيط</div>
+                <p class="recipe-description">عصير برتقال طبيعي يُقدم بارداً في الأكواب.</p>
                 <div class="recipe-subheading">المكوّنات:</div>
                 <ul class="recipe-ingredients">
-                    <li>قهوة اسبريسو مركزة مبردة</li>
-                    <li>حليب بارد كامل الدسم</li>
-                    <li>شراب فانيليا سائل</li>
-                    <li>هال مطحون ناعم</li>
-                    <li>مكعبات ثلج شفافة</li>
-                    <li>كريمة خفق خفيفة للتزيين</li>
-                    <li>سكر سائل حسب الرغبة</li>
-                    <li>حبات هال كاملة للتزيين</li>
+                    <li>برتقال طازج كبير الحجم</li>
+                    <li>ماء بارد بسيط</li>
+                    <li>سكر حسب الرغبة</li>
+                    <li>مكعبات ثلج صغيرة</li>
+                    <li>شرائح برتقال للتزيين</li>
+                    <li>إبريق زجاجي للتقديم</li>
                 </ul>
                 <div class="recipe-subheading">خطوات التحضير:</div>
                 <ol class="recipe-steps">
-                    <li>يخلط الاسبريسو المبرد مع الحليب البارد في إبريق تقديم.</li>
-                    <li>يضاف شراب الفانيليا والسكر السائل ويقلب حتى يذوب السكر.</li>
-                    <li>يرش الهال المطحون ويقلب برفق.</li>
-                    <li>تمتلئ الأكواب بمكعبات الثلج ثم يصب خليط القهوة فوقها.</li>
-                    <li>تزين الأكواب بطبقة خفيفة من كريمة الخفق وحبات الهال الكاملة.</li>
+                    <li>يُعصر البرتقال في وعاء.</li>
+                    <li>يُضاف الماء البارد والسكر ويُقلب.</li>
+                    <li>يُسكب العصير في الإبريق مع الثلج.</li>
+                    <li>يُقدم في الأكواب ويُزين بشرائح البرتقال.</li>
                 </ol>
                 <div class="recipe-footer">
-                    <span>زمن التحضير: 15 دقيقة</span>
-                    <span>يكفي لـ 2 شخصين</span>
+                    <span>الوقت: 10 دقائق</span>
+                    <span>4 حصص</span>
                 </div>
                 <div class="recipe-admin-tools">
                     <button onclick="loadRecipeIntoForm('recipe20')">تعديل</button>
@@ -1336,157 +1190,173 @@ nav a:hover {
     </div>
 </section>
 
-<footer class="footer">
-    <div class="footer-inner">
-        <div>ساحة اللذة YUM YARD – منصة وصفات ذهبية بطابع عربي معاصر.</div>
-        <div>وضع الإدارة متاح حصراً لمالك الموقع باستخدام الرمز السري المحدد.</div>
-        <div>جميع الوصفات هنا بمكوّنات فريدة لا تتكرر بين الأطباق.</div>
+<section class="section" id="videos">
+    <h2 class="section-title">فيديوهات طبخ بسيطة</h2>
+    <p class="section-subtitle">فيديوهات عامة يمكن استبدال روابطها من خلال وضع الإدارة أو مباشرة في الكود.</p>
+    <div class="videos-grid">
+        <div class="video-card">
+            <h3>فيديو تعليمي عام 1</h3>
+            <video controls>
+                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="video-card">
+            <h3>فيديو تعليمي عام 2</h3>
+            <video controls>
+                <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="video-card">
+            <h3>فيديو تعليمي عام 3</h3>
+            <video controls>
+                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            </video>
+        </div>
     </div>
+</section>
+
+<footer class="footer">
+    <div>ساحة المذاق YUM YARD – صفحة وصفات بسيطة بتصميم كلاسيكي فاتح.</div>
+    <div>وضع الإدارة متاح فقط لصاحب الموقع باستخدام الرمز 20132021.</div>
 </footer>
 
 <script>
-let isAdmin = false;
-const ADMIN_CODE = "20132021";
+let isAdmin=false;
+const ADMIN_CODE="20132021";
 
-function activateAdmin() {
-    const input = document.getElementById("adminCodeInput");
-    const status = document.getElementById("adminStatus");
-    const form = document.getElementById("adminForm");
-    if (input.value === ADMIN_CODE) {
-        isAdmin = true;
-        status.textContent = "الحالة: وضع الإدارة مفعل";
-        status.style.borderColor = "#00e676";
-        status.style.color = "#c8ffd4";
-        form.style.display = "block";
+function activateAdmin(){
+    const input=document.getElementById("adminCodeInput");
+    const status=document.getElementById("adminStatus");
+    const form=document.getElementById("adminForm");
+    if(input.value===ADMIN_CODE){
+        isAdmin=true;
+        status.textContent="الحالة: وضع الإدارة مفعل";
+        status.style.color="#2e7d32";
+        form.style.display="block";
         showAdminTools(true);
-    } else {
-        alert("الرمز غير صحيح. هذا الوضع مخصص فقط لمالك الموقع.");
+    }else{
+        alert("الرمز غير صحيح. هذا الوضع مخصص لصاحب الموقع فقط.");
     }
 }
 
-function deactivateAdmin() {
-    isAdmin = false;
-    const status = document.getElementById("adminStatus");
-    const form = document.getElementById("adminForm");
-    status.textContent = "الحالة: مستخدم عادي";
-    status.style.borderColor = "#d4af37";
-    status.style.color = "#f5e9c9";
-    form.style.display = "none";
+function deactivateAdmin(){
+    isAdmin=false;
+    const status=document.getElementById("adminStatus");
+    const form=document.getElementById("adminForm");
+    status.textContent="الحالة: مستخدم عادي";
+    status.style.color="#555";
+    form.style.display="none";
     showAdminTools(false);
 }
 
-function showAdminTools(show) {
-    const tools = document.querySelectorAll(".recipe-admin-tools");
-    tools.forEach(function(tool) {
-        tool.style.display = show ? "flex" : "none";
+function showAdminTools(show){
+    const tools=document.querySelectorAll(".recipe-admin-tools");
+    tools.forEach(function(t){
+        t.style.display=show?"block":"none";
     });
 }
 
-function scrollToRecipes() {
-    const section = document.getElementById("recipes");
-    section.scrollIntoView({ behavior: "smooth" });
+function scrollToRecipes(){
+    const section=document.getElementById("recipes");
+    section.scrollIntoView({behavior:"smooth"});
 }
 
-function scrollToAdmin() {
-    const section = document.getElementById("admin");
-    section.scrollIntoView({ behavior: "smooth" });
+function scrollToAdmin(){
+    const section=document.getElementById("admin");
+    section.scrollIntoView({behavior:"smooth"});
 }
 
-function clearAdminForm() {
-    document.getElementById("recipeSelect").value = "";
-    document.getElementById("recipeTitleInput").value = "";
-    document.getElementById("recipeImageInput").value = "";
-    document.getElementById("recipeDescriptionInput").value = "";
-    document.getElementById("recipeIngredientsInput").value = "";
-    document.getElementById("recipeStepsInput").value = "";
+function clearAdminForm(){
+    document.getElementById("recipeSelect").value="";
+    document.getElementById("recipeTitleInput").value="";
+    document.getElementById("recipeImageInput").value="";
+    document.getElementById("recipeDescriptionInput").value="";
+    document.getElementById("recipeIngredientsInput").value="";
+    document.getElementById("recipeStepsInput").value="";
 }
 
-function loadRecipeIntoForm(recipeId) {
-    if (!isAdmin) {
+function loadRecipeIntoForm(recipeId){
+    if(!isAdmin){
         alert("لا يمكن تعديل الوصفات إلا في وضع الإدارة.");
         return;
     }
-    const select = document.getElementById("recipeSelect");
-    select.value = recipeId;
-    const card = document.getElementById(recipeId);
-    if (!card) return;
-    const title = card.querySelector(".recipe-title").textContent.trim();
-    const img = card.querySelector("img").getAttribute("src");
-    const desc = card.querySelector(".recipe-description").textContent.trim();
-    const ingredientsList = card.querySelectorAll(".recipe-ingredients li");
-    const stepsList = card.querySelectorAll(".recipe-steps li");
-    const ingredients = [];
-    const steps = [];
-    ingredientsList.forEach(function(li) {
+    const card=document.getElementById(recipeId);
+    if(!card)return;
+    document.getElementById("recipeSelect").value=recipeId;
+    const title=card.querySelector(".recipe-title").textContent.trim();
+    const img=card.querySelector("img").getAttribute("src");
+    const desc=card.querySelector(".recipe-description").textContent.trim();
+    const ingredientsList=card.querySelectorAll(".recipe-ingredients li");
+    const stepsList=card.querySelectorAll(".recipe-steps li");
+    const ingredients=[];
+    const steps=[];
+    ingredientsList.forEach(function(li){
         ingredients.push(li.textContent.trim());
     });
-    stepsList.forEach(function(li) {
+    stepsList.forEach(function(li){
         steps.push(li.textContent.trim());
     });
-    document.getElementById("recipeTitleInput").value = title;
-    document.getElementById("recipeImageInput").value = img;
-    document.getElementById("recipeDescriptionInput").value = desc;
-    document.getElementById("recipeIngredientsInput").value = ingredients.join("\n");
-    document.getElementById("recipeStepsInput").value = steps.join("\n");
+    document.getElementById("recipeTitleInput").value=title;
+    document.getElementById("recipeImageInput").value=img;
+    document.getElementById("recipeDescriptionInput").value=desc;
+    document.getElementById("recipeIngredientsInput").value=ingredients.join("\n");
+    document.getElementById("recipeStepsInput").value=steps.join("\n");
 }
 
-function updateSelectedRecipe() {
-    if (!isAdmin) {
+function updateSelectedRecipe(){
+    if(!isAdmin){
         alert("هذا الإجراء متاح فقط في وضع الإدارة.");
         return;
     }
-    const recipeId = document.getElementById("recipeSelect").value;
-    if (!recipeId) {
+    const recipeId=document.getElementById("recipeSelect").value;
+    if(!recipeId){
         alert("يرجى اختيار وصفة لتحديثها.");
         return;
     }
-    const card = document.getElementById(recipeId);
-    if (!card) {
+    const card=document.getElementById(recipeId);
+    if(!card){
         alert("لم يتم العثور على الوصفة المحددة.");
         return;
     }
-    const newTitle = document.getElementById("recipeTitleInput").value.trim();
-    const newImage = document.getElementById("recipeImageInput").value.trim();
-    const newDesc = document.getElementById("recipeDescriptionInput").value.trim();
-    const newIngredientsText = document.getElementById("recipeIngredientsInput").value.trim();
-    const newStepsText = document.getElementById("recipeStepsInput").value.trim();
-    if (newTitle) {
-        card.querySelector(".recipe-title").textContent = newTitle;
+    const newTitle=document.getElementById("recipeTitleInput").value.trim();
+    const newImage=document.getElementById("recipeImageInput").value.trim();
+    const newDesc=document.getElementById("recipeDescriptionInput").value.trim();
+    const newIngredientsText=document.getElementById("recipeIngredientsInput").value.trim();
+    const newStepsText=document.getElementById("recipeStepsInput").value.trim();
+
+    if(newTitle){
+        card.querySelector(".recipe-title").textContent=newTitle;
     }
-    if (newImage) {
-        card.querySelector("img").setAttribute("src", newImage);
+    if(newImage){
+        card.querySelector("img").setAttribute("src",newImage);
     }
-    if (newDesc) {
-        card.querySelector(".recipe-description").textContent = newDesc;
+    if(newDesc){
+        card.querySelector(".recipe-description").textContent=newDesc;
     }
-    if (newIngredientsText) {
-        const ingredientsArray = newIngredientsText.split("\n").filter(function(line) {
-            return line.trim().length > 0;
-        });
-        const ingredientsUl = card.querySelector(".recipe-ingredients");
-        ingredientsUl.innerHTML = "";
-        ingredientsArray.forEach(function(item) {
-            const li = document.createElement("li");
-            li.textContent = item.trim();
+    if(newIngredientsText){
+        const ingredientsArray=newIngredientsText.split("\n").filter(function(line){return line.trim().length>0;});
+        const ingredientsUl=card.querySelector(".recipe-ingredients");
+        ingredientsUl.innerHTML="";
+        ingredientsArray.forEach(function(item){
+            const li=document.createElement("li");
+            li.textContent=item.trim();
             ingredientsUl.appendChild(li);
         });
     }
-    if (newStepsText) {
-        const stepsArray = newStepsText.split("\n").filter(function(line) {
-            return line.trim().length > 0;
-        });
-        const stepsOl = card.querySelector(".recipe-steps");
-        stepsOl.innerHTML = "";
-        stepsArray.forEach(function(step) {
-            const li = document.createElement("li");
-            li.textContent = step.trim();
+    if(newStepsText){
+        const stepsArray=newStepsText.split("\n").filter(function(line){return line.trim().length>0;});
+        const stepsOl=card.querySelector(".recipe-steps");
+        stepsOl.innerHTML="";
+        stepsArray.forEach(function(step){
+            const li=document.createElement("li");
+            li.textContent=step.trim();
             stepsOl.appendChild(li);
         });
     }
-    alert("تم تحديث الوصفة في هذه الجلسة. للحفظ الدائم، يجب تعديل الكود الأصلي.");
+    alert("تم تحديث الوصفة في هذه الجلسة. للحفظ الدائم عدّل ملف HTML الأصلي.");
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded",function(){
     showAdminTools(false);
 });
 </script>
