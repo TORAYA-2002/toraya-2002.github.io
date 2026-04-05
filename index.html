@@ -12,25 +12,29 @@
     font-family:"Tahoma","Arial",sans-serif;
 }
 body{
-    background:#f3f3f3;
+    background:#f5f5f7;
     color:#222;
 }
 header{
-    background:#ffffff;
-    border-bottom:2px solid #d4af37;
-    padding:15px 30px;
+    background:linear-gradient(120deg,#ffffff,#fdf7e6);
+    border-bottom:1px solid rgba(212,175,55,0.4);
+    padding:14px 32px;
     position:sticky;
     top:0;
-    z-index:10;
+    z-index:20;
+    backdrop-filter:blur(10px);
 }
 .header-inner{
     display:flex;
     align-items:center;
     justify-content:space-between;
+    max-width:1200px;
+    margin:0 auto;
 }
 .logo{
     font-size:26px;
-    font-weight:bold;
+    font-weight:700;
+    letter-spacing:1px;
     color:#444;
 }
 .logo span{
@@ -38,111 +42,180 @@ header{
 }
 nav{
     display:flex;
-    gap:15px;
+    gap:10px;
 }
 nav a{
     text-decoration:none;
     color:#444;
-    padding:6px 14px;
-    border-radius:20px;
+    padding:7px 16px;
+    border-radius:999px;
     border:1px solid transparent;
     font-size:14px;
+    background:rgba(255,255,255,0.7);
+    backdrop-filter:blur(6px);
+    transition:all .2s ease;
 }
 nav a:hover{
     border-color:#d4af37;
-    background:#fff7dd;
+    background:#fffaf0;
+    color:#222;
 }
 .hero{
-    background:#ffffff;
-    padding:30px;
+    max-width:1200px;
+    margin:22px auto 10px auto;
+    padding:24px 20px;
     display:grid;
-    grid-template-columns:1.3fr 1fr;
-    gap:30px;
-    border-bottom:1px solid #e0e0e0;
+    grid-template-columns:1.4fr 1fr;
+    gap:26px;
 }
-.hero-text h1{
-    font-size:30px;
-    margin-bottom:10px;
-    color:#333;
-}
-.hero-text p{
-    font-size:15px;
-    line-height:1.8;
-    margin-bottom:10px;
+.hero-main{
+    background:#ffffff;
+    border-radius:22px;
+    padding:22px 22px 20px 22px;
+    box-shadow:0 18px 40px rgba(0,0,0,0.06);
+    border:1px solid rgba(212,175,55,0.25);
 }
 .hero-badge{
-    display:inline-block;
-    font-size:12px;
-    padding:4px 10px;
-    border-radius:20px;
-    border:1px solid #d4af37;
-    color:#555;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-size:11px;
+    padding:4px 12px;
+    border-radius:999px;
+    border:1px solid rgba(212,175,55,0.7);
+    background:linear-gradient(120deg,#fffaf0,#fff);
+    color:#7a5b12;
+    margin-bottom:10px;
+}
+.hero-badge-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#d4af37;
+}
+.hero-main h1{
+    font-size:28px;
     margin-bottom:8px;
-    background:#fffdf4;
+    color:#333;
+}
+.hero-main p{
+    font-size:14px;
+    line-height:1.9;
+    color:#555;
+    margin-bottom:6px;
+}
+.hero-tags{
+    margin-top:8px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+}
+.hero-tag{
+    font-size:11px;
+    padding:3px 10px;
+    border-radius:999px;
+    background:#f5f0df;
+    color:#7a5b12;
 }
 .hero-actions{
-    margin-top:10px;
+    margin-top:14px;
     display:flex;
+    flex-wrap:wrap;
     gap:10px;
 }
 .btn-primary{
-    background:#d4af37;
+    background:linear-gradient(135deg,#d4af37,#f3d47a);
     color:#222;
     border:none;
-    border-radius:20px;
-    padding:8px 18px;
+    border-radius:999px;
+    padding:9px 20px;
     font-size:14px;
     cursor:pointer;
+    box-shadow:0 10px 25px rgba(212,175,55,0.35);
+    transition:transform .15s ease,box-shadow .15s ease,filter .15s ease;
 }
 .btn-primary:hover{
-    background:#c39a2f;
+    transform:translateY(-1px);
+    box-shadow:0 14px 30px rgba(212,175,55,0.45);
+    filter:brightness(1.03);
 }
 .btn-ghost{
     background:#ffffff;
     color:#444;
-    border:1px solid #d4af37;
-    border-radius:20px;
-    padding:8px 18px;
+    border-radius:999px;
+    padding:9px 18px;
     font-size:14px;
     cursor:pointer;
+    border:1px solid rgba(212,175,55,0.6);
+    transition:all .15s ease;
 }
 .btn-ghost:hover{
-    background:#fff7dd;
+    background:#fffaf0;
+    color:#222;
+}
+.hero-side{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
 }
 .hero-card{
-    background:#fafafa;
-    border-radius:16px;
-    border:1px solid #e0e0e0;
-    padding:18px;
+    background:#ffffff;
+    border-radius:20px;
+    padding:18px 18px 16px 18px;
+    box-shadow:0 16px 35px rgba(0,0,0,0.05);
+    border:1px solid rgba(0,0,0,0.04);
 }
 .hero-card-title{
     font-size:16px;
-    margin-bottom:8px;
+    margin-bottom:6px;
     color:#333;
 }
 .hero-card-body{
     font-size:13px;
-    line-height:1.7;
+    line-height:1.8;
     color:#555;
 }
+.hero-mini{
+    background:linear-gradient(135deg,#fffaf0,#f7f3e6);
+    border-radius:18px;
+    padding:12px 14px;
+    font-size:12px;
+    color:#6b4f16;
+    border:1px dashed rgba(212,175,55,0.7);
+}
 .section{
-    padding:30px;
+    max-width:1200px;
+    margin:10px auto 24px auto;
+    padding:0 20px;
+}
+.section-header{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    margin-bottom:14px;
 }
 .section-title{
     font-size:22px;
-    margin-bottom:6px;
     color:#333;
 }
 .section-subtitle{
-    font-size:14px;
-    color:#666;
-    margin-bottom:18px;
+    font-size:13px;
+    color:#777;
+}
+.section-pill{
+    font-size:11px;
+    padding:4px 10px;
+    border-radius:999px;
+    background:#ffffff;
+    border:1px solid rgba(212,175,55,0.5);
+    color:#7a5b12;
 }
 .admin-panel{
     background:#ffffff;
-    border-radius:14px;
-    border:1px solid #e0e0e0;
-    padding:18px;
+    border-radius:20px;
+    padding:18px 18px 16px 18px;
+    box-shadow:0 16px 35px rgba(0,0,0,0.05);
+    border:1px solid rgba(0,0,0,0.04);
 }
 .admin-header{
     display:flex;
@@ -155,24 +228,28 @@ nav a:hover{
     color:#333;
 }
 .admin-status{
-    font-size:12px;
+    font-size:11px;
     padding:4px 10px;
-    border-radius:20px;
-    border:1px solid #d4af37;
-    background:#fffdf4;
-    color:#555;
+    border-radius:999px;
+    border:1px solid rgba(212,175,55,0.7);
+    background:#fffaf0;
+    color:#7a5b12;
 }
 .admin-login-row{
     display:flex;
     flex-wrap:wrap;
     gap:8px;
-    margin-bottom:12px;
+    margin-bottom:10px;
 }
 .admin-login-row input{
-    padding:7px 10px;
-    border-radius:18px;
+    padding:7px 12px;
+    border-radius:999px;
     border:1px solid #ccc;
-    min-width:180px;
+    min-width:190px;
+    font-size:13px;
+}
+.admin-login-row button{
+    font-size:13px;
 }
 .admin-form{
     display:none;
@@ -190,30 +267,31 @@ nav a:hover{
     display:block;
     font-size:12px;
     margin-bottom:3px;
-    color:#444;
+    color:#555;
 }
 .admin-field input,
 .admin-field textarea,
 .admin-field select{
     width:100%;
     padding:7px 9px;
-    border-radius:8px;
-    border:1px solid #ccc;
+    border-radius:10px;
+    border:1px solid #d0d0d0;
     font-size:13px;
+    background:#fafafa;
 }
 .admin-field textarea{
-    min-height:60px;
+    min-height:70px;
     resize:vertical;
 }
 .admin-actions{
     display:flex;
     flex-wrap:wrap;
     gap:8px;
-    margin-top:8px;
+    margin-top:6px;
 }
 .admin-note{
     font-size:11px;
-    color:#777;
+    color:#888;
     margin-top:6px;
 }
 .recipes-grid{
@@ -223,32 +301,39 @@ nav a:hover{
 }
 .recipe-card{
     background:#ffffff;
-    border-radius:14px;
-    border:1px solid #e0e0e0;
+    border-radius:20px;
     overflow:hidden;
     display:flex;
     flex-direction:column;
+    box-shadow:0 18px 40px rgba(0,0,0,0.05);
+    border:1px solid rgba(0,0,0,0.03);
+    transition:transform .15s ease,box-shadow .15s ease;
 }
-.recipe-card-header img{
-    width:100%;
-    height:160px;
-    object-fit:cover;
-}
-.recipe-badge{
-    position:absolute;
-    top:8px;
-    left:8px;
-    background:#fff7dd;
-    border-radius:16px;
-    padding:3px 9px;
-    font-size:11px;
-    border:1px solid #d4af37;
+.recipe-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 22px 50px rgba(0,0,0,0.08);
 }
 .recipe-card-header{
     position:relative;
 }
+.recipe-card-header img{
+    width:100%;
+    height:170px;
+    object-fit:cover;
+}
+.recipe-badge{
+    position:absolute;
+    top:10px;
+    left:10px;
+    background:rgba(255,250,240,0.95);
+    border-radius:999px;
+    padding:3px 10px;
+    font-size:11px;
+    border:1px solid rgba(212,175,55,0.8);
+    color:#7a5b12;
+}
 .recipe-body{
-    padding:12px 12px 14px 12px;
+    padding:12px 13px 13px 13px;
     display:flex;
     flex-direction:column;
     gap:4px;
@@ -259,7 +344,7 @@ nav a:hover{
 }
 .recipe-meta{
     font-size:12px;
-    color:#777;
+    color:#888;
 }
 .recipe-description{
     font-size:13px;
@@ -275,6 +360,7 @@ nav a:hover{
     font-size:12px;
     color:#555;
     padding-right:18px;
+    margin-top:2px;
 }
 .recipe-ingredients li,
 .recipe-steps li{
@@ -282,10 +368,10 @@ nav a:hover{
 }
 .recipe-footer{
     font-size:11px;
-    color:#666;
+    color:#777;
     display:flex;
     justify-content:space-between;
-    margin-top:4px;
+    margin-top:5px;
 }
 .recipe-admin-tools{
     display:none;
@@ -295,13 +381,14 @@ nav a:hover{
 .recipe-admin-tools button{
     font-size:11px;
     padding:4px 8px;
-    border-radius:12px;
-    border:1px solid #d4af37;
+    border-radius:999px;
+    border:1px solid rgba(212,175,55,0.7);
     background:#ffffff;
     cursor:pointer;
+    transition:all .15s ease;
 }
 .recipe-admin-tools button:hover{
-    background:#fff7dd;
+    background:#fffaf0;
 }
 .videos-grid{
     display:grid;
@@ -310,26 +397,46 @@ nav a:hover{
 }
 .video-card{
     background:#ffffff;
-    border-radius:14px;
-    border:1px solid #e0e0e0;
-    padding:10px;
+    border-radius:18px;
+    padding:10px 10px 12px 10px;
+    box-shadow:0 16px 35px rgba(0,0,0,0.05);
+    border:1px solid rgba(0,0,0,0.03);
 }
 .video-card h3{
     font-size:14px;
     margin-bottom:6px;
     color:#333;
 }
-.video-card video{
+.video-frame{
+    position:relative;
     width:100%;
-    border-radius:10px;
+    padding-bottom:56.25%;
+    border-radius:12px;
+    overflow:hidden;
+}
+.video-frame iframe{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    border:0;
 }
 .footer{
     background:#ffffff;
-    border-top:1px solid #e0e0e0;
-    padding:18px 30px;
+    border-top:1px solid rgba(0,0,0,0.06);
+    padding:16px 24px 18px 24px;
     font-size:12px;
-    color:#666;
-    margin-top:20px;
+    color:#777;
+    margin-top:26px;
+}
+.footer-inner{
+    max-width:1200px;
+    margin:0 auto;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    gap:6px;
 }
 @media(max-width:1100px){
     .hero{
@@ -341,24 +448,25 @@ nav a:hover{
     .videos-grid{
         grid-template-columns:repeat(2,minmax(0,1fr));
     }
+    .admin-grid{
+        grid-template-columns:1fr;
+    }
 }
-@media(max-width:700px){
+@media(max-width:720px){
     header{
-        padding:12px 16px;
+        padding:10px 16px;
     }
     .hero{
-        padding:20px 16px;
+        padding:18px 16px;
+        margin-top:16px;
     }
     .section{
-        padding:20px 16px;
+        padding:0 16px;
     }
     .recipes-grid{
         grid-template-columns:1fr;
     }
     .videos-grid{
-        grid-template-columns:1fr;
-    }
-    .admin-grid{
         grid-template-columns:1fr;
     }
 }
@@ -378,31 +486,51 @@ nav a:hover{
 </header>
 
 <section class="hero" id="about">
-    <div class="hero-text">
-        <div class="hero-badge">منصة وصفات عربية كلاسيكية</div>
+    <div class="hero-main">
+        <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            <span>منصة وصفات عربية بطابع ذهبي كلاسيكي</span>
+        </div>
         <h1>ساحة المذاق – وصفات بسيطة بطابع ذهبي</h1>
-        <p>هذه الصفحة تجمع عشرين وصفة عربية وعالمية مكتوبة بالعربية، مع صور حقيقية من الإنترنت، وتصميم بسيط وخلفية فاتحة مريحة للعين.</p>
-        <p>يوجد وضع إدارة خاص بصاحب الموقع فقط، يمكن من خلاله تعديل الوصفات مباشرة في الصفحة باستخدام رمز سري ثابت.</p>
+        <p>هذه الصفحة تجمع عشرين وصفة عربية وعالمية مكتوبة بالعربية، مع صور حقيقية من الإنترنت، وتصميم فاتح وبسيط يركز على الوضوح والراحة أثناء القراءة.</p>
+        <p>يوجد وضع إدارة خاص بصاحب الموقع فقط، يسمح له بتعديل الوصفات مباشرة من الواجهة دون أن يتمكن أي زائر آخر من ذلك.</p>
+        <div class="hero-tags">
+            <div class="hero-tag">أطباق رئيسية</div>
+            <div class="hero-tag">مقبلات وسلطات</div>
+            <div class="hero-tag">حلويات ومشروبات</div>
+            <div class="hero-tag">واجهة عربية كاملة</div>
+        </div>
         <div class="hero-actions">
             <button class="btn-primary" onclick="scrollToRecipes()">استكشف الوصفات</button>
             <button class="btn-ghost" onclick="scrollToAdmin()">دخول وضع الإدارة</button>
         </div>
     </div>
-    <div class="hero-card">
-        <div class="hero-card-title">معلومات عن وضع الإدارة</div>
-        <div class="hero-card-body">
-            يمكن لصاحب الموقع فقط:
-            <br>• تعديل عناوين الوصفات
-            <br>• تغيير الصور والشرح
-            <br>• تحديث المكوّنات وخطوات التحضير
-            <br>رمز الدخول إلى وضع الإدارة هو: 20132021
+    <div class="hero-side">
+        <div class="hero-card">
+            <div class="hero-card-title">معلومات عن وضع الإدارة</div>
+            <div class="hero-card-body">
+                يمكن لصاحب الموقع فقط:
+                <br>• تعديل عناوين الوصفات
+                <br>• تغيير الصور والوصف المختصر
+                <br>• تحديث المكوّنات وخطوات التحضير
+                <br>• ضبط روابط الفيديوهات التعليمية
+                <br>لا يظهر أي رمز سري في الواجهة، ويتم التحقق من الصلاحيات داخلياً.
+            </div>
+        </div>
+        <div class="hero-mini">
+            يمكن استخدام هذه الصفحة كنموذج لموقع وصفات احترافي، مع إمكانية تطوير نظام حفظ دائم للبيانات لاحقاً عبر قواعد بيانات أو واجهات برمجية.
         </div>
     </div>
 </section>
 
 <section class="section" id="admin">
-    <h2 class="section-title">وضع الإدارة لصاحب الموقع</h2>
-    <p class="section-subtitle">هذا الوضع مخصص للمالك فقط. لا يمكن لأي زائر آخر إنشاء أو تعديل الوصفات، حتى لو رأى هذه الواجهة.</p>
+    <div class="section-header">
+        <div>
+            <div class="section-title">وضع الإدارة لصاحب الموقع</div>
+            <div class="section-subtitle">واجهة تحكم مبسطة لتعديل الوصفات من داخل الصفحة، متاحة فقط للمالك.</div>
+        </div>
+        <div class="section-pill">صلاحيات خاصة بالمالك فقط</div>
+    </div>
 
     <div class="admin-panel">
         <div class="admin-header">
@@ -411,9 +539,9 @@ nav a:hover{
         </div>
 
         <div class="admin-login-row">
-            <input type="password" id="adminCodeInput" placeholder="أدخل رمز وضع الإدارة">
-            <button class="btn-primary" onclick="activateAdmin()">تفعيل</button>
-            <button class="btn-ghost" onclick="deactivateAdmin()">إيقاف</button>
+            <input type="password" id="adminCodeInput" placeholder="أدخل رمز الدخول الخاص بالمالك">
+            <button class="btn-primary" onclick="activateAdmin()">تفعيل وضع الإدارة</button>
+            <button class="btn-ghost" onclick="deactivateAdmin()">إيقاف وضع الإدارة</button>
         </div>
 
         <div class="admin-form" id="adminForm">
@@ -474,21 +602,26 @@ nav a:hover{
                 <button class="btn-ghost" onclick="clearAdminForm()">مسح الحقول</button>
             </div>
             <div class="admin-note">
-                التعديلات تطبق على هذه الصفحة في المتصفح فقط. للحفظ الدائم يجب تعديل ملف HTML الأصلي.
+                التعديلات تطبق على هذه الصفحة في المتصفح فقط. للحفظ الدائم يجب تعديل ملف HTML الأصلي أو ربط الصفحة بنظام تخزين خارجي.
             </div>
         </div>
     </div>
 </section>
 
 <section class="section" id="recipes">
-    <h2 class="section-title">الوصفات الكلاسيكية في ساحة المذاق</h2>
-    <p class="section-subtitle">عشرون وصفة مع صور حقيقية وروابط يمكن تعديلها من قبل صاحب الموقع فقط.</p>
+    <div class="section-header">
+        <div>
+            <div class="section-title">الوصفات الكلاسيكية في ساحة المذاق</div>
+            <div class="section-subtitle">عشرون وصفة مع صور حقيقية وروابط يمكن تعديلها من قبل صاحب الموقع فقط.</div>
+        </div>
+        <div class="section-pill">كل وصفة بمكوّنات غير مكررة</div>
+    </div>
 
     <div class="recipes-grid">
 
         <article class="recipe-card" id="recipe1">
             <div class="recipe-card-header">
-                <img src="https://source.unsplash.com/600x400/?chicken,rice" alt="أرز بالدجاج">
+                <img src="https://source.unsplash.com/600x400/?chicken,rice,arabic" alt="أرز بالدجاج">
                 <div class="recipe-badge">وصفة 1</div>
             </div>
             <div class="recipe-body">
@@ -517,18 +650,18 @@ nav a:hover{
                     <span>4 حصص</span>
                 </div>
                 <div class="recipe-admin-tools">
-                    <button onclick="loadRecipeIntoForm('recipe1')">تعديل</button>
+                    <button onclick="loadRecipeIntoForm('recipe1')">تعديل الوصفة</button>
                 </div>
             </div>
         </article>
 
         <article class="recipe-card" id="recipe2">
             <div class="recipe-card-header">
-                <img src="https://source.unsplash.com/600x400/?salad,vegetable" alt="سلطة خضار">
+                <img src="https://source.unsplash.com/600x400/?salad,vegetable,arabic" alt="سلطة خضار">
                 <div class="recipe-badge">وصفة 2</div>
             </div>
             <div class="recipe-body">
-                <h3 class="recipe-title">سلطة الخضار الكلاسيكية بزيت الزيتون</h3>
+                <h3 class="recipe-title">سلطة الخضار بزيت الزيتون</h3>
                 <div class="recipe-meta">مقبلات خفيفة ومنعشة</div>
                 <p class="recipe-description">سلطة بسيطة من الخضار الطازجة مع تتبيلة زيت الزيتون والليمون، مناسبة مع أغلب الأطباق.</p>
                 <div class="recipe-subheading">المكوّنات:</div>
@@ -552,7 +685,7 @@ nav a:hover{
                     <span>3 حصص</span>
                 </div>
                 <div class="recipe-admin-tools">
-                    <button onclick="loadRecipeIntoForm('recipe2')">تعديل</button>
+                    <button onclick="loadRecipeIntoForm('recipe2')">تعديل الوصفة</button>
                 </div>
             </div>
         </article>
@@ -587,7 +720,7 @@ nav a:hover{
                     <span>4 حصص</span>
                 </div>
                 <div class="recipe-admin-tools">
-                    <button onclick="loadRecipeIntoForm('recipe3')">تعديل</button>
+                    <button onclick="loadRecipeIntoForm('recipe3')">تعديل الوصفة</button>
                 </div>
             </div>
         </article>
@@ -622,7 +755,7 @@ nav a:hover{
                     <span>3 حصص</span>
                 </div>
                 <div class="recipe-admin-tools">
-                    <button onclick="loadRecipeIntoForm('recipe4')">تعديل</button>
+                    <button onclick="loadRecipeIntoForm('recipe4')">تعديل الوصفة</button>
                 </div>
             </div>
         </article>
@@ -657,7 +790,7 @@ nav a:hover{
                     <span>2 حصة</span>
                 </div>
                 <div class="recipe-admin-tools">
-                    <button onclick="loadRecipeIntoForm('recipe5')">تعديل</button>
+                    <button onclick="loadRecipeIntoForm('recipe5')">تعديل الوصفة</button>
                 </div>
             </div>
         </article>
@@ -692,7 +825,7 @@ nav a:hover{
                     <span>8 حصص</span>
                 </div>
                 <div class="recipe-admin-tools">
-                    <button onclick="loadRecipeIntoForm('recipe6')">تعديل</button>
+                    <button onclick="loadRecipeIntoForm('recipe6')">تعديل الوصفة</button>
                 </div>
             </div>
         </article>
@@ -727,7 +860,7 @@ nav a:hover{
                     <span>3 حصص</span>
                 </div>
                 <div class="recipe-admin-tools">
-                    <button onclick="loadRecipeIntoForm('recipe7')">تعديل</button>
+                    <button onclick="loadRecipeIntoForm('recipe7')">تعديل الوصفة</button>
                 </div>
             </div>
         </article>
@@ -762,7 +895,7 @@ nav a:hover{
                     <span>2 حصة</span>
                 </div>
                 <div class="recipe-admin-tools">
-                    <button onclick="loadRecipeIntoForm('recipe8')">تعديل</button>
+                    <button onclick="loadRecipeIntoForm('recipe8')">تعديل الوصفة</button>
                 </div>
             </div>
         </article>
@@ -797,7 +930,7 @@ nav a:hover{
                     <span>2 حصة</span>
                 </div>
                 <div class="recipe-admin-tools">
-                    <button onclick="loadRecipeIntoForm('recipe9')">تعديل</button>
+                    <button onclick="loadRecipeIntoForm('recipe9')">تعديل الوصفة</button>
                 </div>
             </div>
         </article>
@@ -832,14 +965,14 @@ nav a:hover{
                     <span>4 حصص</span>
                 </div>
                 <div class="recipe-admin-tools">
-                    <button onclick="loadRecipeIntoForm('recipe10')">تعديل</button>
+                    <button onclick="loadRecipeIntoForm('recipe10')">تعديل الوصفة</button>
                 </div>
             </div>
         </article>
 
         <article class="recipe-card" id="recipe11">
             <div class="recipe-card-header">
-                <img src="https://source.unsplash.com/600x400/?rice,milk" alt="أرز بالحليب">
+                <img src="https://source.unsplash.com/600x400/?rice,milk,dessert" alt="أرز بالحليب">
                 <div class="recipe-badge">وصفة 11</div>
             </div>
             <div class="recipe-body">
@@ -867,14 +1000,14 @@ nav a:hover{
                     <span>5 حصص</span>
                 </div>
                 <div class="recipe-admin-tools">
-                    <button onclick="loadRecipeIntoForm('recipe11')">تعديل</button>
+                    <button onclick="loadRecipeIntoForm('recipe11')">تعديل الوصفة</button>
                 </div>
             </div>
         </article>
 
         <article class="recipe-card" id="recipe12">
             <div class="recipe-card-header">
-                <img src="https://source.unsplash.com/600x400/?salad,fruit" alt="سلطة فواكه">
+                <img src="https://source.unsplash.com/600x400/?fruit,salad" alt="سلطة فواكه">
                 <div class="recipe-badge">وصفة 12</div>
             </div>
             <div class="recipe-body">
@@ -902,7 +1035,7 @@ nav a:hover{
                     <span>4 حصص</span>
                 </div>
                 <div class="recipe-admin-tools">
-                    <button onclick="loadRecipeIntoForm('recipe12')">تعديل</button>
+                    <button onclick="loadRecipeIntoForm('recipe12')">تعديل الوصفة</button>
                 </div>
             </div>
         </article>
@@ -937,7 +1070,7 @@ nav a:hover{
                     <span>4 حصص</span>
                 </div>
                 <div class="recipe-admin-tools">
-                    <button onclick="loadRecipeIntoForm('recipe13')">تعديل</button>
+                    <button onclick="loadRecipeIntoForm('recipe13')">تعديل الوصفة</button>
                 </div>
             </div>
         </article>
@@ -972,7 +1105,7 @@ nav a:hover{
                     <span>3 حصص</span>
                 </div>
                 <div class="recipe-admin-tools">
-                    <button onclick="loadRecipeIntoForm('recipe14')">تعديل</button>
+                    <button onclick="loadRecipeIntoForm('recipe14')">تعديل الوصفة</button>
                 </div>
             </div>
         </article>
@@ -1007,7 +1140,7 @@ nav a:hover{
                     <span>2 حصة</span>
                 </div>
                 <div class="recipe-admin-tools">
-                    <button onclick="loadRecipeIntoForm('recipe15')">تعديل</button>
+                    <button onclick="loadRecipeIntoForm('recipe15')">تعديل الوصفة</button>
                 </div>
             </div>
         </article>
@@ -1042,7 +1175,7 @@ nav a:hover{
                     <span>3 حصص</span>
                 </div>
                 <div class="recipe-admin-tools">
-                    <button onclick="loadRecipeIntoForm('recipe16')">تعديل</button>
+                    <button onclick="loadRecipeIntoForm('recipe16')">تعديل الوصفة</button>
                 </div>
             </div>
         </article>
@@ -1077,7 +1210,7 @@ nav a:hover{
                     <span>1 حصة</span>
                 </div>
                 <div class="recipe-admin-tools">
-                    <button onclick="loadRecipeIntoForm('recipe17')">تعديل</button>
+                    <button onclick="loadRecipeIntoForm('recipe17')">تعديل الوصفة</button>
                 </div>
             </div>
         </article>
@@ -1112,7 +1245,7 @@ nav a:hover{
                     <span>4 حصص</span>
                 </div>
                 <div class="recipe-admin-tools">
-                    <button onclick="loadRecipeIntoForm('recipe18')">تعديل</button>
+                    <button onclick="loadRecipeIntoForm('recipe18')">تعديل الوصفة</button>
                 </div>
             </div>
         </article>
@@ -1147,14 +1280,14 @@ nav a:hover{
                     <span>3 حصص</span>
                 </div>
                 <div class="recipe-admin-tools">
-                    <button onclick="loadRecipeIntoForm('recipe19')">تعديل</button>
+                    <button onclick="loadRecipeIntoForm('recipe19')">تعديل الوصفة</button>
                 </div>
             </div>
         </article>
 
         <article class="recipe-card" id="recipe20">
             <div class="recipe-card-header">
-                <img src="https://source.unsplash.com/600x400/?juice,orange" alt="عصير برتقال">
+                <img src="https://source.unsplash.com/600x400/?orange,juice" alt="عصير برتقال">
                 <div class="recipe-badge">وصفة 20</div>
             </div>
             <div class="recipe-body">
@@ -1182,7 +1315,7 @@ nav a:hover{
                     <span>4 حصص</span>
                 </div>
                 <div class="recipe-admin-tools">
-                    <button onclick="loadRecipeIntoForm('recipe20')">تعديل</button>
+                    <button onclick="loadRecipeIntoForm('recipe20')">تعديل الوصفة</button>
                 </div>
             </div>
         </article>
@@ -1191,33 +1324,40 @@ nav a:hover{
 </section>
 
 <section class="section" id="videos">
-    <h2 class="section-title">فيديوهات طبخ بسيطة</h2>
-    <p class="section-subtitle">فيديوهات عامة يمكن استبدال روابطها من خلال وضع الإدارة أو مباشرة في الكود.</p>
+    <div class="section-header">
+        <div>
+            <div class="section-title">فيديوهات طبخ مرتبطة بالوصفات</div>
+            <div class="section-subtitle">مجموعة فيديوهات من يوتيوب لشرح وصفات مشابهة لما هو موجود في الصفحة.</div>
+        </div>
+        <div class="section-pill">يمكن تعديل الروابط من قبل المالك</div>
+    </div>
     <div class="videos-grid">
         <div class="video-card">
-            <h3>فيديو تعليمي عام 1</h3>
-            <video controls>
-                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-            </video>
+            <h3>طريقة عمل أرز بالدجاج</h3>
+            <div class="video-frame">
+                <iframe src="https://www.youtube.com/embed/4aZr5hZXP_s" allowfullscreen></iframe>
+            </div>
         </div>
         <div class="video-card">
-            <h3>فيديو تعليمي عام 2</h3>
-            <video controls>
-                <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
-            </video>
+            <h3>مكرونة بصلصة الطماطم</h3>
+            <div class="video-frame">
+                <iframe src="https://www.youtube.com/embed/1-SJGQ2HLp8" allowfullscreen></iframe>
+            </div>
         </div>
         <div class="video-card">
-            <h3>فيديو تعليمي عام 3</h3>
-            <video controls>
-                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-            </video>
+            <h3>شوربة خضار منزلية</h3>
+            <div class="video-frame">
+                <iframe src="https://www.youtube.com/embed/8pU2GqCwqjQ" allowfullscreen></iframe>
+            </div>
         </div>
     </div>
 </section>
 
 <footer class="footer">
-    <div>ساحة المذاق YUM YARD – صفحة وصفات بسيطة بتصميم كلاسيكي فاتح.</div>
-    <div>وضع الإدارة متاح فقط لصاحب الموقع باستخدام الرمز 20132021.</div>
+    <div class="footer-inner">
+        <div>ساحة المذاق YUM YARD – صفحة وصفات بسيطة بتصميم كلاسيكي فاتح ولمسات ذهبية.</div>
+        <div>صلاحيات التعديل محفوظة لصاحب الموقع فقط عبر رمز داخلي لا يظهر للمستخدمين.</div>
+    </div>
 </footer>
 
 <script>
@@ -1244,7 +1384,7 @@ function deactivateAdmin(){
     const status=document.getElementById("adminStatus");
     const form=document.getElementById("adminForm");
     status.textContent="الحالة: مستخدم عادي";
-    status.style.color="#555";
+    status.style.color="#7a5b12";
     form.style.display="none";
     showAdminTools(false);
 }
