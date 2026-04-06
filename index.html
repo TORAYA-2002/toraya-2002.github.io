@@ -745,370 +745,405 @@
     <p>© 2026 <span>YUM YARD</span> — جميع الحقوق محفوظة. تصميم وبرمجة: Alae.</p>
   </footer>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
-    import {
-      getFirestore,
-      collection,
-      doc,
-      getDocs,
-      getDoc,
-      setDoc,
-      deleteDoc
-    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+  import {
+    getFirestore,
+    collection,
+    doc,
+    getDocs,
+    getDoc,
+    setDoc,
+    deleteDoc
+  } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyC5vWkaVRMC5ZIT_KGeTqXMqg7U662n9bQ",
-      authDomain: "coocking-380d8.firebaseapp.com",
-      projectId: "coocking-380d8",
-      storageBucket: "coocking-380d8.firebasestorage.app",
-      messagingSenderId: "32948618858",
-      appId: "1:32948618858:web:43fd8bf52b3c9aee772c13",
-      measurementId: "G-MTD0PZSB0P"
-    };
+  const firebaseConfig = {
+    apiKey: "AIzaSyC5vWkaVRMC5ZIT_KGeTqXMqg7U662n9bQ",
+    authDomain: "coocking-380d8.firebaseapp.com",
+    projectId: "coocking-380d8",
+    storageBucket: "coocking-380d8.firebasestorage.app",
+    messagingSenderId: "32948618858",
+    appId: "1:32948618858:web:43fd8bf52b3c9aee772c13",
+    measurementId: "G-MTD0PZSB0P"
+  };
 
-    const app = initializeApp(firebaseConfig);
-    getAnalytics(app);
-    const db = getFirestore(app);
+  const app = initializeApp(firebaseConfig);
+  getAnalytics(app);
+  const db = getFirestore(app);
 
-    const recipesCol = collection(db, "recipes");
-    const articlesCol = collection(db, "articles");
-    const videosCol = collection(db, "videos");
-    const settingsCol = collection(db, "settings");
+  const recipesCol = collection(db, "recipes");
+  const articlesCol = collection(db, "articles");
+  const videosCol = collection(db, "videos");
+  const settingsCol = collection(db, "settings");
 
-    let recipesCache = [];
-    let articlesCache = [];
-    let videosCache = [];
-    let isAdmin = false;
+  let recipesCache = [];
+  let articlesCache = [];
+  let videosCache = [];
+  let isAdmin = false;
 
-    const recipesContainer = document.getElementById("recipesContainer");
-    const articlesContainer = document.getElementById("articlesContainer");
-    const videosContainer = document.getElementById("videosContainer");
+  const recipesContainer = document.getElementById("recipesContainer");
+  const articlesContainer = document.getElementById("articlesContainer");
+  const videosContainer = document.getElementById("videosContainer");
 
-    const recipeModalBackdrop = document.getElementById("recipeModalBackdrop");
-    const modalTitle = document.getElementById("modalTitle");
-    const modalImage = document.getElementById("modalImage");
-    const modalIngredients = document.getElementById("modalIngredients");
-    const modalSteps = document.getElementById("modalSteps");
-    const closeRecipeBtn = document.getElementById("closeRecipeBtn");
+  const recipeModalBackdrop = document.getElementById("recipeModalBackdrop");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalImage = document.getElementById("modalImage");
+  const modalIngredients = document.getElementById("modalIngredients");
+  const modalSteps = document.getElementById("modalSteps");
+  const closeRecipeBtn = document.getElementById("closeRecipeBtn");
 
-    const articleModalBackdrop = document.getElementById("articleModalBackdrop");
-    const articleModalTitle = document.getElementById("articleModalTitle");
-    const articleModalBody = document.getElementById("articleModalBody");
-    const closeArticleBtn = document.getElementById("closeArticleBtn");
+  const articleModalBackdrop = document.getElementById("articleModalBackdrop");
+  const articleModalTitle = document.getElementById("articleModalTitle");
+  const articleModalBody = document.getElementById("articleModalBody");
+  const closeArticleBtn = document.getElementById("closeArticleBtn");
 
-    function renderRecipes(filterCat = "all") {
-      recipesContainer.innerHTML = "";
-      recipesCache
-        .filter(r => filterCat === "all" || r.category === filterCat)
-        .forEach(r => {
-          const card = document.createElement("div");
-          card.className = "card";
-          card.innerHTML = `
-            <img src="${r.image || ""}" alt="${r.title || ""}">
-            <div class="card-body">
-              <div>
-                <div class="card-title">${r.title || ""}</div>
-                <div class="card-meta">⏱ ${r.time || ""} • المستوى: ${r.level || ""} • الفئة: ${r.category || ""}</div>
-              </div>
-              <button data-id="${r.id}">عرض الوصفة</button>
+  function renderRecipes(filterCat = "all") {
+    recipesContainer.innerHTML = "";
+    recipesCache
+      .filter(r => filterCat === "all" || r.category === filterCat)
+      .forEach(r => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <img src="${r.image || ""}" alt="${r.title || ""}">
+          <div class="card-body">
+            <div>
+              <div class="card-title">${r.title || ""}</div>
+              <div class="card-meta">⏱ ${r.time || ""} • المستوى: ${r.level || ""} • الفئة: ${r.category || ""}</div>
             </div>
-          `;
-          card.querySelector("button").addEventListener("click", () => openRecipe(r.id));
-          recipesContainer.appendChild(card);
-        });
-    }
-
-    function renderArticles() {
-      articlesContainer.innerHTML = "";
-      articlesCache.forEach(a => {
-        const card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `
-          <div class="card-body">
-            <div class="card-title">${a.title || ""}</div>
-            <div class="card-text">${a.excerpt || ""}</div>
-            <button data-id="${a.id}">قراءة المقال</button>
+            <button data-id="${r.id}">عرض الوصفة</button>
           </div>
         `;
-        card.querySelector("button").addEventListener("click", () => openArticle(a.id));
-        articlesContainer.appendChild(card);
+        card.querySelector("button").addEventListener("click", () => openRecipe(r.id));
+        recipesContainer.appendChild(card);
       });
-    }
+  }
 
-    function renderVideos() {
-      videosContainer.innerHTML = "";
-      videosCache.forEach(v => {
-        const card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `
-          <img src="${v.thumb || ""}" alt="${v.title || ""}">
-          <div class="card-body">
-            <div class="card-title">${v.title || ""}</div>
-            <div class="card-text">${v.desc || ""}</div>
-            <a class="btn" href="${v.url || "#"}" target="_blank" rel="noopener">مشاهدة الفيديو</a>
-          </div>
-        `;
-        videosContainer.appendChild(card);
-      });
-    }
-
-    function openRecipe(id) {
-      const recipe = recipesCache.find(r => r.id === id);
-      if (!recipe) return;
-      modalTitle.textContent = recipe.title || "";
-      modalImage.src = recipe.image || "";
-      modalIngredients.innerHTML = "";
-      (recipe.ingredients || []).forEach(i => {
-        const li = document.createElement("li");
-        li.textContent = i;
-        modalIngredients.appendChild(li);
-      });
-      modalSteps.textContent = recipe.steps || "";
-      recipeModalBackdrop.style.display = "flex";
-    }
-
-    function closeRecipeModal() {
-      recipeModalBackdrop.style.display = "none";
-    }
-
-    function openArticle(id) {
-      const article = articlesCache.find(a => a.id === id);
-      if (!article) return;
-      articleModalTitle.textContent = article.title || "";
-      articleModalBody.textContent = article.body || "";
-      articleModalBackdrop.style.display = "flex";
-    }
-
-    function closeArticleModal() {
-      articleModalBackdrop.style.display = "none";
-    }
-
-    closeRecipeBtn.addEventListener("click", closeRecipeModal);
-    closeArticleBtn.addEventListener("click", closeArticleModal);
-
-    recipeModalBackdrop.addEventListener("click", e => {
-      if (e.target === recipeModalBackdrop) closeRecipeModal();
+  function renderArticles() {
+    articlesContainer.innerHTML = "";
+    articlesCache.forEach(a => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <div class="card-body">
+          <div class="card-title">${a.title || ""}</div>
+          <div class="card-text">${a.excerpt || ""}</div>
+          <button data-id="${a.id}">قراءة المقال</button>
+        </div>
+      `;
+      card.querySelector("button").addEventListener("click", () => openArticle(a.id));
+      articlesContainer.appendChild(card);
     });
-    articleModalBackdrop.addEventListener("click", e => {
-      if (e.target === articleModalBackdrop) closeArticleModal();
+  }
+
+  function renderVideos() {
+    videosContainer.innerHTML = "";
+    videosCache.forEach(v => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <img src="${v.thumb || ""}" alt="${v.title || ""}">
+        <div class="card-body">
+          <div class="card-title">${v.title || ""}</div>
+          <div class="card-text">${v.desc || ""}</div>
+          <a class="btn" href="${v.url || "#"}" target="_blank" rel="noopener">مشاهدة الفيديو</a>
+        </div>
+      `;
+      videosContainer.appendChild(card);
     });
+  }
 
-    document.querySelectorAll("#recipeFilters .filter-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        document.querySelectorAll("#recipeFilters .filter-btn").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        const cat = btn.getAttribute("data-cat");
-        renderRecipes(cat);
+  function openRecipe(id) {
+    const recipe = recipesCache.find(r => r.id === id);
+    if (!recipe) return;
+    modalTitle.textContent = recipe.title || "";
+    modalImage.src = recipe.image || "";
+    modalIngredients.innerHTML = "";
+    (recipe.ingredients || []).forEach(i => {
+      const li = document.createElement("li");
+      li.textContent = i;
+      modalIngredients.appendChild(li);
+    });
+    modalSteps.textContent = recipe.steps || "";
+    recipeModalBackdrop.style.display = "flex";
+  }
+
+  function closeRecipeModal() {
+    recipeModalBackdrop.style.display = "none";
+  }
+
+  function openArticle(id) {
+    const article = articlesCache.find(a => a.id === id);
+    if (!article) return;
+    articleModalTitle.textContent = article.title || "";
+    articleModalBody.textContent = article.body || "";
+    articleModalBackdrop.style.display = "flex";
+  }
+
+  function closeArticleModal() {
+    articleModalBackdrop.style.display = "none";
+  }
+
+  closeRecipeBtn.addEventListener("click", closeRecipeModal);
+  closeArticleBtn.addEventListener("click", closeArticleModal);
+
+  recipeModalBackdrop.addEventListener("click", e => {
+    if (e.target === recipeModalBackdrop) closeRecipeModal();
+  });
+  articleModalBackdrop.addEventListener("click", e => {
+    if (e.target === articleModalBackdrop) closeArticleModal();
+  });
+
+  document.querySelectorAll("#recipeFilters .filter-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll("#recipeFilters .filter-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      const cat = btn.getAttribute("data-cat");
+      renderRecipes(cat);
+    });
+  });
+
+  async function loadRecipes() {
+    const snap = await getDocs(recipesCol);
+    recipesCache = [];
+    snap.forEach(docSnap => {
+      const data = docSnap.data();
+      recipesCache.push({
+        id: docSnap.id,
+        title: data.title || "",
+        image: data.image || "",
+        time: data.time || "",
+        level: data.level || "",
+        category: data.category || "",
+        ingredients: data.ingredients || [],
+        steps: data.steps || ""
       });
     });
+    renderRecipes();
+    renderRecipesAdminList();
+  }
 
-    async function loadRecipes() {
-      const snap = await getDocs(recipesCol);
-      recipesCache = [];
-      snap.forEach(docSnap => {
-        const data = docSnap.data();
-        recipesCache.push({
-          id: docSnap.id,
-          title: data.title || "",
-          image: data.image || "",
-          time: data.time || "",
-          level: data.level || "",
-          category: data.category || "",
-          ingredients: data.ingredients || [],
-          steps: data.steps || ""
-        });
+  async function loadArticles() {
+    const snap = await getDocs(articlesCol);
+    articlesCache = [];
+    snap.forEach(docSnap => {
+      const data = docSnap.data();
+      articlesCache.push({
+        id: docSnap.id,
+        title: data.title || "",
+        excerpt: data.excerpt || "",
+        body: data.body || ""
       });
-      renderRecipes();
-      renderRecipesAdminList();
-    }
+    });
+    renderArticles();
+    renderArticlesAdminList();
+  }
 
-    async function loadArticles() {
-      const snap = await getDocs(articlesCol);
-      articlesCache = [];
-      snap.forEach(docSnap => {
-        const data = docSnap.data();
-        articlesCache.push({
-          id: docSnap.id,
-          title: data.title || "",
-          excerpt: data.excerpt || "",
-          body: data.body || ""
-        });
+  async function loadVideos() {
+    const snap = await getDocs(videosCol);
+    videosCache = [];
+    snap.forEach(docSnap => {
+      const data = docSnap.data();
+      videosCache.push({
+        id: docSnap.id,
+        title: data.title || "",
+        thumb: data.thumb || "",
+        url: data.url || "",
+        desc: data.desc || ""
       });
-      renderArticles();
-      renderArticlesAdminList();
+    });
+    renderVideos();
+    renderVideosAdminList();
+  }
+
+  async function loadBanner() {
+    const bannerDoc = await getDoc(doc(settingsCol, "banner"));
+    const bannerTextEl = document.getElementById("bannerText");
+    const adminBannerText = document.getElementById("adminBannerText");
+    if (bannerDoc.exists()) {
+      const data = bannerDoc.data();
+      bannerTextEl.textContent = data.text || bannerTextEl.textContent;
+      adminBannerText.value = data.text || "";
+    } else {
+      adminBannerText.value = bannerTextEl.textContent;
+    }
+  }
+
+  async function loadLegalTexts() {
+    const privacyDoc = await getDoc(doc(settingsCol, "privacy"));
+    const termsDoc = await getDoc(doc(settingsCol, "terms"));
+    const privacyContent = document.getElementById("privacyContent");
+    const termsContent = document.getElementById("termsContent");
+    const privacyTextArea = document.getElementById("privacyText");
+    const termsTextArea = document.getElementById("termsText");
+
+    if (privacyDoc.exists()) {
+      const data = privacyDoc.data();
+      privacyContent.innerHTML = data.html || privacyContent.innerHTML;
+      privacyTextArea.value = data.html || "";
+    } else {
+      privacyTextArea.value = privacyContent.innerHTML;
     }
 
-    async function loadVideos() {
-      const snap = await getDocs(videosCol);
-      videosCache = [];
-      snap.forEach(docSnap => {
-        const data = docSnap.data();
-        videosCache.push({
-          id: docSnap.id,
-          title: data.title || "",
-          thumb: data.thumb || "",
-          url: data.url || "",
-          desc: data.desc || ""
-        });
-      });
-      renderVideos();
-      renderVideosAdminList();
+    if (termsDoc.exists()) {
+      const data = termsDoc.data();
+      termsContent.innerHTML = data.html || termsContent.innerHTML;
+      termsTextArea.value = data.html || "";
+    } else {
+      termsTextArea.value = termsContent.innerHTML;
     }
+  }
 
-    async function loadBanner() {
-      const bannerDoc = await getDoc(doc(settingsCol, "banner"));
-      const bannerTextEl = document.getElementById("bannerText");
-      const adminBannerText = document.getElementById("adminBannerText");
-      if (bannerDoc.exists()) {
-        const data = bannerDoc.data();
-        bannerTextEl.textContent = data.text || bannerTextEl.textContent;
-        adminBannerText.value = data.text || "";
-      } else {
-        adminBannerText.value = bannerTextEl.textContent;
-      }
-    }
+  const adminLoginBtn = document.getElementById("adminLoginBtn");
+  const adminPanel = document.getElementById("adminPanel");
+  const adminCloseBtn = document.getElementById("adminCloseBtn");
 
-    async function loadLegalTexts() {
-      const privacyDoc = await getDoc(doc(settingsCol, "privacy"));
-      const termsDoc = await getDoc(doc(settingsCol, "terms"));
-      const privacyContent = document.getElementById("privacyContent");
-      const termsContent = document.getElementById("termsContent");
-      const privacyTextArea = document.getElementById("privacyText");
-      const termsTextArea = document.getElementById("termsText");
-
-      if (privacyDoc.exists()) {
-        const data = privacyDoc.data();
-        privacyContent.innerHTML = data.html || privacyContent.innerHTML;
-        privacyTextArea.value = data.html || "";
-      } else {
-        privacyTextArea.value = privacyContent.innerHTML;
-      }
-
-      if (termsDoc.exists()) {
-        const data = termsDoc.data();
-        termsContent.innerHTML = data.html || termsContent.innerHTML;
-        termsTextArea.value = data.html || "";
-      } else {
-        termsTextArea.value = termsContent.innerHTML;
-      }
-    }
-
-    const adminLoginBtn = document.getElementById("adminLoginBtn");
-    const adminPanel = document.getElementById("adminPanel");
-    const adminCloseBtn = document.getElementById("adminCloseBtn");
-
-    adminLoginBtn.addEventListener("click", () => {
-      if (!isAdmin) {
-        const code = prompt("أدخل كود الإدارة:");
-        if (code === "20132021") {
-          isAdmin = true;
-          adminPanel.style.display = "flex";
-        } else {
-          alert("كود غير صحيح.");
-        }
-      } else {
+  adminLoginBtn.addEventListener("click", () => {
+    if (!isAdmin) {
+      const code = prompt("أدخل كود الإدارة:");
+      if (code === "20132021") {
+        isAdmin = true;
         adminPanel.style.display = "flex";
+      } else {
+        alert("كود غير صحيح.");
       }
-    });
+    } else {
+      adminPanel.style.display = "flex";
+    }
+  });
 
-    adminCloseBtn.addEventListener("click", () => {
+  adminCloseBtn.addEventListener("click", () => {
+    adminPanel.style.display = "none";
+  });
+
+  adminPanel.addEventListener("click", e => {
+    if (e.target === adminPanel) {
       adminPanel.style.display = "none";
-    });
+    }
+  });
 
-    adminPanel.addEventListener("click", e => {
-      if (e.target === adminPanel) {
-        adminPanel.style.display = "none";
+  document.querySelectorAll(".admin-tab-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".admin-tab-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      const tab = btn.getAttribute("data-tab");
+      document.querySelectorAll(".admin-section").forEach(sec => sec.classList.remove("active"));
+      document.getElementById(tab).classList.add("active");
+    });
+  });
+
+  const saveBannerBtn = document.getElementById("saveBannerBtn");
+  saveBannerBtn.addEventListener("click", async () => {
+    try {
+      if (!isAdmin) {
+        alert("غير مسموح. يجب تسجيل الدخول كمسؤول.");
+        return;
       }
-    });
-
-    document.querySelectorAll(".admin-tab-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        document.querySelectorAll(".admin-tab-btn").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        const tab = btn.getAttribute("data-tab");
-        document.querySelectorAll(".admin-section").forEach(sec => sec.classList.remove("active"));
-        document.getElementById(tab).classList.add("active");
-      });
-    });
-
-    const saveBannerBtn = document.getElementById("saveBannerBtn");
-    saveBannerBtn.addEventListener("click", async () => {
-      if (!isAdmin) return;
       const text = document.getElementById("adminBannerText").value || "";
       await setDoc(doc(settingsCol, "banner"), { text });
       document.getElementById("bannerText").textContent = text;
-      alert("تم حفظ البانر.");
-    });
-
-    const recipesAdminList = document.getElementById("recipesAdminList");
-    const recipeIdInput = document.getElementById("recipeId");
-    const recipeTitleInput = document.getElementById("recipeTitle");
-    const recipeImageInput = document.getElementById("recipeImage");
-    const recipeTimeInput = document.getElementById("recipeTime");
-    const recipeLevelInput = document.getElementById("recipeLevel");
-    const recipeCategorySelect = document.getElementById("recipeCategory");
-    const recipeIngredientsInput = document.getElementById("recipeIngredients");
-    const recipeStepsInput = document.getElementById("recipeSteps");
-    const newRecipeBtn = document.getElementById("newRecipeBtn");
-    const saveRecipeBtn = document.getElementById("saveRecipeBtn");
-    const deleteRecipeBtn = document.getElementById("deleteRecipeBtn");
-
-    function renderRecipesAdminList() {
-      recipesAdminList.innerHTML = "";
-      recipesCache.forEach(r => {
-        const div = document.createElement("div");
-        div.className = "admin-item";
-        div.innerHTML = `
-          <span>${r.id} — ${r.title}</span>
-          <button data-id="${r.id}">تعديل</button>
-        `;
-        div.querySelector("button").addEventListener("click", () => {
-          recipeIdInput.value = r.id;
-          recipeTitleInput.value = r.title || "";
-          recipeImageInput.value = r.image || "";
-          recipeTimeInput.value = r.time || "";
-          recipeLevelInput.value = r.level || "";
-          recipeCategorySelect.value = r.category || "طاجين";
-          recipeIngredientsInput.value = (r.ingredients || []).join("\n");
-          recipeStepsInput.value = r.steps || "";
-        });
-        recipesAdminList.appendChild(div);
-      });
+      alert("✔ تم حفظ البانر.");
+    } catch (err) {
+      console.error(err);
+      alert("حدث خطأ أثناء حفظ البانر.");
     }
+  });
 
-    newRecipeBtn.addEventListener("click", () => {
-      recipeIdInput.value = "";
-      recipeTitleInput.value = "";
-      recipeImageInput.value = "";
-      recipeTimeInput.value = "";
-      recipeLevelInput.value = "";
-      recipeCategorySelect.value = "طاجين";
-      recipeIngredientsInput.value = "";
-      recipeStepsInput.value = "";
+  const recipesAdminList = document.getElementById("recipesAdminList");
+  const recipeIdInput = document.getElementById("recipeId");
+  const recipeTitleInput = document.getElementById("recipeTitle");
+  const recipeImageInput = document.getElementById("recipeImage");
+  const recipeTimeInput = document.getElementById("recipeTime");
+  const recipeLevelInput = document.getElementById("recipeLevel");
+  const recipeCategorySelect = document.getElementById("recipeCategory");
+  const recipeIngredientsInput = document.getElementById("recipeIngredients");
+  const recipeStepsInput = document.getElementById("recipeSteps");
+  const newRecipeBtn = document.getElementById("newRecipeBtn");
+  const saveRecipeBtn = document.getElementById("saveRecipeBtn");
+  const deleteRecipeBtn = document.getElementById("deleteRecipeBtn");
+
+  function renderRecipesAdminList() {
+    recipesAdminList.innerHTML = "";
+    recipesCache.forEach(r => {
+      const div = document.createElement("div");
+      div.className = "admin-item";
+      div.innerHTML = `
+        <span>${r.id} — ${r.title}</span>
+        <button data-id="${r.id}">تعديل</button>
+      `;
+      div.querySelector("button").addEventListener("click", () => {
+        recipeIdInput.value = r.id;
+        recipeTitleInput.value = r.title || "";
+        recipeImageInput.value = r.image || "";
+        recipeTimeInput.value = r.time || "";
+        recipeLevelInput.value = r.level || "";
+        recipeCategorySelect.value = r.category || "طاجين";
+        recipeIngredientsInput.value = (r.ingredients || []).join("\n");
+        recipeStepsInput.value = r.steps || "";
+      });
+      recipesAdminList.appendChild(div);
     });
+  }
 
-    saveRecipeBtn.addEventListener("click", async () => {
-      if (!isAdmin) return;
-      const id = recipeIdInput.value.trim() || (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()));
+  newRecipeBtn.addEventListener("click", () => {
+    recipeIdInput.value = "";
+    recipeTitleInput.value = "";
+    recipeImageInput.value = "";
+    recipeTimeInput.value = "";
+    recipeLevelInput.value = "";
+    recipeCategorySelect.value = "طاجين";
+    recipeIngredientsInput.value = "";
+    recipeStepsInput.value = "";
+  });
+
+  // FIXED SAVE RECIPE BUTTON
+  saveRecipeBtn.addEventListener("click", async () => {
+    try {
+      if (!isAdmin) {
+        alert("غير مسموح. يجب تسجيل الدخول كمسؤول.");
+        return;
+      }
+
+      let id = recipeIdInput.value.trim();
+      if (!id) {
+        id = crypto.randomUUID ? crypto.randomUUID() : String(Date.now());
+        recipeIdInput.value = id;
+      }
+
       const data = {
-        title: recipeTitleInput.value || "",
-        image: recipeImageInput.value || "",
-        time: recipeTimeInput.value || "",
-        level: recipeLevelInput.value || "",
-        category: recipeCategorySelect.value || "",
-        ingredients: (recipeIngredientsInput.value || "").split("\n").filter(x => x.trim() !== ""),
-        steps: recipeStepsInput.value || ""
+        title: recipeTitleInput.value.trim(),
+        image: recipeImageInput.value.trim(),
+        time: recipeTimeInput.value.trim(),
+        level: recipeLevelInput.value.trim(),
+        category: recipeCategorySelect.value.trim(),
+        ingredients: (recipeIngredientsInput.value || "")
+          .split("\n")
+          .map(i => i.trim())
+          .filter(i => i),
+        steps: recipeStepsInput.value.trim()
       };
+
+      if (!data.title || !data.image || !data.steps) {
+        alert("يجب ملء الحقول الأساسية: العنوان، الصورة، الطريقة.");
+        return;
+      }
+
       await setDoc(doc(recipesCol, id), data);
       await loadRecipes();
-      recipeIdInput.value = id;
-      alert("تم حفظ الوصفة.");
-    });
+      alert("✔ تم حفظ الوصفة بنجاح وتظهر الآن للزوار.");
+    } catch (error) {
+      console.error("Save error:", error);
+      alert("حدث خطأ أثناء حفظ الوصفة. تحقق من الكونسول.");
+    }
+  });
 
-    deleteRecipeBtn.addEventListener("click", async () => {
-      if (!isAdmin) return;
+  deleteRecipeBtn.addEventListener("click", async () => {
+    try {
+      if (!isAdmin) {
+        alert("غير مسموح. يجب تسجيل الدخول كمسؤول.");
+        return;
+      }
       const id = recipeIdInput.value.trim();
       if (!id) {
         alert("أدخل ID الوصفة لحذفها.");
@@ -1118,60 +1153,83 @@
       await deleteDoc(doc(recipesCol, id));
       await loadRecipes();
       newRecipeBtn.click();
-      alert("تم حذف الوصفة.");
-    });
-
-    const articlesAdminList = document.getElementById("articlesAdminList");
-    const articleIdInput = document.getElementById("articleId");
-    const articleTitleInput = document.getElementById("articleTitle");
-    const articleExcerptInput = document.getElementById("articleExcerpt");
-    const articleBodyInput = document.getElementById("articleBody");
-    const newArticleBtn = document.getElementById("newArticleBtn");
-    const saveArticleBtn = document.getElementById("saveArticleBtn");
-    const deleteArticleBtn = document.getElementById("deleteArticleBtn");
-
-    function renderArticlesAdminList() {
-      articlesAdminList.innerHTML = "";
-      articlesCache.forEach(a => {
-        const div = document.createElement("div");
-        div.className = "admin-item";
-        div.innerHTML = `
-          <span>${a.id} — ${a.title}</span>
-          <button data-id="${a.id}">تعديل</button>
-        `;
-        div.querySelector("button").addEventListener("click", () => {
-          articleIdInput.value = a.id;
-          articleTitleInput.value = a.title || "";
-          articleExcerptInput.value = a.excerpt || "";
-          articleBodyInput.value = a.body || "";
-        });
-        articlesAdminList.appendChild(div);
-      });
+      alert("✔ تم حذف الوصفة.");
+    } catch (err) {
+      console.error(err);
+      alert("حدث خطأ أثناء حذف الوصفة.");
     }
+  });
 
-    newArticleBtn.addEventListener("click", () => {
-      articleIdInput.value = "";
-      articleTitleInput.value = "";
-      articleExcerptInput.value = "";
-      articleBodyInput.value = "";
+  const articlesAdminList = document.getElementById("articlesAdminList");
+  const articleIdInput = document.getElementById("articleId");
+  const articleTitleInput = document.getElementById("articleTitle");
+  const articleExcerptInput = document.getElementById("articleExcerpt");
+  const articleBodyInput = document.getElementById("articleBody");
+  const newArticleBtn = document.getElementById("newArticleBtn");
+  const saveArticleBtn = document.getElementById("saveArticleBtn");
+  const deleteArticleBtn = document.getElementById("deleteArticleBtn");
+
+  function renderArticlesAdminList() {
+    articlesAdminList.innerHTML = "";
+    articlesCache.forEach(a => {
+      const div = document.createElement("div");
+      div.className = "admin-item";
+      div.innerHTML = `
+        <span>${a.id} — ${a.title}</span>
+        <button data-id="${a.id}">تعديل</button>
+      `;
+      div.querySelector("button").addEventListener("click", () => {
+        articleIdInput.value = a.id;
+        articleTitleInput.value = a.title || "";
+        articleExcerptInput.value = a.excerpt || "";
+        articleBodyInput.value = a.body || "";
+      });
+      articlesAdminList.appendChild(div);
     });
+  }
 
-    saveArticleBtn.addEventListener("click", async () => {
-      if (!isAdmin) return;
-      const id = articleIdInput.value.trim() || (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()));
+  newArticleBtn.addEventListener("click", () => {
+    articleIdInput.value = "";
+    articleTitleInput.value = "";
+    articleExcerptInput.value = "";
+    articleBodyInput.value = "";
+  });
+
+  saveArticleBtn.addEventListener("click", async () => {
+    try {
+      if (!isAdmin) {
+        alert("غير مسموح. يجب تسجيل الدخول كمسؤول.");
+        return;
+      }
+      let id = articleIdInput.value.trim();
+      if (!id) {
+        id = crypto.randomUUID ? crypto.randomUUID() : String(Date.now());
+        articleIdInput.value = id;
+      }
       const data = {
-        title: articleTitleInput.value || "",
-        excerpt: articleExcerptInput.value || "",
-        body: articleBodyInput.value || ""
+        title: articleTitleInput.value.trim(),
+        excerpt: articleExcerptInput.value.trim(),
+        body: articleBodyInput.value.trim()
       };
+      if (!data.title || !data.body) {
+        alert("يجب ملء العنوان ونص المقال.");
+        return;
+      }
       await setDoc(doc(articlesCol, id), data);
       await loadArticles();
-      articleIdInput.value = id;
-      alert("تم حفظ المقال.");
-    });
+      alert("✔ تم حفظ المقال.");
+    } catch (err) {
+      console.error(err);
+      alert("حدث خطأ أثناء حفظ المقال.");
+    }
+  });
 
-    deleteArticleBtn.addEventListener("click", async () => {
-      if (!isAdmin) return;
+  deleteArticleBtn.addEventListener("click", async () => {
+    try {
+      if (!isAdmin) {
+        alert("غير مسموح. يجب تسجيل الدخول كمسؤول.");
+        return;
+      }
       const id = articleIdInput.value.trim();
       if (!id) {
         alert("أدخل ID المقال لحذفه.");
@@ -1181,64 +1239,87 @@
       await deleteDoc(doc(articlesCol, id));
       await loadArticles();
       newArticleBtn.click();
-      alert("تم حذف المقال.");
-    });
-
-    const videosAdminList = document.getElementById("videosAdminList");
-    const videoIdInput = document.getElementById("videoId");
-    const videoTitleInput = document.getElementById("videoTitle");
-    const videoThumbInput = document.getElementById("videoThumb");
-    const videoUrlInput = document.getElementById("videoUrl");
-    const videoDescInput = document.getElementById("videoDesc");
-    const newVideoBtn = document.getElementById("newVideoBtn");
-    const saveVideoBtn = document.getElementById("saveVideoBtn");
-    const deleteVideoBtn = document.getElementById("deleteVideoBtn");
-
-    function renderVideosAdminList() {
-      videosAdminList.innerHTML = "";
-      videosCache.forEach(v => {
-        const div = document.createElement("div");
-        div.className = "admin-item";
-        div.innerHTML = `
-          <span>${v.id} — ${v.title}</span>
-          <button data-id="${v.id}">تعديل</button>
-        `;
-        div.querySelector("button").addEventListener("click", () => {
-          videoIdInput.value = v.id;
-          videoTitleInput.value = v.title || "";
-          videoThumbInput.value = v.thumb || "";
-          videoUrlInput.value = v.url || "";
-          videoDescInput.value = v.desc || "";
-        });
-        videosAdminList.appendChild(div);
-      });
+      alert("✔ تم حذف المقال.");
+    } catch (err) {
+      console.error(err);
+      alert("حدث خطأ أثناء حذف المقال.");
     }
+  });
 
-    newVideoBtn.addEventListener("click", () => {
-      videoIdInput.value = "";
-      videoTitleInput.value = "";
-      videoThumbInput.value = "";
-      videoUrlInput.value = "";
-      videoDescInput.value = "";
+  const videosAdminList = document.getElementById("videosAdminList");
+  const videoIdInput = document.getElementById("videoId");
+  const videoTitleInput = document.getElementById("videoTitle");
+  const videoThumbInput = document.getElementById("videoThumb");
+  const videoUrlInput = document.getElementById("videoUrl");
+  const videoDescInput = document.getElementById("videoDesc");
+  const newVideoBtn = document.getElementById("newVideoBtn");
+  const saveVideoBtn = document.getElementById("saveVideoBtn");
+  const deleteVideoBtn = document.getElementById("deleteVideoBtn");
+
+  function renderVideosAdminList() {
+    videosAdminList.innerHTML = "";
+    videosCache.forEach(v => {
+      const div = document.createElement("div");
+      div.className = "admin-item";
+      div.innerHTML = `
+        <span>${v.id} — ${v.title}</span>
+        <button data-id="${v.id}">تعديل</button>
+      `;
+      div.querySelector("button").addEventListener("click", () => {
+        videoIdInput.value = v.id;
+        videoTitleInput.value = v.title || "";
+        videoThumbInput.value = v.thumb || "";
+        videoUrlInput.value = v.url || "";
+        videoDescInput.value = v.desc || "";
+      });
+      videosAdminList.appendChild(div);
     });
+  }
 
-    saveVideoBtn.addEventListener("click", async () => {
-      if (!isAdmin) return;
-      const id = videoIdInput.value.trim() || (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()));
+  newVideoBtn.addEventListener("click", () => {
+    videoIdInput.value = "";
+    videoTitleInput.value = "";
+    videoThumbInput.value = "";
+    videoUrlInput.value = "";
+    videoDescInput.value = "";
+  });
+
+  saveVideoBtn.addEventListener("click", async () => {
+    try {
+      if (!isAdmin) {
+        alert("غير مسموح. يجب تسجيل الدخول كمسؤول.");
+        return;
+      }
+      let id = videoIdInput.value.trim();
+      if (!id) {
+        id = crypto.randomUUID ? crypto.randomUUID() : String(Date.now());
+        videoIdInput.value = id;
+      }
       const data = {
-        title: videoTitleInput.value || "",
-        thumb: videoThumbInput.value || "",
-        url: videoUrlInput.value || "",
-        desc: videoDescInput.value || ""
+        title: videoTitleInput.value.trim(),
+        thumb: videoThumbInput.value.trim(),
+        url: videoUrlInput.value.trim(),
+        desc: videoDescInput.value.trim()
       };
+      if (!data.title || !data.url) {
+        alert("يجب ملء العنوان ورابط الفيديو.");
+        return;
+      }
       await setDoc(doc(videosCol, id), data);
       await loadVideos();
-      videoIdInput.value = id;
-      alert("تم حفظ الفيديو.");
-    });
+      alert("✔ تم حفظ الفيديو.");
+    } catch (err) {
+      console.error(err);
+      alert("حدث خطأ أثناء حفظ الفيديو.");
+    }
+  });
 
-    deleteVideoBtn.addEventListener("click", async () => {
-      if (!isAdmin) return;
+  deleteVideoBtn.addEventListener("click", async () => {
+    try {
+      if (!isAdmin) {
+        alert("غير مسموح. يجب تسجيل الدخول كمسؤول.");
+        return;
+      }
       const id = videoIdInput.value.trim();
       if (!id) {
         alert("أدخل ID الفيديو لحذفه.");
@@ -1248,30 +1329,43 @@
       await deleteDoc(doc(videosCol, id));
       await loadVideos();
       newVideoBtn.click();
-      alert("تم حذف الفيديو.");
-    });
+      alert("✔ تم حذف الفيديو.");
+    } catch (err) {
+      console.error(err);
+      alert("حدث خطأ أثناء حذف الفيديو.");
+    }
+  });
 
-    const saveLegalBtn = document.getElementById("saveLegalBtn");
-    saveLegalBtn.addEventListener("click", async () => {
-      if (!isAdmin) return;
+  const saveLegalBtn = document.getElementById("saveLegalBtn");
+  saveLegalBtn.addEventListener("click", async () => {
+    try {
+      if (!isAdmin) {
+        alert("غير مسموح. يجب تسجيل الدخول كمسؤول.");
+        return;
+      }
       const privacyHtml = document.getElementById("privacyText").value || "";
       const termsHtml = document.getElementById("termsText").value || "";
       await setDoc(doc(settingsCol, "privacy"), { html: privacyHtml });
       await setDoc(doc(settingsCol, "terms"), { html: termsHtml });
       document.getElementById("privacyContent").innerHTML = privacyHtml;
       document.getElementById("termsContent").innerHTML = termsHtml;
-      alert("تم حفظ النصوص القانونية.");
-    });
+      alert("✔ تم حفظ النصوص القانونية.");
+    } catch (err) {
+      console.error(err);
+      alert("حدث خطأ أثناء حفظ النصوص القانونية.");
+    }
+  });
 
-    (async function init() {
-      await Promise.all([
-        loadRecipes(),
-        loadArticles(),
-        loadVideos(),
-        loadBanner(),
-        loadLegalTexts()
-      ]);
-    })();
-  </script>
+  (async function init() {
+    await Promise.all([
+      loadRecipes(),
+      loadArticles(),
+      loadVideos(),
+      loadBanner(),
+      loadLegalTexts()
+    ]);
+  })();
+</script>
+
 </body>
 </html>
