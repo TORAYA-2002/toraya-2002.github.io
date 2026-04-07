@@ -1,215 +1,1496 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>وصفات الطبخ</title>
+  <meta charset="UTF-8" />
+  <title>Cooking Studio – Live Recipes & Articles</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    body {
-      font-family: system-ui, sans-serif;
-      background: #f5f5f5;
+    :root {
+      --bg: #0f172a;
+      --bg-soft: #111827;
+      --accent: #f59e0b;
+      --accent-soft: rgba(245, 158, 11, 0.15);
+      --text: #f9fafb;
+      --muted: #9ca3af;
+      --card: #020617;
+      --danger: #ef4444;
+      --success: #22c55e;
+      --radius: 14px;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.55);
+      --transition-fast: 0.2s ease-out;
+      --transition-med: 0.35s ease-out;
+    }
+
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
-    .premium-header {
-      text-align: center;
-      padding: 30px 10px;
-      background: #111;
-      color: #fff;
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1f2937 0, #020617 55%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
-    .gold-title {
-      font-size: 32px;
-      font-weight: bold;
-      color: #d4a017;
-      text-shadow: 0 0 10px rgba(212,160,23,0.4);
-      margin: 0 0 10px;
+    .app-shell {
+      max-width: 1200px;
+      margin: 32px auto;
+      padding: 0 16px 40px;
     }
 
-    .gold-desc {
-      font-size: 18px;
-      color: #ddd;
-      margin: 0;
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      gap: 16px;
     }
 
-    .recipe-box {
-      background: #fff;
-      padding: 20px;
-      margin: 25px auto;
-      border-radius: 12px;
-      max-width: 800px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.08);
-      direction: rtl;
-      text-align: right;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
-    .title {
-      font-size: 24px;
-      font-weight: bold;
-      color: #d4a017;
-      margin-bottom: 15px;
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #fbbf24, #f97316 45%, #b45309 100%);
+      box-shadow: 0 0 25px rgba(245, 158, 11, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #111827;
+      font-weight: 800;
+      font-size: 20px;
     }
 
-    label {
-      display: block;
-      margin: 8px 0 4px;
-      font-weight: 600;
+    .brand-text h1 {
+      font-size: 1.4rem;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 15px;
-      box-sizing: border-box;
+    .brand-text h1 span {
+      background: linear-gradient(90deg, #fbbf24, #f97316, #facc15);
+      -webkit-background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 18px rgba(245, 158, 11, 0.6);
     }
 
-    textarea {
-      min-height: 80px;
-      resize: vertical;
+    .brand-text p {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-btn {
+      border: none;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.8);
+      color: var(--muted);
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background var(--transition-fast), color var(--transition-fast), transform 0.15s ease-out, box-shadow 0.15s ease-out;
+    }
+
+    .nav-btn span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.9);
+    }
+
+    .nav-btn.active {
+      background: linear-gradient(90deg, #f59e0b, #f97316);
+      color: #111827;
+      box-shadow: 0 0 18px rgba(245, 158, 11, 0.7);
+      transform: translateY(-1px);
+    }
+
+    .nav-btn:hover {
+      background: rgba(31, 41, 55, 0.95);
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+
+    .nav-btn.active span.dot {
+      background: #111827;
+      box-shadow: none;
+    }
+
+    .hero {
+      background: radial-gradient(circle at top left, rgba(245, 158, 11, 0.18), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.18), transparent 55%),
+                  linear-gradient(135deg, #020617, #020617);
+      border-radius: 24px;
+      padding: 24px 22px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: conic-gradient(from 180deg, rgba(245, 158, 11, 0.15), transparent, rgba(59, 130, 246, 0.15), transparent);
+      filter: blur(40px);
+      opacity: 0.4;
+      animation: spin 18s linear infinite;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.4fr);
+      gap: 24px;
+      align-items: center;
+    }
+
+    .hero-title {
+      font-size: 1.9rem;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .hero-title span {
+      background: linear-gradient(90deg, #fbbf24, #f97316, #facc15);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.8);
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tag-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.9);
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn-primary,
+    .btn-ghost {
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 0.85rem;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.15s ease-out, box-shadow 0.15s ease-out, background var(--transition-fast), color var(--transition-fast);
     }
 
     .btn-primary {
-      background: #d4a017;
-      color: #fff;
-      padding: 10px 18px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 15px;
+      background: linear-gradient(90deg, #f59e0b, #f97316);
+      color: #111827;
+      box-shadow: 0 0 18px rgba(245, 158, 11, 0.7);
     }
 
     .btn-primary:hover {
-      background: #b88a12;
+      transform: translateY(-1px);
+      box-shadow: 0 0 24px rgba(245, 158, 11, 0.9);
     }
 
-    .recipe-card {
-      background: #fafafa;
-      padding: 15px;
+    .btn-ghost {
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--muted);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(31, 41, 55, 0.95);
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+
+    .hero-media {
+      position: relative;
+      border-radius: 20px;
+      background: radial-gradient(circle at top, rgba(248, 250, 252, 0.08), transparent 60%);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 14px;
+      overflow: hidden;
+    }
+
+    .hero-media-inner {
+      border-radius: 16px;
+      background: linear-gradient(135deg, #020617, #020617);
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .hero-stat {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .hero-stat strong {
+      color: var(--accent);
+      font-size: 1rem;
+    }
+
+    .hero-badge {
+      font-size: 0.7rem;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(22, 163, 74, 0.15);
+      color: #bbf7d0;
+      border: 1px solid rgba(34, 197, 94, 0.5);
+    }
+
+    .hero-preview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .hero-preview-card {
       border-radius: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #eee;
+      background: radial-gradient(circle at top, rgba(248, 250, 252, 0.08), transparent 60%);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      padding: 6px;
+      font-size: 0.7rem;
+      color: var(--muted);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      position: relative;
+      overflow: hidden;
     }
 
-    .recipe-id {
-      font-size: 13px;
-      color: #999;
-      margin-bottom: 5px;
+    .hero-preview-card span.title {
+      font-size: 0.75rem;
+      color: var(--text);
     }
 
-    .recipe-name {
-      margin: 0 0 8px;
-      font-size: 20px;
-      color: #333;
+    .hero-preview-card span.pill {
+      font-size: 0.65rem;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      align-self: flex-start;
     }
 
-    .recipe-section-title {
-      font-weight: 700;
+    .hero-preview-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(245, 158, 11, 0.12), transparent 55%);
+      opacity: 0;
+      transition: opacity var(--transition-med);
+    }
+
+    .hero-preview-card:hover::after {
+      opacity: 1;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.2fr);
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 900px) {
+      .hero-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      main {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav {
+        justify-content: flex-start;
+      }
+    }
+
+    .card {
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), #020617);
+      border-radius: var(--radius);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      padding: 16px 16px 18px;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at top, rgba(248, 250, 252, 0.06), transparent 60%);
+      opacity: 0;
+      transition: opacity var(--transition-med);
+      pointer-events: none;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      gap: 8px;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title span.accent {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.9);
+    }
+
+    .card-subtitle {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .pill-soft {
+      font-size: 0.7rem;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--muted);
+    }
+
+    .list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
       margin-top: 8px;
+      max-height: 360px;
+      overflow: auto;
+      padding-right: 4px;
+    }
+
+    .list-empty {
+      font-size: 0.8rem;
+      color: var(--muted);
+      padding: 8px 0;
+    }
+
+    .item {
+      border-radius: 12px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      padding: 10px 10px 10px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 8px;
+      font-size: 0.8rem;
+      transition: transform 0.15s ease-out, box-shadow 0.15s ease-out, border-color var(--transition-fast), background var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .item:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 18px rgba(15, 23, 42, 0.9);
+      border-color: rgba(148, 163, 184, 0.9);
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 1), #020617);
+    }
+
+    .item-main {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .item-title {
+      font-size: 0.9rem;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .item-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 0.7rem;
+    }
+
+    .item-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .item-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .badge {
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--muted);
+    }
+
+    .btn-icon {
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 0.8rem;
+      padding: 2px 4px;
+      transition: color var(--transition-fast), transform 0.15s ease-out;
+    }
+
+    .btn-icon:hover {
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .btn-icon.danger:hover {
+      color: var(--danger);
+    }
+
+    .static-content {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-top: 6px;
+    }
+
+    .static-content h3 {
+      font-size: 0.95rem;
+      color: var(--text);
+      margin-top: 10px;
       margin-bottom: 4px;
-      color: #444;
+    }
+
+    .static-content p {
+      margin-bottom: 6px;
+    }
+
+    .static-content ul {
+      margin-left: 16px;
+      margin-bottom: 6px;
+    }
+
+    .static-content li {
+      margin-bottom: 4px;
+    }
+
+    .admin-locked {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .admin-code-input {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .admin-code-input input {
+      flex: 1;
+      min-width: 140px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text);
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      outline: none;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+    }
+
+    .admin-code-input input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.5);
+      background: rgba(15, 23, 42, 1);
+    }
+
+    .admin-panel {
+      margin-top: 10px;
+      display: none;
+      animation: fadeInUp 0.35s ease-out;
+    }
+
+    .admin-tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .admin-tab-btn {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--muted);
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), transform 0.15s ease-out;
+    }
+
+    .admin-tab-btn.active {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-color: rgba(245, 158, 11, 0.7);
+      transform: translateY(-1px);
+    }
+
+    .admin-section {
+      display: none;
+      margin-top: 4px;
+    }
+
+    .admin-section.active {
+      display: block;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.8rem;
+    }
+
+    .form-row label {
+      color: var(--muted);
+    }
+
+    .form-row input,
+    .form-row textarea,
+    .form-row select {
+      border-radius: 10px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text);
+      padding: 6px 8px;
+      font-size: 0.8rem;
+      outline: none;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+    }
+
+    .form-row input:focus,
+    .form-row textarea:focus,
+    .form-row select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.5);
+      background: rgba(15, 23, 42, 1);
+    }
+
+    .form-row textarea {
+      min-height: 70px;
+      resize: vertical;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .status-text {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .status-text.success {
+      color: var(--success);
+    }
+
+    .status-text.error {
+      color: var(--danger);
+    }
+
+    .admin-list {
+      margin-top: 8px;
+      max-height: 220px;
+      overflow: auto;
+      padding-right: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .admin-item {
+      border-radius: 10px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      padding: 8px 8px;
+      font-size: 0.8rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 6px;
+    }
+
+    .admin-item-main {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .admin-item-title {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .admin-item-meta {
+      color: var(--muted);
+      font-size: 0.7rem;
+    }
+
+    .admin-item-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hidden {
+      display: none !important;
     }
   </style>
 </head>
 <body>
+  <div class="app-shell">
+    <header>
+      <div class="brand">
+        <div class="brand-logo">CS</div>
+        <div class="brand-text">
+          <h1><span>Cooking Studio</span> <small>• live</small></h1>
+          <p>Recipes and articles stored in Firebase, visible to every visitor.</p>
+        </div>
+      </div>
+      <nav>
+        <button class="nav-btn active" data-section="recipes">
+          <span class="dot"></span> Recipes
+        </button>
+        <button class="nav-btn" data-section="articles">Articles</button>
+        <button class="nav-btn" data-section="privacy">Privacy Policy</button>
+        <button class="nav-btn" data-section="terms">Terms & Conditions</button>
+        <button class="nav-btn" data-section="admin">Admin</button>
+      </nav>
+    </header>
 
-  <header class="premium-header">
-    <h1 class="gold-title">✦ وصفات طبخ مميزة ✦</h1>
-    <p class="gold-desc">
-      أضف وصفاتك الخاصة، تُحفظ محليًا في جهازك مع رقم تعريفي ID لكل وصفة.
-    </p>
-  </header>
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+          <h2 class="hero-title">
+            A <span>real-time</span> cooking hub powered by Firebase.
+          </h2>
+          <p class="hero-subtitle">
+            Admin changes are saved in Firebase Realtime Database and instantly visible to all visitors.
+          </p>
+          <div class="hero-tags">
+            <div class="tag">
+              <span class="tag-dot"></span> Shared database
+            </div>
+            <div class="tag">
+              <span class="tag-dot"></span> Admin-only editing
+            </div>
+            <div class="tag">
+              <span class="tag-dot"></span> Recipes & articles
+            </div>
+          </div>
+          <div class="hero-cta">
+            <button class="btn-primary" data-section-jump="recipes">
+              Browse recipes
+            </button>
+            <button class="btn-ghost" data-section-jump="admin">
+              Open admin panel
+            </button>
+          </div>
+        </div>
+        <div class="hero-media">
+          <div class="hero-media-inner">
+            <div class="hero-stat">
+              <div>
+                <div style="font-size:0.75rem;color:var(--muted);">Live content</div>
+                <strong id="hero-total-items">0 items</strong>
+              </div>
+              <div class="hero-badge">Admin code: 20132021</div>
+            </div>
+            <div class="hero-preview-grid">
+              <div class="hero-preview-card">
+                <span class="title">Recipes</span>
+                <span class="pill">Images & videos</span>
+                <span style="font-size:0.65rem;">Stored in Firebase, visible to everyone.</span>
+              </div>
+              <div class="hero-preview-card">
+                <span class="title">Articles</span>
+                <span class="pill">Cooking tips</span>
+                <span style="font-size:0.65rem;">Guides and stories synced for all visitors.</span>
+              </div>
+              <div class="hero-preview-card">
+                <span class="title">Policies</span>
+                <span class="pill">Static pages</span>
+                <span style="font-size:0.65rem;">Privacy & terms in a clean layout.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <!-- إضافة وصفة جديدة -->
-  <section id="recipe-writer" class="recipe-box">
-    <h2 class="title">إضافة وصفة جديدة</h2>
+    <main>
+      <!-- Recipes -->
+      <section id="section-recipes" class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">
+              <span class="accent"></span> Recipes
+            </div>
+            <div class="card-subtitle">All recipes stored in Firebase Realtime Database.</div>
+          </div>
+          <span class="pill-soft" id="recipes-count">0 recipes</span>
+        </div>
+        <div class="list" id="recipes-list"></div>
+        <div class="list-empty hidden" id="recipes-empty">
+          No recipes yet. Use the admin panel to create your first recipe.
+        </div>
+      </section>
 
-    <label for="r-name">اسم الوصفة</label>
-    <input type="text" id="r-name" placeholder="مثال: باستا كريمية بالدجاج">
+      <!-- Articles -->
+      <section id="section-articles" class="card hidden">
+        <div class="card-header">
+          <div>
+            <div class="card-title">
+              <span class="accent"></span> Articles
+            </div>
+            <div class="card-subtitle">Cooking stories, tips, and guides.</div>
+          </div>
+          <span class="pill-soft" id="articles-count">0 articles</span>
+        </div>
+        <div class="list" id="articles-list"></div>
+        <div class="list-empty hidden" id="articles-empty">
+          No articles yet. Use the admin panel to publish one.
+        </div>
+      </section>
 
-    <label for="r-ingredients">المكونات</label>
-    <textarea id="r-ingredients" placeholder="اكتب المكونات هنا..."></textarea>
+      <!-- Privacy -->
+      <section id="section-privacy" class="card hidden">
+        <div class="card-header">
+          <div>
+            <div class="card-title">
+              <span class="accent"></span> Privacy Policy
+            </div>
+            <div class="card-subtitle">How your data is handled in this demo.</div>
+          </div>
+        </div>
+        <div class="static-content">
+          <p>
+            This website uses Firebase Realtime Database to store recipes and articles. Data is stored in your
+            Firebase project, not on this hosting server.
+          </p>
+          <h3>Data stored</h3>
+          <ul>
+            <li>Recipe titles, descriptions, content, image URLs, and video URLs.</li>
+            <li>Article titles, descriptions, and content.</li>
+          </ul>
+          <h3>Control</h3>
+          <p>
+            You can delete any recipe or article from the admin panel. You can also clear all data directly from
+            the Firebase console.
+          </p>
+        </div>
+      </section>
 
-    <label for="r-steps">طريقة التحضير</label>
-    <textarea id="r-steps" placeholder="اكتب خطوات التحضير هنا..."></textarea>
+      <!-- Terms -->
+      <section id="section-terms" class="card hidden">
+        <div class="card-header">
+          <div>
+            <div class="card-title">
+              <span class="accent"></span> Terms & Conditions
+            </div>
+            <div class="card-subtitle">Simple rules for this demo.</div>
+          </div>
+        </div>
+        <div class="static-content">
+          <h3>Use of content</h3>
+          <p>
+            All content is stored in your Firebase project. You are responsible for the content you create and
+            share.
+          </p>
+          <h3>Demo only</h3>
+          <p>
+            This is a front-end demo using Firebase as a backend. You can extend it with authentication, roles,
+            and more advanced features.
+          </p>
+        </div>
+      </section>
 
-    <button id="btn-save" class="btn-primary">حفظ الوصفة</button>
-  </section>
+      <!-- Admin -->
+      <section id="section-admin" class="card hidden">
+        <div class="card-header">
+          <div>
+            <div class="card-title">
+              <span class="accent"></span> Admin Panel
+            </div>
+            <div class="card-subtitle">Enter the admin code to manage recipes and articles.</div>
+          </div>
+          <span class="pill-soft">Code: 20132021</span>
+        </div>
 
-  <!-- عرض الوصفات من قاعدة البيانات -->
-  <section id="recipe-list" class="recipe-box">
-    <h2 class="title">الوصفات المحفوظة (قاعدة البيانات)</h2>
-    <div id="recipes-container"></div>
-  </section>
+        <div class="admin-locked" id="admin-locked">
+          <div>Admin access is locked. Enter the admin code to continue.</div>
+          <div class="admin-code-input">
+            <input type="password" id="admin-code-input" placeholder="Enter admin code 20132021" />
+            <button class="btn-primary" id="admin-code-btn">Unlock</button>
+          </div>
+          <div class="status-text" id="admin-code-status"></div>
+        </div>
+
+        <div class="admin-panel" id="admin-panel">
+          <div class="admin-tabs">
+            <button class="admin-tab-btn active" data-admin-tab="recipes-admin">Recipes</button>
+            <button class="admin-tab-btn" data-admin-tab="articles-admin">Articles</button>
+          </div>
+
+          <!-- Recipes admin -->
+          <div class="admin-section active" id="admin-section-recipes-admin">
+            <div class="form-grid">
+              <div class="form-row">
+                <label for="recipe-title">Recipe title</label>
+                <input type="text" id="recipe-title" placeholder="Ex: Golden Moroccan Couscous" />
+              </div>
+              <div class="form-row">
+                <label for="recipe-description">Short description</label>
+                <input type="text" id="recipe-description" placeholder="Ex: Light, fluffy couscous with vegetables." />
+              </div>
+              <div class="form-row">
+                <label for="recipe-content">Full recipe (steps, ingredients)</label>
+                <textarea id="recipe-content" placeholder="Write the full recipe here..."></textarea>
+              </div>
+              <div class="form-row">
+                <label for="recipe-image">Image URL (optional)</label>
+                <input type="text" id="recipe-image" placeholder="https://example.com/your-image.jpg" />
+              </div>
+              <div class="form-row">
+                <label for="recipe-video">Video URL (optional, YouTube or MP4)</label>
+                <input type="text" id="recipe-video" placeholder="https://youtube.com/..." />
+              </div>
+            </div>
+            <div class="form-actions">
+              <button class="btn-primary" id="recipe-save-btn">Save recipe</button>
+              <button class="btn-ghost" id="recipe-reset-btn">Reset form</button>
+              <span class="status-text" id="recipe-status"></span>
+            </div>
+            <div class="admin-list" id="admin-recipes-list"></div>
+          </div>
+
+          <!-- Articles admin -->
+          <div class="admin-section" id="admin-section-articles-admin">
+            <div class="form-grid">
+              <div class="form-row">
+                <label for="article-title">Article title</label>
+                <input type="text" id="article-title" placeholder="Ex: 5 Secrets to Perfect Tagine" />
+              </div>
+              <div class="form-row">
+                <label for="article-description">Short description</label>
+                <input type="text" id="article-description" placeholder="Ex: Simple tricks to level up your tagine." />
+              </div>
+              <div class="form-row">
+                <label for="article-content">Full article</label>
+                <textarea id="article-content" placeholder="Write the full article here..."></textarea>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button class="btn-primary" id="article-save-btn">Save article</button>
+              <button class="btn-ghost" id="article-reset-btn">Reset form</button>
+              <span class="status-text" id="article-status"></span>
+            </div>
+            <div class="admin-list" id="admin-articles-list"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Firebase SDKs (CDN, no bundler needed) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
   <script>
-    // تحميل البيانات من LocalStorage
-    let recipes = JSON.parse(localStorage.getItem("recipes_db") || "[]");
+    // --- Firebase config (use your project) ---
+    const firebaseConfig = {
+      apiKey: "AIzaSyC5vWkaVRMC5ZIT_KGeTqXMqg7U662n9bQ",
+      authDomain: "coocking-380d8.firebaseapp.com",
+      databaseURL: "https://coocking-380d8-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "coocking-380d8",
+      storageBucket: "coocking-380d8.appspot.com",
+      messagingSenderId: "32948618858",
+      appId: "1:32948618858:web:43fd8bf52b3c9aee772c13",
+      measurementId: "G-MTD0PZSB0P"
+    };
 
-    function saveRecipe() {
-      const name = document.getElementById("r-name").value.trim();
-      const ing = document.getElementById("r-ingredients").value.trim();
-      const steps = document.getElementById("r-steps").value.trim();
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
 
-      if (!name || !ing || !steps) {
-        alert("الرجاء ملء جميع الحقول.");
-        return;
-      }
+    // --- State ---
+    let recipes = [];
+    let articles = [];
 
-      const recipe = {
-        id: Date.now(), // ID تلقائي
-        name,
-        ing,
-        steps
-      };
+    // --- UI helpers ---
+    const navButtons = document.querySelectorAll(".nav-btn");
+    const sections = {
+      recipes: document.getElementById("section-recipes"),
+      articles: document.getElementById("section-articles"),
+      privacy: document.getElementById("section-privacy"),
+      terms: document.getElementById("section-terms"),
+      admin: document.getElementById("section-admin"),
+    };
 
-      recipes.push(recipe);
-      localStorage.setItem("recipes_db", JSON.stringify(recipes));
-      clearForm();
-      renderRecipes();
-    }
-
-    function clearForm() {
-      document.getElementById("r-name").value = "";
-      document.getElementById("r-ingredients").value = "";
-      document.getElementById("r-steps").value = "";
-    }
-
-    function renderRecipes() {
-      const container = document.getElementById("recipes-container");
-      container.innerHTML = "";
-
-      if (recipes.length === 0) {
-        container.innerHTML = "<p>لا توجد وصفات محفوظة بعد.</p>";
-        return;
-      }
-
-      recipes.forEach(r => {
-        const card = document.createElement("div");
-        card.className = "recipe-card";
-
-        card.innerHTML = `
-          <div class="recipe-id">ID: ${r.id}</div>
-          <h3 class="recipe-name">${r.name}</h3>
-          <div>
-            <div class="recipe-section-title">المكونات:</div>
-            <div>${r.ing.replace(/\n/g, "<br>")}</div>
-          </div>
-          <div>
-            <div class="recipe-section-title">طريقة التحضير:</div>
-            <div>${r.steps.replace(/\n/g, "<br>")}</div>
-          </div>
-        `;
-
-        container.appendChild(card);
+    function setActiveSection(sectionName) {
+      navButtons.forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.section === sectionName);
+      });
+      Object.entries(sections).forEach(([name, el]) => {
+        el.classList.toggle("hidden", name !== sectionName);
       });
     }
 
-    document.getElementById("btn-save").addEventListener("click", saveRecipe);
-    renderRecipes();
-  </script>
+    navButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        setActiveSection(btn.dataset.section);
+      });
+    });
 
+    document.querySelectorAll("[data-section-jump]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const target = btn.getAttribute("data-section-jump");
+        setActiveSection(target);
+        window.scrollTo({ top: document.querySelector("main").offsetTop - 20, behavior: "smooth" });
+      });
+    });
+
+    const recipesListEl = document.getElementById("recipes-list");
+    const recipesEmptyEl = document.getElementById("recipes-empty");
+    const recipesCountEl = document.getElementById("recipes-count");
+
+    const articlesListEl = document.getElementById("articles-list");
+    const articlesEmptyEl = document.getElementById("articles-empty");
+    const articlesCountEl = document.getElementById("articles-count");
+
+    const heroTotalItemsEl = document.getElementById("hero-total-items");
+
+    function escapeHtml(str) {
+      return String(str || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function updateHeroStats() {
+      const total = recipes.length + articles.length;
+      heroTotalItemsEl.textContent = `${total} item${total === 1 ? "" : "s"}`;
+    }
+
+    function renderRecipes() {
+      recipesListEl.innerHTML = "";
+      if (!recipes.length) {
+        recipesEmptyEl.classList.remove("hidden");
+      } else {
+        recipesEmptyEl.classList.add("hidden");
+      }
+
+      recipes.forEach((recipe) => {
+        const item = document.createElement("div");
+        item.className = "item";
+        item.innerHTML = `
+          <div class="item-main">
+            <div class="item-title">${escapeHtml(recipe.title || "Untitled recipe")}</div>
+            <div class="item-meta">
+              <span><strong>Desc:</strong> ${escapeHtml(recipe.description || "No description")}</span>
+              ${recipe.imageUrl ? `<span>🖼️ Image</span>` : ""}
+              ${recipe.videoUrl ? `<span>🎬 Video</span>` : ""}
+            </div>
+          </div>
+          <div class="item-actions">
+            <span class="badge">Recipe</span>
+          </div>
+        `;
+        item.addEventListener("click", () => {
+          showRecipeModal(recipe);
+        });
+        recipesListEl.appendChild(item);
+      });
+
+      recipesCountEl.textContent = `${recipes.length} recipe${recipes.length === 1 ? "" : "s"}`;
+      updateHeroStats();
+    }
+
+    function renderArticles() {
+      articlesListEl.innerHTML = "";
+      if (!articles.length) {
+        articlesEmptyEl.classList.remove("hidden");
+      } else {
+        articlesEmptyEl.classList.add("hidden");
+      }
+
+      articles.forEach((article) => {
+        const item = document.createElement("div");
+        item.className = "item";
+        item.innerHTML = `
+          <div class="item-main">
+            <div class="item-title">${escapeHtml(article.title || "Untitled article")}</div>
+            <div class="item-meta">
+              <span>${escapeHtml(article.description || "No description")}</span>
+            </div>
+          </div>
+          <div class="item-actions">
+            <span class="badge">Article</span>
+          </div>
+        `;
+        item.addEventListener("click", () => {
+          showArticleModal(article);
+        });
+        articlesListEl.appendChild(item);
+      });
+
+      articlesCountEl.textContent = `${articles.length} article${articles.length === 1 ? "" : "s"}`;
+      updateHeroStats();
+    }
+
+    function showRecipeModal(recipe) {
+      let message = `Recipe: ${recipe.title || "Untitled"}\n\n`;
+      if (recipe.description) message += `Description: ${recipe.description}\n\n`;
+      if (recipe.content) message += `Recipe:\n${recipe.content}\n\n`;
+      if (recipe.imageUrl) message += `Image URL: ${recipe.imageUrl}\n`;
+      if (recipe.videoUrl) message += `Video URL: ${recipe.videoUrl}\n`;
+      alert(message);
+    }
+
+    function showArticleModal(article) {
+      let message = `Article: ${article.title || "Untitled"}\n\n`;
+      if (article.description) message += `Description: ${article.description}\n\n`;
+      if (article.content) message += `Article:\n${article.content}\n`;
+      alert(message);
+    }
+
+    // --- Admin auth ---
+    const ADMIN_CODE = "20132021";
+    const adminLockedEl = document.getElementById("admin-locked");
+    const adminPanelEl = document.getElementById("admin-panel");
+    const adminCodeInputEl = document.getElementById("admin-code-input");
+    const adminCodeBtnEl = document.getElementById("admin-code-btn");
+    const adminCodeStatusEl = document.getElementById("admin-code-status");
+
+    adminCodeBtnEl.addEventListener("click", () => {
+      const value = adminCodeInputEl.value.trim();
+      if (value === ADMIN_CODE) {
+        adminLockedEl.style.display = "none";
+        adminPanelEl.style.display = "block";
+        adminCodeStatusEl.textContent = "";
+      } else {
+        adminCodeStatusEl.textContent = "Incorrect code. Try again.";
+        adminCodeStatusEl.classList.add("error");
+        setTimeout(() => {
+          adminCodeStatusEl.textContent = "";
+          adminCodeStatusEl.classList.remove("error");
+        }, 2000);
+      }
+    });
+
+    adminCodeInputEl.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        adminCodeBtnEl.click();
+      }
+    });
+
+    // --- Admin tabs ---
+    const adminTabButtons = document.querySelectorAll(".admin-tab-btn");
+    const adminSections = {
+      "recipes-admin": document.getElementById("admin-section-recipes-admin"),
+      "articles-admin": document.getElementById("admin-section-articles-admin"),
+    };
+
+    adminTabButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const tab = btn.dataset.adminTab;
+        adminTabButtons.forEach((b) => b.classList.toggle("active", b === btn));
+        Object.entries(adminSections).forEach(([name, el]) => {
+          el.classList.toggle("active", name === tab);
+        });
+      });
+    });
+
+    // --- Admin: recipes CRUD ---
+    const recipeTitleEl = document.getElementById("recipe-title");
+    const recipeDescriptionEl = document.getElementById("recipe-description");
+    const recipeContentEl = document.getElementById("recipe-content");
+    const recipeImageEl = document.getElementById("recipe-image");
+    const recipeVideoEl = document.getElementById("recipe-video");
+    const recipeSaveBtnEl = document.getElementById("recipe-save-btn");
+    const recipeResetBtnEl = document.getElementById("recipe-reset-btn");
+    const recipeStatusEl = document.getElementById("recipe-status");
+    const adminRecipesListEl = document.getElementById("admin-recipes-list");
+
+    let editingRecipeId = null;
+
+    function resetRecipeForm() {
+      recipeTitleEl.value = "";
+      recipeDescriptionEl.value = "";
+      recipeContentEl.value = "";
+      recipeImageEl.value = "";
+      recipeVideoEl.value = "";
+      editingRecipeId = null;
+      recipeSaveBtnEl.textContent = "Save recipe";
+      recipeStatusEl.textContent = "";
+      recipeStatusEl.classList.remove("success", "error");
+    }
+
+    recipeResetBtnEl.addEventListener("click", resetRecipeForm);
+
+    recipeSaveBtnEl.addEventListener("click", () => {
+      const title = recipeTitleEl.value.trim();
+      const description = recipeDescriptionEl.value.trim();
+      const content = recipeContentEl.value.trim();
+      const imageUrl = recipeImageEl.value.trim();
+      const videoUrl = recipeVideoEl.value.trim();
+
+      if (!title) {
+        recipeStatusEl.textContent = "Title is required.";
+        recipeStatusEl.classList.add("error");
+        return;
+      }
+
+      if (editingRecipeId) {
+        firebase
+          .database()
+          .ref("recipes/" + editingRecipeId)
+          .update({ title, description, content, imageUrl, videoUrl })
+          .then(() => {
+            recipeStatusEl.textContent = "Recipe updated.";
+            recipeStatusEl.classList.remove("error");
+            recipeStatusEl.classList.add("success");
+            setTimeout(() => {
+              recipeStatusEl.textContent = "";
+              recipeStatusEl.classList.remove("success");
+            }, 1500);
+            resetRecipeForm();
+          });
+      } else {
+        const newRef = firebase.database().ref("recipes").push();
+        newRef
+          .set({
+            title,
+            description,
+            content,
+            imageUrl,
+            videoUrl,
+            createdAt: Date.now(),
+          })
+          .then(() => {
+            recipeStatusEl.textContent = "Recipe created.";
+            recipeStatusEl.classList.remove("error");
+            recipeStatusEl.classList.add("success");
+            setTimeout(() => {
+              recipeStatusEl.textContent = "";
+              recipeStatusEl.classList.remove("success");
+            }, 1500);
+            resetRecipeForm();
+          });
+      }
+    });
+
+    function renderAdminRecipes() {
+      adminRecipesListEl.innerHTML = "";
+      if (!recipes.length) {
+        const empty = document.createElement("div");
+        empty.className = "status-text";
+        empty.textContent = "No recipes yet.";
+        adminRecipesListEl.appendChild(empty);
+        return;
+      }
+
+      recipes.forEach((recipe) => {
+        const item = document.createElement("div");
+        item.className = "admin-item";
+        item.innerHTML = `
+          <div class="admin-item-main">
+            <div class="admin-item-title">${escapeHtml(recipe.title || "Untitled recipe")}</div>
+            <div class="admin-item-meta">
+              ${escapeHtml(recipe.description || "No description")}
+            </div>
+          </div>
+          <div class="admin-item-actions">
+            <button class="btn-icon" data-action="edit">✏️ Edit</button>
+            <button class="btn-icon danger" data-action="delete">🗑️ Delete</button>
+          </div>
+        `;
+        item.querySelector('[data-action="edit"]').addEventListener("click", () => {
+          editingRecipeId = recipe.id;
+          recipeTitleEl.value = recipe.title || "";
+          recipeDescriptionEl.value = recipe.description || "";
+          recipeContentEl.value = recipe.content || "";
+          recipeImageEl.value = recipe.imageUrl || "";
+          recipeVideoEl.value = recipe.videoUrl || "";
+          recipeSaveBtnEl.textContent = "Update recipe";
+          recipeStatusEl.textContent = "Editing recipe...";
+          recipeStatusEl.classList.remove("error");
+        });
+        item.querySelector('[data-action="delete"]').addEventListener("click", () => {
+          if (!confirm("Delete this recipe?")) return;
+          firebase
+            .database()
+            .ref("recipes/" + recipe.id)
+            .remove();
+        });
+        adminRecipesListEl.appendChild(item);
+      });
+    }
+
+    // --- Admin: articles CRUD ---
+    const articleTitleEl = document.getElementById("article-title");
+    const articleDescriptionEl = document.getElementById("article-description");
+    const articleContentEl = document.getElementById("article-content");
+    const articleSaveBtnEl = document.getElementById("article-save-btn");
+    const articleResetBtnEl = document.getElementById("article-reset-btn");
+    const articleStatusEl = document.getElementById("article-status");
+    const adminArticlesListEl = document.getElementById("admin-articles-list");
+
+    let editingArticleId = null;
+
+    function resetArticleForm() {
+      articleTitleEl.value = "";
+      articleDescriptionEl.value = "";
+      articleContentEl.value = "";
+      editingArticleId = null;
+      articleSaveBtnEl.textContent = "Save article";
+      articleStatusEl.textContent = "";
+      articleStatusEl.classList.remove("success", "error");
+    }
+
+    articleResetBtnEl.addEventListener("click", resetArticleForm);
+
+    articleSaveBtnEl.addEventListener("click", () => {
+      const title = articleTitleEl.value.trim();
+      const description = articleDescriptionEl.value.trim();
+      const content = articleContentEl.value.trim();
+
+      if (!title) {
+        articleStatusEl.textContent = "Title is required.";
+        articleStatusEl.classList.add("error");
+        return;
+      }
+
+      if (editingArticleId) {
+        firebase
+          .database()
+          .ref("articles/" + editingArticleId)
+          .update({ title, description, content })
+          .then(() => {
+            articleStatusEl.textContent = "Article updated.";
+            articleStatusEl.classList.remove("error");
+            articleStatusEl.classList.add("success");
+            setTimeout(() => {
+              articleStatusEl.textContent = "";
+              articleStatusEl.classList.remove("success");
+            }, 1500);
+            resetArticleForm();
+          });
+      } else {
+        const newRef = firebase.database().ref("articles").push();
+        newRef
+          .set({
+            title,
+            description,
+            content,
+            createdAt: Date.now(),
+          })
+          .then(() => {
+            articleStatusEl.textContent = "Article created.";
+            articleStatusEl.classList.remove("error");
+            articleStatusEl.classList.add("success");
+            setTimeout(() => {
+              articleStatusEl.textContent = "";
+              articleStatusEl.classList.remove("success");
+            }, 1500);
+            resetArticleForm();
+          });
+      }
+    });
+
+    function renderAdminArticles() {
+      adminArticlesListEl.innerHTML = "";
+      if (!articles.length) {
+        const empty = document.createElement("div");
+        empty.className = "status-text";
+        empty.textContent = "No articles yet.";
+        adminArticlesListEl.appendChild(empty);
+        return;
+      }
+
+      articles.forEach((article) => {
+        const item = document.createElement("div");
+        item.className = "admin-item";
+        item.innerHTML = `
+          <div class="admin-item-main">
+            <div class="admin-item-title">${escapeHtml(article.title || "Untitled article")}</div>
+            <div class="admin-item-meta">
+              ${escapeHtml(article.description || "No description")}
+            </div>
+          </div>
+          <div class="admin-item-actions">
+            <button class="btn-icon" data-action="edit">✏️ Edit</button>
+            <button class="btn-icon danger" data-action="delete">🗑️ Delete</button>
+          </div>
+        `;
+        item.querySelector('[data-action="edit"]').addEventListener("click", () => {
+          editingArticleId = article.id;
+          articleTitleEl.value = article.title || "";
+          articleDescriptionEl.value = article.description || "";
+          articleContentEl.value = article.content || "";
+          articleSaveBtnEl.textContent = "Update article";
+          articleStatusEl.textContent = "Editing article...";
+          articleStatusEl.classList.remove("error");
+        });
+        item.querySelector('[data-action="delete"]').addEventListener("click", () => {
+          if (!confirm("Delete this article?")) return;
+          firebase
+            .database()
+            .ref("articles/" + article.id)
+            .remove();
+        });
+        adminArticlesListEl.appendChild(item);
+      });
+    }
+
+    // --- Firebase listeners (real-time sync for all visitors) ---
+    firebase
+      .database()
+      .ref("recipes")
+      .on("value", (snapshot) => {
+        const data = snapshot.val() || {};
+        recipes = Object.entries(data)
+          .map(([id, value]) => ({ id, ...value }))
+          .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+        renderRecipes();
+        renderAdminRecipes();
+      });
+
+    firebase
+      .database()
+      .ref("articles")
+      .on("value", (snapshot) => {
+        const data = snapshot.val() || {};
+        articles = Object.entries(data)
+          .map(([id, value]) => ({ id, ...value }))
+          .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+        renderArticles();
+        renderAdminArticles();
+      });
+  </script>
 </body>
 </html>
