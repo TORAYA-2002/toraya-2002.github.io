@@ -1,236 +1,1392 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YUM YARD – وثيقة احترافية كاملة</title>
+  <meta charset="UTF-8" />
+  <title>Projet – Document principal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<style>
-/* ------------------------------
-   تصميم قسم الوصفات
---------------------------------*/
-#recipesContainer {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
-  margin-top: 20px;
-}
-
-.recipe-card {
-  background: #fff;
-  border-radius: 12px;
-  padding: 15px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  text-align: center;
-}
-
-.recipe-card img {
-  width: 100%;
-  border-radius: 10px;
-}
-
-/* ------------------------------
-   أزرار الفلترة
---------------------------------*/
-.filter-btn {
-  padding: 10px 20px;
-  border-radius: 25px;
-  border: none;
-  background: #eee;
-  cursor: pointer;
-  margin: 5px;
-  transition: 0.3s;
-}
-
-.filter-btn.active,
-.filter-btn:hover {
-  background: gold;
-  color: #000;
-}
-
-/* ------------------------------
-   قسم الفيديو
---------------------------------*/
-.video-card {
-  width: 100%;
-  max-width: 500px;
-  margin: 20px auto;
-}
-
-.video-thumbnail {
-  position: relative;
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.video-thumbnail img {
-  width: 100%;
-}
-
-.play-btn {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(255, 215, 0, 0.9);
-  border: none;
-  font-size: 40px;
-  padding: 15px 25px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.play-btn:hover {
-  background: gold;
-  transform: translate(-50%, -50%) scale(1.1);
-}
-
-/* ------------------------------
-   نافذة الفيديو
---------------------------------*/
-.video-modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.8);
-  justify-content: center;
-  align-items: center;
-}
-
-.video-content {
-  width: 90%;
-  max-width: 800px;
-  position: relative;
-}
-
-.close-video {
-  position: absolute;
-  top: -40px;
-  right: 0;
-  font-size: 40px;
-  color: white;
-  cursor: pointer;
-}
-
-#videoFrame {
-  width: 100%;
-  height: 450px;
-  border-radius: 12px;
-}
-</style>
-</head>
-
-<body>
-
-<!-- ============================
-     قسم الوصفات
-============================= -->
-<section>
-  <h2>الوصفات</h2>
-
-  <div>
-    <button class="filter-btn active" data-category="all">الكل</button>
-    <button class="filter-btn" data-category="طاجين">طاجين</button>
-    <button class="filter-btn" data-category="كسكس">كسكس</button>
-    <button class="filter-btn" data-category="شوربة">شوربة</button>
-    <button class="filter-btn" data-category="حلويات">حلويات</button>
-  </div>
-
-  <div id="recipesContainer"></div>
-</section>
-
-<!-- ============================
-     قسم الفيديو
-============================= -->
-<section>
-  <h2>فيديوهات الطبخ</h2>
-
-  <div class="video-card">
-    <div class="video-thumbnail">
-      <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg">
-      <button class="play-btn" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">▶</button>
-    </div>
-    <h3>عنوان الفيديو</h3>
-  </div>
-
-  <div id="videoModal" class="video-modal">
-    <div class="video-content">
-      <span class="close-video">&times;</span>
-      <iframe id="videoFrame" src="" frameborder="0" allowfullscreen></iframe>
-    </div>
-  </div>
-</section>
-
-<script>
-/* ============================================================
-   1) تحميل الوصفات
-============================================================ */
-let allRecipes = JSON.parse(localStorage.getItem("recipes")) || [];
-
-/* ============================================================
-   2) عرض الوصفات
-============================================================ */
-function renderRecipes(list) {
-  const container = document.getElementById("recipesContainer");
-
-  if (!list || list.length === 0) {
-    container.innerHTML = "<p>لا توجد وصفات حالياً.</p>";
-    return;
-  }
-
-  container.innerHTML = list.map(r => `
-    <div class="recipe-card">
-      <img src="${r.thumb}">
-      <h3>${r.title}</h3>
-      <p>${r.desc}</p>
-    </div>
-  `).join("");
-}
-
-renderRecipes(allRecipes);
-
-/* ============================================================
-   3) فلترة الوصفات
-============================================================ */
-const filterButtons = document.querySelectorAll(".filter-btn");
-
-filterButtons.forEach(btn => {
-  btn.addEventListener("click", () => {
-    filterButtons.forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-
-    const category = btn.dataset.category;
-
-    if (category === "all") {
-      renderRecipes(allRecipes);
-    } else {
-      const filtered = allRecipes.filter(r => r.category === category);
-      renderRecipes(filtered);
+  <!-- ====== STYLE GLOBAL ====== -->
+  <style>
+    :root {
+      --bg: #050509;
+      --bg-alt: #0b0b12;
+      --card: #11111b;
+      --accent: #f5c542;
+      --accent-soft: rgba(245, 197, 66, 0.15);
+      --text: #f5f5f7;
+      --muted: #a0a0b3;
+      --danger: #ff4b5c;
+      --radius: 14px;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.55);
+      --transition-fast: 0.18s ease-out;
+      --transition-med: 0.25s ease;
+      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
-  });
-});
 
-/* ============================================================
-   4) تشغيل الفيديو
-============================================================ */
-const playButtons = document.querySelectorAll(".play-btn");
-const videoModal = document.getElementById("videoModal");
-const videoFrame = document.getElementById("videoFrame");
-const closeVideo = document.querySelector(".close-video");
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-playButtons.forEach(btn => {
-  btn.addEventListener("click", () => {
-    videoFrame.src = btn.dataset.video + "?autoplay=1";
-    videoModal.style.display = "flex";
-  });
-});
+    body {
+      font-family: var(--font-main);
+      background: radial-gradient(circle at top, #151520 0, #050509 55%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-closeVideo.addEventListener("click", () => {
-  videoModal.style.display = "none";
-  videoFrame.src = "";
-});
-</script>
+    /* ====== LAYOUT ====== */
+    .app-shell {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 18px 16px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
 
+    header.app-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #fff8d2, #f5c542 40%, #8a5b12 100%);
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.08),
+        0 12px 30px rgba(0, 0, 0, 0.7);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-logo::after {
+      content: "";
+      position: absolute;
+      inset: 18%;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      box-shadow: 0 0 18px rgba(255, 255, 255, 0.35);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-title {
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .brand-title span.glow {
+      color: var(--accent);
+      text-shadow:
+        0 0 8px rgba(245, 197, 66, 0.9),
+        0 0 18px rgba(245, 197, 66, 0.7);
+    }
+
+    .brand-sub {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pill {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(245, 197, 66, 0.12), rgba(245, 197, 66, 0.03));
+      border: 1px solid rgba(245, 197, 66, 0.35);
+      font-size: 0.75rem;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(245, 197, 66, 0.9);
+    }
+
+    .btn {
+      border: none;
+      outline: none;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 7px 14px;
+      font-size: 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--text);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+    }
+
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.06);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.55);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #f5c542, #f0a52b);
+      color: #1b1305;
+      border-color: rgba(0, 0, 0, 0.4);
+      box-shadow:
+        0 0 12px rgba(245, 197, 66, 0.7),
+        0 14px 30px rgba(0, 0, 0, 0.7);
+      font-weight: 600;
+    }
+
+    .btn-primary:hover {
+      box-shadow:
+        0 0 16px rgba(245, 197, 66, 0.9),
+        0 18px 36px rgba(0, 0, 0, 0.8);
+      transform: translateY(-1.5px);
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.4fr);
+      gap: 18px;
+    }
+
+    @media (max-width: 880px) {
+      main {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      header.app-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    /* ====== PANNEAU GAUCHE ====== */
+    .panel {
+      background: radial-gradient(circle at top left, #1a1a26 0, #050509 55%);
+      border-radius: 22px;
+      padding: 16px 16px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 0 0, rgba(245, 197, 66, 0.06), transparent 55%),
+        radial-gradient(circle at 100% 0, rgba(245, 197, 66, 0.04), transparent 55%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .panel-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .panel-title {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .panel-title span.accent {
+      color: var(--accent);
+    }
+
+    .panel-badges {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      font-size: 0.7rem;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(0, 0, 0, 0.35);
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .hero-block {
+      margin-top: 4px;
+      padding: 12px 12px 14px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(10, 10, 18, 0.95));
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.1fr);
+      gap: 12px;
+    }
+
+    @media (max-width: 720px) {
+      .hero-block {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .hero-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .hero-title span.gold {
+      color: var(--accent);
+      text-shadow:
+        0 0 10px rgba(245, 197, 66, 0.9),
+        0 0 22px rgba(245, 197, 66, 0.7);
+    }
+
+    .hero-sub {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .hero-meta {
+      font-size: 0.75rem;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .hero-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .hero-visual {
+      position: relative;
+      border-radius: 16px;
+      background: radial-gradient(circle at 30% 0, rgba(245, 197, 66, 0.2), transparent 55%), #050509;
+      border: 1px solid rgba(245, 197, 66, 0.35);
+      padding: 10px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      justify-content: space-between;
+    }
+
+    .hero-visual-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .hero-chip {
+      font-size: 0.7rem;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .hero-ring {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(245, 197, 66, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow:
+        0 0 12px rgba(245, 197, 66, 0.7),
+        0 0 30px rgba(245, 197, 66, 0.4);
+    }
+
+    .hero-ring::after {
+      content: "";
+      position: absolute;
+      inset: 22%;
+      border-radius: 50%;
+      border: 1px solid rgba(245, 197, 66, 0.7);
+      opacity: 0.7;
+    }
+
+    .hero-ring span {
+      font-size: 0.7rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .hero-visual-bottom {
+      font-size: 0.75rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .hero-visual-bottom span.highlight {
+      color: var(--accent);
+    }
+
+    /* ====== LISTE PRINCIPALE ====== */
+    .section-title {
+      margin-top: 6px;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .section-title-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, rgba(245, 197, 66, 0.4), transparent);
+      opacity: 0.7;
+    }
+
+    .items-list {
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 320px;
+      overflow: auto;
+      padding-right: 4px;
+    }
+
+    .item-card {
+      border-radius: 14px;
+      background: rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 9px 10px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.9fr) minmax(0, 1.1fr);
+      gap: 8px;
+      align-items: center;
+      transition: background var(--transition-fast), transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .item-card:hover {
+      background: rgba(255, 255, 255, 0.03);
+      border-color: rgba(245, 197, 66, 0.5);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.7);
+    }
+
+    .item-main {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .item-title {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .item-meta {
+      font-size: 0.75rem;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .item-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 2px;
+    }
+
+    .tag {
+      font-size: 0.7rem;
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--muted);
+    }
+
+    .item-side {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .item-status {
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(0, 0, 0, 0.6);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .item-status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #3ddc84;
+      box-shadow: 0 0 10px rgba(61, 220, 132, 0.9);
+    }
+
+    .item-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .btn-ghost {
+      padding: 3px 7px;
+      font-size: 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.02);
+      cursor: pointer;
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(245, 197, 66, 0.6);
+      color: var(--accent);
+      transform: translateY(-0.5px);
+    }
+
+    /* ====== PANNEAU DROIT ====== */
+    .side-panel {
+      background: radial-gradient(circle at top right, #181824 0, #050509 55%);
+      border-radius: 22px;
+      padding: 14px 14px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .side-panel::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 100% 0, rgba(245, 197, 66, 0.08), transparent 55%),
+        radial-gradient(circle at 0 100%, rgba(245, 197, 66, 0.04), transparent 55%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .side-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .side-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .side-title {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .side-title span.accent {
+      color: var(--accent);
+    }
+
+    .side-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .side-body {
+      margin-top: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .field-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .field-label span.accent {
+      color: var(--accent);
+    }
+
+    .field-input,
+    .field-textarea,
+    .field-select {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(0, 0, 0, 0.6);
+      color: var(--text);
+      padding: 7px 9px;
+      font-size: 0.8rem;
+      outline: none;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .field-input:focus,
+    .field-textarea:focus,
+    .field-select:focus {
+      border-color: rgba(245, 197, 66, 0.7);
+      box-shadow:
+        0 0 0 1px rgba(245, 197, 66, 0.5),
+        0 0 18px rgba(245, 197, 66, 0.4);
+      background: rgba(0, 0, 0, 0.8);
+      transform: translateY(-0.5px);
+    }
+
+    .field-textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    .side-footer {
+      margin-top: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .side-footer span.accent {
+      color: var(--accent);
+    }
+
+    /* ====== MODAL ====== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+      backdrop-filter: blur(6px);
+    }
+
+    .modal-backdrop.active {
+      display: flex;
+    }
+
+    .modal {
+      width: min(520px, 92vw);
+      background: radial-gradient(circle at top, #181824 0, #050509 55%);
+      border-radius: 20px;
+      border: 1px solid rgba(245, 197, 66, 0.5);
+      box-shadow:
+        0 0 18px rgba(245, 197, 66, 0.7),
+        0 26px 60px rgba(0, 0, 0, 0.9);
+      padding: 14px 14px 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .modal::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 0 0, rgba(245, 197, 66, 0.12), transparent 55%),
+        radial-gradient(circle at 100% 0, rgba(245, 197, 66, 0.06), transparent 55%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .modal-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .modal-title {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .modal-title span.accent {
+      color: var(--accent);
+    }
+
+    .modal-close {
+      border: none;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 999px;
+      padding: 4px 8px;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .modal-close:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(245, 197, 66, 0.7);
+      color: var(--accent);
+      transform: translateY(-0.5px);
+    }
+
+    .modal-body {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .modal-body h3 {
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    .modal-footer {
+      margin-top: 6px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    /* ====== TOAST ====== */
+    .toast {
+      position: fixed;
+      right: 14px;
+      bottom: 14px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.85);
+      border: 1px solid rgba(245, 197, 66, 0.6);
+      color: var(--accent);
+      font-size: 0.78rem;
+      display: none;
+      align-items: center;
+      gap: 8px;
+      z-index: 60;
+      box-shadow:
+        0 0 12px rgba(245, 197, 66, 0.7),
+        0 18px 40px rgba(0, 0, 0, 0.9);
+    }
+
+    .toast-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(245, 197, 66, 0.9);
+    }
+
+    .toast.show {
+      display: inline-flex;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <!-- ====== HEADER ====== -->
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-logo"></div>
+        <div class="brand-text">
+          <div class="brand-title">
+            <span class="glow">Document</span> principal
+          </div>
+          <div class="brand-sub">
+            Base complète – HTML + CSS + JS dans un seul fichier.
+          </div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <div class="pill">
+          <span class="pill-dot"></span>
+          Mode édition actif
+        </div>
+        <button class="btn" id="btn-open-admin">
+          ⚙️ Admin
+        </button>
+        <button class="btn btn-primary" id="btn-add-item">
+          + Nouvel élément
+        </button>
+      </div>
+    </header>
+
+    <!-- ====== MAIN ====== -->
+    <main>
+      <!-- ====== PANNEAU GAUCHE : LISTE ====== -->
+      <section class="panel">
+        <div class="panel-inner">
+          <div class="panel-header">
+            <div class="panel-title">
+              <span class="accent">Liste</span> principale
+            </div>
+            <div class="panel-badges">
+              <div class="badge">
+                <span class="badge-dot"></span>
+                Données locales
+              </div>
+              <div class="badge">
+                🔁 Auto-sync
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-block">
+            <div class="hero-text">
+              <div class="hero-title">
+                Tu peux utiliser ce <span class="gold">document principal</span> comme base
+                pour ton projet complet.
+              </div>
+              <div class="hero-sub">
+                Tout est dans un seul fichier : structure, style, logique.  
+                Tu peux renommer les sections, adapter les champs, connecter un vrai JSON, etc.
+              </div>
+              <div class="hero-actions">
+                <button class="btn btn-primary" id="btn-demo-fill">
+                  ⚡ Remplir avec des exemples
+                </button>
+                <button class="btn" id="btn-clear-all">
+                  🧹 Vider la liste
+                </button>
+              </div>
+              <div class="hero-meta">
+                <span>📁 <strong id="meta-count">0</strong> éléments</span>
+                <span>💾 Stockage : <span id="meta-storage">localStorage</span></span>
+              </div>
+            </div>
+            <div class="hero-visual">
+              <div class="hero-visual-top">
+                <div class="hero-chip">
+                  🛠️ Mode : <strong id="meta-mode">édition</strong>
+                </div>
+                <div class="hero-ring">
+                  <span>LIVE</span>
+                </div>
+              </div>
+              <div class="hero-visual-bottom">
+                <span>Tout ce que tu ajoutes ici reste dans ton navigateur.</span>
+                <span class="highlight">Aucun serveur requis.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-title">
+            <span>Éléments</span>
+            <div class="section-title-line"></div>
+          </div>
+
+          <div class="items-list" id="items-list">
+            <!-- Les cartes seront injectées ici par JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ====== PANNEAU DROIT : FORMULAIRE ====== -->
+      <aside class="side-panel">
+        <div class="side-inner">
+          <div class="side-header">
+            <div class="side-title">
+              <span class="accent">Éditeur</span> d’élément
+            </div>
+            <div class="side-controls">
+              <button class="btn-ghost" id="btn-reset-form">
+                ↺ Réinitialiser
+              </button>
+            </div>
+          </div>
+
+          <div class="side-body">
+            <div class="field-group">
+              <label class="field-label">
+                Titre
+                <span class="accent" id="field-mode-label">Nouveau</span>
+              </label>
+              <input
+                type="text"
+                id="field-title"
+                class="field-input"
+                placeholder="Ex : Recette premium, Article, Vidéo, etc."
+              />
+            </div>
+
+            <div class="field-group">
+              <label class="field-label">
+                Catégorie
+              </label>
+              <select id="field-category" class="field-select">
+                <option value="article">Article</option>
+                <option value="recette">Recette</option>
+                <option value="video">Vidéo</option>
+                <option value="autre">Autre</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label">
+                Description
+              </label>
+              <textarea
+                id="field-description"
+                class="field-textarea"
+                placeholder="Résumé, détails, instructions, etc."
+              ></textarea>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label">
+                Tags (séparés par des virgules)
+              </label>
+              <input
+                type="text"
+                id="field-tags"
+                class="field-input"
+                placeholder="ex : rapide, premium, gold"
+              />
+            </div>
+          </div>
+
+          <div class="side-footer">
+            <span>
+              ID courant : <span class="accent" id="field-id-display">—</span>
+            </span>
+            <button class="btn btn-primary" id="btn-save-item">
+              💾 Enregistrer
+            </button>
+          </div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <!-- ====== MODAL ADMIN ====== -->
+  <div class="modal-backdrop" id="modal-admin">
+    <div class="modal">
+      <div class="modal-inner">
+        <div class="modal-header">
+          <div class="modal-title">
+            <span class="accent">Panneau</span> admin
+          </div>
+          <button class="modal-close" data-close-modal="admin">
+            ✕ Fermer
+          </button>
+        </div>
+        <div class="modal-body">
+          <h3>Ce panneau admin est une base.</h3>
+          <p>
+            Tu peux ici brancher :
+          </p>
+          <ul>
+            <li>Export / import JSON</li>
+            <li>Réinitialisation complète</li>
+            <li>Changement de thème, etc.</li>
+          </ul>
+          <p>
+            Pour l’instant, il affiche juste un message de démonstration.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-ghost" id="btn-admin-export">
+            ⬇️ Export JSON
+          </button>
+          <button class="btn-ghost" id="btn-admin-import">
+            ⬆️ Import JSON
+          </button>
+          <button class="btn btn-primary" id="btn-admin-reset">
+            🧨 Tout réinitialiser
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== TOAST ====== -->
+  <div class="toast" id="toast">
+    <span class="toast-dot"></span>
+    <span id="toast-message">Action effectuée.</span>
+  </div>
+
+  <!-- ====== LOGIQUE JS ====== -->
+  <script>
+    // ====== STOCKAGE LOCAL SIMPLE ======
+    const STORAGE_KEY = "document_principal_items_v1";
+
+    function loadItems() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        if (!Array.isArray(parsed)) return [];
+        return parsed;
+      } catch (e) {
+        console.error("Erreur de lecture storage", e);
+        return [];
+      }
+    }
+
+    function saveItems(items) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+      } catch (e) {
+        console.error("Erreur de sauvegarde storage", e);
+      }
+    }
+
+    // ====== ÉTAT ======
+    let items = loadItems();
+    let currentEditId = null;
+
+    // ====== UTILITAIRES ======
+    function generateId() {
+      return "itm_" + Date.now() + "_" + Math.floor(Math.random() * 999999);
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      const msg = document.getElementById("toast-message");
+      msg.textContent = message;
+      toast.classList.add("show");
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2200);
+    }
+
+    function updateMeta() {
+      document.getElementById("meta-count").textContent = items.length;
+      document.getElementById("meta-mode").textContent = currentEditId ? "édition" : "création";
+      document.getElementById("field-mode-label").textContent = currentEditId ? "Édition" : "Nouveau";
+      document.getElementById("field-id-display").textContent = currentEditId || "—";
+    }
+
+    // ====== RENDU LISTE ======
+    function renderItems() {
+      const container = document.getElementById("items-list");
+      container.innerHTML = "";
+
+      if (!items.length) {
+        const empty = document.createElement("div");
+        empty.style.fontSize = "0.8rem";
+        empty.style.color = "var(--muted)";
+        empty.style.padding = "6px 2px";
+        empty.textContent = "Aucun élément pour l’instant. Ajoute-en un avec le panneau de droite.";
+        container.appendChild(empty);
+        updateMeta();
+        return;
+      }
+
+      items.forEach((item) => {
+        const card = document.createElement("div");
+        card.className = "item-card";
+        card.dataset.id = item.id;
+
+        const main = document.createElement("div");
+        main.className = "item-main";
+
+        const title = document.createElement("div");
+        title.className = "item-title";
+        title.textContent = item.title || "(Sans titre)";
+
+        const meta = document.createElement("div");
+        meta.className = "item-meta";
+        const catSpan = document.createElement("span");
+        catSpan.textContent = "Catégorie : " + (item.category || "—");
+        const descSpan = document.createElement("span");
+        descSpan.textContent = item.description ? item.description.slice(0, 80) + (item.description.length > 80 ? "…" : "") : "Pas de description.";
+        meta.appendChild(catSpan);
+        meta.appendChild(descSpan);
+
+        const tagsWrap = document.createElement("div");
+        tagsWrap.className = "item-tags";
+        if (item.tags && item.tags.length) {
+          item.tags.forEach((tag) => {
+            const t = document.createElement("span");
+            t.className = "tag";
+            t.textContent = tag;
+            tagsWrap.appendChild(t);
+          });
+        }
+
+        main.appendChild(title);
+        main.appendChild(meta);
+        main.appendChild(tagsWrap);
+
+        const side = document.createElement("div");
+        side.className = "item-side";
+
+        const status = document.createElement("div");
+        status.className = "item-status";
+        const dot = document.createElement("span");
+        dot.className = "item-status-dot";
+        const statusText = document.createElement("span");
+        statusText.textContent = "Local";
+        status.appendChild(dot);
+        status.appendChild(statusText);
+
+        const actions = document.createElement("div");
+        actions.className = "item-actions";
+
+        const btnEdit = document.createElement("button");
+        btnEdit.className = "btn-ghost";
+        btnEdit.textContent = "✏️ Éditer";
+        btnEdit.addEventListener("click", (e) => {
+          e.stopPropagation();
+          startEdit(item.id);
+        });
+
+        const btnDelete = document.createElement("button");
+        btnDelete.className = "btn-ghost";
+        btnDelete.textContent = "🗑️ Supprimer";
+        btnDelete.addEventListener("click", (e) => {
+          e.stopPropagation();
+          deleteItem(item.id);
+        });
+
+        actions.appendChild(btnEdit);
+        actions.appendChild(btnDelete);
+
+        side.appendChild(status);
+        side.appendChild(actions);
+
+        card.appendChild(main);
+        card.appendChild(side);
+
+        card.addEventListener("click", () => {
+          startEdit(item.id);
+        });
+
+        container.appendChild(card);
+      });
+
+      updateMeta();
+    }
+
+    // ====== FORMULAIRE ======
+    function getFormData() {
+      const title = document.getElementById("field-title").value.trim();
+      const category = document.getElementById("field-category").value;
+      const description = document.getElementById("field-description").value.trim();
+      const tagsRaw = document.getElementById("field-tags").value.trim();
+      const tags = tagsRaw
+        ? tagsRaw
+            .split(",")
+            .map((t) => t.trim())
+            .filter(Boolean)
+        : [];
+      return { title, category, description, tags };
+    }
+
+    function setFormData(item) {
+      document.getElementById("field-title").value = item.title || "";
+      document.getElementById("field-category").value = item.category || "article";
+      document.getElementById("field-description").value = item.description || "";
+      document.getElementById("field-tags").value = item.tags ? item.tags.join(", ") : "";
+    }
+
+    function resetForm() {
+      currentEditId = null;
+      document.getElementById("field-title").value = "";
+      document.getElementById("field-category").value = "article";
+      document.getElementById("field-description").value = "";
+      document.getElementById("field-tags").value = "";
+      updateMeta();
+    }
+
+    function startEdit(id) {
+      const item = items.find((i) => i.id === id);
+      if (!item) return;
+      currentEditId = id;
+      setFormData(item);
+      updateMeta();
+      showToast("Mode édition activé pour l’élément sélectionné.");
+    }
+
+    function deleteItem(id) {
+      const idx = items.findIndex((i) => i.id === id);
+      if (idx === -1) return;
+      items.splice(idx, 1);
+      saveItems(items);
+      if (currentEditId === id) {
+        resetForm();
+      }
+      renderItems();
+      showToast("Élément supprimé.");
+    }
+
+    function saveCurrent() {
+      const data = getFormData();
+      if (!data.title) {
+        showToast("Ajoute au moins un titre.");
+        return;
+      }
+
+      if (currentEditId) {
+        const idx = items.findIndex((i) => i.id === currentEditId);
+        if (idx !== -1) {
+          items[idx] = { ...items[idx], ...data };
+        }
+        showToast("Élément mis à jour.");
+      } else {
+        const id = generateId();
+        items.push({ id, ...data });
+        showToast("Nouvel élément ajouté.");
+      }
+
+      saveItems(items);
+      renderItems();
+      resetForm();
+    }
+
+    function clearAll() {
+      if (!items.length) {
+        showToast("La liste est déjà vide.");
+        return;
+      }
+      if (!confirm("Tu veux vraiment tout supprimer ?")) return;
+      items = [];
+      saveItems(items);
+      resetForm();
+      renderItems();
+      showToast("Tous les éléments ont été supprimés.");
+    }
+
+    function fillDemo() {
+      if (items.length && !confirm("Remplacer la liste actuelle par des exemples ?")) {
+        return;
+      }
+      items = [
+        {
+          id: generateId(),
+          title: "Article – Démarrer un projet premium",
+          category: "article",
+          description: "Un guide pour structurer ton projet avec un seul document principal propre et évolutif.",
+          tags: ["article", "structure", "premium"]
+        },
+        {
+          id: generateId(),
+          title: "Recette – Interface gold",
+          category: "recette",
+          description: "Étapes pour créer une interface gold avec titres lumineux, cartes propres et modals premium.",
+          tags: ["recette", "UI", "gold"]
+        },
+        {
+          id: generateId(),
+          title: "Vidéo – Présentation du système",
+          category: "video",
+          description: "Une vidéo qui montre comment utiliser ce document comme base pour tout le projet.",
+          tags: ["vidéo", "présentation"]
+        }
+      ];
+      saveItems(items);
+      renderItems();
+      resetForm();
+      showToast("Exemples ajoutés.");
+    }
+
+    // ====== MODAL ADMIN ======
+    function openAdminModal() {
+      document.getElementById("modal-admin").classList.add("active");
+    }
+
+    function closeAdminModal() {
+      document.getElementById("modal-admin").classList.remove("active");
+    }
+
+    function exportJSON() {
+      const dataStr = JSON.stringify(items, null, 2);
+      console.log("Export JSON :", dataStr);
+      showToast("JSON exporté dans la console.");
+    }
+
+    function importJSON() {
+      const raw = prompt("Colle ici un JSON valide pour remplacer la liste actuelle :");
+      if (!raw) return;
+      try {
+        const parsed = JSON.parse(raw);
+        if (!Array.isArray(parsed)) throw new Error("Format invalide");
+        items = parsed.map((it) => ({
+          id: it.id || generateId(),
+          title: it.title || "",
+          category: it.category || "article",
+          description: it.description || "",
+          tags: Array.isArray(it.tags) ? it.tags : []
+        }));
+        saveItems(items);
+        renderItems();
+        resetForm();
+        showToast("JSON importé avec succès.");
+      } catch (e) {
+        console.error(e);
+        showToast("JSON invalide.");
+      }
+    }
+
+    function adminResetAll() {
+      if (!confirm("Réinitialiser complètement (liste + storage) ?")) return;
+      items = [];
+      saveItems(items);
+      resetForm();
+      renderItems();
+      showToast("Réinitialisation complète effectuée.");
+    }
+
+    // ====== INIT ======
+    window.addEventListener("DOMContentLoaded", () => {
+      // Rendu initial
+      renderItems();
+
+      // Boutons principaux
+      document.getElementById("btn-save-item").addEventListener("click", saveCurrent);
+      document.getElementById("btn-reset-form").addEventListener("click", resetForm);
+      document.getElementById("btn-clear-all").addEventListener("click", clearAll);
+      document.getElementById("btn-demo-fill").addEventListener("click", fillDemo);
+
+      // Admin
+      document.getElementById("btn-open-admin").addEventListener("click", openAdminModal);
+      document.querySelectorAll("[data-close-modal='admin']").forEach((btn) => {
+        btn.addEventListener("click", closeAdminModal);
+      });
+      document.getElementById("modal-admin").addEventListener("click", (e) => {
+        if (e.target.id === "modal-admin") {
+          closeAdminModal();
+        }
+      });
+
+      document.getElementById("btn-admin-export").addEventListener("click", exportJSON);
+      document.getElementById("btn-admin-import").addEventListener("click", importJSON);
+      document.getElementById("btn-admin-reset").addEventListener("click", adminResetAll);
+    });
+  </script>
 </body>
 </html>
