@@ -2,576 +2,238 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>الوثيقة الرئيسية</title>
-
+  <title>وصفات الطبخ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    /* كل الـ CSS يبقى كما هو بدون تغيير */
-    /* … (احتفظ بكل التنسيق الأصلي هنا كما هو) … */
+    :root {
+      --bg: #0b0c10;
+      --card-bg: #11131a;
+      --accent: #f5b301;
+      --accent-soft: rgba(245, 179, 1, 0.18);
+      --text: #f7f7f7;
+      --muted: #a7a7b3;
+      --radius-lg: 18px;
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.55);
+      --shadow-glow: 0 0 25px rgba(245, 179, 1, 0.35);
+    }
+
+    body {
+      font-family: "Cairo", system-ui, sans-serif;
+      background: radial-gradient(circle at top, #1b1f2b 0, #05060a 55%, #020308 100%);
+      color: var(--text);
+      padding: 32px 18px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    /* HEADER */
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 26px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: radial-gradient(circle at 30% 0, #ffe9a6 0, #f5b301 35%, #b87a00 100%);
+      box-shadow: var(--shadow-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #1b1300;
+      font-size: 20px;
+    }
+
+    .brand-text h1 {
+      font-size: 22px;
+      color: var(--accent);
+      text-shadow: 0 0 18px rgba(245, 179, 1, 0.55);
+    }
+
+    .brand-text p {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .search-box input {
+      background: rgba(10, 12, 20, 0.95);
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 9px 14px;
+      color: var(--text);
+      min-width: 210px;
+      outline: none;
+    }
+
+    .filter-chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      border-radius: 999px;
+      padding: 7px 13px;
+      font-size: 12px;
+      background: rgba(10, 12, 20, 0.9);
+      color: var(--muted);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      cursor: pointer;
+    }
+
+    .chip.active {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* GRID */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    /* CARD */
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .card-image {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+    }
+
+    .badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.72);
+      color: var(--accent);
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+    }
+
+    .card-body {
+      padding: 14px;
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .card-description {
+      font-size: 13px;
+      color: #c5c5d2;
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #f5b301, #ffdd7a);
+      padding: 7px 13px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      color: #1b1300;
+    }
   </style>
 </head>
 
 <body>
-  <div class="app-shell">
+  <div class="app">
 
-    <!-- ====== HEADER ====== -->
-    <header class="app-header">
+    <!-- HEADER -->
+    <header class="header">
       <div class="brand">
-        <div class="brand-logo"></div>
+        <div class="brand-logo">طبخ</div>
         <div class="brand-text">
-          <div class="brand-title">
-            <span class="glow">الوثيقة</span> الرئيسية
-          </div>
-          <div class="brand-sub">
-            قاعدة كاملة – HTML + CSS + JS في ملف واحد.
-          </div>
+          <h1>وصفات مميزة</h1>
+          <p>مجموعة مختارة من أشهى الأطباق.</p>
         </div>
       </div>
 
       <div class="header-actions">
-        <div class="pill">
-          <span class="pill-dot"></span>
-          وضع التحرير مُفعل
+        <div class="search-box">
+          <input type="text" placeholder="ابحث عن وصفة أو مكوّن..." />
         </div>
 
-        <button class="btn" id="btn-open-admin">
-          ⚙️ الإدارة
-        </button>
-
-        <button class="btn btn-primary" id="btn-add-item">
-          + عنصر جديد
-        </button>
+        <div class="filter-chips">
+          <button class="chip active">الكل</button>
+          <button class="chip">سريع</button>
+          <button class="chip">مقبلات</button>
+          <button class="chip">أطباق رئيسية</button>
+          <button class="chip">حلويات</button>
+        </div>
       </div>
     </header>
 
-    <!-- ====== MAIN ====== -->
-    <main>
+    <!-- GRID -->
+    <main class="grid">
 
-      <!-- ====== اللوحة اليسرى ====== -->
-      <section class="panel">
-        <div class="panel-inner">
-
-          <div class="panel-header">
-            <div class="panel-title">
-              <span class="accent">القائمة</span> الرئيسية
-            </div>
-
-            <div class="panel-badges">
-              <div class="badge">
-                <span class="badge-dot"></span>
-                البيانات المحلية
-              </div>
-
-              <div class="badge">
-                🔁 مزامنة تلقائية
-              </div>
-            </div>
-          </div>
-
-          <!-- ====== HERO BLOCK ====== -->
-          <div class="hero-block">
-            <div class="hero-text">
-
-              <div class="hero-title">
-                يمكنك استخدام <span class="gold">هذه الوثيقة الرئيسية</span> كقاعدة
-                لمشروعك الكامل.
-              </div>
-
-              <div class="hero-sub">
-                كل شيء موجود داخل ملف واحد: البنية، التنسيق، والمنطق.  
-                يمكنك إعادة تسمية الأقسام، تعديل الحقول، ربط JSON حقيقي، وغير ذلك.
-              </div>
-
-              <div class="hero-actions">
-                <button class="btn btn-primary" id="btn-demo-fill">
-                  ⚡ تعبئة بأمثلة
-                </button>
-
-                <button class="btn" id="btn-clear-all">
-                  🧹 مسح القائمة
-                </button>
-              </div>
-
-              <div class="hero-meta">
-                <span>📁 <strong id="meta-count">0</strong> عناصر</span>
-                <span>💾 التخزين : <span id="meta-storage">localStorage</span></span>
-              </div>
-
-            </div>
-
-            <div class="hero-visual">
-              <div class="hero-visual-top">
-                <div class="hero-chip">
-                  🛠️ الوضع : <strong id="meta-mode">تحرير</strong>
-                </div>
-
-                <div class="hero-ring">
-                  <span>مباشر</span>
-                </div>
-              </div>
-
-              <div class="hero-visual-bottom">
-                <span>كل ما تضيفه هنا يبقى داخل متصفحك.</span>
-                <span class="highlight">لا حاجة لأي خادم.</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- ====== قائمة العناصر ====== -->
-          <div class="section-title">
-            <span>العناصر</span>
-            <div class="section-title-line"></div>
-          </div>
-
-          <div class="items-list" id="items-list">
-            <!-- سيتم حقن البطاقات هنا عبر JS -->
-          </div>
-
+      <!-- CARD 1 -->
+      <article class="card">
+        <img class="card-image" src="https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?auto=compress&cs=tinysrgb&w=800" alt="باستا بالدجاج" />
+        <div class="card-body">
+          <h2 class="card-title">باستا كريمية بالدجاج</h2>
+          <p class="card-description">
+            باستا لذيذة بصلصة كريمية مع الثوم والبارميزان، جاهزة خلال أقل من 30 دقيقة.
+          </p>
+          <button class="btn-primary">عرض الوصفة</button>
         </div>
-      </section>
+      </article>
 
-      <!-- ====== اللوحة اليمنى (محرر العنصر) ====== -->
-      <aside class="side-panel">
-        <div class="side-inner">
-
-          <div class="side-header">
-            <div class="side-title">
-              <span class="accent">محرر</span> العنصر
-            </div>
-
-            <div class="side-controls">
-              <button class="btn-ghost" id="btn-reset-form">
-                ↺ إعادة تعيين
-              </button>
-            </div>
-          </div>
-
-          <div class="side-body">
-
-            <div class="field-group">
-              <label class="field-label">
-                العنوان
-                <span class="accent" id="field-mode-label">جديد</span>
-              </label>
-
-              <input
-                type="text"
-                id="field-title"
-                class="field-input"
-                placeholder="مثال: وصفة بريميوم، مقال، فيديو، إلخ."
-              />
-            </div>
-
-            <div class="field-group">
-              <label class="field-label">الفئة</label>
-
-              <select id="field-category" class="field-select">
-                <option value="article">مقال</option>
-                <option value="recette">وصفة</option>
-                <option value="video">فيديو</option>
-                <option value="autre">أخرى</option>
-              </select>
-            </div>
-
-            <div class="field-group">
-              <label class="field-label">الوصف</label>
-
-              <textarea
-                id="field-description"
-                class="field-textarea"
-                placeholder="ملخص، تفاصيل، تعليمات، إلخ."
-              ></textarea>
-            </div>
-
-            <div class="field-group">
-              <label class="field-label">الوسوم (مفصولة بفواصل)</label>
-
-              <input
-                type="text"
-                id="field-tags"
-                class="field-input"
-                placeholder="مثال: سريع، بريميوم، ذهبي"
-              />
-            </div>
-
-          </div>
-
-          <div class="side-footer">
-            <span>
-              المعرّف الحالي : <span class="accent" id="field-id-display">—</span>
-            </span>
-
-            <button class="btn btn-primary" id="btn-save-item">
-              💾 حفظ
-            </button>
-          </div>
-
+      <!-- CARD 2 -->
+      <article class="card">
+        <img class="card-image" src="https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg?auto=compress&cs=tinysrgb&w=800" alt="سلطة متوسطية" />
+        <div class="card-body">
+          <h2 class="card-title">سلطة متوسطية</h2>
+          <p class="card-description">
+            طماطم، خيار، زيتون، جبنة فيتا مع صلصة ليمون منعشة.
+          </p>
+          <button class="btn-primary">عرض الوصفة</button>
         </div>
-      </aside>
+      </article>
+
+      <!-- CARD 3 -->
+      <article class="card">
+        <img class="card-image" src="https://images.pexels.com/photos/4109992/pexels-photo-4109992.jpeg?auto=compress&cs=tinysrgb&w=800" alt="فوندان الشوكولاتة" />
+        <div class="card-body">
+          <h2 class="card-title">فوندان الشوكولاتة</h2>
+          <p class="card-description">
+            حلوى شهية بقلب شوكولاتة سائل وقشرة مقرمشة لعشاق النكهة القوية.
+          </p>
+          <button class="btn-primary">عرض الوصفة</button>
+        </div>
+      </article>
 
     </main>
-    <!-- ====== MODAL ADMIN ====== -->
-    <div class="modal-backdrop" id="modal-admin">
-      <div class="modal">
-        <div class="modal-inner">
-
-          <div class="modal-header">
-            <div class="modal-title">
-              <span class="accent">لوحة</span> الإدارة
-            </div>
-
-            <button class="modal-close" data-close-modal="admin">
-              ✕ إغلاق
-            </button>
-          </div>
-
-          <div class="modal-body">
-            <h3>هذه لوحة إدارة أساسية.</h3>
-            <p>يمكنك هنا إضافة وظائف مثل:</p>
-
-            <ul>
-              <li>تصدير / استيراد JSON</li>
-              <li>إعادة تعيين كاملة</li>
-              <li>تغيير السمة، وغير ذلك</li>
-            </ul>
-
-            <p>حالياً، تعرض فقط رسالة تجريبية.</p>
-          </div>
-
-          <div class="modal-footer">
-            <button class="btn-ghost" id="btn-admin-export">
-              ⬇️ تصدير JSON
-            </button>
-
-            <button class="btn-ghost" id="btn-admin-import">
-              ⬆️ استيراد JSON
-            </button>
-
-            <button class="btn btn-primary" id="btn-admin-reset">
-              🧨 إعادة تعيين الكل
-            </button>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <!-- ====== TOAST ====== -->
-    <div class="toast" id="toast">
-      <span class="toast-dot"></span>
-      <span id="toast-message">تم تنفيذ العملية.</span>
-    </div>
-
-    <!-- ====== LOGIQUE JS ====== -->
-    <script>
-      const STORAGE_KEY = "document_principal_items_v1";
-
-      function loadItems() {
-        try {
-          const raw = localStorage.getItem(STORAGE_KEY);
-          if (!raw) return [];
-          const parsed = JSON.parse(raw);
-          return Array.isArray(parsed) ? parsed : [];
-        } catch {
-          return [];
-        }
-      }
-
-      function saveItems(items) {
-        try {
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
-        } catch {}
-      }
-
-      let items = loadItems();
-      let currentEditId = null;
-
-      function generateId() {
-        return "itm_" + Date.now() + "_" + Math.floor(Math.random() * 999999);
-      }
-
-      function showToast(message) {
-        const toast = document.getElementById("toast");
-        const msg = document.getElementById("toast-message");
-        msg.textContent = message;
-        toast.classList.add("show");
-        setTimeout(() => toast.classList.remove("show"), 2200);
-      }
-
-      function updateMeta() {
-        document.getElementById("meta-count").textContent = items.length;
-        document.getElementById("meta-mode").textContent = currentEditId ? "تحرير" : "إنشاء";
-        document.getElementById("field-mode-label").textContent = currentEditId ? "تحرير" : "جديد";
-        document.getElementById("field-id-display").textContent = currentEditId || "—";
-      }
-
-      function renderItems() {
-        const container = document.getElementById("items-list");
-        container.innerHTML = "";
-
-        if (!items.length) {
-          const empty = document.createElement("div");
-          empty.style.fontSize = "0.8rem";
-          empty.style.color = "var(--muted)";
-          empty.style.padding = "6px 2px";
-          empty.textContent = "لا يوجد أي عنصر حالياً. أضف واحداً من لوحة اليمين.";
-          container.appendChild(empty);
-          updateMeta();
-          return;
-        }
-
-        items.forEach((item) => {
-          const card = document.createElement("div");
-          card.className = "item-card";
-          card.dataset.id = item.id;
-
-          const main = document.createElement("div");
-          main.className = "item-main";
-
-          const title = document.createElement("div");
-          title.className = "item-title";
-          title.textContent = item.title || "(بدون عنوان)";
-
-          const meta = document.createElement("div");
-          meta.className = "item-meta";
-
-          const catSpan = document.createElement("span");
-          catSpan.textContent = "الفئة : " + (item.category || "—");
-
-          const descSpan = document.createElement("span");
-          descSpan.textContent = item.description
-            ? item.description.slice(0, 80) + (item.description.length > 80 ? "…" : "")
-            : "لا يوجد وصف.";
-
-          meta.appendChild(catSpan);
-          meta.appendChild(descSpan);
-
-          const tagsWrap = document.createElement("div");
-          tagsWrap.className = "item-tags";
-
-          if (item.tags?.length) {
-            item.tags.forEach((tag) => {
-              const t = document.createElement("span");
-              t.className = "tag";
-              t.textContent = tag;
-              tagsWrap.appendChild(t);
-            });
-          }
-
-          main.appendChild(title);
-          main.appendChild(meta);
-          main.appendChild(tagsWrap);
-
-          const side = document.createElement("div");
-          side.className = "item-side";
-
-          const status = document.createElement("div");
-          status.className = "item-status";
-
-          const dot = document.createElement("span");
-          dot.className = "item-status-dot";
-
-          const statusText = document.createElement("span");
-          statusText.textContent = "محلي";
-
-          status.appendChild(dot);
-          status.appendChild(statusText);
-
-          const actions = document.createElement("div");
-          actions.className = "item-actions";
-
-          const btnEdit = document.createElement("button");
-          btnEdit.className = "btn-ghost";
-          btnEdit.textContent = "✏️ تعديل";
-          btnEdit.onclick = (e) => {
-            e.stopPropagation();
-            startEdit(item.id);
-          };
-
-          const btnDelete = document.createElement("button");
-          btnDelete.className = "btn-ghost";
-          btnDelete.textContent = "🗑️ حذف";
-          btnDelete.onclick = (e) => {
-            e.stopPropagation();
-            deleteItem(item.id);
-          };
-
-          actions.appendChild(btnEdit);
-          actions.appendChild(btnDelete);
-
-          side.appendChild(status);
-          side.appendChild(actions);
-
-          card.appendChild(main);
-          card.appendChild(side);
-
-          card.onclick = () => startEdit(item.id);
-
-          container.appendChild(card);
-        });
-
-        updateMeta();
-      }
-
-      function getFormData() {
-        const title = document.getElementById("field-title").value.trim();
-        const category = document.getElementById("field-category").value;
-        const description = document.getElementById("field-description").value.trim();
-        const tagsRaw = document.getElementById("field-tags").value.trim();
-        const tags = tagsRaw ? tagsRaw.split(",").map(t => t.trim()).filter(Boolean) : [];
-        return { title, category, description, tags };
-      }
-
-      function setFormData(item) {
-        document.getElementById("field-title").value = item.title || "";
-        document.getElementById("field-category").value = item.category || "article";
-        document.getElementById("field-description").value = item.description || "";
-        document.getElementById("field-tags").value = item.tags ? item.tags.join(", ") : "";
-      }
-
-      function resetForm() {
-        currentEditId = null;
-        document.getElementById("field-title").value = "";
-        document.getElementById("field-category").value = "article";
-        document.getElementById("field-description").value = "";
-        document.getElementById("field-tags").value = "";
-        updateMeta();
-      }
-
-      function startEdit(id) {
-        const item = items.find(i => i.id === id);
-        if (!item) return;
-        currentEditId = id;
-        setFormData(item);
-        updateMeta();
-        showToast("تم تفعيل وضع التحرير للعنصر المحدد.");
-      }
-
-      function deleteItem(id) {
-        const idx = items.findIndex(i => i.id === id);
-        if (idx === -1) return;
-        items.splice(idx, 1);
-        saveItems(items);
-        if (currentEditId === id) resetForm();
-        renderItems();
-        showToast("تم حذف العنصر.");
-      }
-
-      function saveCurrent() {
-        const data = getFormData();
-        if (!data.title) {
-          showToast("أضف على الأقل عنواناً.");
-          return;
-        }
-
-        if (currentEditId) {
-          const idx = items.findIndex(i => i.id === currentEditId);
-          if (idx !== -1) items[idx] = { ...items[idx], ...data };
-          showToast("تم تحديث العنصر.");
-        } else {
-          const id = generateId();
-          items.push({ id, ...data });
-          showToast("تم إضافة عنصر جديد.");
-        }
-
-        saveItems(items);
-        renderItems();
-        resetForm();
-      }
-
-      function clearAll() {
-        if (!items.length) {
-          showToast("القائمة فارغة بالفعل.");
-          return;
-        }
-        if (!confirm("هل تريد فعلاً حذف كل العناصر؟")) return;
-        items = [];
-        saveItems(items);
-        resetForm();
-        renderItems();
-        showToast("تم حذف جميع العناصر.");
-      }
-
-      function fillDemo() {
-        if (items.length && !confirm("استبدال القائمة الحالية بأمثلة؟")) return;
-
-        items = [
-          {
-            id: generateId(),
-            title: "مقال – بدء مشروع بريميوم",
-            category: "article",
-            description: "دليل لتنظيم مشروعك باستخدام وثيقة رئيسية واحدة نظيفة وقابلة للتطوير.",
-            tags: ["مقال", "هيكلة", "بريميوم"]
-          },
-          {
-            id: generateId(),
-            title: "وصفة – واجهة ذهبية",
-            category: "recette",
-            description: "خطوات لإنشاء واجهة ذهبية مع عناوين مضيئة وبطاقات نظيفة ومودالات بريميوم.",
-            tags: ["وصفة", "واجهة", "ذهبي"]
-          },
-          {
-            id: generateId(),
-            title: "فيديو – عرض النظام",
-            category: "video",
-            description: "فيديو يوضح كيفية استخدام هذه الوثيقة كقاعدة للمشروع بالكامل.",
-            tags: ["فيديو", "عرض"]
-          }
-        ];
-
-        saveItems(items);
-        renderItems();
-        resetForm();
-        showToast("تمت إضافة الأمثلة.");
-      }
-
-      function openAdminModal() {
-        document.getElementById("modal-admin").classList.add("active");
-      }
-
-      function closeAdminModal() {
-        document.getElementById("modal-admin").classList.remove("active");
-      }
-
-      function exportJSON() {
-        const dataStr = JSON.stringify(items, null, 2);
-        console.log("تصدير JSON :", dataStr);
-        showToast("تم تصدير JSON إلى الكونسول.");
-      }
-
-      function adminResetAll() {
-        if (!confirm("إعادة تعيين كاملة (القائمة + التخزين)؟")) return;
-        items = [];
-        saveItems(items);
-        resetForm();
-        renderItems();
-        showToast("تم تنفيذ إعادة التعيين الكاملة.");
-      }
-
-      window.addEventListener("DOMContentLoaded", () => {
-        renderItems();
-
-        document.getElementById("btn-save-item").onclick = saveCurrent;
-        document.getElementById("btn-reset-form").onclick = resetForm;
-        document.getElementById("btn-clear-all").onclick = clearAll;
-        document.getElementById("btn-demo-fill").onclick = fillDemo;
-
-        document.getElementById("btn-open-admin").onclick = openAdminModal;
-
-        document.querySelectorAll("[data-close-modal='admin']").forEach(btn => {
-          btn.onclick = closeAdminModal;
-        });
-
-        document.getElementById("modal-admin").onclick = (e) => {
-          if (e.target.id === "modal-admin") closeAdminModal();
-        };
-
-        document.getElementById("btn-admin-export").onclick = exportJSON;
-        document.getElementById("btn-admin-import").onclick = importJSON;
-        document.getElementById("btn-admin-reset").onclick = adminResetAll;
-      });
-    </script>
-
   </div>
 </body>
 </html>
