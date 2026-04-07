@@ -859,14 +859,15 @@ header {
           <div><strong>Admin access is locked.</strong> Enter the admin code to continue.</div>
           <div class="admin-lock-row">
             <input
-              type="password"
-              id="admin-code-input"
-              placeholder="Admin code"
-              autocomplete="off"
-              autocorrect="off"
-              autocapitalize="off"
-              spellcheck="false"
-            />
+  type="password"
+  id="admin-code-input"
+  placeholder="Admin code"
+  autocomplete="new-password"
+  autocorrect="off"
+  autocapitalize="off"
+  spellcheck="false"
+/>
+
             <button class="btn btn-primary" id="admin-code-btn" type="button">Unlock</button>
           </div>
           <div class="status" id="admin-code-status"></div>
