@@ -2,666 +2,165 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Cooking Studio – Live Recipes & Articles</title>
+  <title>Cooking Studio – Admin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    :root {
-      --bg: #0f172a;
-      --bg-soft: #111827;
-      --accent: #f59e0b;
-      --accent-soft: rgba(245, 158, 11, 0.15);
-      --text: #f9fafb;
-      --muted: #9ca3af;
-      --card: #020617;
-      --danger: #ef4444;
-      --success: #22c55e;
-      --radius: 14px;
-      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.55);
-      --transition-fast: 0.2s ease-out;
-      --transition-med: 0.35s ease-out;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
+      margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #1f2937 0, #020617 55%);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      background: #020617;
+      color: #f9fafb;
     }
-    .app-shell { max-width: 1200px; margin: 32px auto; padding: 0 16px 40px; }
-    header {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 24px; gap: 16px;
+    .shell { max-width: 900px; margin: 32px auto; padding: 0 16px 40px; }
+    h1 { margin: 0 0 4px; }
+    .muted { color: #9ca3af; font-size: 0.9rem; }
+    .card {
+      margin-top: 16px;
+      background: #020617;
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      padding: 16px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.55);
     }
-    .brand { display: flex; align-items: center; gap: 12px; }
-    .brand-logo {
-      width: 44px; height: 44px; border-radius: 50%;
-      background: radial-gradient(circle at 30% 20%, #fbbf24, #f97316 45%, #b45309 100%);
-      box-shadow: 0 0 25px rgba(245, 158, 11, 0.7);
-      display: flex; align-items: center; justify-content: center;
-      color: #111827; font-weight: 800; font-size: 20px;
+    .row { margin-bottom: 10px; display: flex; flex-direction: column; gap: 4px; font-size: 0.85rem; }
+    input, textarea {
+      border-radius: 10px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.9);
+      color: #f9fafb;
+      padding: 6px 8px;
+      font-size: 0.85rem;
+      outline: none;
     }
-    .brand-text h1 {
-      font-size: 1.4rem; letter-spacing: 0.04em;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .brand-text h1 span {
-      background: linear-gradient(90deg, #fbbf24, #f97316, #facc15);
-      -webkit-background-clip: text; color: transparent;
-      text-shadow: 0 0 18px rgba(245, 158, 11, 0.6);
-    }
-    .brand-text p { font-size: 0.85rem; color: var(--muted); }
-    nav { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
-    .nav-btn {
-      border: none; padding: 8px 14px; border-radius: 999px;
-      background: rgba(15, 23, 42, 0.8); color: var(--muted);
-      font-size: 0.85rem; cursor: pointer;
-      display: inline-flex; align-items: center; gap: 6px;
-      transition: background var(--transition-fast), color var(--transition-fast),
-                  transform 0.15s ease-out, box-shadow 0.15s ease-out;
-    }
-    .nav-btn span.dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: var(--accent); box-shadow: 0 0 10px rgba(245, 158, 11, 0.9);
-    }
-    .nav-btn.active {
-      background: linear-gradient(90deg, #f59e0b, #f97316);
-      color: #111827; box-shadow: 0 0 18px rgba(245, 158, 11, 0.7);
-      transform: translateY(-1px);
-    }
-    .nav-btn:hover {
-      background: rgba(31, 41, 55, 0.95); color: var(--text);
-      transform: translateY(-1px);
-    }
-    .nav-btn.active span.dot { background: #111827; box-shadow: none; }
-
-    .hero {
-      background: radial-gradient(circle at top left, rgba(245, 158, 11, 0.18), transparent 55%),
-                  radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.18), transparent 55%),
-                  linear-gradient(135deg, #020617, #020617);
-      border-radius: 24px; padding: 24px 22px; margin-bottom: 24px;
-      box-shadow: var(--shadow-soft); position: relative; overflow: hidden;
-    }
-    .hero::before {
-      content: ""; position: absolute; inset: -40%;
-      background: conic-gradient(from 180deg, rgba(245, 158, 11, 0.15), transparent,
-                                 rgba(59, 130, 246, 0.15), transparent);
-      filter: blur(40px); opacity: 0.4; animation: spin 18s linear infinite;
-      pointer-events: none;
-    }
-    .hero-inner {
-      position: relative;
-      display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.4fr);
-      gap: 24px; align-items: center;
-    }
-    .hero-title { font-size: 1.9rem; line-height: 1.2; margin-bottom: 8px; }
-    .hero-title span {
-      background: linear-gradient(90deg, #fbbf24, #f97316, #facc15);
-      -webkit-background-clip: text; color: transparent;
-    }
-    .hero-subtitle { color: var(--muted); font-size: 0.95rem; margin-bottom: 16px; }
-    .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
-    .tag {
-      font-size: 0.75rem; padding: 4px 10px; border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      background: rgba(15, 23, 42, 0.8); color: var(--muted);
-      display: inline-flex; align-items: center; gap: 6px;
-    }
-    .tag-dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: var(--accent); box-shadow: 0 0 10px rgba(245, 158, 11, 0.9);
-    }
-    .hero-cta { display: flex; flex-wrap: wrap; gap: 10px; }
-    .btn-primary, .btn-ghost {
-      border-radius: 999px; padding: 8px 16px; font-size: 0.85rem;
-      border: none; cursor: pointer;
-      display: inline-flex; align-items: center; gap: 8px;
-      transition: transform 0.15s ease-out, box-shadow 0.15s ease-out,
-                  background var(--transition-fast), color var(--transition-fast);
+    textarea { min-height: 70px; resize: vertical; }
+    button {
+      border-radius: 999px;
+      border: none;
+      padding: 7px 14px;
+      font-size: 0.85rem;
+      cursor: pointer;
     }
     .btn-primary {
       background: linear-gradient(90deg, #f59e0b, #f97316);
-      color: #111827; box-shadow: 0 0 18px rgba(245, 158, 11, 0.7);
-    }
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 0 24px rgba(245, 158, 11, 0.9);
+      color: #111827;
     }
     .btn-ghost {
-      background: rgba(15, 23, 42, 0.9); color: var(--muted);
-      border: 1px solid rgba(148, 163, 184, 0.4);
-    }
-    .btn-ghost:hover {
-      background: rgba(31, 41, 55, 0.95); color: var(--text);
-      transform: translateY(-1px);
-    }
-    .hero-media {
-      position: relative; border-radius: 20px;
-      background: radial-gradient(circle at top, rgba(248, 250, 252, 0.08), transparent 60%);
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      padding: 14px; overflow: hidden;
-    }
-    .hero-media-inner {
-      border-radius: 16px; background: linear-gradient(135deg, #020617, #020617);
-      padding: 14px; display: grid; gap: 10px;
-    }
-    .hero-stat {
-      display: flex; justify-content: space-between; align-items: center;
-      font-size: 0.8rem; color: var(--muted);
-    }
-    .hero-stat strong { color: var(--accent); font-size: 1rem; }
-    .hero-badge {
-      font-size: 0.7rem; padding: 4px 8px; border-radius: 999px;
-      background: rgba(22, 163, 74, 0.15); color: #bbf7d0;
-      border: 1px solid rgba(34, 197, 94, 0.5);
-    }
-    .hero-preview-grid {
-      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 6px; margin-top: 6px;
-    }
-    .hero-preview-card {
-      border-radius: 10px;
-      background: radial-gradient(circle at top, rgba(248, 250, 252, 0.08), transparent 60%);
-      border: 1px solid rgba(148, 163, 184, 0.3);
-      padding: 6px; font-size: 0.7rem; color: var(--muted);
-      display: flex; flex-direction: column; gap: 4px;
-      position: relative; overflow: hidden;
-    }
-    .hero-preview-card span.title { font-size: 0.75rem; color: var(--text); }
-    .hero-preview-card span.pill {
-      font-size: 0.65rem; padding: 2px 6px; border-radius: 999px;
       background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      align-self: flex-start;
-    }
-    .hero-preview-card::after {
-      content: ""; position: absolute; inset: 0;
-      background: radial-gradient(circle at top, rgba(245, 158, 11, 0.12), transparent 55%);
-      opacity: 0; transition: opacity var(--transition-med);
-    }
-    .hero-preview-card:hover::after { opacity: 1; }
-
-    main {
-      display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.2fr);
-      gap: 20px; align-items: flex-start;
-    }
-    @media (max-width: 900px) {
-      .hero-inner { grid-template-columns: minmax(0, 1fr); }
-      main { grid-template-columns: minmax(0, 1fr); }
-      header { flex-direction: column; align-items: flex-start; }
-      nav { justify-content: flex-start; }
-    }
-
-    .card {
-      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), #020617);
-      border-radius: var(--radius);
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      padding: 16px 16px 18px;
-      box-shadow: var(--shadow-soft);
-      position: relative; overflow: hidden;
-    }
-    .card::before {
-      content: ""; position: absolute; inset: -40%;
-      background: radial-gradient(circle at top, rgba(248, 250, 252, 0.06), transparent 60%);
-      opacity: 0; transition: opacity var(--transition-med);
-      pointer-events: none;
-    }
-    .card:hover::before { opacity: 1; }
-    .card-header {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 10px; gap: 8px;
-    }
-    .card-title {
-      font-size: 1rem; display: flex; align-items: center; gap: 8px;
-    }
-    .card-title span.accent {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--accent); box-shadow: 0 0 12px rgba(245, 158, 11, 0.9);
-    }
-    .card-subtitle { font-size: 0.8rem; color: var(--muted); }
-    .pill-soft {
-      font-size: 0.7rem; padding: 4px 8px; border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      color: var(--muted);
-    }
-    .list {
-      display: flex; flex-direction: column; gap: 10px;
-      margin-top: 8px; max-height: 360px; overflow: auto; padding-right: 4px;
-    }
-    .list-empty {
-      font-size: 0.8rem; color: var(--muted); padding: 8px 0;
-    }
-    .item {
-      border-radius: 12px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      padding: 10px 10px 10px;
-      display: grid; grid-template-columns: minmax(0, 1fr) auto;
-      gap: 8px; font-size: 0.8rem;
-      transition: transform 0.15s ease-out, box-shadow 0.15s ease-out,
-                  border-color var(--transition-fast), background var(--transition-fast);
-      cursor: pointer;
-    }
-    .item:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 0 18px rgba(15, 23, 42, 0.9);
-      border-color: rgba(148, 163, 184, 0.9);
-      background: radial-gradient(circle at top, rgba(15, 23, 42, 1), #020617);
-    }
-    .item-main { display: flex; flex-direction: column; gap: 4px; }
-    .item-title { font-size: 0.9rem; color: var(--text); font-weight: 500; }
-    .item-meta {
-      display: flex; flex-wrap: wrap; gap: 6px;
-      color: var(--muted); font-size: 0.7rem;
-    }
-    .item-meta span { display: inline-flex; align-items: center; gap: 4px; }
-    .item-actions {
-      display: flex; flex-direction: column; gap: 4px;
-      align-items: flex-end; justify-content: center;
-    }
-    .badge {
-      font-size: 0.7rem; padding: 2px 8px; border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      color: var(--muted);
-    }
-
-    .static-content {
-      font-size: 0.85rem; color: var(--muted);
-      line-height: 1.6; margin-top: 6px;
-    }
-    .static-content h3 {
-      font-size: 0.95rem; color: var(--text);
-      margin-top: 10px; margin-bottom: 4px;
-    }
-    .static-content p { margin-bottom: 6px; }
-    .static-content ul { margin-left: 16px; margin-bottom: 6px; }
-    .static-content li { margin-bottom: 4px; }
-
-    .admin-locked {
-      font-size: 0.8rem; color: var(--muted);
-      margin-top: 8px; display: flex; flex-direction: column; gap: 8px;
-    }
-    .admin-code-input {
-      display: flex; gap: 8px; flex-wrap: wrap;
-    }
-    .admin-code-input input {
-      flex: 1; min-width: 140px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      background: rgba(15, 23, 42, 0.9);
-      color: var(--text); padding: 6px 10px; font-size: 0.8rem;
-      outline: none;
-      transition: border-color var(--transition-fast),
-                  box-shadow var(--transition-fast),
-                  background var(--transition-fast);
-    }
-    .admin-code-input input:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.5);
-      background: rgba(15, 23, 42, 1);
-    }
-    .admin-panel { margin-top: 10px; display: none; animation: fadeInUp 0.35s ease-out; }
-    .admin-tabs { display: flex; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
-    .admin-tab-btn {
-      border-radius: 999px;
+      color: #9ca3af;
       border: 1px solid rgba(148, 163, 184, 0.5);
-      background: rgba(15, 23, 42, 0.9);
-      color: var(--muted); font-size: 0.75rem;
-      padding: 4px 10px; cursor: pointer;
-      display: inline-flex; align-items: center; gap: 6px;
-      transition: background var(--transition-fast), color var(--transition-fast),
-                  border-color var(--transition-fast), transform 0.15s ease-out;
     }
-    .admin-tab-btn.active {
-      background: var(--accent-soft); color: var(--accent);
-      border-color: rgba(245, 158, 11, 0.7);
-      transform: translateY(-1px);
-    }
-    .admin-section { display: none; margin-top: 4px; }
-    .admin-section.active { display: block; }
-
-    .form-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; margin-bottom: 10px; }
-    .form-row { display: flex; flex-direction: column; gap: 4px; font-size: 0.8rem; }
-    .form-row label { color: var(--muted); }
-    .form-row input, .form-row textarea {
-      border-radius: 10px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      background: rgba(15, 23, 42, 0.9);
-      color: var(--text); padding: 6px 8px; font-size: 0.8rem;
-      outline: none;
-      transition: border-color var(--transition-fast),
-                  box-shadow var(--transition-fast),
-                  background var(--transition-fast);
-    }
-    .form-row input:focus, .form-row textarea:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.5);
-      background: rgba(15, 23, 42, 1);
-    }
-    .form-row textarea { min-height: 70px; resize: vertical; }
-    .form-actions {
-      display: flex; gap: 8px; flex-wrap: wrap;
-      align-items: center; justify-content: flex-start;
-    }
-    .status-text { font-size: 0.75rem; color: var(--muted); }
-    .status-text.success { color: var(--success); }
-    .status-text.error { color: var(--danger); }
-
-    .admin-list {
-      margin-top: 8px; max-height: 220px; overflow: auto;
-      padding-right: 4px; display: flex; flex-direction: column; gap: 8px;
-    }
-    .admin-item {
+    .status { font-size: 0.8rem; margin-top: 6px; }
+    .status.error { color: #ef4444; }
+    .status.success { color: #22c55e; }
+    .list { margin-top: 10px; max-height: 260px; overflow: auto; display: flex; flex-direction: column; gap: 8px; }
+    .item {
       border-radius: 10px;
       background: rgba(15, 23, 42, 0.9);
       border: 1px solid rgba(55, 65, 81, 0.9);
-      padding: 8px 8px; font-size: 0.8rem;
-      display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px;
+      padding: 8px;
+      font-size: 0.8rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 6px;
     }
-    .admin-item-main { display: flex; flex-direction: column; gap: 4px; }
-    .admin-item-title { color: var(--text); font-weight: 500; }
-    .admin-item-meta { color: var(--muted); font-size: 0.7rem; }
-    .admin-item-actions {
-      display: flex; flex-direction: column; gap: 4px;
-      align-items: flex-end; justify-content: center;
-    }
+    .item-title { font-weight: 600; }
+    .item-meta { color: #9ca3af; font-size: 0.75rem; }
+    .item-actions { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; justify-content: center; }
     .btn-icon {
-      border: none; background: transparent; color: var(--muted);
-      cursor: pointer; font-size: 0.8rem; padding: 2px 4px;
-      transition: color var(--transition-fast), transform 0.15s ease-out;
+      border: none;
+      background: transparent;
+      color: #9ca3af;
+      cursor: pointer;
+      font-size: 0.8rem;
     }
-    .btn-icon:hover { color: var(--accent); transform: translateY(-1px); }
-    .btn-icon.danger:hover { color: var(--danger); }
-
-    @keyframes spin { to { transform: rotate(360deg); } }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .hidden { display: none !important; }
+    .btn-icon.danger { color: #ef4444; }
   </style>
 </head>
 <body>
-  <div class="app-shell">
-    <header>
-      <div class="brand">
-        <div class="brand-logo">CS</div>
-        <div class="brand-text">
-          <h1><span>Cooking Studio</span> <small>• live</small></h1>
-          <p>Secure recipes and articles, synced for every visitor.</p>
-        </div>
+  <div class="shell">
+    <h1>Cooking Studio – Admin</h1>
+    <div class="muted">This page is for you only. Do not share this URL.</div>
+
+    <div class="card" id="auth-card">
+      <div class="row">
+        <label for="admin-code">Admin code</label>
+        <input
+          type="password"
+          id="admin-code"
+          placeholder="Enter admin code"
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="false"
+        />
       </div>
-      <nav>
-        <button class="nav-btn active" data-section="recipes"><span class="dot"></span> Recipes</button>
-        <button class="nav-btn" data-section="articles">Articles</button>
-        <button class="nav-btn" data-section="privacy">Privacy Policy</button>
-        <button class="nav-btn" data-section="terms">Terms & Conditions</button>
-        <button class="nav-btn" data-section="admin">Admin</button>
-      </nav>
-    </header>
+      <button class="btn-primary" id="admin-login-btn">Unlock admin</button>
+      <div class="status" id="auth-status"></div>
+    </div>
 
-    <section class="hero">
-      <div class="hero-inner">
-        <div>
-          <h2 class="hero-title">
-            A <span>secure</span> cooking hub powered by Firebase Functions.
-          </h2>
-          <p class="hero-subtitle">
-            Admin edits go through a protected backend. Visitors only read. No keys or codes in the HTML.
-          </p>
-          <div class="hero-tags">
-            <div class="tag"><span class="tag-dot"></span> Secure backend</div>
-            <div class="tag"><span class="tag-dot"></span> Shared database</div>
-            <div class="tag"><span class="tag-dot"></span> Admin-only editing</div>
-          </div>
-          <div class="hero-cta">
-            <button class="btn-primary" data-section-jump="recipes">Browse recipes</button>
-            <button class="btn-ghost" data-section-jump="admin">Open admin panel</button>
-          </div>
-        </div>
-        <div class="hero-media">
-          <div class="hero-media-inner">
-            <div class="hero-stat">
-              <div>
-                <div style="font-size:0.75rem;color:var(--muted);">Live content</div>
-                <strong id="hero-total-items">0 items</strong>
-              </div>
-              <div class="hero-badge">Backend protected</div>
-            </div>
-            <div class="hero-preview-grid">
-              <div class="hero-preview-card">
-                <span class="title">Recipes</span>
-                <span class="pill">Images & videos</span>
-                <span style="font-size:0.65rem;">Stored in Firebase, edited via API.</span>
-              </div>
-              <div class="hero-preview-card">
-                <span class="title">Articles</span>
-                <span class="pill">Cooking tips</span>
-                <span style="font-size:0.65rem;">Guides synced for all visitors.</span>
-              </div>
-              <div class="hero-preview-card">
-                <span class="title">Policies</span>
-                <span class="pill">Static pages</span>
-                <span style="font-size:0.65rem;">Privacy & terms in a clean layout.</span>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="card" id="admin-card" style="display:none;">
+      <h2>Recipes</h2>
+      <div class="row">
+        <label>Title</label>
+        <input id="r-title" />
       </div>
-    </section>
+      <div class="row">
+        <label>Description</label>
+        <input id="r-desc" />
+      </div>
+      <div class="row">
+        <label>Content</label>
+        <textarea id="r-content"></textarea>
+      </div>
+      <div class="row">
+        <label>Image URL</label>
+        <input id="r-image" />
+      </div>
+      <div class="row">
+        <label>Video URL</label>
+        <input id="r-video" />
+      </div>
+      <button class="btn-primary" id="r-save">Save recipe</button>
+      <button class="btn-ghost" id="r-reset">Reset</button>
+      <div class="status" id="r-status"></div>
+      <div class="list" id="r-list"></div>
+    </div>
 
-    <main>
-      <!-- Recipes -->
-      <section id="section-recipes" class="card">
-        <div class="card-header">
-          <div>
-            <div class="card-title"><span class="accent"></span> Recipes</div>
-            <div class="card-subtitle">All recipes loaded from the secure backend.</div>
-          </div>
-          <span class="pill-soft" id="recipes-count">0 recipes</span>
-        </div>
-        <div class="list" id="recipes-list"></div>
-        <div class="list-empty hidden" id="recipes-empty">
-          No recipes yet. Use the admin panel to create your first recipe.
-        </div>
-      </section>
-
-      <!-- Articles -->
-      <section id="section-articles" class="card hidden">
-        <div class="card-header">
-          <div>
-            <div class="card-title"><span class="accent"></span> Articles</div>
-            <div class="card-subtitle">Cooking stories, tips, and guides.</div>
-          </div>
-          <span class="pill-soft" id="articles-count">0 articles</span>
-        </div>
-        <div class="list" id="articles-list"></div>
-        <div class="list-empty hidden" id="articles-empty">
-          No articles yet. Use the admin panel to publish one.
-        </div>
-      </section>
-
-      <!-- Privacy -->
-      <section id="section-privacy" class="card hidden">
-        <div class="card-header">
-          <div>
-            <div class="card-title"><span class="accent"></span> Privacy Policy</div>
-            <div class="card-subtitle">How your data is handled in this demo.</div>
-          </div>
-        </div>
-        <div class="static-content">
-          <p>
-            This website uses Firebase Realtime Database and Cloud Functions. All write operations go through a
-            protected backend. Visitors can only read data.
-          </p>
-          <h3>Data stored</h3>
-          <ul>
-            <li>Recipe titles, descriptions, content, image URLs, and video URLs.</li>
-            <li>Article titles, descriptions, and content.</li>
-          </ul>
-          <h3>Control</h3>
-          <p>
-            You can delete any recipe or article from the admin panel. You can also clear all data directly from
-            the Firebase console.
-          </p>
-        </div>
-      </section>
-
-      <!-- Terms -->
-      <section id="section-terms" class="card hidden">
-        <div class="card-header">
-          <div>
-            <div class="card-title"><span class="accent"></span> Terms & Conditions</div>
-            <div class="card-subtitle">Simple rules for this demo.</div>
-          </div>
-        </div>
-        <div class="static-content">
-          <h3>Use of content</h3>
-          <p>
-            All content is stored in your Firebase project. You are responsible for the content you create and
-            share.
-          </p>
-          <h3>Demo only</h3>
-          <p>
-            This is a front-end + backend demo using Firebase. You can extend it with authentication, roles,
-            and more advanced features.
-          </p>
-        </div>
-      </section>
-
-      <!-- Admin -->
-      <section id="section-admin" class="card hidden">
-        <div class="card-header">
-          <div>
-            <div class="card-title"><span class="accent"></span> Admin Panel</div>
-            <div class="card-subtitle">Enter the admin code to manage recipes and articles.</div>
-          </div>
-          <span class="pill-soft">Code protected on server</span>
-        </div>
-
-        <div class="admin-locked" id="admin-locked">
-          <div>Admin access is locked. Enter the admin code to continue.</div>
-          <div class="admin-code-input">
-            <input type="password" id="admin-code-input" placeholder="Enter admin code" />
-            <button class="btn-primary" id="admin-code-btn">Unlock</button>
-          </div>
-          <div class="status-text" id="admin-code-status"></div>
-        </div>
-
-        <div class="admin-panel" id="admin-panel">
-          <div class="admin-tabs">
-            <button class="admin-tab-btn active" data-admin-tab="recipes-admin">Recipes</button>
-            <button class="admin-tab-btn" data-admin-tab="articles-admin">Articles</button>
-          </div>
-
-          <!-- Recipes admin -->
-          <div class="admin-section active" id="admin-section-recipes-admin">
-            <div class="form-grid">
-              <div class="form-row">
-                <label for="recipe-title">Recipe title</label>
-                <input type="text" id="recipe-title" placeholder="Ex: Golden Moroccan Couscous" />
-              </div>
-              <div class="form-row">
-                <label for="recipe-description">Short description</label>
-                <input type="text" id="recipe-description" placeholder="Ex: Light, fluffy couscous with vegetables." />
-              </div>
-              <div class="form-row">
-                <label for="recipe-content">Full recipe (steps, ingredients)</label>
-                <textarea id="recipe-content" placeholder="Write the full recipe here..."></textarea>
-              </div>
-              <div class="form-row">
-                <label for="recipe-image">Image URL (optional)</label>
-                <input type="text" id="recipe-image" placeholder="https://example.com/your-image.jpg" />
-              </div>
-              <div class="form-row">
-                <label for="recipe-video">Video URL (optional, YouTube or MP4)</label>
-                <input type="text" id="recipe-video" placeholder="https://youtube.com/..." />
-              </div>
-            </div>
-            <div class="form-actions">
-              <button class="btn-primary" id="recipe-save-btn">Save recipe</button>
-              <button class="btn-ghost" id="recipe-reset-btn">Reset form</button>
-              <span class="status-text" id="recipe-status"></span>
-            </div>
-            <div class="admin-list" id="admin-recipes-list"></div>
-          </div>
-
-          <!-- Articles admin -->
-          <div class="admin-section" id="admin-section-articles-admin">
-            <div class="form-grid">
-              <div class="form-row">
-                <label for="article-title">Article title</label>
-                <input type="text" id="article-title" placeholder="Ex: 5 Secrets to Perfect Tagine" />
-              </div>
-              <div class="form-row">
-                <label for="article-description">Short description</label>
-                <input type="text" id="article-description" placeholder="Ex: Simple tricks to level up your tagine." />
-              </div>
-              <div class="form-row">
-                <label for="article-content">Full article</label>
-                <textarea id="article-content" placeholder="Write the full article here..."></textarea>
-              </div>
-            </div>
-            <div class="form-actions">
-              <button class="btn-primary" id="article-save-btn">Save article</button>
-              <button class="btn-ghost" id="article-reset-btn">Reset form</button>
-              <span class="status-text" id="article-status"></span>
-            </div>
-            <div class="admin-list" id="admin-articles-list"></div>
-          </div>
-        </div>
-      </section>
-    </main>
+    <div class="card" id="admin-articles-card" style="display:none;">
+      <h2>Articles</h2>
+      <div class="row">
+        <label>Title</label>
+        <input id="a-title" />
+      </div>
+      <div class="row">
+        <label>Description</label>
+        <input id="a-desc" />
+      </div>
+      <div class="row">
+        <label>Content</label>
+        <textarea id="a-content"></textarea>
+      </div>
+      <button class="btn-primary" id="a-save">Save article</button>
+      <button class="btn-ghost" id="a-reset">Reset</button>
+      <div class="status" id="a-status"></div>
+      <div class="list" id="a-list"></div>
+    </div>
   </div>
 
   <script>
-    // Base API URL (Firebase Hosting + Functions in same project)
     const API_BASE = "/api";
-
+    let adminCode = null;
     let recipes = [];
     let articles = [];
-    let adminCode = null;
+    let editingRecipeId = null;
+    let editingArticleId = null;
 
-    const navButtons = document.querySelectorAll(".nav-btn");
-    const sections = {
-      recipes: document.getElementById("section-recipes"),
-      articles: document.getElementById("section-articles"),
-      privacy: document.getElementById("section-privacy"),
-      terms: document.getElementById("section-terms"),
-      admin: document.getElementById("section-admin"),
-    };
-
-    function setActiveSection(sectionName) {
-      navButtons.forEach((btn) => {
-        btn.classList.toggle("active", btn.dataset.section === sectionName);
-      });
-      Object.entries(sections).forEach(([name, el]) => {
-        el.classList.toggle("hidden", name !== sectionName);
-      });
-    }
-
-    navButtons.forEach((btn) => {
-      btn.addEventListener("click", () => setActiveSection(btn.dataset.section));
-    });
-
-    document.querySelectorAll("[data-section-jump]").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const target = btn.getAttribute("data-section-jump");
-        setActiveSection(target);
-        window.scrollTo({ top: document.querySelector("main").offsetTop - 20, behavior: "smooth" });
-      });
-    });
-
-    const recipesListEl = document.getElementById("recipes-list");
-    const recipesEmptyEl = document.getElementById("recipes-empty");
-    const recipesCountEl = document.getElementById("recipes-count");
-    const articlesListEl = document.getElementById("articles-list");
-    const articlesEmptyEl = document.getElementById("articles-empty");
-    const articlesCountEl = document.getElementById("articles-count");
-    const heroTotalItemsEl = document.getElementById("hero-total-items");
+    const authCard = document.getElementById("auth-card");
+    const adminCard = document.getElementById("admin-card");
+    const adminArticlesCard = document.getElementById("admin-articles-card");
+    const adminCodeInput = document.getElementById("admin-code");
+    const adminLoginBtn = document.getElementById("admin-login-btn");
+    const authStatus = document.getElementById("auth-status");
 
     function escapeHtml(str) {
       return String(str || "")
@@ -672,181 +171,85 @@
         .replace(/'/g, "&#039;");
     }
 
-    function updateHeroStats() {
-      const total = recipes.length + articles.length;
-      heroTotalItemsEl.textContent = `${total} item${total === 1 ? "" : "s"}`;
-    }
-
-    function renderRecipes() {
-      recipesListEl.innerHTML = "";
-      if (!recipes.length) {
-        recipesEmptyEl.classList.remove("hidden");
-      } else {
-        recipesEmptyEl.classList.add("hidden");
-      }
-
-      recipes.forEach((recipe) => {
-        const item = document.createElement("div");
-        item.className = "item";
-        item.innerHTML = `
-          <div class="item-main">
-            <div class="item-title">${escapeHtml(recipe.title || "Untitled recipe")}</div>
-            <div class="item-meta">
-              <span><strong>Desc:</strong> ${escapeHtml(recipe.description || "No description")}</span>
-              ${recipe.imageUrl ? `<span>🖼️ Image</span>` : ""}
-              ${recipe.videoUrl ? `<span>🎬 Video</span>` : ""}
-            </div>
-          </div>
-          <div class="item-actions">
-            <span class="badge">Recipe</span>
-          </div>
-        `;
-        item.addEventListener("click", () => {
-          let message = `Recipe: ${recipe.title || "Untitled"}\n\n`;
-          if (recipe.description) message += `Description: ${recipe.description}\n\n`;
-          if (recipe.content) message += `Recipe:\n${recipe.content}\n\n`;
-          if (recipe.imageUrl) message += `Image URL: ${recipe.imageUrl}\n`;
-          if (recipe.videoUrl) message += `Video URL: ${recipe.videoUrl}\n`;
-          alert(message);
-        });
-        recipesListEl.appendChild(item);
-      });
-
-      recipesCountEl.textContent = `${recipes.length} recipe${recipes.length === 1 ? "" : "s"}`;
-      updateHeroStats();
-    }
-
-    function renderArticles() {
-      articlesListEl.innerHTML = "";
-      if (!articles.length) {
-        articlesEmptyEl.classList.remove("hidden");
-      } else {
-        articlesEmptyEl.classList.add("hidden");
-      }
-
-      articles.forEach((article) => {
-        const item = document.createElement("div");
-        item.className = "item";
-        item.innerHTML = `
-          <div class="item-main">
-            <div class="item-title">${escapeHtml(article.title || "Untitled article")}</div>
-            <div class="item-meta">
-              <span>${escapeHtml(article.description || "No description")}</span>
-            </div>
-          </div>
-          <div class="item-actions">
-            <span class="badge">Article</span>
-          </div>
-        `;
-        item.addEventListener("click", () => {
-          let message = `Article: ${article.title || "Untitled"}\n\n`;
-          if (article.description) message += `Description: ${article.description}\n\n`;
-          if (article.content) message += `Article:\n${article.content}\n`;
-          alert(message);
-        });
-        articlesListEl.appendChild(item);
-      });
-
-      articlesCountEl.textContent = `${articles.length} article${articles.length === 1 ? "" : "s"}`;
-      updateHeroStats();
-    }
-
-    // --- Admin auth (frontend side only) ---
-    const adminLockedEl = document.getElementById("admin-locked");
-    const adminPanelEl = document.getElementById("admin-panel");
-    const adminCodeInputEl = document.getElementById("admin-code-input");
-    const adminCodeBtnEl = document.getElementById("admin-code-btn");
-    const adminCodeStatusEl = document.getElementById("admin-code-status");
-
-    adminCodeBtnEl.addEventListener("click", () => {
-      const value = adminCodeInputEl.value.trim();
+    adminLoginBtn.addEventListener("click", async () => {
+      const value = adminCodeInput.value.trim();
+      authStatus.classList.remove("error", "success");
       if (!value) {
-        adminCodeStatusEl.textContent = "Enter the admin code.";
-        adminCodeStatusEl.classList.add("error");
+        authStatus.textContent = "Enter the admin code.";
+        authStatus.classList.add("error");
         return;
       }
-      // We don't verify here; backend will reject wrong codes.
-      adminCode = value;
-      adminLockedEl.style.display = "none";
-      adminPanelEl.style.display = "block";
-      adminCodeStatusEl.textContent = "";
-      adminCodeStatusEl.classList.remove("error");
-    });
-
-    adminCodeInputEl.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") adminCodeBtnEl.click();
-    });
-
-    // --- Admin tabs ---
-    const adminTabButtons = document.querySelectorAll(".admin-tab-btn");
-    const adminSections = {
-      "recipes-admin": document.getElementById("admin-section-recipes-admin"),
-      "articles-admin": document.getElementById("admin-section-articles-admin"),
-    };
-
-    adminTabButtons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const tab = btn.dataset.adminTab;
-        adminTabButtons.forEach((b) => b.classList.toggle("active", b === btn));
-        Object.entries(adminSections).forEach(([name, el]) => {
-          el.classList.toggle("active", name === tab);
+      authStatus.textContent = "Checking...";
+      try {
+        const res = await fetch(`${API_BASE}/auth/admin`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-admin-code": value
+          },
+          body: JSON.stringify({})
         });
-      });
+        if (!res.ok) {
+          authStatus.textContent = "Wrong code.";
+          authStatus.classList.add("error");
+          return;
+        }
+        adminCode = value;
+        authCard.style.display = "none";
+        adminCard.style.display = "block";
+        adminArticlesCard.style.display = "block";
+        authStatus.textContent = "";
+        await Promise.all([loadRecipes(), loadArticles()]);
+      } catch {
+        authStatus.textContent = "Error contacting server.";
+        authStatus.classList.add("error");
+      }
     });
 
-    // --- Admin: recipes CRUD ---
-    const recipeTitleEl = document.getElementById("recipe-title");
-    const recipeDescriptionEl = document.getElementById("recipe-description");
-    const recipeContentEl = document.getElementById("recipe-content");
-    const recipeImageEl = document.getElementById("recipe-image");
-    const recipeVideoEl = document.getElementById("recipe-video");
-    const recipeSaveBtnEl = document.getElementById("recipe-save-btn");
-    const recipeResetBtnEl = document.getElementById("recipe-reset-btn");
-    const recipeStatusEl = document.getElementById("recipe-status");
-    const adminRecipesListEl = document.getElementById("admin-recipes-list");
-    let editingRecipeId = null;
+    // recipes admin
+    const rTitle = document.getElementById("r-title");
+    const rDesc = document.getElementById("r-desc");
+    const rContent = document.getElementById("r-content");
+    const rImage = document.getElementById("r-image");
+    const rVideo = document.getElementById("r-video");
+    const rSave = document.getElementById("r-save");
+    const rReset = document.getElementById("r-reset");
+    const rStatus = document.getElementById("r-status");
+    const rList = document.getElementById("r-list");
 
     function resetRecipeForm() {
-      recipeTitleEl.value = "";
-      recipeDescriptionEl.value = "";
-      recipeContentEl.value = "";
-      recipeImageEl.value = "";
-      recipeVideoEl.value = "";
       editingRecipeId = null;
-      recipeSaveBtnEl.textContent = "Save recipe";
-      recipeStatusEl.textContent = "";
-      recipeStatusEl.classList.remove("success", "error");
+      rTitle.value = "";
+      rDesc.value = "";
+      rContent.value = "";
+      rImage.value = "";
+      rVideo.value = "";
+      rStatus.textContent = "";
+      rStatus.classList.remove("error", "success");
+      rSave.textContent = "Save recipe";
     }
 
-    recipeResetBtnEl.addEventListener("click", resetRecipeForm);
+    rReset.addEventListener("click", resetRecipeForm);
 
-    recipeSaveBtnEl.addEventListener("click", async () => {
-      const title = recipeTitleEl.value.trim();
-      const description = recipeDescriptionEl.value.trim();
-      const content = recipeContentEl.value.trim();
-      const imageUrl = recipeImageEl.value.trim();
-      const videoUrl = recipeVideoEl.value.trim();
-
+    rSave.addEventListener("click", async () => {
+      if (!adminCode) return;
+      const title = rTitle.value.trim();
+      const description = rDesc.value.trim();
+      const content = rContent.value.trim();
+      const imageUrl = rImage.value.trim();
+      const videoUrl = rVideo.value.trim();
       if (!title) {
-        recipeStatusEl.textContent = "Title is required.";
-        recipeStatusEl.classList.add("error");
+        rStatus.textContent = "Title required.";
+        rStatus.classList.add("error");
         return;
       }
-      if (!adminCode) {
-        recipeStatusEl.textContent = "Unlock admin first.";
-        recipeStatusEl.classList.add("error");
-        return;
-      }
-
-      recipeStatusEl.textContent = "Saving...";
-      recipeStatusEl.classList.remove("error", "success");
-
+      rStatus.textContent = "Saving...";
+      rStatus.classList.remove("error", "success");
       try {
         const method = editingRecipeId ? "PUT" : "POST";
         const url = editingRecipeId
           ? `${API_BASE}/recipes/${encodeURIComponent(editingRecipeId)}`
           : `${API_BASE}/recipes`;
-
         const res = await fetch(url, {
           method,
           headers: {
@@ -855,129 +258,103 @@
           },
           body: JSON.stringify({ title, description, content, imageUrl, videoUrl })
         });
-
-        if (!res.ok) {
-          const data = await res.json().catch(() => ({}));
-          throw new Error(data.error || "Failed");
-        }
-
-        recipeStatusEl.textContent = editingRecipeId ? "Recipe updated." : "Recipe created.";
-        recipeStatusEl.classList.add("success");
-        setTimeout(() => {
-          recipeStatusEl.textContent = "";
-          recipeStatusEl.classList.remove("success");
-        }, 1500);
+        if (!res.ok) throw new Error("Failed");
+        rStatus.textContent = editingRecipeId ? "Updated." : "Created.";
+        rStatus.classList.add("success");
         resetRecipeForm();
         await loadRecipes();
-      } catch (err) {
-        recipeStatusEl.textContent = err.message || "Error saving recipe.";
-        recipeStatusEl.classList.add("error");
+      } catch {
+        rStatus.textContent = "Error saving.";
+        rStatus.classList.add("error");
       }
     });
 
     function renderAdminRecipes() {
-      adminRecipesListEl.innerHTML = "";
+      rList.innerHTML = "";
       if (!recipes.length) {
-        const empty = document.createElement("div");
-        empty.className = "status-text";
-        empty.textContent = "No recipes yet.";
-        adminRecipesListEl.appendChild(empty);
+        const el = document.createElement("div");
+        el.className = "muted";
+        el.textContent = "No recipes yet.";
+        rList.appendChild(el);
         return;
       }
-
-      recipes.forEach((recipe) => {
-        const item = document.createElement("div");
-        item.className = "admin-item";
-        item.innerHTML = `
-          <div class="admin-item-main">
-            <div class="admin-item-title">${escapeHtml(recipe.title || "Untitled recipe")}</div>
-            <div class="admin-item-meta">${escapeHtml(recipe.description || "No description")}</div>
+      recipes.forEach((r) => {
+        const el = document.createElement("div");
+        el.className = "item";
+        el.innerHTML = `
+          <div>
+            <div class="item-title">${escapeHtml(r.title || "Untitled")}</div>
+            <div class="item-meta">${escapeHtml(r.description || "No description")}</div>
           </div>
-          <div class="admin-item-actions">
-            <button class="btn-icon" data-action="edit">✏️ Edit</button>
-            <button class="btn-icon danger" data-action="delete">🗑️ Delete</button>
+          <div class="item-actions">
+            <button class="btn-icon" data-action="edit">✏️</button>
+            <button class="btn-icon danger" data-action="delete">🗑️</button>
           </div>
         `;
-        item.querySelector('[data-action="edit"]').addEventListener("click", () => {
-          editingRecipeId = recipe.id;
-          recipeTitleEl.value = recipe.title || "";
-          recipeDescriptionEl.value = recipe.description || "";
-          recipeContentEl.value = recipe.content || "";
-          recipeImageEl.value = recipe.imageUrl || "";
-          recipeVideoEl.value = recipe.videoUrl || "";
-          recipeSaveBtnEl.textContent = "Update recipe";
-          recipeStatusEl.textContent = "Editing recipe...";
-          recipeStatusEl.classList.remove("error");
+        el.querySelector('[data-action="edit"]').addEventListener("click", () => {
+          editingRecipeId = r.id;
+          rTitle.value = r.title || "";
+          rDesc.value = r.description || "";
+          rContent.value = r.content || "";
+          rImage.value = r.imageUrl || "";
+          rVideo.value = r.videoUrl || "";
+          rSave.textContent = "Update recipe";
         });
-        item.querySelector('[data-action="delete"]').addEventListener("click", async () => {
+        el.querySelector('[data-action="delete"]').addEventListener("click", async () => {
           if (!confirm("Delete this recipe?")) return;
-          if (!adminCode) {
-            recipeStatusEl.textContent = "Unlock admin first.";
-            recipeStatusEl.classList.add("error");
-            return;
-          }
           try {
-            const res = await fetch(`${API_BASE}/recipes/${encodeURIComponent(recipe.id)}`, {
+            const res = await fetch(`${API_BASE}/recipes/${encodeURIComponent(r.id)}`, {
               method: "DELETE",
               headers: { "x-admin-code": adminCode }
             });
-            if (!res.ok) throw new Error("Failed to delete");
+            if (!res.ok) throw new Error("Failed");
             await loadRecipes();
-          } catch (err) {
-            alert("Error deleting recipe: " + err.message);
+          } catch {
+            alert("Error deleting recipe.");
           }
         });
-        adminRecipesListEl.appendChild(item);
+        rList.appendChild(el);
       });
     }
 
-    // --- Admin: articles CRUD ---
-    const articleTitleEl = document.getElementById("article-title");
-    const articleDescriptionEl = document.getElementById("article-description");
-    const articleContentEl = document.getElementById("article-content");
-    const articleSaveBtnEl = document.getElementById("article-save-btn");
-    const articleResetBtnEl = document.getElementById("article-reset-btn");
-    const articleStatusEl = document.getElementById("article-status");
-    const adminArticlesListEl = document.getElementById("admin-articles-list");
-    let editingArticleId = null;
+    // articles admin
+    const aTitle = document.getElementById("a-title");
+    const aDesc = document.getElementById("a-desc");
+    const aContent = document.getElementById("a-content");
+    const aSave = document.getElementById("a-save");
+    const aReset = document.getElementById("a-reset");
+    const aStatus = document.getElementById("a-status");
+    const aList = document.getElementById("a-list");
 
     function resetArticleForm() {
-      articleTitleEl.value = "";
-      articleDescriptionEl.value = "";
-      articleContentEl.value = "";
       editingArticleId = null;
-      articleSaveBtnEl.textContent = "Save article";
-      articleStatusEl.textContent = "";
-      articleStatusEl.classList.remove("success", "error");
+      aTitle.value = "";
+      aDesc.value = "";
+      aContent.value = "";
+      aStatus.textContent = "";
+      aStatus.classList.remove("error", "success");
+      aSave.textContent = "Save article";
     }
 
-    articleResetBtnEl.addEventListener("click", resetArticleForm);
+    aReset.addEventListener("click", resetArticleForm);
 
-    articleSaveBtnEl.addEventListener("click", async () => {
-      const title = articleTitleEl.value.trim();
-      const description = articleDescriptionEl.value.trim();
-      const content = articleContentEl.value.trim();
-
+    aSave.addEventListener("click", async () => {
+      if (!adminCode) return;
+      const title = aTitle.value.trim();
+      const description = aDesc.value.trim();
+      const content = aContent.value.trim();
       if (!title) {
-        articleStatusEl.textContent = "Title is required.";
-        articleStatusEl.classList.add("error");
+        aStatus.textContent = "Title required.";
+        aStatus.classList.add("error");
         return;
       }
-      if (!adminCode) {
-        articleStatusEl.textContent = "Unlock admin first.";
-        articleStatusEl.classList.add("error");
-        return;
-      }
-
-      articleStatusEl.textContent = "Saving...";
-      articleStatusEl.classList.remove("error", "success");
-
+      aStatus.textContent = "Saving...";
+      aStatus.classList.remove("error", "success");
       try {
         const method = editingArticleId ? "PUT" : "POST";
         const url = editingArticleId
           ? `${API_BASE}/articles/${encodeURIComponent(editingArticleId)}`
           : `${API_BASE}/articles`;
-
         const res = await fetch(url, {
           method,
           headers: {
@@ -986,98 +363,74 @@
           },
           body: JSON.stringify({ title, description, content })
         });
-
-        if (!res.ok) {
-          const data = await res.json().catch(() => ({}));
-          throw new Error(data.error || "Failed");
-        }
-
-        articleStatusEl.textContent = editingArticleId ? "Article updated." : "Article created.";
-        articleStatusEl.classList.add("success");
-        setTimeout(() => {
-          articleStatusEl.textContent = "";
-          articleStatusEl.classList.remove("success");
-        }, 1500);
+        if (!res.ok) throw new Error("Failed");
+        aStatus.textContent = editingArticleId ? "Updated." : "Created.";
+        aStatus.classList.add("success");
         resetArticleForm();
         await loadArticles();
-      } catch (err) {
-        articleStatusEl.textContent = err.message || "Error saving article.";
-        articleStatusEl.classList.add("error");
+      } catch {
+        aStatus.textContent = "Error saving.";
+        aStatus.classList.add("error");
       }
     });
 
     function renderAdminArticles() {
-      adminArticlesListEl.innerHTML = "";
+      aList.innerHTML = "";
       if (!articles.length) {
-        const empty = document.createElement("div");
-        empty.className = "status-text";
-        empty.textContent = "No articles yet.";
-        adminArticlesListEl.appendChild(empty);
+        const el = document.createElement("div");
+        el.className = "muted";
+        el.textContent = "No articles yet.";
+        aList.appendChild(el);
         return;
       }
-
-      articles.forEach((article) => {
-        const item = document.createElement("div");
-        item.className = "admin-item";
-        item.innerHTML = `
-          <div class="admin-item-main">
-            <div class="admin-item-title">${escapeHtml(article.title || "Untitled article")}</div>
-            <div class="admin-item-meta">${escapeHtml(article.description || "No description")}</div>
+      articles.forEach((a) => {
+        const el = document.createElement("div");
+        el.className = "item";
+        el.innerHTML = `
+          <div>
+            <div class="item-title">${escapeHtml(a.title || "Untitled")}</div>
+            <div class="item-meta">${escapeHtml(a.description || "No description")}</div>
           </div>
-          <div class="admin-item-actions">
-            <button class="btn-icon" data-action="edit">✏️ Edit</button>
-            <button class="btn-icon danger" data-action="delete">🗑️ Delete</button>
+          <div class="item-actions">
+            <button class="btn-icon" data-action="edit">✏️</button>
+            <button class="btn-icon danger" data-action="delete">🗑️</button>
           </div>
         `;
-        item.querySelector('[data-action="edit"]').addEventListener("click", () => {
-          editingArticleId = article.id;
-          articleTitleEl.value = article.title || "";
-          articleDescriptionEl.value = article.description || "";
-          articleContentEl.value = article.content || "";
-          articleSaveBtnEl.textContent = "Update article";
-          articleStatusEl.textContent = "Editing article...";
-          articleStatusEl.classList.remove("error");
+        el.querySelector('[data-action="edit"]').addEventListener("click", () => {
+          editingArticleId = a.id;
+          aTitle.value = a.title || "";
+          aDesc.value = a.description || "";
+          aContent.value = a.content || "";
+          aSave.textContent = "Update article";
         });
-        item.querySelector('[data-action="delete"]').addEventListener("click", async () => {
+        el.querySelector('[data-action="delete"]').addEventListener("click", async () => {
           if (!confirm("Delete this article?")) return;
-          if (!adminCode) {
-            articleStatusEl.textContent = "Unlock admin first.";
-            articleStatusEl.classList.add("error");
-            return;
-          }
           try {
-            const res = await fetch(`${API_BASE}/articles/${encodeURIComponent(article.id)}`, {
+            const res = await fetch(`${API_BASE}/articles/${encodeURIComponent(a.id)}`, {
               method: "DELETE",
               headers: { "x-admin-code": adminCode }
             });
-            if (!res.ok) throw new Error("Failed to delete");
+            if (!res.ok) throw new Error("Failed");
             await loadArticles();
-          } catch (err) {
-            alert("Error deleting article: " + err.message);
+          } catch {
+            alert("Error deleting article.");
           }
         });
-        adminArticlesListEl.appendChild(item);
+        aList.appendChild(el);
       });
     }
 
-    // --- Load data from backend ---
     async function loadRecipes() {
       const res = await fetch(`${API_BASE}/public/recipes`);
       recipes = await res.json();
-      renderRecipes();
       renderAdminRecipes();
     }
 
     async function loadArticles() {
       const res = await fetch(`${API_BASE}/public/articles`);
       articles = await res.json();
-      renderArticles();
       renderAdminArticles();
     }
-
-    (async () => {
-      await Promise.all([loadRecipes(), loadArticles()]);
-    })();
   </script>
 </body>
 </html>
