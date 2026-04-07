@@ -1,239 +1,215 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>وصفات الطبخ</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    :root {
-      --bg: #0b0c10;
-      --card-bg: #11131a;
-      --accent: #f5b301;
-      --accent-soft: rgba(245, 179, 1, 0.18);
-      --text: #f7f7f7;
-      --muted: #a7a7b3;
-      --radius-lg: 18px;
-      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.55);
-      --shadow-glow: 0 0 25px rgba(245, 179, 1, 0.35);
-    }
-
     body {
-      font-family: "Cairo", system-ui, sans-serif;
-      background: radial-gradient(circle at top, #1b1f2b 0, #05060a 55%, #020308 100%);
-      color: var(--text);
-      padding: 32px 18px;
-      display: flex;
-      justify-content: center;
+      font-family: system-ui, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
     }
 
-    .app {
-      width: 100%;
-      max-width: 1200px;
+    .premium-header {
+      text-align: center;
+      padding: 30px 10px;
+      background: #111;
+      color: #fff;
     }
 
-    /* HEADER */
-    .header {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 26px;
+    .gold-title {
+      font-size: 32px;
+      font-weight: bold;
+      color: #d4a017;
+      text-shadow: 0 0 10px rgba(212,160,23,0.4);
+      margin: 0 0 10px;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 14px;
+    .gold-desc {
+      font-size: 18px;
+      color: #ddd;
+      margin: 0;
     }
 
-    .brand-logo {
-      width: 42px;
-      height: 42px;
-      border-radius: 14px;
-      background: radial-gradient(circle at 30% 0, #ffe9a6 0, #f5b301 35%, #b87a00 100%);
-      box-shadow: var(--shadow-glow);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      color: #1b1300;
-      font-size: 20px;
+    .recipe-box {
+      background: #fff;
+      padding: 20px;
+      margin: 25px auto;
+      border-radius: 12px;
+      max-width: 800px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.08);
+      direction: rtl;
+      text-align: right;
     }
 
-    .brand-text h1 {
-      font-size: 22px;
-      color: var(--accent);
-      text-shadow: 0 0 18px rgba(245, 179, 1, 0.55);
+    .title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #d4a017;
+      margin-bottom: 15px;
     }
 
-    .brand-text p {
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .search-box input {
-      background: rgba(10, 12, 20, 0.95);
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 9px 14px;
-      color: var(--text);
-      min-width: 210px;
-      outline: none;
-    }
-
-    .filter-chips {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .chip {
-      border-radius: 999px;
-      padding: 7px 13px;
-      font-size: 12px;
-      background: rgba(10, 12, 20, 0.9);
-      color: var(--muted);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      cursor: pointer;
-    }
-
-    .chip.active {
-      background: var(--accent-soft);
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    /* GRID */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 18px;
-    }
-
-    /* CARD */
-    .card {
-      background: var(--card-bg);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.04);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .card-image {
-      width: 100%;
-      height: 190px;
-      object-fit: cover;
-    }
-
-    .badge {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: rgba(0, 0, 0, 0.72);
-      color: var(--accent);
-      padding: 5px 10px;
-      border-radius: 999px;
-      font-size: 11px;
-    }
-
-    .card-body {
-      padding: 14px;
-    }
-
-    .card-title {
-      font-size: 16px;
+    label {
+      display: block;
+      margin: 8px 0 4px;
       font-weight: 600;
-      margin-bottom: 6px;
     }
 
-    .card-description {
-      font-size: 13px;
-      color: #c5c5d2;
+    input, textarea {
+      width: 100%;
+      padding: 10px;
       margin-bottom: 10px;
-      line-height: 1.6;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      min-height: 80px;
+      resize: vertical;
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, #f5b301, #ffdd7a);
-      padding: 7px 13px;
-      border-radius: 999px;
+      background: #d4a017;
+      color: #fff;
+      padding: 10px 18px;
       border: none;
+      border-radius: 8px;
       cursor: pointer;
-      font-size: 12px;
-      font-weight: 600;
-      color: #1b1300;
+      font-size: 15px;
+    }
+
+    .btn-primary:hover {
+      background: #b88a12;
+    }
+
+    .recipe-card {
+      background: #fafafa;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #eee;
+    }
+
+    .recipe-id {
+      font-size: 13px;
+      color: #999;
+      margin-bottom: 5px;
+    }
+
+    .recipe-name {
+      margin: 0 0 8px;
+      font-size: 20px;
+      color: #333;
+    }
+
+    .recipe-section-title {
+      font-weight: 700;
+      margin-top: 8px;
+      margin-bottom: 4px;
+      color: #444;
     }
   </style>
 </head>
-
 <body>
-  <div class="app">
 
-    <!-- HEADER -->
-    <header class="header">
-      <div class="brand">
-        <div class="brand-logo">طبخ</div>
-        <div class="brand-text">
-          <h1>وصفات مميزة</h1>
-          <p>مجموعة مختارة من أشهى الأطباق.</p>
-        </div>
-      </div>
+  <header class="premium-header">
+    <h1 class="gold-title">✦ وصفات طبخ مميزة ✦</h1>
+    <p class="gold-desc">
+      أضف وصفاتك الخاصة، تُحفظ محليًا في جهازك مع رقم تعريفي ID لكل وصفة.
+    </p>
+  </header>
 
-      <div class="header-actions">
-        <div class="search-box">
-          <input type="text" placeholder="ابحث عن وصفة أو مكوّن..." />
-        </div>
+  <!-- إضافة وصفة جديدة -->
+  <section id="recipe-writer" class="recipe-box">
+    <h2 class="title">إضافة وصفة جديدة</h2>
 
-        <div class="filter-chips">
-          <button class="chip active">الكل</button>
-          <button class="chip">سريع</button>
-          <button class="chip">مقبلات</button>
-          <button class="chip">أطباق رئيسية</button>
-          <button class="chip">حلويات</button>
-        </div>
-      </div>
-    </header>
+    <label for="r-name">اسم الوصفة</label>
+    <input type="text" id="r-name" placeholder="مثال: باستا كريمية بالدجاج">
 
-    <!-- GRID -->
-    <main class="grid">
+    <label for="r-ingredients">المكونات</label>
+    <textarea id="r-ingredients" placeholder="اكتب المكونات هنا..."></textarea>
 
-      <!-- CARD 1 -->
-      <article class="card">
-        <img class="card-image" src="https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?auto=compress&cs=tinysrgb&w=800" alt="باستا بالدجاج" />
-        <div class="card-body">
-          <h2 class="card-title">باستا كريمية بالدجاج</h2>
-          <p class="card-description">
-            باستا لذيذة بصلصة كريمية مع الثوم والبارميزان، جاهزة خلال أقل من 30 دقيقة.
-          </p>
-          <button class="btn-primary">عرض الوصفة</button>
-        </div>
-      </article>
+    <label for="r-steps">طريقة التحضير</label>
+    <textarea id="r-steps" placeholder="اكتب خطوات التحضير هنا..."></textarea>
 
-      <!-- CARD 2 -->
-      <article class="card">
-        <img class="card-image" src="https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg?auto=compress&cs=tinysrgb&w=800" alt="سلطة متوسطية" />
-        <div class="card-body">
-          <h2 class="card-title">سلطة متوسطية</h2>
-          <p class="card-description">
-            طماطم، خيار، زيتون، جبنة فيتا مع صلصة ليمون منعشة.
-          </p>
-          <button class="btn-primary">عرض الوصفة</button>
-        </div>
-      </article>
+    <button id="btn-save" class="btn-primary">حفظ الوصفة</button>
+  </section>
 
-      <!-- CARD 3 -->
-      <article class="card">
-        <img class="card-image" src="https://images.pexels.com/photos/4109992/pexels-photo-4109992.jpeg?auto=compress&cs=tinysrgb&w=800" alt="فوندان الشوكولاتة" />
-        <div class="card-body">
-          <h2 class="card-title">فوندان الشوكولاتة</h2>
-          <p class="card-description">
-            حلوى شهية بقلب شوكولاتة سائل وقشرة مقرمشة لعشاق النكهة القوية.
-          </p>
-          <button class="btn-primary">عرض الوصفة</button>
-        </div>
-      </article>
+  <!-- عرض الوصفات من قاعدة البيانات -->
+  <section id="recipe-list" class="recipe-box">
+    <h2 class="title">الوصفات المحفوظة (قاعدة البيانات)</h2>
+    <div id="recipes-container"></div>
+  </section>
 
-    </main>
-  </div>
+  <script>
+    // تحميل البيانات من LocalStorage
+    let recipes = JSON.parse(localStorage.getItem("recipes_db") || "[]");
+
+    function saveRecipe() {
+      const name = document.getElementById("r-name").value.trim();
+      const ing = document.getElementById("r-ingredients").value.trim();
+      const steps = document.getElementById("r-steps").value.trim();
+
+      if (!name || !ing || !steps) {
+        alert("الرجاء ملء جميع الحقول.");
+        return;
+      }
+
+      const recipe = {
+        id: Date.now(), // ID تلقائي
+        name,
+        ing,
+        steps
+      };
+
+      recipes.push(recipe);
+      localStorage.setItem("recipes_db", JSON.stringify(recipes));
+      clearForm();
+      renderRecipes();
+    }
+
+    function clearForm() {
+      document.getElementById("r-name").value = "";
+      document.getElementById("r-ingredients").value = "";
+      document.getElementById("r-steps").value = "";
+    }
+
+    function renderRecipes() {
+      const container = document.getElementById("recipes-container");
+      container.innerHTML = "";
+
+      if (recipes.length === 0) {
+        container.innerHTML = "<p>لا توجد وصفات محفوظة بعد.</p>";
+        return;
+      }
+
+      recipes.forEach(r => {
+        const card = document.createElement("div");
+        card.className = "recipe-card";
+
+        card.innerHTML = `
+          <div class="recipe-id">ID: ${r.id}</div>
+          <h3 class="recipe-name">${r.name}</h3>
+          <div>
+            <div class="recipe-section-title">المكونات:</div>
+            <div>${r.ing.replace(/\n/g, "<br>")}</div>
+          </div>
+          <div>
+            <div class="recipe-section-title">طريقة التحضير:</div>
+            <div>${r.steps.replace(/\n/g, "<br>")}</div>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    document.getElementById("btn-save").addEventListener("click", saveRecipe);
+    renderRecipes();
+  </script>
+
 </body>
 </html>
