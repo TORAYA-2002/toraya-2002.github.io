@@ -924,6 +924,43 @@ header {
   color: #ffe66d;
   text-transform: capitalize;
 }
+   /* =========================================================
+   CARD IMAGE STYLE (auto thumbnail)
+   ========================================================= */
+
+.item {
+  display: flex;
+  gap: 14px;
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.item:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.25);
+  transform: translateY(-4px);
+}
+
+.item-thumb {
+  width: 90px;
+  height: 90px;
+  border-radius: 14px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: #111;
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+}
+
+.item-main {
+  flex: 1;
+}
+
 
 
  </style>
@@ -1299,16 +1336,17 @@ header {
         .forEach((r) => {
           const el = document.createElement("div");
           el.className = "item";
-          el.innerHTML = `
-            <div class="item-main">
-              <div class="item-title">${escapeHtml(r.title || "Untitled recipe")}</div>
-              <div class="item-desc">${escapeHtml(r.description || "No description")}</div>
-            </div>
-            <div class="item-meta">
-              <span class="badge"><span class="dot"></span>Recipe</span>
-              ${r.imageUrl || r.videoUrl ? '<span>Media attached</span>' : ""}
-            </div>
-          `;
+        el.innerHTML = `
+  ${r.imageUrl ? `<img class="item-thumb" src="${escapeHtml(r.imageUrl)}" />` : ""}
+  <div class="item-main">
+    <div class="item-title">${escapeHtml(r.title || "Untitled recipe")}</div>
+    <div class="item-desc">${escapeHtml(r.description || "No description")}</div>
+  </div>
+  <div class="item-meta">
+    <span class="badge"><span class="dot"></span>Recipe</span>
+  </div>
+`;
+
           el.addEventListener("click", () => {
             let html = "";
             if (r.imageUrl) {
@@ -1342,15 +1380,17 @@ header {
         .forEach((a) => {
           const el = document.createElement("div");
           el.className = "item";
-          el.innerHTML = `
-            <div class="item-main">
-              <div class="item-title">${escapeHtml(a.title || "Untitled article")}</div>
-              <div class="item-desc">${escapeHtml(a.description || "No description")}</div>
-            </div>
-            <div class="item-meta">
-              <span class="badge"><span class="dot"></span>Article</span>
-            </div>
-          `;
+         el.innerHTML = `
+  ${a.imageUrl ? `<img class="item-thumb" src="${escapeHtml(a.imageUrl)}" />` : ""}
+  <div class="item-main">
+    <div class="item-title">${escapeHtml(a.title)}</div>
+    <div class="item-desc">${escapeHtml(a.description)}</div>
+  </div>
+  <div class="item-meta">
+    <span class="badge"><span class="dot"></span>Article</span>
+  </div>
+`;
+
           el.addEventListener("click", () => {
             let html = "";
             if (a.content) {
