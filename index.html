@@ -1,88 +1,1777 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Cooking Studio</title><meta name="viewport" content="width=device-width,initial-scale=1"><style>
-:root{--bg:#05060a;--card:#10121a;--accent:#ffb347;--accent2:#ff6b6b;--muted:#8f93a8;--border:rgba(255,255,255,0.12);--radius:18px;--text:#ffffff;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:radial-gradient(circle at top,#1b1f33 0,#05060a 55%);color:var(--text);min-height:100vh;display:flex;justify-content:center;align-items:flex-start;padding:24px}
-.shell{width:100%;max-width:1120px}
-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
-.brand{display:flex;align-items:center;gap:10px}
-.brand-logo{width:40px;height:40px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:700;color:#000;box-shadow:0 10px 30px rgba(0,0,0,0.6)}
-h1{font-size:1.2rem}
-.muted{color:var(--muted)}
-.pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.18);font-size:.75rem}
-.pill-dot{width:7px;height:7px;border-radius:50%;background:#4ade80;box-shadow:0 0 10px #4ade80}
-.admin-btn{padding:6px 12px;border-radius:999px;border:none;background:rgba(255,255,255,0.06);color:var(--text);font-size:.8rem;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:.2s}
-.admin-btn:hover{background:rgba(255,255,255,0.14)}
-.hero{display:grid;grid-template-columns:1.2fr 1.1fr;gap:14px;margin-bottom:16px}
-.hero-card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);box-shadow:0 18px 40px rgba(0,0,0,0.8)}
-.hero-inner{padding:16px 18px}
-.hero-title{font-size:1.1rem;font-weight:600;margin-bottom:4px}
-.hero-sub{font-size:.85rem;color:var(--muted);line-height:1.5}
-.hero-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:10px}
-.hero-stat{padding:10px;border-radius:14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.12)}
-.hero-stat-label{font-size:.75rem;color:var(--muted);margin-bottom:4px}
-.hero-stat-value{font-size:.9rem;font-weight:600}
-.tabs{display:flex;gap:6px;flex-wrap:wrap}
-.tabs .tab-btn{padding:7px 14px;border-radius:999px;border:none;background:rgba(255,255,255,0.05);color:var(--muted);font-size:.78rem;cursor:pointer;transition:.2s}
-.tabs .tab-btn:hover{background:rgba(255,255,255,0.12);color:#fff}
-.tabs .tab-btn.active{background:linear-gradient(120deg,var(--accent),var(--accent2));color:#000;box-shadow:0 0 18px rgba(255,107,107,0.6);transform:translateY(-1px)}
-.layout{display:grid;grid-template-columns:1.4fr 1.1fr;gap:14px}
-.card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);box-shadow:0 18px 40px rgba(0,0,0,0.8);padding:14px 16px;display:flex;flex-direction:column;gap:10px}
-.card-header{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
-.card-title{font-size:1.1rem;font-weight:600;background:linear-gradient(120deg,var(--accent),var(--accent2));-webkit-background-clip:text;color:transparent}
-.card-sub{font-size:.82rem;color:var(--muted)}
-.list{display:flex;flex-direction:column;gap:8px;margin-top:6px}
-.item{display:flex;gap:14px;padding:12px 14px;border-radius:18px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.12);box-shadow:0 10px 30px rgba(0,0,0,0.6);cursor:pointer;transition:.25s;position:relative;overflow:hidden}
-.item:hover{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.25);transform:translateY(-3px);box-shadow:0 18px 40px rgba(0,0,0,0.9)}
-.item::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at top left,rgba(255,179,71,0.12),transparent 60%);opacity:0;transition:.3s}
-.item:hover::before{opacity:1}
-.item-thumb{width:90px;height:90px;border-radius:14px;object-fit:cover;flex-shrink:0;background:#111;border:1px solid rgba(255,255,255,0.15);box-shadow:0 6px 20px rgba(0,0,0,0.5)}
-.item-main{flex:1;position:relative;z-index:1}
-.item-title{font-size:.98rem;font-weight:600;margin-bottom:4px;color:#fff}
-.item-desc{font-size:.8rem;color:var(--muted);line-height:1.5}
-.item-meta{display:flex;flex-direction:column;align-items:flex-end;gap:6px;font-size:.75rem;color:var(--muted);position:relative;z-index:1}
-.badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);font-size:.7rem;color:#ffe66d}
-.badge .dot{width:7px;height:7px;border-radius:50%;background:#ffe66d;box-shadow:0 0 8px #ffe66d}
-.static-section{font-size:.82rem;color:var(--muted);line-height:1.6;display:flex;flex-direction:column;gap:6px}
-.static-section h3{font-size:.9rem;color:#fff;margin-top:6px}
-.static-section ul{padding-left:18px}
-.static-section li{margin-bottom:3px}
-.btn,.btn-primary,.btn-ghost{font-size:.8rem;border-radius:999px;padding:6px 12px;border:none;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;gap:6px}
-.btn-primary{background:linear-gradient(120deg,var(--accent),var(--accent2));color:#000;box-shadow:0 10px 30px rgba(0,0,0,0.7)}
-.btn-primary:hover{filter:brightness(1.05);transform:translateY(-1px)}
-.btn-ghost{background:rgba(255,255,255,0.04);color:var(--muted);border:1px solid rgba(255,255,255,0.16)}
-.btn-ghost:hover{background:rgba(255,255,255,0.12);color:#fff}
-.admin-lock{margin-top:12px;padding:10px 12px;border-radius:14px;background:rgba(255,255,255,0.03);border:1px dashed rgba(255,255,255,0.2);font-size:.8rem;display:none;flex-direction:column;gap:8px}
-.admin-lock-row{display:flex;gap:8px}
-.admin-lock input{flex:1;padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,0.2);background:#05060a;color:#fff;font-size:.8rem}
-.status{margin-top:4px;font-size:.75rem;color:var(--muted)}
-.status.error{color:#f97373}
-.status.success{color:#4ade80}
-.admin-panel{margin-top:10px;padding:10px 12px;border-radius:16px;background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.18);display:none;flex-direction:column;gap:8px}
-.admin-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
-.admin-title{font-size:.95rem;font-weight:600}
-.admin-row{display:flex;gap:8px}
-.field{flex:1;display:flex;flex-direction:column;gap:3px}
-.field label{font-size:.75rem;color:var(--muted)}
-.field input,.field textarea{width:100%;border-radius:10px;border:1px solid rgba(255,255,255,0.18);background:#05060a;color:#fff;font-size:.8rem;padding:6px 8px;resize:vertical;min-height:32px}
-.field textarea{min-height:70px}
-.admin-actions{display:flex;gap:8px;align-items:center;margin-top:6px}
-.admin-list{margin-top:8px;display:flex;flex-direction:column;gap:6px}
-.admin-item{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-radius:14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);transition:.2s}
-.admin-item:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.2);transform:translateY(-1px)}
-.admin-item-title{font-size:.88rem;font-weight:600}
-.admin-item-desc{font-size:.76rem;color:var(--muted)}
-.btn-icon{padding:4px 8px;border-radius:8px;border:1px solid rgba(255,255,255,0.18);background:rgba(255,255,255,0.06);color:#fff;font-size:.75rem;cursor:pointer;transition:.2s}
-.btn-icon:hover{background:rgba(255,255,255,0.14)}
-.btn-icon.danger{color:#fecaca;border-color:rgba(248,113,113,0.6)}
-.btn-icon.danger:hover{background:rgba(248,113,113,0.25)}
-.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;z-index:40}
-.modal{width:100%;max-width:640px;background:#05060a;border-radius:18px;border:1px solid rgba(255,255,255,0.18);box-shadow:0 24px 60px rgba(0,0,0,0.9);padding:16px 18px;position:relative;max-height:80vh;overflow:auto}
-.modal-title{font-size:1.05rem;font-weight:600;margin-bottom:4px}
-.modal-sub{font-size:.8rem;color:var(--muted);margin-bottom:8px}
-.modal-body{font-size:.82rem;color:var(--muted);line-height:1.6}
-.modal-close{position:absolute;top:8px;right:8px;border:none;background:transparent;color:var(--muted);cursor:pointer;font-size:.9rem}
-#empty-state{color:var(--muted)}
-@media(max-width:900px){body{padding:12px}.hero,.layout{grid-template-columns:1fr}.hero-card,.card{border-radius:14px}}
-</style></head><body><div class="shell"><header><div class="brand"><div class="brand-logo">CS</div><div><h1>Cooking Studio</h1><div class="muted">Clean, live recipes, articles & stories powered by Firebase.</div></div></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;"><div class="pill"><span class="pill-dot"></span><span>Visitor mode – read only</span></div><button id="open-admin-lock" class="admin-btn" type="button"><span>Admin panel</span><span>🔒</span></button></div></header><section class="hero"><div class="hero-card"><div class="hero-inner"><div class="hero-title">Cook, publish, and tell stories in real time.</div><div class="hero-sub">Visitors can explore recipes, articles, and tall comedy stories. When you unlock admin mode, you can create, edit, and delete content — all changes instantly appear to everyone.</div><div class="hero-grid" style="margin-top:14px;"><div class="hero-stat"><div class="hero-stat-label">Recipes</div><div class="hero-stat-value" id="stat-recipes">0 live</div></div><div class="hero-stat"><div class="hero-stat-label">Articles</div><div class="hero-stat-value" id="stat-articles">0 live</div></div><div class="hero-stat"><div class="hero-stat-label">Stories</div><div class="hero-stat-value" id="stat-stories">0 live</div></div></div></div></div><div class="hero-card"><div class="hero-inner"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;"><div><div class="hero-title">Browse by category</div><div class="hero-sub">Switch between recipes, articles, stories, privacy policy, and terms & conditions.</div></div><div class="tabs"><button class="tab-btn active" data-tab="recipes" type="button">Recipes</button><button class="tab-btn" data-tab="articles" type="button">Articles</button><button class="tab-btn" data-tab="stories" type="button">Stories</button><button class="tab-btn" data-tab="privacy" type="button">Privacy</button><button class="tab-btn" data-tab="terms" type="button">Terms</button></div></div><div class="muted" style="margin-top:10px;font-size:.8rem;">Click any item to open a clean reader view. Admin edits update this content live for all visitors.</div></div></div></section><section class="layout"><div class="card"><div class="card-header"><div><div class="card-title" id="list-title">Recipes</div><div class="card-sub" id="list-sub">All public recipes, sorted by latest.</div></div></div><div id="recipes-list" class="list"></div><div id="articles-list" class="list" style="display:none;"></div><div id="stories-list" class="list" style="display:none;"></div><div id="privacy-view" class="list" style="display:none;"></div><div id="terms-view" class="list" style="display:none;"></div><div id="empty-state" class="muted" style="margin-top:8px;font-size:.8rem;display:none;">Nothing here yet. When the admin adds content, it will appear instantly.</div></div><div class="card"><div class="card-header"><div><div class="card-title">About this site</div><div class="card-sub">Realtime cooking content with a hidden admin mode.</div></div></div><div class="static-section"><h3>Privacy policy</h3><p>This demo uses Firebase Realtime Database. Visitors can only read public content. Admin actions are protected by a private code and never exposed in the page.</p><h3>Terms &amp; conditions</h3><ul><li>You control all content stored in your Firebase project.</li><li>Recipes, articles, and stories are for educational and personal use.</li><li>Do not share your admin code with anyone.</li></ul><h3>Categories</h3><ul><li><strong>Recipes:</strong> Full cooking instructions, images, and videos.</li><li><strong>Articles:</strong> Tips, guides, and cooking stories.</li><li><strong>Stories:</strong> Imaginary and real comedy tales about food, vegetables, meat, and fruits.</li><li><strong>Privacy policy:</strong> How data is handled.</li><li><strong>Conditions &amp; terms:</strong> Rules for using the site.</li></ul></div><div id="admin-lock" class="admin-lock"><div><strong>Admin access is locked.</strong> Enter the admin code to continue.</div><div class="admin-lock-row"><input type="password" id="admin-code-input" placeholder="Admin code" autocomplete="new-password" autocorrect="off" autocapitalize="off" spellcheck="false"/><button class="btn-primary" id="admin-code-btn" type="button">Unlock</button></div><div class="status" id="admin-code-status"></div></div><div id="admin-panel" class="admin-panel"><div class="admin-header"><div><div class="admin-title">Admin mode</div><div class="muted" style="font-size:.78rem;">You can create, edit, and delete content. Changes are live for all visitors.</div></div><button class="btn-ghost" id="admin-logout" type="button">Exit admin</button></div><div style="font-size:.8rem;color:var(--muted);margin-bottom:6px;">Choose what you want to manage.</div><div class="tabs" style="margin-bottom:10px;"><button class="tab-btn active" data-admin-tab="recipes" type="button">Recipes</button><button class="tab-btn" data-admin-tab="articles" type="button">Articles</button><button class="tab-btn" data-admin-tab="stories" type="button">Stories</button><button class="tab-btn" data-admin-tab="pages" type="button">Privacy &amp; Terms</button></div><div id="admin-recipes"><div class="admin-row"><div class="field"><label for="r-title">Recipe title</label><input id="r-title"/></div><div class="field"><label for="r-desc">Short description</label><input id="r-desc"/></div></div><div class="field"><label for="r-content">Full recipe (steps, ingredients)</label><textarea id="r-content"></textarea></div><div class="admin-row" style="margin-top:6px;"><div class="field"><label for="r-image">Image URL (optional)</label><input id="r-image"/></div><div class="field"><label for="r-video">Video URL (optional)</label><input id="r-video"/></div></div><div class="admin-actions"><button class="btn-primary" id="r-save" type="button">Save recipe</button><button class="btn-ghost" id="r-reset" type="button">Reset form</button></div><div class="status" id="r-status"></div><div class="admin-list" id="r-list"></div></div><div id="admin-articles" style="display:none;"><div class="admin-row"><div class="field"><label for="a-title">Article title</label><input id="a-title"/></div><div class="field"><label for="a-desc">Short description</label><input id="a-desc"/></div></div><div class="field"><label for="a-content">Full article</label><textarea id="a-content"></textarea></div><div class="admin-actions"><button class="btn-primary" id="a-save" type="button">Save article</button><button class="btn-ghost" id="a-reset" type="button">Reset form</button></div><div class="status" id="a-status"></div><div class="admin-list" id="a-list"></div></div><div id="admin-stories" style="display:none;"><div class="admin-row"><div class="field"><label for="s-title">Story title</label><input id="s-title"/></div><div class="field"><label for="s-desc">Short description</label><input id="s-desc"/></div></div><div class="field"><label for="s-content">Full story (tall, comedy, real + imaginary)</label><textarea id="s-content"></textarea></div><div class="field" style="margin-top:6px;"><label for="s-images">Story images (4 URLs, separated by new lines)</label><textarea id="s-images" placeholder="https://image-1\nhttps://image-2\nhttps://image-3\nhttps://image-4"></textarea></div><div class="admin-actions"><button class="btn-primary" id="s-save" type="button">Save story</button><button class="btn-ghost" id="s-reset" type="button">Reset form</button></div><div class="status" id="s-status"></div><div class="admin-list" id="s-list"></div></div><div id="admin-pages" style="display:none;"><div class="field"><label for="p-privacy">Privacy policy content</label><textarea id="p-privacy"></textarea></div><div class="field" style="margin-top:6px;"><label for="p-terms">Terms &amp; conditions content</label><textarea id="p-terms"></textarea></div><div class="admin-actions"><button class="btn-primary" id="p-save" type="button">Save pages</button></div><div class="status" id="p-status"></div></div></div></div></section></div><div id="modal-backdrop" class="modal-backdrop"><div class="modal"><button class="modal-close" id="modal-close" type="button">✕</button><div class="modal-title" id="modal-title"></div><div class="modal-sub" id="modal-sub"></div><div class="modal-body" id="modal-body"></div></div></div><script type="module">
-import{initializeApp}from"https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";import{getDatabase,ref,push,set,update,remove,onValue}from"https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";const firebaseConfig={apiKey:"AIzaSyC5vWkaVRMC5ZIT_KGeTqXMqg7U662n9bQ",authDomain:"coocking-380d8.firebaseapp.com",databaseURL:"https://coocking-380d8-default-rtdb.europe-west1.firebasedatabase.app",projectId:"coocking-380d8",storageBucket:"coocking-380d8.firebasestorage.app",messagingSenderId:"32948618858",appId:"1:32948618858:web:43fd8bf52b3c9aee772c13",measurementId:"G-MTD0PZSB0P"};const app=initializeApp(firebaseConfig),db=getDatabase(app),ADMIN_CODE="20132021",recipesListEl=document.getElementById("recipes-list"),articlesListEl=document.getElementById("articles-list"),storiesListEl=document.getElementById("stories-list"),privacyViewEl=document.getElementById("privacy-view"),termsViewEl=document.getElementById("terms-view"),emptyStateEl=document.getElementById("empty-state"),listTitleEl=document.getElementById("list-title"),listSubEl=document.getElementById("list-sub"),statRecipesEl=document.getElementById("stat-recipes"),statArticlesEl=document.getElementById("stat-articles"),statStoriesEl=document.getElementById("stat-stories"),modalBackdrop=document.getElementById("modal-backdrop"),modalClose=document.getElementById("modal-close"),modalTitle=document.getElementById("modal-title"),modalSub=document.getElementById("modal-sub"),modalBody=document.getElementById("modal-body"),openAdminLockBtn=document.getElementById("open-admin-lock"),adminLockEl=document.getElementById("admin-lock"),adminCodeInputEl=document.getElementById("admin-code-input"),adminCodeBtnEl=document.getElementById("admin-code-btn"),adminCodeStatusEl=document.getElementById("admin-code-status"),adminPanelEl=document.getElementById("admin-panel"),adminLogoutBtn=document.getElementById("admin-logout"),adminTabs=document.querySelectorAll("[data-admin-tab]"),adminRecipesSection=document.getElementById("admin-recipes"),adminArticlesSection=document.getElementById("admin-articles"),adminStoriesSection=document.getElementById("admin-stories"),adminPagesSection=document.getElementById("admin-pages"),rTitle=document.getElementById("r-title"),rDesc=document.getElementById("r-desc"),rContent=document.getElementById("r-content"),rImage=document.getElementById("r-image"),rVideo=document.getElementById("r-video"),rSave=document.getElementById("r-save"),rReset=document.getElementById("r-reset"),rStatus=document.getElementById("r-status"),rList=document.getElementById("r-list"),aTitle=document.getElementById("a-title"),aDesc=document.getElementById("a-desc"),aContent=document.getElementById("a-content"),aSave=document.getElementById("a-save"),aReset=document.getElementById("a-reset"),aStatus=document.getElementById("a-status"),aList=document.getElementById("a-list"),sTitle=document.getElementById("s-title"),sDesc=document.getElementById("s-desc"),sContent=document.getElementById("s-content"),sImages=document.getElementById("s-images"),sSave=document.getElementById("s-save"),sReset=document.getElementById("s-reset"),sStatus=document.getElementById("s-status"),sList=document.getElementById("s-list"),pPrivacy=document.getElementById("p-privacy"),pTerms=document.getElementById("p-terms"),pSave=document.getElementById("p-save"),pStatus=document.getElementById("p-status"),tabs=document.querySelectorAll("[data-tab]");let recipes=[],articles=[],stories=[],pages={privacy:"",terms:""},currentTab="recipes",isAdmin=!1,editingRecipeId=null,editingArticleId=null,editingStoryId=null;function escapeHtml(e){return String(e||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;")}function setStatus(e,t,s){e&&(e.textContent=t||"",e.classList.remove("error","success"),"error"===s&&e.classList.add("error"),"success"===s&&e.classList.add("success"))}function openModal(e,t,s){modalTitle.textContent=e||"",modalSub.textContent=t||"",modalBody.innerHTML=s||"",modalBackdrop.style.display="flex"}function closeModal(){modalBackdrop.style.display="none"}modalClose.addEventListener("click",closeModal),modalBackdrop.addEventListener("click",e=>{e.target===modalBackdrop&&closeModal()});function renderStats(){statRecipesEl&&(statRecipesEl.textContent=recipes.length+" live"),statArticlesEl&&(statArticlesEl.textContent=articles.length+" live"),statStoriesEl&&(statStoriesEl.textContent=stories.length+" live")}function renderRecipesList(){recipesListEl.innerHTML="",recipes.length?(emptyStateEl.style.display="none",recipes.slice().sort((e,t)=>(t.createdAt||0)-(e.createdAt||0)).forEach(e=>{const t=document.createElement("div");t.className="item";const s=e.imageUrl?`<img class="item-thumb" src="${escapeHtml(e.imageUrl)}"/>`:"";t.innerHTML=`${s}<div class="item-main"><div class="item-title">${escapeHtml(e.title||"Untitled recipe")}</div><div class="item-desc">${escapeHtml(e.description||"No description")}</div></div><div class="item-meta"><span class="badge"><span class="dot"></span>Recipe</span></div>`,t.addEventListener("click",()=>{let t="";e.imageUrl&&(t+=`<p><img src="${escapeHtml(e.imageUrl)}" style="max-width:100%;border-radius:18px;margin-bottom:14px;"/></p>`),e.videoUrl&&(t+=`<p><strong>Video:</strong> <a href="${escapeHtml(e.videoUrl)}" target="_blank" rel="noopener">Open video</a></p>`),e.content&&(t+=`<p>${escapeHtml(e.content).replace(/\n/g,"<br>")}</p>`),t||(t="<p>No content yet.</p>"),openModal(e.title||"Recipe",e.description||"",t)}),recipesListEl.appendChild(t)})):(emptyStateEl.style.display="block")}function renderArticlesList(){articlesListEl.innerHTML="",articles.length?(emptyStateEl.style.display="none",articles.slice().sort((e,t)=>(t.createdAt||0)-(e.createdAt||0)).forEach(e=>{const t=document.createElement("div");t.className="item";const s=e.imageUrl?`<img class="item-thumb" src="${escapeHtml(e.imageUrl)}"/>`:"";t.innerHTML=`${s}<div class="item-main"><div class="item-title">${escapeHtml(e.title||"Untitled article")}</div><div class="item-desc">${escapeHtml(e.description||"No description")}</div></div><div class="item-meta"><span class="badge"><span class="dot"></span>Article</span></div>`,t.addEventListener("click",()=>{let t="";e.content?t+=`<p>${escapeHtml(e.content).replace(/\n/g,"<br>")}</p>`:t="<p>No content yet.</p>",openModal(e.title||"Article",e.description||"",t)}),articlesListEl.appendChild(t)})):(emptyStateEl.style.display="block")}function renderStoriesList(){storiesListEl.innerHTML="",stories.length?(emptyStateEl.style.display="none",stories.slice().sort((e,t)=>(t.createdAt||0)-(e.createdAt||0)).forEach(e=>{const t=document.createElement("div"),s=(e.images||[]).filter(Boolean),n=s[0]?`<img class="item-thumb" src="${escapeHtml(s[0])}"/>`:"";t.className="item",t.innerHTML=`${n}<div class="item-main"><div class="item-title">${escapeHtml(e.title||"Untitled story")}</div><div class="item-desc">${escapeHtml(e.description||"No description")}</div></div><div class="item-meta"><span class="badge"><span class="dot"></span>Story</span></div>`,t.addEventListener("click",()=>{let t="";s.length&&(t+=`<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:10px;">${s.map(o=>`<img src="${escapeHtml(o)}" style="width:100%;border-radius:14px;object-fit:cover;max-height:180px;"/>`).join("")}</div>`),e.content&&(t+=`<p>${escapeHtml(e.content).replace(/\n/g,"<br>")}</p>`),t||(t="<p>No content yet.</p>"),openModal(e.title||"Story",e.description||"",t)}),storiesListEl.appendChild(t)})):(emptyStateEl.style.display="block")}function renderPagesView(){privacyViewEl.innerHTML="",termsViewEl.innerHTML="";const e=pages.privacy||"No privacy policy has been written yet.",t=pages.terms||"No terms & conditions have been written yet.",s=document.createElement("div");s.className="item",s.innerHTML=`<div class="item-main"><div class="item-title">Privacy policy</div><div class="item-desc">Click to read the full privacy policy.</div></div><div class="item-meta"><span class="badge"><span class="dot"></span>Privacy</span></div>`,s.addEventListener("click",()=>{const t=`<p>${escapeHtml(e).replace(/\n/g,"<br>")}</p>`;openModal("Privacy policy","",t)}),privacyViewEl.appendChild(s);const n=document.createElement("div");n.className="item",n.innerHTML=`<div class="item-main"><div class="item-title">Terms &amp; conditions</div><div class="item-desc">Click to read the full terms &amp; conditions.</div></div><div class="item-meta"><span class="badge"><span class="dot"></span>Terms</span></div>`,n.addEventListener("click",()=>{const e=`<p>${escapeHtml(t).replace(/\n,g,"<br>")}</p>`;openModal("Terms &amp; conditions","",e)}),termsViewEl.appendChild(n)}function updateMainView(){recipesListEl.style.display="none",articlesListEl.style.display="none",storiesListEl.style.display="none",privacyViewEl.style.display="none",termsViewEl.style.display="none",emptyStateEl.style.display="none","recipes"===currentTab?(listTitleEl.textContent="Recipes",listSubEl.textContent="All public recipes, sorted by latest.",recipesListEl.style.display="flex",recipes.length||(emptyStateEl.style.display="block")):"articles"===currentTab?(listTitleEl.textContent="Articles",listSubEl.textContent="Cooking articles, tips, and guides.",articlesListEl.style.display="flex",articles.length||(emptyStateEl.style.display="block")):"stories"===currentTab?(listTitleEl.textContent="Stories",listSubEl.textContent="Tall, funny stories about vegetables, meat, and fruits.",storiesListEl.style.display="flex",stories.length||(emptyStateEl.style.display="block")):"privacy"===currentTab?(listTitleEl.textContent="Privacy policy",listSubEl.textContent="How data is handled on this site.",privacyViewEl.style.display="flex"):"terms"===currentTab&&(listTitleEl.textContent="Terms & conditions",listSubEl.textContent="Rules for using this site.",termsViewEl.style.display="flex")}tabs.forEach(e=>{e.addEventListener("click",()=>{const t=e.getAttribute("data-tab");currentTab=t,tabs.forEach(s=>s.classList.remove("active")),e.classList.add("active"),updateMainView()})});function renderAdminRecipes(){rList.innerHTML="",recipes.length?recipes.slice().sort((e,t)=>(t.createdAt||0)-(e.createdAt||0)).forEach(e=>{const t=document.createElement("div");t.className="admin-item",t.innerHTML=`<div><div class="admin-item-title">${escapeHtml(e.title||"Untitled recipe")}</div><div class="admin-item-desc">${escapeHtml(e.description||"No description")}</div></div><div class="admin-item-actions"><button class="btn-icon" data-action="edit">✏️ Edit</button><button class="btn-icon danger" data-action="delete">🗑️ Delete</button></div>`,t.querySelector('[data-action="edit"]').addEventListener("click",()=>{editingRecipeId=e.id,rTitle.value=e.title||"",rDesc.value=e.description||"",rContent.value=e.content||"",rImage.value=e.imageUrl||"",rVideo.value=e.videoUrl||"",rSave.textContent="Update recipe",setStatus(rStatus,"",null)}),t.querySelector('[data-action="delete"]').addEventListener("click",async()=>{if(!confirm("Delete this recipe?"))return;try{await remove(ref(db,"recipes/"+e.id))}catch(t){alert("Error deleting recipe.")}}),rList.appendChild(t)}):(e=>{const t=document.createElement("div");t.className="muted",t.style.fontSize=".78rem",t.textContent=e,rList.appendChild(t)})("No recipes yet.")}function renderAdminArticles(){aList.innerHTML="",articles.length?articles.slice().sort((e,t)=>(t.createdAt||0)-(e.createdAt||0)).forEach(e=>{const t=document.createElement("div");t.className="admin-item",t.innerHTML=`<div><div class="admin-item-title">${escapeHtml(e.title||"Untitled article")}</div><div class="admin-item-desc">${escapeHtml(e.description||"No description")}</div></div><div class="admin-item-actions"><button class="btn-icon" data-action="edit">✏️ Edit</button><button class="btn-icon danger" data-action="delete">🗑️ Delete</button></div>`,t.querySelector('[data-action="edit"]').addEventListener("click",()=>{editingArticleId=e.id,aTitle.value=e.title||"",aDesc.value=e.description||"",aContent.value=e.content||"",aSave.textContent="Update article",setStatus(aStatus,"",null)}),t.querySelector('[data-action="delete"]').addEventListener("click",async()=>{if(!confirm("Delete this article?"))return;try{await remove(ref(db,"articles/"+e.id))}catch(t){alert("Error deleting article.")}}),aList.appendChild(t)}):(e=>{const t=document.createElement("div");t.className="muted",t.style.fontSize=".78rem",t.textContent=e,aList.appendChild(t)})("No articles yet.")}function renderAdminStories(){sList.innerHTML="",stories.length?stories.slice().sort((e,t)=>(t.createdAt||0)-(e.createdAt||0)).forEach(e=>{const t=document.createElement("div");t.className="admin-item";const s=(e.images||[]).filter(Boolean).length;t.innerHTML=`<div><div class="admin-item-title">${escapeHtml(e.title||"Untitled story")}</div><div class="admin-item-desc">${escapeHtml(e.description||"No description")} · ${s} image(s)</div></div><div class="admin-item-actions"><button class="btn-icon" data-action="edit">✏️ Edit</button><button class="btn-icon danger" data-action="delete">🗑️ Delete</button></div>`,t.querySelector('[data-action="edit"]').addEventListener("click",()=>{editingStoryId=e.id,sTitle.value=e.title||"",sDesc.value=e.description||"",sContent.value=e.content||"";const t=(e.images||[]).join("\n");sImages.value=t,setStatus(sStatus,"",null),sSave.textContent="Update story"}),t.querySelector('[data-action="delete"]').addEventListener("click",async()=>{if(!confirm("Delete this story?"))return;try{await remove(ref(db,"stories/"+e.id))}catch(t){alert("Error deleting story.")}}),sList.appendChild(t)}):(e=>{const t=document.createElement("div");t.className="muted",t.style.fontSize=".78rem",t.textContent=e,sList.appendChild(t)})("No stories yet.")}function resetRecipeForm(){editingRecipeId=null,rTitle.value="",rDesc.value="",rContent.value="",rImage.value="",rVideo.value="",rSave.textContent="Save recipe",setStatus(rStatus,"",null)}function resetArticleForm(){editingArticleId=null,aTitle.value="",aDesc.value="",aContent.value="",aSave.textContent="Save article",setStatus(aStatus,"",null)}function resetStoryForm(){editingStoryId=null,sTitle.value="",sDesc.value="",sContent.value="",sImages.value="",sSave.textContent="Save story",setStatus(sStatus,"",null)}rReset.addEventListener("click",resetRecipeForm),aReset.addEventListener("click",resetArticleForm),sReset.addEventListener("click",resetStoryForm),rSave.addEventListener("click",async()=>{if(!isAdmin)return;const e=rTitle.value.trim(),t=rDesc.value.trim(),s=rContent.value.trim(),n=rImage.value.trim(),o=rVideo.value.trim();if(!e)return void setStatus(rStatus,"Title is required.","error");setStatus(rStatus,"Saving...",null);try{if(editingRecipeId)await update(ref(db,"recipes/"+editingRecipeId),{title:e,description:t,content:s,imageUrl:n,videoUrl:o}),setStatus(rStatus,"Recipe updated.","success");else{const i=push(ref(db,"recipes"));await set(i,{title:e,description:t,content:s,imageUrl:n,videoUrl:o,createdAt:Date.now()}),setStatus(rStatus,"Recipe created.","success")}resetRecipeForm()}catch(i){setStatus(rStatus,"Error saving recipe.","error")}}),aSave.addEventListener("click",async()=>{if(!isAdmin)return;const e=aTitle.value.trim(),t=aDesc.value.trim(),s=aContent.value.trim();if(!e)return void setStatus(aStatus,"Title is required.","error");setStatus(aStatus,"Saving...",null);try{if(editingArticleId)await update(ref(db,"articles/"+editingArticleId),{title:e,description:t,content:s}),setStatus(aStatus,"Article updated.","success");else{const n=push(ref(db,"articles"));await set(n,{title:e,description:t,content:s,createdAt:Date.now()}),setStatus(aStatus,"Article created.","success")}resetArticleForm()}catch(n){setStatus(aStatus,"Error saving article.","error")}}),sSave.addEventListener("click",async()=>{if(!isAdmin)return;const e=sTitle.value.trim(),t=sDesc.value.trim(),s=sContent.value.trim(),n=sImages.value.split("\n").map(o=>o.trim()).filter(Boolean);if(!e)return void setStatus(sStatus,"Title is required.","error");if(n.length<1)return void setStatus(sStatus,"At least 1 image URL is required.","error");setStatus(sStatus,"Saving...",null);try{if(editingStoryId)await update(ref(db,"stories/"+editingStoryId),{title:e,description:t,content:s,images:n}),setStatus(sStatus,"Story updated.","success");else{const o=push(ref(db,"stories"));await set(o,{title:e,description:t,content:s,images:n,createdAt:Date.now()}),setStatus(sStatus,"Story created.","success")}resetStoryForm()}catch(o){setStatus(sStatus,"Error saving story.","error")}}),pSave.addEventListener("click",async()=>{if(!isAdmin)return;const e=pPrivacy.value.trim(),t=pTerms.value.trim();setStatus(pStatus,"Saving...",null);try{await update(ref(db,"pages"),{privacy:e,terms:t}),setStatus(pStatus,"Pages saved.","success")}catch(s){setStatus(pStatus,"Error saving pages.","error")}}),adminTabs.forEach(e=>{e.addEventListener("click",()=>{adminTabs.forEach(t=>t.classList.remove("active")),e.classList.add("active");const t=e.getAttribute("data-admin-tab");adminRecipesSection.style.display="none",adminArticlesSection.style.display="none",adminStoriesSection.style.display="none",adminPagesSection.style.display="none","recipes"===t&&(adminRecipesSection.style.display="block"),"articles"===t&&(adminArticlesSection.style.display="block"),"stories"===t&&(adminStoriesSection.style.display="block"),"pages"===t&&(adminPagesSection.style.display="block")})}),openAdminLockBtn.addEventListener("click",()=>{adminLockEl.style.display="block"===adminLockEl.style.display?"none":"block",adminCodeInputEl.value="",setStatus(adminCodeStatusEl,"",null),"block"===adminLockEl.style.display&&setTimeout(()=>adminCodeInputEl.focus(),50)}),adminCodeBtnEl.addEventListener("click",()=>{const e=adminCodeInputEl.value.trim();if(setStatus(adminCodeStatusEl,"",null),!e)return void setStatus(adminCodeStatusEl,"Enter the admin code.","error");if(e!==ADMIN_CODE)return void setStatus(adminCodeStatusEl,"Wrong code.","error");isAdmin=!0,adminLockEl.style.display="none",adminPanelEl.style.display="flex",setStatus(adminCodeStatusEl,"",null),pPrivacy.value=pages.privacy||"",pTerms.value=pages.terms||""}),adminLogoutBtn.addEventListener("click",()=>{isAdmin=!1,adminPanelEl.style.display="none",adminCodeInputEl.value="",setStatus(adminCodeStatusEl,"",null),resetRecipeForm(),resetArticleForm(),resetStoryForm(),setStatus(pStatus,"",null)}),window.addEventListener("load",()=>{adminCodeInputEl.value="",setTimeout(()=>{adminCodeInputEl.value=""},200)}),onValue(ref(db,"recipes"),e=>{const t=e.val()||{};recipes=Object.entries(t).map(([s,n])=>({id:s,...n})),renderStats(),renderRecipesList(),renderAdminRecipes(),updateMainView()}),onValue(ref(db,"articles"),e=>{const t=e.val()||{};articles=Object.entries(t).map(([s,n])=>({id:s,...n})),renderStats(),renderArticlesList(),renderAdminArticles(),updateMainView()}),onValue(ref(db,"stories"),e=>{const t=e.val()||{};stories=Object.entries(t).map(([s,n])=>({id:s,...n})),renderStats(),renderStoriesList(),renderAdminStories(),updateMainView(),Object.keys(t).length||seedDefaultStories()}),onValue(ref(db,"pages"),e=>{const t=e.val()||{};pages={privacy:t.privacy||"",terms:t.terms||""},renderPagesView(),isAdmin&&(pPrivacy.value=pages.privacy||"",pTerms.value=pages.terms||""),updateMainView()});function seedDefaultStories(){const e=push(ref(db,"stories")),t=push(ref(db,"stories")),s="قصة الخضار التي قررت أن تصبح نجمة تلفزيون، لكن الكاميرا كانت خائفة من الجزر لأنه يلمع كثيراً تحت الأضواء. في صباح يوم من الأيام، اجتمعت الطماطم والخيار والفلفل في طبق سلطة، وقرروا أن يصنعوا برنامجاً كوميدياً عن حياة الخضار في الثلاجة. كل حلقة تنتهي بأن أحدهم يسقط من الرف ويبدأ يضحك بدل أن يصرخ. وبينما كانوا يتجادلون من سيكون البطل، دخل الجزر من الباب وهو يرتدي نظارات شمسية، وقال: أنا النجم، أنتم مجرد إضافات! ضحكوا جميعاً، ثم اكتشفوا أن الثلاجة مغلقة عليهم طوال الليل، فبدأوا يحكون قصصاً عن البشر الذين يخافون من السعرات الحرارية أكثر من خوفهم من الظلام.";const n="في سوق قديم في مدينة مغربية، كان هناك بائع شاي بالنعناع يعتقد أن إبريقه يتكلم معه ليلاً. في كل ليلة، عندما ينام الجميع، يبدأ الإبريق يحكي قصصاً عن حبات الشاي التي سافرت من الجبال إلى الكؤوس، وعن قطع السكر التي تحلم أن تذوب في كأس غني بالنعناع. في إحدى الليالي، قرر البائع أن يضع بعض حبات الفول السوداني بجانب الإبريق، فبدأ الإبريق يشتكي: لماذا أشارك قصصي مع الفول السوداني؟ إنه يضحك كثيراً! ومع ذلك، أصبح الشاي والفول السوداني أصدقاء، وكل زبون يأتي يشرب الشاي ويأكل الفول ويضحك من دون أن يعرف أن الضحك بدأ من حوار سري بين إبريق وكيس فول.";set(e,{title:"حكاية الخضار الكوميدية في الثلاجة",description:"قصة طويلة ومضحكة عن خضار حقيقية وخيالية تعيش في الثلاجة.",content:s,images:["https://images.pexels.com/photos/143133/pexels-photo-143133.jpeg","https://images.pexels.com/photos/1431335/pexels-photo-1431335.jpeg","https://images.pexels.com/photos/1431336/pexels-photo-1431336.jpeg","https://images.pexels.com/photos/1431337/pexels-photo-1431337.jpeg"],createdAt:Date.now()}),set(t,{title:"إبريق الشاي الذي يحكي القصص",description:"قصة خيالية واقعية عن شاي بالنعناع وفول سوداني في سوق مغربي.",content:n,images:["https://images.pexels.com/photos/1417945/pexels-photo-1417945.jpeg","https://images.pexels.com/photos/1417946/pexels-photo-1417946.jpeg","https://images.pexels.com/photos/1417947/pexels-photo-1417947.jpeg","https://images.pexels.com/photos/1417948/pexels-photo-1417948.jpeg"],createdAt:Date.now()})}updateMainView();
-</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2095257808947941"
+     crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <title>Cooking Studio – Recipes & Articles</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <style>
+
+:root {
+  --bg-main: #050507;
+  --bg-soft: #101018;
+  --bg-card: #151521;
+  --bg-card-soft: #1b1b2a;
+
+  --accent-1: #ffb347;
+  --accent-2: #ff6b6b;
+  --accent-3: #4ecdc4;
+  --accent-4: #ffe66d;
+
+  --text-main: #f7f7fb;
+  --text-muted: #a0a2b3;
+
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --radius-sm: 10px;
+  --radius-pill: 999px;
+
+  --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.7);
+  --shadow-strong: 0 26px 60px rgba(0, 0, 0, 0.9);
+
+  --transition-fast: 0.18s ease-out;
+  --transition-med: 0.28s ease-out;
+
+  --page-padding-x: 7vw;
+  --page-max-width: 1200px;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #1b1b2a 0, #050507 45%, #000 100%);
+  color: var(--text-main);
+  overflow-x: hidden;
+}
+
+/* ---------- SCROLLBAR ---------- */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #050507;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ffb347, #ff6b6b);
+  border-radius: 999px;
+}
+
+/* =========================================================
+   SHELL & GLOBAL LAYOUT
+   ========================================================= */
+
+.shell {
+  min-height: 100vh;
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: 26px var(--page-padding-x) 40px;
+  position: relative;
+}
+
+/* subtle background overlay behind everything */
+.shell::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(255, 179, 71, 0.18), transparent 55%),
+    radial-gradient(circle at 90% 100%, rgba(78, 205, 196, 0.18), transparent 55%);
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* =========================================================
+   HEADER – BRAND + VISITOR PILL + ADMIN BUTTON
+   ========================================================= */
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 26px;
+}
+
+/* brand */
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 16px;
+  background: radial-gradient(circle at 30% 0, #ffffff, #ffb347, #ff6b6b);
+  box-shadow: 0 0 22px rgba(255, 179, 71, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: #000;
+}
+
+.brand h1 {
+  font-size: 1.4rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.muted {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* visitor pill */
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.6);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.pill-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00ff9d;
+  box-shadow: 0 0 10px #00ff9d;
+}
+
+/* admin button */
+
+.admin-btn {
+  margin-top: 4px;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(0, 0, 0, 0.7);
+  color: var(--text-main);
+  font-size: 0.78rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+.admin-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   HERO – TWO PRO CARDS ON TOP OF A BANNER
+   ========================================================= */
+
+.hero {
+  position: relative;
+  margin-bottom: 26px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 18px;
+}
+
+/* background banner behind hero cards */
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -26px -40px 0;
+  background-image: url("https://images.unsplash.com/photo-1504674900247-0877df9cc836");
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.35);
+  z-index: -2;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: -26px -40px 0;
+  background: radial-gradient(circle at left, rgba(0, 0, 0, 0.7), transparent 55%),
+              radial-gradient(circle at right, rgba(0, 0, 0, 0.8), transparent 55%);
+  z-index: -1;
+}
+
+/* hero cards */
+
+.hero-card {
+  border-radius: var(--radius-lg);
+  background: rgba(5, 5, 10, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: var(--shadow-strong);
+  padding: 18px 18px 16px;
+  backdrop-filter: blur(12px);
+  transform: translateY(30px);
+  opacity: 0;
+  animation: heroFadeUp 0.7s var(--transition-med) forwards;
+}
+
+.hero-card:nth-child(2) {
+  animation-delay: 0.12s;
+}
+
+.hero-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.hero-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.hero-sub {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* hero stats */
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.hero-stat {
+  padding: 10px 10px 8px;
+  border-radius: var(--radius-md);
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.hero-stat-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.hero-stat-value {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-4);
+}
+
+/* tabs in hero */
+
+.tabs {
+  display: inline-flex;
+  gap: 6px;
+  padding: 4px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.tab-btn {
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  border: none;
+  background: transparent;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+.tab-btn.active {
+  background: linear-gradient(120deg, #ffb347, #ff6b6b);
+  color: #000;
+  box-shadow: 0 0 18px rgba(255, 107, 107, 0.6);
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   MAIN LAYOUT – LEFT LIST CARD + RIGHT ABOUT/ADMIN CARD
+   ========================================================= */
+
+.layout {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+  gap: 18px;
+}
+
+/* generic card */
+
+.card {
+  border-radius: var(--radius-lg);
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: var(--shadow-soft);
+  padding: 16px 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* card header */
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.card-sub {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* list area */
+
+.list {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* list items (recipes/articles) – card style */
+
+.list-item {
+  border-radius: var(--radius-md);
+  background: var(--bg-card-soft);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 10px 10px 8px;
+  cursor: pointer;
+  transition: background var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.list-item:hover {
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.9);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.list-item-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.list-item-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* static section (about / privacy / terms) */
+
+.static-section {
+  margin-top: 4px;
+  padding: 10px 10px 8px;
+  border-radius: var(--radius-md);
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.static-section h3 {
+  font-size: 0.9rem;
+  margin-top: 8px;
+  margin-bottom: 4px;
+  color: var(--text-main);
+}
+
+.static-section ul {
+  padding-left: 18px;
+  margin-top: 4px;
+}
+
+.static-section li {
+  margin-bottom: 3px;
+}
+
+/* empty state */
+
+#empty-state {
+  padding: 8px 10px;
+  border-radius: var(--radius-md);
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* =========================================================
+   BUTTONS (REUSED)
+   ========================================================= */
+
+.btn {
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  border: none;
+  font-size: 0.8rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: background var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast), color var(--transition-fast);
+}
+
+.btn-primary {
+  background: linear-gradient(120deg, #ffb347, #ff6b6b);
+  color: #000;
+  box-shadow: 0 0 18px rgba(255, 107, 107, 0.6);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 26px rgba(255, 107, 107, 0.9);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-main);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.25);
+}
+
+/* =========================================================
+   ADMIN LOCK + ADMIN PANEL
+   ========================================================= */
+
+.admin-lock {
+  margin-top: 10px;
+  padding: 10px 10px 8px;
+  border-radius: var(--radius-md);
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px dashed rgba(255, 255, 255, 0.25);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.admin-lock-row {
+  display: flex;
+  gap: 8px;
+}
+
+.admin-lock input {
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(0, 0, 0, 0.7);
+  color: var(--text-main);
+  font-size: 0.8rem;
+}
+
+.admin-lock input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* status text */
+
+.status {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* admin panel */
+
+.admin-panel {
+  margin-top: 12px;
+  padding: 12px 10px 10px;
+  border-radius: var(--radius-md);
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  font-size: 0.8rem;
+  display: none; /* JS toggles this */
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.admin-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* admin fields */
+
+.admin-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.field label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.field input,
+.field textarea {
+  padding: 7px 9px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(0, 0, 0, 0.7);
+  color: var(--text-main);
+  font-size: 0.78rem;
+  resize: vertical;
+}
+
+.field textarea {
+  min-height: 80px;
+}
+
+/* admin actions */
+
+.admin-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+/* admin list */
+
+.admin-list {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* =========================================================
+   MODAL – READER VIEW
+   ========================================================= */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: none; /* JS toggles */
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.modal {
+  width: min(640px, 92vw);
+  max-height: 80vh;
+  border-radius: 24px;
+  background: #050507;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.95);
+  padding: 18px 18px 16px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* subtle gradient border */
+
+.modal::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  border: 1px solid transparent;
+  background: linear-gradient(135deg, rgba(255, 179, 71, 0.7), transparent, rgba(78, 205, 196, 0.6)) border-box;
+  mask:
+    linear-gradient(#000 0 0) padding-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border-radius: 999px;
+  border: none;
+  width: 26px;
+  height: 26px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.8);
+  color: var(--text-main);
+  box-shadow: 0 0 14px rgba(0, 0, 0, 0.9);
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.modal-close:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+.modal-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-right: 26px;
+}
+
+.modal-sub {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.modal-body {
+  margin-top: 6px;
+  padding-right: 4px;
+  font-size: 0.85rem;
+  color: var(--text-main);
+  line-height: 1.7;
+  overflow-y: auto;
+}
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1024px) {
+  .shell {
+    padding-inline: 5vw;
+  }
+
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero::before,
+  .hero::after {
+    inset: -20px -20px 0;
+  }
+
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero {
+    margin-top: 10px;
+  }
+
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .admin-lock-row {
+    flex-direction: column;
+  }
+
+  .modal {
+    max-height: 86vh;
+  }
+}
+   /* =========================================================
+   PRO LIST CARDS (Recipes, Articles, Privacy, Terms)
+   ========================================================= */
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  cursor: pointer;
+  transition: 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.item:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.25);
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.9);
+}
+
+.item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(255,179,71,0.12), transparent 60%);
+  opacity: 0;
+  transition: 0.3s ease;
+}
+
+.item:hover::before {
+  opacity: 1;
+}
+
+.item-main {
+  flex: 1;
+}
+
+.item-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #fff;
+}
+
+.item-desc {
+  font-size: 0.82rem;
+  color: #a0a2b3;
+  line-height: 1.5;
+}
+
+.item-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: #a0a2b3;
+}
+
+/* Badge style */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+  font-size: 0.7rem;
+  color: #ffe66d;
+}
+
+.badge .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ffe66d;
+  box-shadow: 0 0 8px #ffe66d;
+}
+
+   /* =========================================================
+   CATEGORY TABS (main list)
+   ========================================================= */
+
+.tabs .tab-btn {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(255,255,255,0.05);
+  color: #a0a2b3;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.tabs .tab-btn:hover {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+}
+
+.tabs .tab-btn.active {
+  background: linear-gradient(120deg, #ffb347, #ff6b6b);
+  color: #000;
+  box-shadow: 0 0 18px rgba(255,107,107,0.6);
+  transform: translateY(-2px);
+}
+#list-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  background: linear-gradient(120deg, #ffb347, #ff6b6b);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+#list-sub {
+  font-size: 0.85rem;
+  color: #a0a2b3;
+}
+.admin-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.12);
+  transition: 0.2s ease;
+}
+
+.admin-item:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.2);
+  transform: translateY(-2px);
+}
+
+.admin-item-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.admin-item-desc {
+  font-size: 0.75rem;
+  color: #a0a2b3;
+}
+
+.btn-icon {
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.btn-icon:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+.btn-icon.danger:hover {
+  background: rgba(255,0,0,0.25);
+  border-color: rgba(255,0,0,0.4);
+}
+.item[data-type="recipe"]::after,
+.item[data-type="article"]::after {
+  content: attr(data-type);
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  padding: 4px 10px;
+  font-size: 0.7rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: #ffe66d;
+  text-transform: capitalize;
+}
+   /* =========================================================
+   CARD IMAGE STYLE (auto thumbnail)
+   ========================================================= */
+
+.item {
+  display: flex;
+  gap: 14px;
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.item:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.25);
+  transform: translateY(-4px);
+}
+
+.item-thumb {
+  width: 90px;
+  height: 90px;
+  border-radius: 14px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: #111;
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+}
+
+.item-main {
+  flex: 1;
+}
+
+
+
+ </style>
+
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <div class="brand">
+        <div class="brand-logo">CS</div>
+        <div>
+          <h1>Cooking Studio</h1>
+          <div class="muted">Clean, live recipes &amp; articles powered by Firebase.</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+        <div class="pill">
+          <span class="pill-dot"></span>
+          <span>Visitor mode – read only</span>
+        </div>
+        <button id="open-admin-lock" class="admin-btn" type="button">
+          <span>Admin panel</span>
+          <span>🔒</span>
+        </button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-card">
+        <div class="hero-inner">
+          <div class="hero-title">Cook, publish, and update in real time.</div>
+          <div class="hero-sub">
+            Visitors can explore recipes and articles. When you unlock admin mode with your code, you can create, edit, and delete content — all changes instantly appear to everyone.
+          </div>
+          <div class="hero-grid" style="margin-top:14px;">
+            <div class="hero-stat">
+              <div class="hero-stat-label">Recipes</div>
+              <div class="hero-stat-value" id="stat-recipes">0 live</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-label">Articles</div>
+              <div class="hero-stat-value" id="stat-articles">0 live</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-label">Privacy &amp; Terms</div>
+              <div class="hero-stat-value">Editable in admin</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-inner">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;">
+            <div>
+              <div class="hero-title">Browse by category</div>
+              <div class="hero-sub">Switch between recipes, articles, privacy policy, and terms &amp; conditions.</div>
+            </div>
+            <div class="tabs">
+              <button class="tab-btn active" data-tab="recipes" type="button">Recipes</button>
+              <button class="tab-btn" data-tab="articles" type="button">Articles</button>
+              <button class="tab-btn" data-tab="privacy" type="button">Privacy</button>
+              <button class="tab-btn" data-tab="terms" type="button">Terms</button>
+            </div>
+          </div>
+          <div class="muted" style="margin-top:10px;font-size:0.8rem;">
+            Click any item to open a clean reader view. Admin edits update this content live for all visitors.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="layout">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title" id="list-title">Recipes</div>
+            <div class="card-sub" id="list-sub">All public recipes, sorted by latest.</div>
+          </div>
+        </div>
+        <div id="recipes-list" class="list"></div>
+        <div id="articles-list" class="list" style="display:none;"></div>
+        <div id="privacy-view" class="list" style="display:none;"></div>
+        <div id="terms-view" class="list" style="display:none;"></div>
+        <div id="empty-state" class="muted" style="margin-top:8px;font-size:0.8rem;display:none;">
+          Nothing here yet. When the admin adds content, it will appear instantly.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">About this site</div>
+            <div class="card-sub">Realtime cooking content with a hidden admin mode.</div>
+          </div>
+        </div>
+        <div class="static-section">
+          <h3>Privacy policy</h3>
+          <p>
+            This demo uses Firebase Realtime Database. Visitors can only read public content. Admin actions are protected by a private code and never exposed in the page.
+          </p>
+          <h3>Terms &amp; conditions</h3>
+          <ul>
+            <li>You control all content stored in your Firebase project.</li>
+            <li>Recipes and articles are for educational and personal use.</li>
+            <li>Do not share your admin code with anyone.</li>
+          </ul>
+          <h3>Categories</h3>
+          <ul>
+            <li><strong>Recipes:</strong> Full cooking instructions, images, and videos.</li>
+            <li><strong>Articles:</strong> Tips, guides, and cooking stories.</li>
+            <li><strong>Privacy policy:</strong> How data is handled.</li>
+            <li><strong>Conditions &amp; terms:</strong> Rules for using the site.</li>
+          </ul>
+        </div>
+
+        <div id="admin-lock" class="admin-lock">
+          <div><strong>Admin access is locked.</strong> Enter the admin code to continue.</div>
+          <div class="admin-lock-row">
+            <input
+  type="password"
+  id="admin-code-input"
+  placeholder="Admin code"
+  autocomplete="new-password"
+  autocorrect="off"
+  autocapitalize="off"
+  spellcheck="false"
+/>
+
+            <button class="btn btn-primary" id="admin-code-btn" type="button">Unlock</button>
+          </div>
+          <div class="status" id="admin-code-status"></div>
+        </div>
+
+        <div id="admin-panel" class="admin-panel">
+          <div class="admin-header">
+            <div>
+              <div class="admin-title">Admin mode</div>
+              <div class="muted" style="font-size:0.78rem;">You can create, edit, and delete content. Changes are live for all visitors.</div>
+            </div>
+            <button class="btn btn-ghost" id="admin-logout" type="button">Exit admin</button>
+          </div>
+
+          <div style="font-size:0.8rem;color:var(--muted);margin-bottom:6px;">
+            Choose what you want to manage.
+          </div>
+          <div class="tabs" style="margin-bottom:10px;">
+            <button class="tab-btn active" data-admin-tab="recipes" type="button">Recipes</button>
+            <button class="tab-btn" data-admin-tab="articles" type="button">Articles</button>
+            <button class="tab-btn" data-admin-tab="pages" type="button">Privacy &amp; Terms</button>
+          </div>
+
+          <div id="admin-recipes">
+            <div class="admin-row">
+              <div class="field">
+                <label for="r-title">Recipe title</label>
+                <input id="r-title" />
+              </div>
+              <div class="field">
+                <label for="r-desc">Short description</label>
+                <input id="r-desc" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="r-content">Full recipe (steps, ingredients)</label>
+              <textarea id="r-content"></textarea>
+            </div>
+            <div class="admin-row" style="margin-top:6px;">
+              <div class="field">
+                <label for="r-image">Image URL (optional)</label>
+                <input id="r-image" />
+              </div>
+              <div class="field">
+                <label for="r-video">Video URL (optional)</label>
+                <input id="r-video" />
+              </div>
+            </div>
+            <div class="admin-actions">
+              <button class="btn btn-primary" id="r-save" type="button">Save recipe</button>
+              <button class="btn btn-ghost" id="r-reset" type="button">Reset form</button>
+            </div>
+            <div class="status" id="r-status"></div>
+            <div class="admin-list" id="r-list"></div>
+          </div>
+
+          <div id="admin-articles" style="display:none;">
+            <div class="admin-row">
+              <div class="field">
+                <label for="a-title">Article title</label>
+                <input id="a-title" />
+              </div>
+              <div class="field">
+                <label for="a-desc">Short description</label>
+                <input id="a-desc" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="a-content">Full article</label>
+              <textarea id="a-content"></textarea>
+            </div>
+            <div class="admin-actions">
+              <button class="btn btn-primary" id="a-save" type="button">Save article</button>
+              <button class="btn btn-ghost" id="a-reset" type="button">Reset form</button>
+            </div>
+            <div class="status" id="a-status"></div>
+            <div class="admin-list" id="a-list"></div>
+          </div>
+
+          <div id="admin-pages" style="display:none;">
+            <div class="field">
+              <label for="p-privacy">Privacy policy content</label>
+              <textarea id="p-privacy"></textarea>
+            </div>
+            <div class="field" style="margin-top:6px;">
+              <label for="p-terms">Terms &amp; conditions content</label>
+              <textarea id="p-terms"></textarea>
+            </div>
+            <div class="admin-actions">
+              <button class="btn btn-primary" id="p-save" type="button">Save pages</button>
+            </div>
+            <div class="status" id="p-status"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="modal-backdrop" class="modal-backdrop">
+    <div class="modal">
+      <button class="modal-close" id="modal-close" type="button">✕</button>
+      <div class="modal-title" id="modal-title"></div>
+      <div class="modal-sub" id="modal-sub"></div>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import {
+      getDatabase,
+      ref,
+      push,
+      set,
+      update,
+      remove,
+      onValue
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyC5vWkaVRMC5ZIT_KGeTqXMqg7U662n9bQ",
+      authDomain: "coocking-380d8.firebaseapp.com",
+      databaseURL: "https://coocking-380d8-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "coocking-380d8",
+      storageBucket: "coocking-380d8.firebasestorage.app",
+      messagingSenderId: "32948618858",
+      appId: "1:32948618858:web:43fd8bf52b3c9aee772c13",
+      measurementId: "G-MTD0PZSB0P"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    const ADMIN_CODE = "20132021";
+
+    const recipesListEl = document.getElementById("recipes-list");
+    const articlesListEl = document.getElementById("articles-list");
+    const privacyViewEl = document.getElementById("privacy-view");
+    const termsViewEl = document.getElementById("terms-view");
+    const emptyStateEl = document.getElementById("empty-state");
+    const listTitleEl = document.getElementById("list-title");
+    const listSubEl = document.getElementById("list-sub");
+    const statRecipesEl = document.getElementById("stat-recipes");
+    const statArticlesEl = document.getElementById("stat-articles");
+
+    const modalBackdrop = document.getElementById("modal-backdrop");
+    const modalClose = document.getElementById("modal-close");
+    const modalTitle = document.getElementById("modal-title");
+    const modalSub = document.getElementById("modal-sub");
+    const modalBody = document.getElementById("modal-body");
+
+    const openAdminLockBtn = document.getElementById("open-admin-lock");
+    const adminLockEl = document.getElementById("admin-lock");
+    const adminCodeInputEl = document.getElementById("admin-code-input");
+    const adminCodeBtnEl = document.getElementById("admin-code-btn");
+    const adminCodeStatusEl = document.getElementById("admin-code-status");
+    const adminPanelEl = document.getElementById("admin-panel");
+    const adminLogoutBtn = document.getElementById("admin-logout");
+
+    const adminTabs = document.querySelectorAll("[data-admin-tab]");
+    const adminRecipesSection = document.getElementById("admin-recipes");
+    const adminArticlesSection = document.getElementById("admin-articles");
+    const adminPagesSection = document.getElementById("admin-pages");
+
+    const rTitle = document.getElementById("r-title");
+    const rDesc = document.getElementById("r-desc");
+    const rContent = document.getElementById("r-content");
+    const rImage = document.getElementById("r-image");
+    const rVideo = document.getElementById("r-video");
+    const rSave = document.getElementById("r-save");
+    const rReset = document.getElementById("r-reset");
+    const rStatus = document.getElementById("r-status");
+    const rList = document.getElementById("r-list");
+
+    const aTitle = document.getElementById("a-title");
+    const aDesc = document.getElementById("a-desc");
+    const aContent = document.getElementById("a-content");
+    const aSave = document.getElementById("a-save");
+    const aReset = document.getElementById("a-reset");
+    const aStatus = document.getElementById("a-status");
+    const aList = document.getElementById("a-list");
+
+    const pPrivacy = document.getElementById("p-privacy");
+    const pTerms = document.getElementById("p-terms");
+    const pSave = document.getElementById("p-save");
+    const pStatus = document.getElementById("p-status");
+
+    const tabs = document.querySelectorAll("[data-tab]");
+
+    let recipes = [];
+    let articles = [];
+    let pages = { privacy: "", terms: "" };
+    let currentTab = "recipes";
+    let isAdmin = false;
+    let editingRecipeId = null;
+    let editingArticleId = null;
+
+    function escapeHtml(str) {
+      return String(str || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function setStatus(el, msg, type) {
+      el.textContent = msg || "";
+      el.classList.remove("error", "success");
+      if (type === "error") el.classList.add("error");
+      if (type === "success") el.classList.add("success");
+    }
+
+    function openModal(title, sub, html) {
+      modalTitle.textContent = title || "";
+      modalSub.textContent = sub || "";
+      modalBody.innerHTML = html || "";
+      modalBackdrop.style.display = "flex";
+    }
+
+    function closeModal() {
+      modalBackdrop.style.display = "none";
+    }
+
+    modalClose.addEventListener("click", closeModal);
+    modalBackdrop.addEventListener("click", (e) => {
+      if (e.target === modalBackdrop) closeModal();
+    });
+
+    function renderStats() {
+      statRecipesEl.textContent = recipes.length + " live";
+      statArticlesEl.textContent = articles.length + " live";
+    }
+
+    function renderRecipesList() {
+      recipesListEl.innerHTML = "";
+      if (!recipes.length) {
+        emptyStateEl.style.display = "block";
+        return;
+      }
+      emptyStateEl.style.display = "none";
+      recipes
+        .slice()
+        .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0))
+        .forEach((r) => {
+          const el = document.createElement("div");
+          el.className = "item";
+        el.innerHTML = `
+  ${r.imageUrl ? `<img class="item-thumb" src="${escapeHtml(r.imageUrl)}" />` : ""}
+  <div class="item-main">
+    <div class="item-title">${escapeHtml(r.title || "Untitled recipe")}</div>
+    <div class="item-desc">${escapeHtml(r.description || "No description")}</div>
+  </div>
+  <div class="item-meta">
+    <span class="badge"><span class="dot"></span>Recipe</span>
+  </div>
+`;
+
+          el.addEventListener("click", () => {
+            let html = "";
+            if (r.imageUrl) {
+              html += `<p><strong>Image:</strong> <a href="${escapeHtml(r.imageUrl)}" target="_blank" rel="noopener">Open image</a></p>`;
+            }
+            if (r.videoUrl) {
+              html += `<p><strong>Video:</strong> <a href="${escapeHtml(r.videoUrl)}" target="_blank" rel="noopener">Open video</a></p>`;
+            }
+            if (r.content) {
+              html += `<p>${escapeHtml(r.content).replace(/\n/g, "<br>")}</p>`;
+            }
+            if (!html) {
+              html = "<p>No content yet.</p>";
+            }
+            openModal(r.title || "Recipe", r.description || "", html);
+          });
+          recipesListEl.appendChild(el);
+        });
+    }
+
+    function renderArticlesList() {
+      articlesListEl.innerHTML = "";
+      if (!articles.length) {
+        emptyStateEl.style.display = "block";
+        return;
+      }
+      emptyStateEl.style.display = "none";
+      articles
+        .slice()
+        .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0))
+        .forEach((a) => {
+          const el = document.createElement("div");
+          el.className = "item";
+         el.innerHTML = `
+  ${a.imageUrl ? `<img class="item-thumb" src="${escapeHtml(a.imageUrl)}" />` : ""}
+  <div class="item-main">
+    <div class="item-title">${escapeHtml(a.title)}</div>
+    <div class="item-desc">${escapeHtml(a.description)}</div>
+  </div>
+  <div class="item-meta">
+    <span class="badge"><span class="dot"></span>Article</span>
+  </div>
+`;
+
+          el.addEventListener("click", () => {
+            let html = "";
+            if (a.content) {
+              html += `<p>${escapeHtml(a.content).replace(/\n/g, "<br>")}</p>`;
+            } else {
+              html = "<p>No content yet.</p>";
+            }
+            openModal(a.title || "Article", a.description || "", html);
+          });
+          articlesListEl.appendChild(el);
+        });
+    }
+
+    function renderPagesView() {
+      privacyViewEl.innerHTML = "";
+      termsViewEl.innerHTML = "";
+      const privacyText = pages.privacy || "No privacy policy has been written yet.";
+      const termsText = pages.terms || "No terms & conditions have been written yet.";
+
+      const pEl = document.createElement("div");
+      pEl.className = "item";
+      pEl.innerHTML = `
+        <div class="item-main">
+          <div class="item-title">Privacy policy</div>
+          <div class="item-desc">Click to read the full privacy policy.</div>
+        </div>
+        <div class="item-meta">
+          <span class="badge"><span class="dot"></span>Privacy</span>
+        </div>
+      `;
+      pEl.addEventListener("click", () => {
+        const html = `<p>${escapeHtml(privacyText).replace(/\n/g, "<br>")}</p>`;
+        openModal("Privacy policy", "", html);
+      });
+      privacyViewEl.appendChild(pEl);
+
+      const tEl = document.createElement("div");
+      tEl.className = "item";
+      tEl.innerHTML = `
+        <div class="item-main">
+          <div class="item-title">Terms & conditions</div>
+          <div class="item-desc">Click to read the full terms & conditions.</div>
+        </div>
+        <div class="item-meta">
+          <span class="badge"><span class="dot"></span>Terms</span>
+        </div>
+      `;
+      tEl.addEventListener("click", () => {
+        const html = `<p>${escapeHtml(termsText).replace(/\n/g, "<br>")}</p>`;
+        openModal("Terms & conditions", "", html);
+      });
+      termsViewEl.appendChild(tEl);
+    }
+
+    function updateMainView() {
+      recipesListEl.style.display = "none";
+      articlesListEl.style.display = "none";
+      privacyViewEl.style.display = "none";
+      termsViewEl.style.display = "none";
+      emptyStateEl.style.display = "none";
+
+      if (currentTab === "recipes") {
+        listTitleEl.textContent = "Recipes";
+        listSubEl.textContent = "All public recipes, sorted by latest.";
+        recipesListEl.style.display = "flex";
+        if (!recipes.length) emptyStateEl.style.display = "block";
+      } else if (currentTab === "articles") {
+        listTitleEl.textContent = "Articles";
+        listSubEl.textContent = "Cooking articles, tips, and guides.";
+        articlesListEl.style.display = "flex";
+        if (!articles.length) emptyStateEl.style.display = "block";
+      } else if (currentTab === "privacy") {
+        listTitleEl.textContent = "Privacy policy";
+        listSubEl.textContent = "How data is handled on this site.";
+        privacyViewEl.style.display = "flex";
+      } else if (currentTab === "terms") {
+        listTitleEl.textContent = "Terms & conditions";
+        listSubEl.textContent = "Rules for using this site.";
+        termsViewEl.style.display = "flex";
+      }
+    }
+
+    tabs.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const tab = btn.getAttribute("data-tab");
+        currentTab = tab;
+        tabs.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        updateMainView();
+      });
+    });
+
+    function renderAdminRecipes() {
+      rList.innerHTML = "";
+      if (!recipes.length) {
+        const el = document.createElement("div");
+        el.className = "muted";
+        el.style.fontSize = "0.78rem";
+        el.textContent = "No recipes yet.";
+        rList.appendChild(el);
+        return;
+      }
+      recipes
+        .slice()
+        .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0))
+        .forEach((r) => {
+          const el = document.createElement("div");
+          el.className = "admin-item";
+          el.innerHTML = `
+            <div>
+              <div class="admin-item-title">${escapeHtml(r.title || "Untitled recipe")}</div>
+              <div class="admin-item-desc">${escapeHtml(r.description || "No description")}</div>
+            </div>
+            <div class="admin-item-actions">
+              <button class="btn-icon" data-action="edit">✏️ Edit</button>
+              <button class="btn-icon danger" data-action="delete">🗑️ Delete</button>
+            </div>
+          `;
+          el.querySelector('[data-action="edit"]').addEventListener("click", () => {
+            editingRecipeId = r.id;
+            rTitle.value = r.title || "";
+            rDesc.value = r.description || "";
+            rContent.value = r.content || "";
+            rImage.value = r.imageUrl || "";
+            rVideo.value = r.videoUrl || "";
+            rSave.textContent = "Update recipe";
+            setStatus(rStatus, "", null);
+          });
+          el.querySelector('[data-action="delete"]').addEventListener("click", async () => {
+            if (!confirm("Delete this recipe?")) return;
+            try {
+              await remove(ref(db, "recipes/" + r.id));
+            } catch (e) {
+              alert("Error deleting recipe.");
+            }
+          });
+          rList.appendChild(el);
+        });
+    }
+
+    function renderAdminArticles() {
+      aList.innerHTML = "";
+      if (!articles.length) {
+        const el = document.createElement("div");
+        el.className = "muted";
+        el.style.fontSize = "0.78rem";
+        el.textContent = "No articles yet.";
+        aList.appendChild(el);
+        return;
+      }
+      articles
+        .slice()
+        .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0))
+        .forEach((a) => {
+          const el = document.createElement("div");
+          el.className = "admin-item";
+          el.innerHTML = `
+            <div>
+              <div class="admin-item-title">${escapeHtml(a.title || "Untitled article")}</div>
+              <div class="admin-item-desc">${escapeHtml(a.description || "No description")}</div>
+            </div>
+            <div class="admin-item-actions">
+              <button class="btn-icon" data-action="edit">✏️ Edit</button>
+              <button class="btn-icon danger" data-action="delete">🗑️ Delete</button>
+            </div>
+          `;
+          el.querySelector('[data-action="edit"]').addEventListener("click", () => {
+            editingArticleId = a.id;
+            aTitle.value = a.title || "";
+            aDesc.value = a.description || "";
+            aContent.value = a.content || "";
+            aSave.textContent = "Update article";
+            setStatus(aStatus, "", null);
+          });
+          el.querySelector('[data-action="delete"]').addEventListener("click", async () => {
+            if (!confirm("Delete this article?")) return;
+            try {
+              await remove(ref(db, "articles/" + a.id));
+            } catch (e) {
+              alert("Error deleting article.");
+            }
+          });
+          aList.appendChild(el);
+        });
+    }
+
+    function resetRecipeForm() {
+      editingRecipeId = null;
+      rTitle.value = "";
+      rDesc.value = "";
+      rContent.value = "";
+      rImage.value = "";
+      rVideo.value = "";
+      rSave.textContent = "Save recipe";
+      setStatus(rStatus, "", null);
+    }
+
+    function resetArticleForm() {
+      editingArticleId = null;
+      aTitle.value = "";
+      aDesc.value = "";
+      aContent.value = "";
+      aSave.textContent = "Save article";
+      setStatus(aStatus, "", null);
+    }
+
+    rReset.addEventListener("click", resetRecipeForm);
+    aReset.addEventListener("click", resetArticleForm);
+
+    rSave.addEventListener("click", async () => {
+      if (!isAdmin) return;
+      const title = rTitle.value.trim();
+      const description = rDesc.value.trim();
+      const content = rContent.value.trim();
+      const imageUrl = rImage.value.trim();
+      const videoUrl = rVideo.value.trim();
+      if (!title) {
+        setStatus(rStatus, "Title is required.", "error");
+        return;
+      }
+      setStatus(rStatus, "Saving...", null);
+      try {
+        if (editingRecipeId) {
+          await update(ref(db, "recipes/" + editingRecipeId), {
+            title,
+            description,
+            content,
+            imageUrl,
+            videoUrl
+          });
+          setStatus(rStatus, "Recipe updated.", "success");
+        } else {
+          const newRef = push(ref(db, "recipes"));
+          await set(newRef, {
+            title,
+            description,
+            content,
+            imageUrl,
+            videoUrl,
+            createdAt: Date.now()
+          });
+          setStatus(rStatus, "Recipe created.", "success");
+        }
+        resetRecipeForm();
+      } catch (e) {
+        setStatus(rStatus, "Error saving recipe.", "error");
+      }
+    });
+
+    aSave.addEventListener("click", async () => {
+      if (!isAdmin) return;
+      const title = aTitle.value.trim();
+      const description = aDesc.value.trim();
+      const content = aContent.value.trim();
+      if (!title) {
+        setStatus(aStatus, "Title is required.", "error");
+        return;
+      }
+      setStatus(aStatus, "Saving...", null);
+      try {
+        if (editingArticleId) {
+          await update(ref(db, "articles/" + editingArticleId), {
+            title,
+            description,
+            content
+          });
+          setStatus(aStatus, "Article updated.", "success");
+        } else {
+          const newRef = push(ref(db, "articles"));
+          await set(newRef, {
+            title,
+            description,
+            content,
+            createdAt: Date.now()
+          });
+          setStatus(aStatus, "Article created.", "success");
+        }
+        resetArticleForm();
+      } catch (e) {
+        setStatus(aStatus, "Error saving article.", "error");
+      }
+    });
+
+    pSave.addEventListener("click", async () => {
+      if (!isAdmin) return;
+      const privacy = pPrivacy.value.trim();
+      const terms = pTerms.value.trim();
+      setStatus(pStatus, "Saving...", null);
+      try {
+        await update(ref(db, "pages"), { privacy, terms });
+        setStatus(pStatus, "Pages saved.", "success");
+      } catch (e) {
+        setStatus(pStatus, "Error saving pages.", "error");
+      }
+    });
+
+    adminTabs.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        adminTabs.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        const tab = btn.getAttribute("data-admin-tab");
+        adminRecipesSection.style.display = "none";
+        adminArticlesSection.style.display = "none";
+        adminPagesSection.style.display = "none";
+        if (tab === "recipes") adminRecipesSection.style.display = "block";
+        if (tab === "articles") adminArticlesSection.style.display = "block";
+        if (tab === "pages") adminPagesSection.style.display = "block";
+      });
+    });
+
+    openAdminLockBtn.addEventListener("click", () => {
+      adminLockEl.style.display = adminLockEl.style.display === "block" ? "none" : "block";
+      adminCodeInputEl.value = "";
+      setStatus(adminCodeStatusEl, "", null);
+      if (adminLockEl.style.display === "block") {
+        setTimeout(() => adminCodeInputEl.focus(), 50);
+      }
+    });
+
+    adminCodeBtnEl.addEventListener("click", () => {
+      const value = adminCodeInputEl.value.trim();
+      setStatus(adminCodeStatusEl, "", null);
+      if (!value) {
+        setStatus(adminCodeStatusEl, "Enter the admin code.", "error");
+        return;
+      }
+      if (value !== ADMIN_CODE) {
+        setStatus(adminCodeStatusEl, "Wrong code.", "error");
+        return;
+      }
+      isAdmin = true;
+      adminLockEl.style.display = "none";
+      adminPanelEl.style.display = "block";
+      setStatus(adminCodeStatusEl, "", null);
+      pPrivacy.value = pages.privacy || "";
+      pTerms.value = pages.terms || "";
+    });
+
+    adminLogoutBtn.addEventListener("click", () => {
+      isAdmin = false;
+      adminPanelEl.style.display = "none";
+      adminCodeInputEl.value = "";
+      setStatus(adminCodeStatusEl, "", null);
+      resetRecipeForm();
+      resetArticleForm();
+      setStatus(pStatus, "", null);
+    });
+
+    window.addEventListener("load", () => {
+      adminCodeInputEl.value = "";
+    });
+
+    onValue(ref(db, "recipes"), (snap) => {
+      const val = snap.val() || {};
+      recipes = Object.entries(val).map(([id, v]) => ({ id, ...v }));
+      renderStats();
+      renderRecipesList();
+      renderAdminRecipes();
+      updateMainView();
+    });
+
+    onValue(ref(db, "articles"), (snap) => {
+      const val = snap.val() || {};
+      articles = Object.entries(val).map(([id, v]) => ({ id, ...v }));
+      renderStats();
+      renderArticlesList();
+      renderAdminArticles();
+      updateMainView();
+    });
+
+    onValue(ref(db, "pages"), (snap) => {
+      const val = snap.val() || {};
+      pages = {
+        privacy: val.privacy || "",
+        terms: val.terms || ""
+      };
+      renderPagesView();
+      if (isAdmin) {
+        pPrivacy.value = pages.privacy || "";
+        pTerms.value = pages.terms || "";
+      }
+      updateMainView();
+    });
+
+    updateMainView();
+  </script>
+</body>
+</html>
